@@ -7,6 +7,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useTranslations } from 'next-intl';
@@ -24,11 +26,18 @@ export function Navigation() {
 
   const navItems = [
     { name: t('home'), href: "/" },
-    { name: t('about'), href: "/about" },
     { name: t('projects'), href: "/projects" },
     { name: t('business'), href: "/business" },
     { name: t('blog'), href: "/blog" },
     { name: t('contact'), href: "/contact" },
+  ];
+
+  const aboutSubpages = [
+    { name: t('aboutOverview'), href: "/about", description: t('aboutOverviewDesc') },
+    { name: t('fitnessJourney'), href: "/about/fitness", description: t('fitnessJourneyDesc') },
+    { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc') },
+    { name: t('personalGrowth'), href: "/about/growth", description: t('personalGrowthDesc') },
+    { name: t('techJourney'), href: "/about/journey", description: t('techJourneyDesc') },
   ];
 
   return (
@@ -37,7 +46,7 @@ export function Navigation() {
         <div className="flex items-center justify-between">
           <NavigationBrand />
           
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden md:flex" viewport={false}>
             <NavigationMenuList className="flex space-x-4">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.href}>
@@ -57,6 +66,43 @@ export function Navigation() {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
+              
+              {/* About Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger 
+                  className={cn(
+                    "px-3 py-2 text-sm font-medium transition-colors hover:text-primary bg-transparent",
+                    pathname.startsWith('/about')
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {t('about')}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="left-0">
+                  <div className="w-[400px] p-4">
+                    <div className="grid gap-3">
+                      {aboutSubpages.map((subpage) => (
+                        <NavigationMenuLink asChild key={subpage.href}>
+                          <Link
+                            href={subpage.href as any}
+                            prefetch={true}
+                            className={cn(
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                              pathname === subpage.href && "bg-accent"
+                            )}
+                          >
+                            <div className="text-sm font-medium leading-none">{subpage.name}</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              {subpage.description}
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      ))}
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -93,6 +139,29 @@ export function Navigation() {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* About Section */}
+              <div className="space-y-1">
+                <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                  {t('about')}
+                </div>
+                {aboutSubpages.map((subpage) => (
+                  <Link
+                    key={subpage.href}
+                    href={subpage.href as any}
+                    prefetch={true}
+                    className={cn(
+                      "block px-6 py-2 text-sm transition-colors hover:text-primary rounded-md",
+                      pathname === subpage.href
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:bg-muted"
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {subpage.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}

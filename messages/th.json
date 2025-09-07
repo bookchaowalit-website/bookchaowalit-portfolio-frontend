@@ -5,7 +5,17 @@
     "projects": "ผลงาน",
     "business": "ธุรกิจ",
     "blog": "บล็อก",
-    "contact": "ติดต่อ"
+    "contact": "ติดต่อ",
+    "aboutOverview": "ภาพรวม",
+    "aboutOverviewDesc": "เรื่องราวและประสบการณ์อาชีพในฐานะ Tech Generalist",
+    "fitnessJourney": "การเดินทางเพื่อสุขภาพ",
+    "fitnessJourneyDesc": "ฟิตเนสส่งผลต่อการแก้ปัญหาอย่างไร",
+    "creativeWorks": "ผลงานสร้างสรรค์",
+    "creativeWorksDesc": "จุดที่เทคโนโลยีพบกับศิลปะและการคิดเชิงออกแบบ",
+    "personalGrowth": "การพัฒนาตนเอง",
+    "personalGrowthDesc": "การเรียนรู้อย่างต่อเนื่องและกรอบความคิดในการพัฒนาตนเอง",
+    "techJourney": "การเดินทางด้านเทคโนโลยี",
+    "techJourneyDesc": "วิวัฒนาการจากอิเล็กทรอนิกส์สู่ AI และการพัฒนา full-stack"
   },
   "home": {
     "greeting": "สวัสดีครับ ผม",

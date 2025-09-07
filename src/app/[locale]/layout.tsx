@@ -44,9 +44,14 @@ export const metadata: Metadata = {
   title: "Chaowalit Greepoke - Portfolio",
   description: "Tech Generalist - Full-stack Developer, AI Developer & SEO Specialist from Bangkok, specializing in Next.js, React, AI integration, and data analytics",
   icons: {
-    icon: '/icon',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon', type: 'image/png', sizes: '32x32' }
+    ],
     shortcut: '/favicon.ico',
-    apple: '/icon',
+    apple: [
+      { url: '/apple-icon', sizes: '180x180', type: 'image/png' }
+    ],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

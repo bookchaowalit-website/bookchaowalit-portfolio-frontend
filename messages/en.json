@@ -5,7 +5,17 @@
     "projects": "Projects",
     "business": "Business",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "aboutOverview": "Overview",
+    "aboutOverviewDesc": "My story and professional experience as a Tech Generalist",
+    "fitnessJourney": "Fitness Journey",
+    "fitnessJourneyDesc": "How physical fitness shapes my approach to problem-solving",
+    "creativeWorks": "Creative Works",
+    "creativeWorksDesc": "Where technology meets artistry and design thinking",
+    "personalGrowth": "Personal Growth",
+    "personalGrowthDesc": "Continuous learning and self-development mindset",
+    "techJourney": "Tech Journey", 
+    "techJourneyDesc": "My evolution from electronics to AI and full-stack development"
   },
   "home": {
     "greeting": "Hello, I'm",
