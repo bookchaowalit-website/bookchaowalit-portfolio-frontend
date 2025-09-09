@@ -10,28 +10,16 @@ import { useTranslations } from 'next-intl';
 
 export function BusinessSection() {
   const t = useTranslations('business');
-  
+
   const highlightedBusinesses = [
     {
-      title: t('bookchaowaTitle'),
-      description: t('bookchaowaDesc'),
-      icon: "💻",
+      title: "Ionomad",
+      description: "A deeptech and marketing agency specializing in AI-driven solutions, content marketing, and digital transformation.",
+      icon: "🚀",
       status: t('activeStatus')
-    },
-    {
-      title: t('aiConsultingTitle'),
-      description: t('aiConsultingDesc'),
-      icon: "🤖",
-      status: t('activeStatus')
-    },
-    {
-      title: t('networkTitle'),
-      description: t('networkDesc'),
-      icon: "🌐",
-      status: t('growingStatus')
     }
   ];
-  
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 30 }}
@@ -41,7 +29,7 @@ export function BusinessSection() {
       className="space-y-8"
     >
       <div className="text-center space-y-4">
-        <MixedTypographyTitle 
+        <MixedTypographyTitle
           words={[
             { text: "My", style: "cursive", color: "text-purple-700", size: "lg" },
             { text: "Business", style: "bubble", color: "text-blue-600", size: "lg" },
@@ -49,7 +37,7 @@ export function BusinessSection() {
           ]}
           className="mb-4"
         />
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -80,18 +68,18 @@ export function BusinessSection() {
                 <div className="flex flex-col h-full space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-2xl">{business.icon}</span>
-                    <Badge 
+                    <Badge
                       variant="secondary"
                       className={`${
-                        business.status === 'Active' 
-                          ? 'bg-green-100 text-green-800' 
+                        business.status === 'Active'
+                          ? 'bg-green-100 text-green-800'
                           : 'bg-yellow-100 text-yellow-800'
                       } text-xs`}
                     >
                       {business.status}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex-1">
                     <h3 className="font-[family-name:var(--font-script)] font-bold text-slate-800 text-lg mb-2">
                       {business.title}
@@ -107,7 +95,7 @@ export function BusinessSection() {
         ))}
       </div>
 
-      <motion.div 
+      <motion.div
         className="text-center pt-4"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
