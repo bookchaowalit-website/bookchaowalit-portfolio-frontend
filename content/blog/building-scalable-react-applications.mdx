@@ -1,52 +1,83 @@
 ---
-title: "Building Scalable React Applications"
-excerpt: "Best practices for structuring large React projects, managing state, and maintaining code quality as your application grows."
+title: "Marker OCR: Powerful Document Intelligence Tool"
+excerpt: "Discover Marker, a fast and accurate OCR tool that converts documents to Markdown, JSON, and HTML with support for Thai language and advanced features."
 author: "Chaowalit Greepoke"
-publishedAt: "2024-12-10"
-tags: ["React", "Architecture", "Best Practices"]
+publishedAt: "2024-12-15"
+tags: ["OCR", "AI", "Document Processing", "Thai Language", "Open Source"]
 featured: true
 ---
 
-# Building Scalable React Applications
+# Marker OCR: Powerful Document Intelligence Tool
 
-As React applications grow in complexity, maintaining clean, scalable code becomes increasingly important. In this comprehensive guide, we'll explore best practices for building React applications that can scale effectively.
+I recently tried the OCR from datalab.to and was impressed by its speed. Let me share this amazing tool with you! 😍
 
-## Project Structure
+## What is Marker?
 
-A well-organized project structure is the foundation of a scalable React application.
+Marker is an advanced OCR (Optical Character Recognition) tool that can convert documents into various formats including PDF, images, PPTX, DOCX, XLSX, HTML, and EPUB. The best part? It fully supports **Thai language** along with many other languages.
 
-### Recommended Folder Structure
+## Key Features
 
-```
-src/
-├── components/
-│   ├── ui/
-│   ├── forms/
-│   └── layout/
-├── pages/
-├── hooks/
-├── utils/
-├── types/
-├── contexts/
-└── services/
-```
+### ✅ Multi-Format Support
+Marker can process documents in multiple formats and convert them to:
+- Markdown
+- JSON
+- HTML
 
-### Component Organization
+### ✅ Advanced Structure Recognition
+The tool excels at capturing detailed document structures including:
+- Tables
+- Forms
+- Mathematical equations
+- Links
+- Code blocks
+- And much more
 
-- **UI Components**: Reusable, generic components
-- **Feature Components**: Components specific to business logic
-- **Layout Components**: Components that define page structure
+### ✅ Image Extraction & Cleanup
+Marker can:
+- Extract images from documents
+- Handle headers and footers
+- Remove noise and unwanted elements
 
-## State Management
+### ✅ Performance & Compatibility
+- Works on CPU, GPU, or Apple MPS
+- Self-hosted for privacy and security
+- Extremely fast processing
 
-Choosing the right state management solution is crucial for scalability.
+### ✅ Hybrid Mode with LLM
+The standout feature is the **Hybrid mode** that uses Large Language Models to improve accuracy, especially for complex tasks like:
+- Merging tables across multiple pages
+- Converting complex mathematical equations
 
-### Local State vs Global State
+### ✅ LLM Integration
+Compatible with various LLMs including:
+- Gemini
+- Ollama
+- And works seamlessly with other AI models
 
-Use local state for:
-- Component-specific data
-- Form inputs
-- UI state (modals, toggles)
+### ✅ Impressive Speed
+Marker delivers outstanding performance with up to **122 pages per second** on GPU H100!
+
+## About DataLab
+
+DataLab.to is the creator of this document intelligence platform. They believe that the future of AI depends on accessing high-quality, diverse data. However, most valuable data is still locked in hard-to-read formats like PDFs.
+
+DataLab is committed to building systems that don't compromise on quality, transparency, and security.
+
+## Who Should Use Marker?
+
+If you work with documents in multiple formats or need OCR that:
+- Supports Thai language
+- Is fast and accurate
+- Can be self-hosted for privacy
+- Handles complex document structures
+
+Then Marker is definitely worth trying!
+
+## Getting Started
+
+You can find Marker on GitHub: [VikParuchuri/marker](https://github.com/VikParuchuri/marker)
+
+If you enjoy content like this, make sure to follow our page to stay updated with the latest technology and tools! 👍
 
 Use global state for:
 - User authentication
@@ -173,9 +204,9 @@ const ExpensiveComponent = memo(({ data }) => {
 ```typescript
 test('should render user profile correctly', () => {
   const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-  
+
   render(<UserProfile user={mockUser} />);
-  
+
   expect(screen.getByText('John Doe')).toBeInTheDocument();
   expect(screen.getByText('john@example.com')).toBeInTheDocument();
 });

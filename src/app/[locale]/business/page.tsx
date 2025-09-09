@@ -9,17 +9,17 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  
+
   const seoTitles = {
-    en: "My Businesses - Book (Chaowalit Greepoke) | Solopreneur Journey Bangkok",
-    th: "ธุรกิจของฉัน - บุ๊ค (เชาวลิต กรีโภค) | การเดินทางของ Solopreneur กรุงเทพฯ"
+    en: "Ionomad - Deeptech & Marketing Agency | Book (Chaowalit Greepoke)",
+    th: "Ionomad - เอเจนซี่ดีปเทคและการตลาด | บุ๊ค (เชาวลิต กรีโภค)"
   };
-  
+
   const seoDescriptions = {
-    en: "Discover the businesses and ventures I've built as a solopreneur. From tech solutions to innovative services, explore my entrepreneurial journey in Bangkok, Thailand.",
-    th: "ค้นพบธุรกิจและกิจการที่ เชาวลิต กรีโภค สร้างขึ้นในฐานะ solopreneur จากโซลูชันเทคโนโลยีไปจนถึงบริการที่นวัตกรรม สำรวจการเดินทางการเป็นผู้ประกอบการของผมในกรุงเทพฯ ประเทศไทย"
+    en: "Ionomad is a deeptech and marketing agency specializing in AI-driven solutions and digital transformation. We help businesses leverage technology and data for sustainable growth.",
+    th: "Ionomad เป็นเอเจนซี่ด้านดีปเทคและการตลาดที่เชี่ยวชาญด้านโซลูชันที่ขับเคลื่อนด้วย AI และการเปลี่ยนแปลงทางดิจิทัล เราช่วยธุรกิจใช้ประโยชน์จากเทคโนโลยีและข้อมูลเพื่อการเติบโตอย่างยั่งยืน"
   };
-  
+
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'),
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,

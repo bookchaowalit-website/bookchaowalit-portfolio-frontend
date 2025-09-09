@@ -10,38 +10,18 @@ import { motion } from "framer-motion";
 // Business data - you can move this to a separate data file later
 const businesses = [
   {
-    title: "BookChaowa Tech Solutions",
-    description: "Full-stack development services specializing in AI integration, SEO optimization, and modern web applications. Helping businesses digitize and scale with intelligent solutions.",
-    category: "Tech Development",
-    services: ["AI Integration", "Full-Stack Development", "SEO Optimization", "Web Analytics", "Shopify Development"],
+    title: "Ionomad",
+    description: "A deeptech and marketing agency specializing in AI-driven solutions, content marketing, and digital transformation. We help businesses navigate the intersection of technology and marketing to achieve sustainable growth.",
+    category: "Deeptech & Marketing Agency",
+    services: ["AI-Powered Marketing", "Content Strategy", "Digital Transformation", "SEO & SEM", "Data Analytics", "Tech Consulting", "Brand Development"],
     socialMedia: {
-      website: "https://bookchaowatech.com",
+      website: "https://www.ionomad.net",
       linkedin: "https://linkedin.com/in/chaowalit-greepoke",
-      github: "https://github.com/bookchaowalit"
-    },
-    status: "Active"
-  },
-  {
-    title: "AI Analytics Consulting",
-    description: "Specialized consulting for businesses looking to implement AI-driven analytics and data insights. Transform your data into actionable intelligence.",
-    category: "AI Consulting",
-    services: ["Data Analytics", "AI Strategy", "Business Intelligence", "Performance Optimization", "ROI Analysis"],
-    socialMedia: {
-      linkedin: "https://linkedin.com/in/chaowalit-greepoke",
+      github: "https://github.com/bookchaowalit",
+      twitter: "",
       email: "bookchaowalit@gmail.com"
     },
     status: "Active"
-  },
-  {
-    title: "Bangkok Freelance Network",
-    description: "Building a network of skilled freelancers in Bangkok, connecting local talent with international opportunities in tech and digital services.",
-    category: "Network Building",
-    services: ["Talent Matching", "Project Management", "Quality Assurance", "Cross-cultural Communication"],
-    socialMedia: {
-      linkedin: "https://linkedin.com/in/chaowalit-greepoke",
-      twitter: "https://twitter.com/bookchaowalit"
-    },
-    status: "Growing"
   }
 ];
 
@@ -50,7 +30,7 @@ export function BusinessClient() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         className="text-center space-y-8 mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -61,7 +41,7 @@ export function BusinessClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <MixedTypographyTitle 
+          <MixedTypographyTitle
             words={[
               { text: "My", style: "cursive", color: "text-purple-700", size: "xl" },
               { text: "Business", style: "bubble", color: "text-blue-600", size: "xl" },
@@ -89,30 +69,30 @@ export function BusinessClient() {
                     🇹🇭 Bangkok Based
                   </Badge>
                 </div>
-                
+
                 <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
-                  Building Multiple Ventures with Passion
+                  Building Ionomad: Deeptech & Marketing Agency
                 </h2>
-                
+
                 <p className="text-lg text-slate-700 font-[family-name:var(--font-doodle)] leading-relaxed">
-                  As a <strong>solopreneur</strong>, I'm passionate about creating innovative solutions that solve real problems. 
-                  From tech development to consulting, I build businesses that combine <strong>cutting-edge technology</strong> with 
-                  <strong>genuine value creation</strong>. Each venture reflects my commitment to excellence and my belief in 
-                  the power of technology to transform businesses.
+                  As a <strong>solopreneur</strong>, I'm passionate about creating innovative solutions that solve real problems.
+                  Through <strong>Ionomad</strong>, I combine <strong>cutting-edge deeptech</strong> with
+                  <strong>strategic marketing</strong> to help businesses navigate the digital landscape. My agency focuses on
+                  AI-driven solutions and data-powered marketing strategies that deliver measurable results.
                 </p>
 
                 <div className="flex flex-wrap gap-3 justify-center">
                   <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    🤖 AI Integration
+                    🤖 AI-Powered Marketing
                   </Badge>
                   <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
                     📊 Data Analytics
                   </Badge>
                   <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    🌐 Full-Stack Development
+                    🚀 Deeptech Solutions
                   </Badge>
                   <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    📈 Business Growth
+                    📈 Digital Growth
                   </Badge>
                 </div>
               </div>
@@ -128,9 +108,9 @@ export function BusinessClient() {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="mb-16"
       >
-        <NotebookSectionHeader 
-          title="My Active Ventures" 
-          subtitle="Each business represents a unique approach to solving market challenges"
+        <NotebookSectionHeader
+          title="Ionomad: Deeptech & Marketing Agency"
+          subtitle="Specializing in AI-driven marketing solutions and digital transformation"
           className="mb-8"
         />
 
@@ -140,8 +120,8 @@ export function BusinessClient() {
               key={index}
               initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ 
-                duration: 0.6, 
+              transition={{
+                duration: 0.6,
                 delay: 1 + index * 0.2,
                 ease: "backOut"
               }}
@@ -151,11 +131,11 @@ export function BusinessClient() {
                   <div className="flex flex-col h-full">
                     <div className="space-y-4 flex-1">
                       <div className="flex items-center justify-between">
-                        <Badge 
-                          variant="secondary" 
+                        <Badge
+                          variant="secondary"
                           className={`${
-                            business.status === 'Active' 
-                              ? 'bg-green-100 text-green-800 border-green-300' 
+                            business.status === 'Active'
+                              ? 'bg-green-100 text-green-800 border-green-300'
                               : 'bg-yellow-100 text-yellow-800 border-yellow-300'
                           }`}
                         >
@@ -165,7 +145,7 @@ export function BusinessClient() {
                           {business.category}
                         </Badge>
                       </div>
-                      
+
                       <div>
                         <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-2">
                           {business.title}
@@ -174,7 +154,7 @@ export function BusinessClient() {
                           {business.description}
                         </p>
                       </div>
-                      
+
                       <div className="space-y-3">
                         <h4 className="font-[family-name:var(--font-comic)] font-bold text-slate-700 uppercase text-xs tracking-wide">
                           Services
@@ -187,7 +167,7 @@ export function BusinessClient() {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div className="space-y-3">
                         <h4 className="font-[family-name:var(--font-comic)] font-bold text-slate-700 uppercase text-xs tracking-wide">
                           Connect
@@ -251,8 +231,8 @@ export function BusinessClient() {
             Ready to Work Together?
           </h2>
           <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
-            Whether you need AI integration, full-stack development, or strategic consulting, 
-            I'm here to help your business grow. Let's discuss how we can create value together!
+            Whether you need AI-powered marketing strategies, deeptech solutions, or digital transformation consulting,
+            Ionomad is here to help your business grow. Let's discuss how we can leverage technology and data to achieve your goals!
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
