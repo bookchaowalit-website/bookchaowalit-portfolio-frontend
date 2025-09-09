@@ -36,17 +36,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ].join(', '),
     robots: 'index, follow',
     alternates: {
-      canonical: locale === 'en' ? '/contact' : `/${locale}/contact`,
+      canonical: `/${locale}/contact`,
       languages: {
-        'en': '/contact',
+        'en': '/en/contact',
         'th': '/th/contact',
-        'x-default': '/contact'
+        'x-default': '/en/contact'
       }
     },
     openGraph: {
       type: 'website',
       locale: locale,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale === 'en' ? '' : locale + '/'}contact`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale}/contact`,
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',

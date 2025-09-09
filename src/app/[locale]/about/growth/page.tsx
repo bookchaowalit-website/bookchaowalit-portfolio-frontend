@@ -23,11 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     alternates: {
-      canonical: locale === 'en' ? '/about/growth' : `/${locale}/about/growth`,
+      canonical: `/${locale}/about/growth`,
       languages: {
-        'en': '/about/growth',
+        'en': '/en/about/growth',
         'th': '/th/about/growth',
-        'x-default': '/about/growth'
+        'x-default': '/en/about/growth'
       }
     },
   };

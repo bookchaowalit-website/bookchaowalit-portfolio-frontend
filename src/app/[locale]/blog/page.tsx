@@ -41,11 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ].join(', '),
     robots: 'index, follow',
     alternates: {
-      canonical: locale === 'en' ? '/blog' : `/${locale}/blog`,
+      canonical: `/${locale}/blog`,
       languages: {
-        'en': '/blog',
+        'en': '/en/blog',
         'th': '/th/blog',
-        'x-default': '/blog'
+        'x-default': '/en/blog'
       }
     },
     openGraph: {

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
       'Tech Generalist Bangkok',
-      'Solopreneur Thailand', 
+      'Solopreneur Thailand',
       'Problem Solver Developer',
       'Software Engineering Bangkok',
       'Data Analytics Consultant',
@@ -44,17 +44,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     publisher: 'Chaowalit Greepoke',
     robots: 'index, follow',
     alternates: {
-      canonical: locale === 'en' ? '/' : `/${locale}`,
+      canonical: `/${locale}`,
       languages: {
-        'en': '/',
+        'en': '/en',
         'th': '/th',
-        'x-default': '/'
+        'x-default': '/en'
       }
     },
     openGraph: {
       type: 'website',
       locale: locale,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale === 'en' ? '' : locale}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale}`,
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',

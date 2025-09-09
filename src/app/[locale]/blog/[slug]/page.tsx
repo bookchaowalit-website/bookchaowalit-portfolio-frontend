@@ -59,11 +59,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     publisher: 'Chaowalit Greepoke',
     robots: 'index, follow',
     alternates: {
-      canonical: blogUrl,
+      canonical: `/${locale}/blog/${slug}`,
       languages: {
-        'en': `/blog/${slug}`,
+        'en': `/en/blog/${slug}`,
         'th': `/th/blog/${slug}`,
-        'x-default': `/blog/${slug}`
+        'x-default': `/en/blog/${slug}`
       }
     },
     openGraph: {

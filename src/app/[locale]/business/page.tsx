@@ -24,17 +24,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'),
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+    keywords: [
+      'Deeptech Agency Bangkok',
+      'AI Marketing Agency Thailand',
+      'Digital Transformation Consultant',
+      'Tech Consulting Bangkok',
+      'Marketing Agency Thailand',
+      'AI Solutions Bangkok',
+      'Business Growth Consultant',
+      'Technology Strategy Thailand'
+    ].join(', '),
+    robots: 'index, follow',
+    alternates: {
+      canonical: `/${locale}/business`,
+      languages: {
+        'en': '/en/business',
+        'th': '/th/business',
+        'x-default': '/en/business'
+      }
+    },
     openGraph: {
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       type: 'website',
       locale: locale,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale}/business`,
+      siteName: 'Chaowalit Greepoke Portfolio',
+      images: [{
+        url: '/og-business.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ionomad - Deeptech & Marketing Agency'
+      }]
     },
     twitter: {
       card: 'summary_large_image',
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
-    },
+      creator: '@bookchaowalit',
+      images: ['/og-business.jpg']
+    }
   };
 }
 
