@@ -99,7 +99,7 @@ export default async function LocaleLayout({
     },
     "knowsAbout": [
       "Software Engineering",
-      "Data Analytics", 
+      "Data Analytics",
       "Artificial Intelligence",
       "Digital Growth",
       "Web Development",
@@ -107,7 +107,7 @@ export default async function LocaleLayout({
     ],
     "sameAs": [
       "https://github.com/bookchaowalit",
-      "https://linkedin.com/in/bookchaowalit"
+      "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
     ]
   };
 

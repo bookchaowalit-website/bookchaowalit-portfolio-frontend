@@ -37,7 +37,7 @@ export function ContactClient() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <motion.div 
+      <motion.div
         className="text-center space-y-8 mb-12"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export function ContactClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <MixedTypographyTitle 
+          <MixedTypographyTitle
             words={[
               { text: "Let's", style: "cursive", color: "text-purple-700", size: "xl" },
               { text: "Connect!", style: "bubble", color: "text-blue-600", size: "xl" },
@@ -57,7 +57,7 @@ export function ContactClient() {
             className="mb-6"
           />
         </motion.div>
-        
+
         <motion.div
           className="max-w-lg mx-auto"
           initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
@@ -102,7 +102,7 @@ export function ContactClient() {
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -115,7 +115,7 @@ export function ContactClient() {
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="subject">Subject</Label>
                 <Input
@@ -128,7 +128,7 @@ export function ContactClient() {
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea
@@ -141,7 +141,7 @@ export function ContactClient() {
                   required
                 />
               </div>
-              
+
               <Button type="submit" className="w-full">
                 Send Message
               </Button>
@@ -166,7 +166,7 @@ export function ContactClient() {
                   <p className="text-sm text-muted-foreground">bookchaowalit@gmail.com</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   📱
@@ -176,7 +176,7 @@ export function ContactClient() {
                   <p className="text-sm text-muted-foreground">+66 65-416-9146</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   📍
@@ -204,39 +204,39 @@ export function ContactClient() {
                     GitHub
                   </a>
                 </Button>
-                
+
                 <Button variant="outline" className="justify-start" asChild>
-                  <a href="https://linkedin.com/in/chaowalit-greepoke" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">💼</span>
                     LinkedIn
                   </a>
                 </Button>
-                
+
                 <Button variant="outline" className="justify-start" asChild>
                   <a href="https://twitter.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">🐦</span>
                     Twitter
                   </a>
                 </Button>
-                
+
                 <Button variant="outline" className="justify-start" asChild>
                   <a href="https://dev.to/bookchaowalit" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">✍️</span>
                     Dev.to
                   </a>
                 </Button>
-                
+
                 <Button variant="outline" className="justify-start" asChild>
-                  <a href="https://www.upwork.com/freelancers/bookchaowalit" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">🔧</span>
                     Upwork
                   </a>
                 </Button>
-                
+
                 <Button variant="outline" className="justify-start" asChild>
-                  <a href="https://www.freelancer.com/u/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                    <span className="mr-2">💪</span>
-                    Freelancer
+                  <a href="https://fastwork.co/user/bookchao" target="_blank" rel="noopener noreferrer">
+                    <span className="mr-2">⚡</span>
+                    Fastwork
                   </a>
                 </Button>
               </div>
@@ -282,9 +282,9 @@ export function ContactClient() {
                 I typically respond to messages within 24-48 hours (Bangkok timezone UTC+7).
                 For urgent AI or development projects, please mention it in the subject line.
               </p>
-              
+
               <Separator className="my-4" />
-              
+
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-sm">General inquiries</span>

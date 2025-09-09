@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="mt-16 py-12 border-t border-slate-200">
       <div className="container mx-auto px-4">
@@ -21,19 +21,19 @@ export function Footer() {
               Thanks for visiting!
             </h2>
             {/* Hand-drawn underline */}
-            <motion.svg 
-              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-primary/60" 
-              width="180" 
-              height="8" 
+            <motion.svg
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-primary/60"
+              width="180"
+              height="8"
               viewBox="0 0 180 8"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
             >
-              <motion.path 
+              <motion.path
                 d="M5 4c20 1 35-1 55 2 15-2 25 1 40-1 20 2 30-1 45 1 10-1 15 0 20 0"
-                stroke="currentColor" 
-                strokeWidth="3" 
+                stroke="currentColor"
+                strokeWidth="3"
                 fill="none"
                 strokeLinecap="round"
               />
@@ -41,14 +41,14 @@ export function Footer() {
           </motion.div>
 
           {/* Navigation with doodle style */}
-          <motion.nav 
+          <motion.nav
             className="flex flex-wrap justify-center gap-6 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(1deg)` }}
@@ -57,7 +57,7 @@ export function Footer() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/about"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-0.5deg)` }}
@@ -66,7 +66,7 @@ export function Footer() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/projects"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(0.5deg)` }}
@@ -75,7 +75,7 @@ export function Footer() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/business"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-0.8deg)` }}
@@ -84,7 +84,7 @@ export function Footer() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/blog"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-1deg)` }}
@@ -93,7 +93,7 @@ export function Footer() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
-              <Link 
+              <Link
                 href="/contact"
                 className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(0.5deg)` }}
@@ -104,15 +104,15 @@ export function Footer() {
           </motion.nav>
 
           {/* Social Media Links */}
-          <motion.div 
+          <motion.div
             className="flex flex-wrap justify-center gap-4 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <motion.a 
-              href="https://github.com/bookchaowalit" 
-              target="_blank" 
+            <motion.a
+              href="https://github.com/bookchaowalit"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
@@ -120,9 +120,9 @@ export function Footer() {
             >
               🐙
             </motion.a>
-            <motion.a 
-              href="https://linkedin.com/in/chaowalit-greepoke" 
-              target="_blank" 
+            <motion.a
+              href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
@@ -130,9 +130,9 @@ export function Footer() {
             >
               💼
             </motion.a>
-            <motion.a 
-              href="https://twitter.com/bookchaowalit" 
-              target="_blank" 
+            <motion.a
+              href="https://twitter.com/bookchaowalit"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
@@ -140,9 +140,9 @@ export function Footer() {
             >
               🐦
             </motion.a>
-            <motion.a 
-              href="https://www.upwork.com/freelancers/bookchaowalit" 
-              target="_blank" 
+            <motion.a
+              href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
@@ -150,17 +150,17 @@ export function Footer() {
             >
               🔧
             </motion.a>
-            <motion.a 
-              href="https://www.freelancer.com/u/bookchaowalit" 
-              target="_blank" 
+            <motion.a
+              href="https://fastwork.co/user/bookchao"
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
-              title="Freelancer"
+              title="Fastwork"
             >
-              💪
+              ⚡
             </motion.a>
-            <motion.a 
+            <motion.a
               href="mailto:bookchaowalit@gmail.com"
               whileHover={{ y: -2, scale: 1.1 }}
               className="text-slate-600 hover:text-primary transition-colors duration-200"
@@ -171,58 +171,58 @@ export function Footer() {
           </motion.div>
 
           {/* Hand-drawn doodle symbols */}
-          <motion.div 
+          <motion.div
             className="flex justify-center items-center gap-8 mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {/* Star doodle */}
-            <motion.svg 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
+            <motion.svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               className="text-primary/60"
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             >
-              <path 
-                d="M12 2l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 15l-3.5 2.5L10 13l-3.5-2.5h4.5L12 2z" 
+              <path
+                d="M12 2l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 15l-3.5 2.5L10 13l-3.5-2.5h4.5L12 2z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
               />
             </motion.svg>
-            
+
             {/* Heart doodle */}
-            <motion.svg 
-              width="24" 
-              height="20" 
-              viewBox="0 0 24 20" 
+            <motion.svg
+              width="24"
+              height="20"
+              viewBox="0 0 24 20"
               className="text-red-400/60"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <path 
-                d="M12 18s-8-4-8-10c0-3 2-5 5-5 2 0 3 1 3 1s1-1 3-1c3 0 5 2 5 5 0 6-8 10-8 10z" 
+              <path
+                d="M12 18s-8-4-8-10c0-3 2-5 5-5 2 0 3 1 3 1s1-1 3-1c3 0 5 2 5 5 0 6-8 10-8 10z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
             </motion.svg>
-            
+
             {/* Squiggle doodle */}
-            <motion.svg 
-              width="40" 
-              height="16" 
-              viewBox="0 0 40 16" 
+            <motion.svg
+              width="40"
+              height="16"
+              viewBox="0 0 40 16"
               className="text-secondary/60"
             >
-              <motion.path 
-                d="M2 8c4-3 8 3 12-2 4-3 8 2 12-1 4-2 8 3 10 0" 
-                stroke="currentColor" 
-                strokeWidth="2" 
+              <motion.path
+                d="M2 8c4-3 8 3 12-2 4-3 8 2 12-1 4-2 8 3 10 0"
+                stroke="currentColor"
+                strokeWidth="2"
                 fill="none"
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}

@@ -16,7 +16,7 @@ const businesses = [
     services: ["AI-Powered Marketing", "Content Strategy", "Digital Transformation", "SEO & SEM", "Data Analytics", "Tech Consulting", "Brand Development"],
     socialMedia: {
       website: "https://www.ionomad.net",
-      linkedin: "https://linkedin.com/in/chaowalit-greepoke",
+      linkedin: "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/",
       github: "https://github.com/bookchaowalit",
       twitter: "",
       email: "bookchaowalit@gmail.com"
