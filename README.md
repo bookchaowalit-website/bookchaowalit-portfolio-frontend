@@ -33,7 +33,7 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Shadc
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -106,6 +106,52 @@ npm run build
 - **Netlify**: Works out of the box
 - **AWS Amplify**: Compatible with static export
 - **GitHub Pages**: Use `next export` for static deployment
+
+## 📧 Contact Form Setup
+
+The contact form is fully functional and ready for production. It uses **Resend** for email delivery.
+
+### Setting up Email Delivery
+
+1. **Sign up for Resend**:
+   - Go to [resend.com](https://resend.com)
+   - Create a free account
+   - Verify your domain (recommended for production)
+
+2. **Get your API Key**:
+   - Go to API Keys in your Resend dashboard
+   - Create a new API key
+
+3. **Configure Environment Variables**:
+   ```bash
+   # Copy the example file
+   cp .env.example .env.local
+
+   # Add your Resend configuration
+   RESEND_API_KEY=re_your_api_key_here
+   CONTACT_EMAIL=your-email@example.com
+   ```
+
+4. **Deploy**:
+   - The contact form will automatically use Resend when the API key is configured
+   - Without the API key, it will log messages to the console (useful for development)
+
+### Features
+
+- ✅ **Form validation**: Client and server-side validation
+- ✅ **Loading states**: Visual feedback during submission
+- ✅ **Error handling**: Graceful error messages
+- ✅ **Success feedback**: Confirmation messages
+- ✅ **Responsive design**: Works on all devices
+- ✅ **Accessibility**: Proper form labels and ARIA attributes
+
+### Alternative Email Services
+
+If you prefer a different email service, you can easily modify `src/app/api/contact/route.ts`:
+
+- **SendGrid**: Replace Resend with SendGrid SDK
+- **EmailJS**: Client-side only solution
+- **Nodemailer**: Self-hosted SMTP solution
 
 ## 📁 Project Structure
 

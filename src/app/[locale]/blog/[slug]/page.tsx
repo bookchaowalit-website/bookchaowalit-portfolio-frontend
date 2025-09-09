@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n/routing";
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { ShareButton } from "@/components/share-button";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -27,7 +28,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const post = getBlogPost(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found',
@@ -98,12 +99,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const post = getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
+
+  const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -124,11 +127,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               </Badge>
             ))}
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
             {post.title}
           </h1>
-          
+
           <p className="text-xl text-muted-foreground leading-relaxed">
             {post.excerpt}
           </p>
@@ -157,16 +160,15 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             </div>
           </div>
 
-          {/* Share buttons placeholder */}
+          {/* Share buttons */}
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm">
-              Share
-            </Button>
+            <ShareButton
+              title={post.title}
+              url={currentUrl}
+            />
           </div>
         </div>
-      </header>
-
-      {/* Article content */}
+      </header>      {/* Article content */}
       <article className="prose prose-lg max-w-none">
         <MDXRemote source={post.content} />
       </article>
@@ -183,7 +185,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-2">About {post.author}</h3>
             <p className="text-muted-foreground mb-4">
-              Tech Generalist from Bangkok, Thailand with expertise in AI integration, full-stack development, and SEO optimization. 
+              Tech Generalist from Bangkok, Thailand with expertise in AI integration, full-stack development, and SEO optimization.
               I love sharing knowledge and helping developers build innovative solutions with modern technologies.
             </p>
             <div className="flex space-x-2">

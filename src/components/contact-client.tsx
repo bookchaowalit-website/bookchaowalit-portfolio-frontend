@@ -20,19 +20,61 @@ export function ContactClient() {
     message: ""
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear any previous status when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission logic
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! I'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Message sent successfully! I\'ll get back to you soon.'
+        });
+        // Clear form on success
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.'
+        });
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -89,6 +131,20 @@ export function ContactClient() {
               </p>
             </motion.div>
             <div>
+            {/* Status Message */}
+            {submitStatus.type && (
+              <div className={`mb-6 p-4 rounded-lg ${
+                submitStatus.type === 'success'
+                  ? 'bg-green-50 border border-green-200 text-green-800'
+                  : 'bg-red-50 border border-red-200 text-red-800'
+              }`}>
+                <p className="text-sm font-medium">
+                  {submitStatus.type === 'success' ? '✅ ' : '❌ '}
+                  {submitStatus.message}
+                </p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
@@ -100,6 +156,7 @@ export function ContactClient() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -113,6 +170,7 @@ export function ContactClient() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -126,6 +184,7 @@ export function ContactClient() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -139,11 +198,19 @@ export function ContactClient() {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
-              <Button type="submit" className="w-full">
-                Send Message
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </form>
             </div>
