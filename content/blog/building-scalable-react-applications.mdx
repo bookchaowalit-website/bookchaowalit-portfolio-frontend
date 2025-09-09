@@ -13,17 +13,21 @@ I recently tried the OCR from datalab.to and was impressed by its speed. Let me 
 
 ## What is Marker?
 
-Marker is an advanced OCR (Optical Character Recognition) tool that can convert documents into various formats including PDF, images, PPTX, DOCX, XLSX, HTML, and EPUB. The best part? It fully supports **Thai language** along with many other languages.
+Marker is an advanced OCR (Optical Character Recognition) tool that can convert documents into various formats including PDF, images, PPTX, DOCX, XLSX, HTML, and EPUB.
+
+**The best part?** It fully supports **Thai language** along with many other languages.
 
 ## Key Features
 
 ### ✅ Multi-Format Support
+
 Marker can process documents in multiple formats and convert them to:
 - Markdown
 - JSON
 - HTML
 
 ### ✅ Advanced Structure Recognition
+
 The tool excels at capturing detailed document structures including:
 - Tables
 - Forms
@@ -33,28 +37,33 @@ The tool excels at capturing detailed document structures including:
 - And much more
 
 ### ✅ Image Extraction & Cleanup
+
 Marker can:
 - Extract images from documents
 - Handle headers and footers
 - Remove noise and unwanted elements
 
 ### ✅ Performance & Compatibility
+
 - Works on CPU, GPU, or Apple MPS
 - Self-hosted for privacy and security
 - Extremely fast processing
 
 ### ✅ Hybrid Mode with LLM
+
 The standout feature is the **Hybrid mode** that uses Large Language Models to improve accuracy, especially for complex tasks like:
 - Merging tables across multiple pages
 - Converting complex mathematical equations
 
 ### ✅ LLM Integration
+
 Compatible with various LLMs including:
 - Gemini
 - Ollama
 - And works seamlessly with other AI models
 
 ### ✅ Impressive Speed
+
 Marker delivers outstanding performance with up to **122 pages per second** on GPU H100!
 
 ## About DataLab
@@ -71,171 +80,12 @@ If you work with documents in multiple formats or need OCR that:
 - Can be self-hosted for privacy
 - Handles complex document structures
 
-Then Marker is definitely worth trying!
+**Then Marker is definitely worth trying!**
 
 ## Getting Started
 
 You can find Marker on GitHub: [VikParuchuri/marker](https://github.com/VikParuchuri/marker)
 
-If you enjoy content like this, make sure to follow our page to stay updated with the latest technology and tools! 👍
-
-Use global state for:
-- User authentication
-- Application-wide settings
-- Shared data across components
-
-### State Management Options
-
-1. **Context API**: For simple global state
-2. **Zustand**: Lightweight state management
-3. **Redux Toolkit**: For complex applications
-4. **React Query**: For server state management
-
-## Code Quality
-
-Maintaining high code quality is essential for long-term scalability.
-
-### TypeScript Integration
-
-```typescript
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface UserProps {
-  user: User;
-  onUpdate: (user: User) => void;
-}
-```
-
-### Component Patterns
-
-#### Compound Components
-
-```typescript
-<Modal>
-  <Modal.Header>
-    <Modal.Title>Confirm Action</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    Are you sure you want to continue?
-  </Modal.Body>
-  <Modal.Footer>
-    <Modal.Button>Cancel</Modal.Button>
-    <Modal.Button primary>Confirm</Modal.Button>
-  </Modal.Footer>
-</Modal>
-```
-
-#### Custom Hooks
-
-```typescript
-function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
-  });
-
-  const setValue = (value: T) => {
-    try {
-      setStoredValue(value);
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.error('Error saving to localStorage:', error);
-    }
-  };
-
-  return [storedValue, setValue] as const;
-}
-```
-
-## Performance Optimization
-
-### Code Splitting
-
-Implement lazy loading for routes and heavy components:
-
-```typescript
-const LazyComponent = lazy(() => import('./HeavyComponent'));
-
-function App() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <LazyComponent />
-    </Suspense>
-  );
-}
-```
-
-### Memoization
-
-Use React.memo and useMemo strategically:
-
-```typescript
-const ExpensiveComponent = memo(({ data }) => {
-  const processedData = useMemo(() => {
-    return data.map(item => expensiveComputation(item));
-  }, [data]);
-
-  return <div>{processedData}</div>;
-});
-```
-
-## Testing Strategy
-
-### Testing Pyramid
-
-1. **Unit Tests**: Test individual components and functions
-2. **Integration Tests**: Test component interactions
-3. **E2E Tests**: Test complete user workflows
-
-### Testing Tools
-
-- **Jest**: Unit testing framework
-- **React Testing Library**: Component testing
-- **Cypress**: End-to-end testing
-
-```typescript
-test('should render user profile correctly', () => {
-  const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-
-  render(<UserProfile user={mockUser} />);
-
-  expect(screen.getByText('John Doe')).toBeInTheDocument();
-  expect(screen.getByText('john@example.com')).toBeInTheDocument();
-});
-```
-
-## Deployment and Monitoring
-
-### Build Optimization
-
-- Enable tree shaking
-- Optimize bundle splitting
-- Compress assets
-- Use CDN for static assets
-
-### Monitoring
-
-Implement proper monitoring:
-
-- Error tracking (Sentry)
-- Performance monitoring
-- User analytics
-- Core Web Vitals tracking
-
-## Conclusion
-
-Building scalable React applications requires careful planning and adherence to best practices. By following these guidelines, you can create applications that remain maintainable and performant as they grow.
-
-Remember that scalability is not just about handling more users—it's about creating code that can evolve with changing requirements while maintaining quality and developer productivity.
-
 ---
 
-*Have you implemented any of these patterns in your projects? What challenges have you faced when scaling React applications?*
+*If you enjoy content like this, make sure to follow our page to stay updated with the latest technology and tools! 👍*
