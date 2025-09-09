@@ -12,15 +12,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h3 className="text-xl font-semibold mb-2 text-foreground">{children}</h3>
     ),
     p: ({ children }) => (
-      <p className="mb-4 text-muted-foreground leading-7">{children}</p>
+      <p className="mb-4 text-foreground leading-7">{children}</p>
     ),
     ul: ({ children }) => (
-      <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
+      <ul className="mb-4 ml-6 list-disc text-foreground marker:text-foreground">{children}</ul>
     ),
     ol: ({ children }) => (
-      <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
+      <ol className="mb-4 ml-6 list-decimal text-foreground marker:text-foreground">{children}</ol>
     ),
-    li: ({ children }) => <li className="mb-1">{children}</li>,
+    li: ({ children }) => <li className="mb-1 text-foreground">{children}</li>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-primary pl-4 italic mb-4 text-muted-foreground">
         {children}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/routing';
+import { usePathname as useNextPathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -18,14 +18,17 @@ const languages = [
 
 export function LanguageSwitcher() {
   const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = useNextPathname();
 
   const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
 
   const handleLanguageChange = (newLocale: string) => {
-    // @ts-expect-error - router.replace with locale is supported
-    router.replace(pathname, { locale: newLocale });
+    // For dynamic routes, we need to construct the path properly
+    // Remove the locale prefix from the current pathname
+    const pathWithoutLocale = pathname.replace(/^\/(en|th)/, '') || '/';
+
+    // Navigate to the same path with the new locale
+    window.location.href = `/${newLocale}${pathWithoutLocale}`;
   };
 
   return (
