@@ -16,7 +16,11 @@ export const routing = defineRouting({
     '/blog': '/blog',
     '/blog/[slug]': '/blog/[slug]',
     '/contact': '/contact',
-    '/business': '/business'
+    '/business': '/business',
+    '/skills': '/skills',
+    '/skills/tech': '/skills/tech',
+    '/skills/art': '/skills/art',
+    '/skills/video': '/skills/video'
   }
 });
 

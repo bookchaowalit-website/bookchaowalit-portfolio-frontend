@@ -1,0 +1,331 @@
+"use client";
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
+import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { motion } from "framer-motion";
+import { Link } from "@/i18n/routing";
+import {
+  Palette,
+  Monitor,
+  PenTool,
+  Layers,
+  Eye,
+  Heart,
+  Zap
+} from "lucide-react";
+
+export function ArtSkillsClient() {
+  const designCategories = [
+    {
+      title: 'UI/UX Design',
+      icon: <Monitor className="w-6 h-6" />,
+      color: 'text-purple-600',
+      skills: [
+        { name: 'Figma', level: 95, experience: '2+ years', projects: 25 },
+        { name: 'User Research', level: 85, experience: '2+ years', projects: 15 },
+        { name: 'Wireframing', level: 90, experience: '2+ years', projects: 20 },
+        { name: 'Prototyping', level: 88, experience: '2+ years', projects: 18 }
+      ]
+    },
+    {
+      title: 'Visual Design',
+      icon: <Palette className="w-6 h-6" />,
+      color: 'text-pink-600',
+      skills: [
+        { name: 'Brand Identity', level: 85, experience: '2+ years', projects: 12 },
+        { name: 'Graphic Design', level: 90, experience: '3+ years', projects: 30 },
+        { name: 'Color Theory', level: 88, experience: '3+ years', projects: 25 },
+        { name: 'Typography', level: 85, experience: '2+ years', projects: 20 }
+      ]
+    },
+    {
+      title: 'Digital Art',
+      icon: <PenTool className="w-6 h-6" />,
+      color: 'text-blue-600',
+      skills: [
+        { name: 'Digital Illustration', level: 80, experience: '2+ years', projects: 15 },
+        { name: 'Concept Art', level: 75, experience: '1+ year', projects: 8 },
+        { name: 'Character Design', level: 78, experience: '1+ year', projects: 10 },
+        { name: 'Visual Storytelling', level: 82, experience: '2+ years', projects: 12 }
+      ]
+    },
+    {
+      title: 'Design Tools',
+      icon: <Layers className="w-6 h-6" />,
+      color: 'text-green-600',
+      skills: [
+        { name: 'Adobe Creative Suite', level: 85, experience: '3+ years', projects: 35 },
+        { name: 'Sketch', level: 80, experience: '1+ year', projects: 10 },
+        { name: 'InVision', level: 75, experience: '1+ year', projects: 8 },
+        { name: 'Principle', level: 70, experience: '6 months', projects: 5 }
+      ]
+    }
+  ];
+
+  const designPrinciples = [
+    {
+      title: 'User-Centered Design',
+      description: 'Always putting users first in the design process',
+      icon: <Heart className="w-5 h-5" />
+    },
+    {
+      title: 'Visual Hierarchy',
+      description: 'Creating clear information architecture through design',
+      icon: <Eye className="w-5 h-5" />
+    },
+    {
+      title: 'Consistency',
+      description: 'Maintaining design patterns across all touchpoints',
+      icon: <Layers className="w-5 h-5" />
+    },
+    {
+      title: 'Accessibility',
+      description: 'Designing for all users, regardless of ability',
+      icon: <Zap className="w-5 h-5" />
+    }
+  ];
+
+  const portfolioItems = [
+    {
+      title: 'Portfolio Website Design',
+      type: 'UI/UX Design',
+      tools: ['Figma', 'Adobe XD', 'Sketch'],
+      description: 'Complete redesign of personal portfolio with modern aesthetics and improved user experience'
+    },
+    {
+      title: 'Brand Identity for Tech Startup',
+      type: 'Brand Design',
+      tools: ['Adobe Illustrator', 'Photoshop', 'InDesign'],
+      description: 'Full brand identity including logo, color palette, typography, and brand guidelines'
+    },
+    {
+      title: 'Mobile App UI Design',
+      type: 'Mobile Design',
+      tools: ['Figma', 'Principle', 'Sketch'],
+      description: 'User interface design for a fitness tracking mobile application with interactive prototypes'
+    }
+  ];
+
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      {/* Hero Section */}
+      <motion.div
+        className="text-center space-y-8 py-8"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <MixedTypographyTitle
+            words={[
+              { text: "Creative", style: "cursive", color: "text-purple-700", size: "xl" },
+              { text: "&", style: "bubble", color: "text-pink-600", size: "lg" },
+              { text: "Design", style: "filled", color: "text-blue-700", size: "xl" },
+              { text: "Skills", style: "block", color: "text-green-600", size: "xl" },
+              { text: "🎨", style: "block", size: "lg" }
+            ]}
+            className="mb-6"
+          />
+        </motion.div>
+
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <p className="text-lg text-muted-foreground">
+            From UI/UX design to visual storytelling, explore my creative process and
+            the design principles that guide my work across digital and traditional media.
+          </p>
+        </motion.div>
+      </motion.div>
+
+      {/* Design Categories */}
+      <div className="space-y-8 mb-12">
+        {designCategories.map((category, categoryIndex) => (
+          <motion.div
+            key={category.title}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+          >
+            <NotebookPaper className="py-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className={`${category.color} bg-slate-100 p-3 rounded-lg`}>
+                  {category.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">{category.title}</h2>
+                  <p className="text-muted-foreground">Creative tools and design proficiency</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
+                  >
+                    <Card>
+                      <CardHeader className="pb-3">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-lg">{skill.name}</CardTitle>
+                          <Badge variant="outline">{skill.level}%</Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <motion.div
+                              className="bg-purple-600 h-2 rounded-full"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${skill.level}%` }}
+                              transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                            />
+                          </div>
+                          <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>{skill.experience}</span>
+                            <span>{skill.projects} projects</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </NotebookPaper>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Design Principles */}
+      <NotebookPaper className="py-8 mb-8">
+        <NotebookSectionHeader
+          title="Design Principles I Live By"
+          subtitle="Core values that guide my creative process"
+          className="mb-6"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {designPrinciples.map((principle, index) => (
+            <motion.div
+              key={principle.title}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="text-center h-full">
+                <CardHeader>
+                  <div className="mx-auto w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                    {principle.icon}
+                  </div>
+                  <CardTitle className="text-lg">{principle.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">{principle.description}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </NotebookPaper>
+
+      {/* Portfolio Highlights */}
+      <NotebookPaper className="py-8 mb-8">
+        <NotebookSectionHeader
+          title="Design Portfolio Highlights"
+          subtitle="Selected projects showcasing my design expertise"
+          className="mb-6"
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {portfolioItems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                    <Badge variant="secondary">{item.type}</Badge>
+                  </div>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tools.map((tool) => (
+                      <Badge key={tool} variant="outline" className="text-xs">
+                        {tool}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </NotebookPaper>
+
+      {/* Creative Process */}
+      <motion.div
+        className="text-center py-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <NotebookPaper className="p-8 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+            🎨 My Creative Process
+          </h2>
+          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+            Every design project starts with understanding the problem, researching the users,
+            and iterating through multiple concepts. I believe great design is invisible -
+            it solves problems without drawing attention to itself.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <StickyNote color="pink" rotation={-2}>
+              <div className="font-semibold text-sm">Research First</div>
+              <div className="text-xs text-muted-foreground mt-1">Understand users & problems</div>
+            </StickyNote>
+            <StickyNote color="blue" rotation={1}>
+              <div className="font-semibold text-sm">Iterate Often</div>
+              <div className="text-xs text-muted-foreground mt-1">Test & refine designs</div>
+            </StickyNote>
+            <StickyNote color="green" rotation={-1}>
+              <div className="font-semibold text-sm">User Focus</div>
+              <div className="text-xs text-muted-foreground mt-1">Design for real people</div>
+            </StickyNote>
+          </div>
+
+          <div className="flex gap-4 justify-center flex-wrap">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild>
+                <Link href="/projects">View Design Projects</Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button variant="outline" asChild>
+                <Link href="/skills">← Back to Skills</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </NotebookPaper>
+      </motion.div>
+    </div>
+  );
+}

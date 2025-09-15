@@ -4,6 +4,7 @@
     "about": "เกี่ยวกับ",
     "projects": "ผลงาน",
     "business": "ธุรกิจ",
+    "skills": "ทักษะ",
     "blog": "บล็อก",
     "contact": "ติดต่อ",
     "aboutOverview": "ภาพรวม",
@@ -15,7 +16,9 @@
     "personalGrowth": "การพัฒนาตนเอง",
     "personalGrowthDesc": "การเรียนรู้อย่างต่อเนื่องและกรอบความคิดในการพัฒนาตนเอง",
     "techJourney": "การเดินทางด้านเทคโนโลยี",
-    "techJourneyDesc": "วิวัฒนาการจากอิเล็กทรอนิกส์สู่ AI และการพัฒนา full-stack"
+    "techJourneyDesc": "วิวัฒนาการจากอิเล็กทรอนิกส์สู่ AI และการพัฒนา full-stack",
+    "tradingJourney": "การเทรดและลงทุน",
+    "tradingJourneyDesc": "เส้นทางของฉันในตลาดการเงินและระบบเทรดที่ขับเคลื่อนด้วย AI"
   },
   "home": {
     "greeting": "สวัสดีครับ ผม",
@@ -35,9 +38,27 @@
     "frontendSkillsTitle": "ทักษะด้าน Frontend และ Framework",
     "backendSkillsTitle": "เทคโนโลยีด้าน Backend และ AI",
     "businessSkillsTitle": "เครื่องมือทางธุรกิจและการวิเคราะห์",
-    "frontendSkills": ["React", "Next.js", "TypeScript"],
-    "backendSkills": ["FastAPI", "Python", "PostgreSQL", "LlamaIndex", "LangChain", "AI/RAG", "Multi-agent Systems"],
-    "businessSkills": ["Shopify", "SEO", "Facebook API", "Google Analytics", "Data Analysis"],
+    "frontendSkills": [
+      "React",
+      "Next.js",
+      "TypeScript"
+    ],
+    "backendSkills": [
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "LlamaIndex",
+      "LangChain",
+      "AI/RAG",
+      "Multi-agent Systems"
+    ],
+    "businessSkills": [
+      "Shopify",
+      "SEO",
+      "Facebook API",
+      "Google Analytics",
+      "Data Analysis"
+    ],
     "featuredProjectsTitle": "ผลงานเด่น",
     "aboutTitle": "เกี่ยวกับฉัน",
     "aboutWord1": "เกี่ยวกับ",
@@ -97,7 +118,7 @@
     "learnMore": "เรียนรู้เพิ่มเติม",
     "bookchaowaTitle": "BookChaowa Tech Solutions",
     "bookchaowaDesc": "บริการพัฒนาแบบ Full-stack พร้อมการรวม AI และการเพิ่มประสิทธิภาพ SEO",
-    "aiConsultingTitle": "AI Analytics Consulting", 
+    "aiConsultingTitle": "AI Analytics Consulting",
     "aiConsultingDesc": "คอนซัลติ้งเฉพาะทางสำหรับการวิเคราะห์ข้อมูลด้วย AI และธุรกิจอินเทลลิเจนซ์",
     "networkTitle": "Bangkok Freelance Network",
     "networkDesc": "เชื่อมต่อฟรีแลนซ์ที่มีทักษะกับโอกาสในต่างประเทศ",

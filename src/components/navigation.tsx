@@ -28,6 +28,7 @@ export function Navigation() {
     { name: t('home'), href: "/" },
     { name: t('projects'), href: "/projects" },
     { name: t('business'), href: "/business" },
+    { name: t('skills'), href: "/skills" },
     { name: t('blog'), href: "/blog" },
     { name: t('contact'), href: "/contact" },
   ];
@@ -38,6 +39,7 @@ export function Navigation() {
     { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc') },
     { name: t('personalGrowth'), href: "/about/growth", description: t('personalGrowthDesc') },
     { name: t('techJourney'), href: "/about/journey", description: t('techJourneyDesc') },
+    { name: t('tradingJourney'), href: "/about/trading", description: t('tradingJourneyDesc') },
   ];
 
   return (
@@ -45,7 +47,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <NavigationBrand />
-          
+
           <NavigationMenu className="hidden md:flex" viewport={false}>
             <NavigationMenuList className="flex space-x-4">
               {navItems.map((item) => (
@@ -66,10 +68,10 @@ export function Navigation() {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
-              
+
               {/* About Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger 
+                <NavigationMenuTrigger
                   className={cn(
                     "px-3 py-2 text-sm font-medium transition-colors hover:text-primary bg-transparent",
                     pathname.startsWith('/about')
@@ -108,9 +110,9 @@ export function Navigation() {
 
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
-            <Button 
-              variant="outline" 
-              size="sm" 
+            <Button
+              variant="outline"
+              size="sm"
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -118,7 +120,7 @@ export function Navigation() {
             </Button>
           </div>
         </div>
-        
+
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden border-t bg-background">
@@ -139,7 +141,7 @@ export function Navigation() {
                   {item.name}
                 </Link>
               ))}
-              
+
               {/* About Section */}
               <div className="space-y-1">
                 <div className="px-3 py-2 text-sm font-medium text-muted-foreground">

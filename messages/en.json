@@ -4,6 +4,7 @@
     "about": "About",
     "projects": "Projects",
     "business": "Business",
+    "skills": "Skills",
     "blog": "Blog",
     "contact": "Contact",
     "aboutOverview": "Overview",
@@ -15,11 +16,13 @@
     "personalGrowth": "Personal Growth",
     "personalGrowthDesc": "Continuous learning and self-development mindset",
     "techJourney": "Tech Journey",
-    "techJourneyDesc": "My evolution from electronics to AI and full-stack development"
+    "techJourneyDesc": "My evolution from electronics to AI and full-stack development",
+    "tradingJourney": "Trading & Investing",
+    "tradingJourneyDesc": "My journey in financial markets and AI-powered trading systems"
   },
   "home": {
     "greeting": "Hello, I'm",
-    "name": "Book (เชาวลิต กรีโภค)",
+    "name": "Book (Chaowalit Greepoke)",
     "subtitle": "Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end. Creating practical and scalable solutions from Bangkok, Thailand",
     "heroAlt": "Chaowalit Greepoke - Tech Generalist",
     "heroWord1": "Tech",

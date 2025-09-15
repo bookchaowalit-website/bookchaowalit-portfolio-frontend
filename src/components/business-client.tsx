@@ -219,6 +219,115 @@ export function BusinessClient() {
         </div>
       </motion.div>
 
+      {/* Future Ventures */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
+        className="mt-16"
+      >
+        <NotebookPaper className="p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+              🚀 Future Ventures & Services
+            </h2>
+            <p className="text-slate-600 font-[family-name:var(--font-doodle)]">
+              Exciting projects and services I'm developing to expand my impact in technology and finance
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <SketchyFrame variant="dashed">
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-2xl">📈</div>
+                  <div>
+                    <h3 className="font-semibold text-lg">AI-Powered Trading Systems</h3>
+                    <Badge variant="outline" className="text-xs mt-1">Coming Soon</Badge>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 mb-4">
+                  Developing algorithmic trading systems using machine learning and AI for automated,
+                  data-driven investment strategies across multiple asset classes.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="text-xs">Python</Badge>
+                  <Badge variant="secondary" className="text-xs">Machine Learning</Badge>
+                  <Badge variant="secondary" className="text-xs">Algorithmic Trading</Badge>
+                  <Badge variant="secondary" className="text-xs">Risk Management</Badge>
+                </div>
+              </div>
+            </SketchyFrame>
+
+            <SketchyFrame variant="dashed">
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-2xl">💰</div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Financial Technology Consulting</h3>
+                    <Badge variant="outline" className="text-xs mt-1">Service Offering</Badge>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 mb-4">
+                  Helping fintech startups and traditional financial institutions integrate AI,
+                  blockchain, and modern data technologies into their operations.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="text-xs">FinTech</Badge>
+                  <Badge variant="secondary" className="text-xs">Blockchain</Badge>
+                  <Badge variant="secondary" className="text-xs">AI Integration</Badge>
+                  <Badge variant="secondary" className="text-xs">Digital Transformation</Badge>
+                </div>
+              </div>
+            </SketchyFrame>
+
+            <SketchyFrame variant="dashed">
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-2xl">📊</div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Investment Analytics Platform</h3>
+                    <Badge variant="outline" className="text-xs mt-1">In Development</Badge>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 mb-4">
+                  Building comprehensive analytics tools for portfolio management,
+                  risk assessment, and investment decision-making with real-time data visualization.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="text-xs">Data Visualization</Badge>
+                  <Badge variant="secondary" className="text-xs">Portfolio Analysis</Badge>
+                  <Badge variant="secondary" className="text-xs">Real-time Data</Badge>
+                  <Badge variant="secondary" className="text-xs">Risk Analytics</Badge>
+                </div>
+              </div>
+            </SketchyFrame>
+
+            <SketchyFrame variant="dashed">
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-2xl">🎯</div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Trading Education & Mentorship</h3>
+                    <Badge variant="outline" className="text-xs mt-1">Service Offering</Badge>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 mb-4">
+                  Sharing knowledge and experience in trading strategies, risk management,
+                  and technical analysis through personalized mentorship and educational content.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="text-xs">Technical Analysis</Badge>
+                  <Badge variant="secondary" className="text-xs">Risk Management</Badge>
+                  <Badge variant="secondary" className="text-xs">Mentorship</Badge>
+                  <Badge variant="secondary" className="text-xs">Education</Badge>
+                </div>
+              </div>
+            </SketchyFrame>
+          </div>
+        </NotebookPaper>
+      </motion.div>
+
       {/* Call to Action */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
