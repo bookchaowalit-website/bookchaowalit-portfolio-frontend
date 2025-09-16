@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Kalam, Caveat, Amatic_SC } from "next/font/google";
+import { Geist, Geist_Mono, Kalam, Caveat, Amatic_SC, Sarabun, Itim, Mali } from "next/font/google";
 import "../globals.css";
 import { Navigation } from "@/components/navigation";
 import { PageTransition } from "@/components/page-transition";
@@ -40,6 +40,27 @@ const amaticSC = Amatic_SC({
   weight: ["400", "700"],
 });
 
+const sarabun = Sarabun({
+  variable: "--font-sarabun",
+  subsets: ["latin", "thai"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const itim = Itim({
+  variable: "--font-itim",
+  subsets: ["latin", "thai"],
+  weight: "400",
+  display: "swap",
+});
+
+const mali = Mali({
+  variable: "--font-mali",
+  subsets: ["latin", "thai"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Chaowalit Greepoke - Portfolio",
   description: "Tech Generalist - Full-stack Developer, AI Developer & SEO Specialist from Bangkok, specializing in Next.js, React, AI integration, and data analytics",
@@ -70,6 +91,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const isThai = locale === 'th';
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as 'en' | 'th')) {
     notFound();
@@ -120,7 +142,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${kalam.variable} ${caveat.variable} ${amaticSC.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${kalam.variable} ${caveat.variable} ${amaticSC.variable} ${sarabun.variable} ${itim.variable} ${mali.variable} antialiased ${isThai ? 'font-thai' : ''}`}
       >
         <NextIntlClientProvider messages={messages}>
           <FloatingDoodles />

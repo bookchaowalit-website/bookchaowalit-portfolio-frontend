@@ -3,25 +3,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
+import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
+import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
-import {
-  Code,
-  Database,
-  Cloud,
-  Smartphone,
-  Globe,
-  Cpu,
-  Layers,
-  Zap,
-  Server,
-  GitBranch,
-  Terminal,
-  Settings
-} from "lucide-react";
+import { Globe, Cpu, Server, Settings } from "lucide-react";
 
 export function TechSkillsClient() {
   const skillCategories = [

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { HeroTypingText } from "@/components/ui/hero-typing-text";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import Image from 'next/image';
@@ -10,9 +10,16 @@ import { motion } from 'framer-motion';
 
 export function HeroSection() {
   const t = useTranslations('home');
+  const locale = useLocale();
+  const heroSpacing = locale === 'th'
+    ? "text-center space-y-8 pt-16 pb-24 md:pt-20 md:pb-36"
+    : "text-center space-y-8 pt-16 pb-16 md:pt-20 md:pb-24";
+  const headingTracking = locale === 'th'
+    ? "tracking-[0.04em]"
+    : "tracking-tight";
   
   return (
-    <section className="text-center space-y-8 py-16">
+    <section className={heroSpacing}>
       <motion.div 
         className="space-y-4"
         initial={{ opacity: 0, y: 20 }}
@@ -43,7 +50,7 @@ export function HeroSection() {
         </motion.div>
         
         <div className="relative">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight font-[family-name:var(--font-script)]">
+          <h1 className={`text-4xl md:text-6xl font-bold ${headingTracking} font-[family-name:var(--font-script)]`}>
             <HeroTypingText 
               greeting={t('greeting')}
               name={t('name')}

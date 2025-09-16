@@ -3,25 +3,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
+import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
+import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
-import {
-  Code,
-  Palette,
-  Video,
-  Database,
-  Smartphone,
-  Globe,
-  Cpu,
-  Layers,
-  Camera,
-  Music,
-  Zap,
-  Target
-} from "lucide-react";
+import { Code, Palette, Video } from "lucide-react";
 
 export function SkillsClient() {
   const skillCategories = [

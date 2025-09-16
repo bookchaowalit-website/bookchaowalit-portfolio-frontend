@@ -7,18 +7,7 @@ import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mix
 import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
-import {
-  Video,
-  Camera,
-  Scissors,
-  Mic,
-  Monitor,
-  Palette,
-  Zap,
-  Play,
-  Edit,
-  Film
-} from "lucide-react";
+import { Camera, Scissors, Mic, Palette, Zap, Play, Edit, Film } from "lucide-react";
 
 export function VideoSkillsClient() {
   const videoCategories = [
