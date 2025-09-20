@@ -20,7 +20,10 @@ export const routing = defineRouting({
     '/skills': '/skills',
     '/skills/tech': '/skills/tech',
     '/skills/art': '/skills/art',
-    '/skills/video': '/skills/video'
+    '/skills/video': '/skills/video',
+    '/privacy': '/privacy',
+    '/privacy/messenger-bot': '/privacy/messenger-bot',
+    '/privacy/web-apps': '/privacy/web-apps'
   }
 });
 

@@ -186,5 +186,153 @@
     "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Try Again"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "How we collect, use, and protect your information",
+    "general": {
+      "title": "General Privacy Policy",
+      "effective_date": "Effective Date",
+      "date": "September 20, 2025",
+      "intro_title": "Introduction",
+      "intro_text": "Bookchaowalit respects the privacy rights of users. This policy explains how we collect, use, and protect your information when you use our services.",
+      "data_collection": {
+        "title": "Information We Collect",
+        "website_analytics": "Website usage analytics (Google Analytics)",
+        "contact_info": "Contact form submissions",
+        "usage_data": "General usage patterns and preferences"
+      },
+      "data_usage": {
+        "title": "How We Use Information",
+        "improve_services": "To improve our services and user experience",
+        "respond_inquiries": "To respond to inquiries and provide support",
+        "analytics": "To analyze website performance and usage patterns"
+      },
+      "contact": {
+        "title": "Contact Information",
+        "email": "Email",
+        "website": "Website"
+      }
+    },
+    "apps": {
+      "title": "App-Specific Privacy Policies",
+      "description": "Choose the specific application or service you're interested in learning about:",
+      "messenger_bot": {
+        "title": "Facebook Messenger Bot",
+        "description": "Privacy policy for our chatbot services"
+      },
+      "web_apps": {
+        "title": "Web Applications",
+        "description": "Privacy policy for our web-based applications"
+      }
+    },
+    "messenger_bot": {
+      "title": "Privacy Policy - Facebook Messenger Bot",
+      "subtitle": "How we handle data in our chatbot interactions",
+      "back_to_privacy": "Back to Privacy Policy",
+      "effective_date": "Effective Date",
+      "date": "September 20, 2025",
+      "data_collection": {
+        "title": "Information We Collect",
+        "messages": "Messages you send to the chatbot",
+        "user_id": "Facebook User ID (for reply purposes)",
+        "timestamp": "Date and time of interactions"
+      },
+      "data_usage": {
+        "title": "How We Use Information",
+        "responses": "To provide responses and user support",
+        "analysis": "To analyze and improve chatbot performance",
+        "personalization": "To personalize your experience"
+      },
+      "data_disclosure": {
+        "title": "Data Disclosure",
+        "policy": "We do not sell, trade, or share your personal information with third parties except:",
+        "legal_requirement": "When required by law",
+        "service_providers": "When using third-party service providers necessary to operate the chatbot"
+      },
+      "data_retention": {
+        "title": "Data Retention",
+        "policy": "We retain information only as long as necessary for the purposes described. Once data is no longer needed, it will be deleted or anonymized."
+      },
+      "user_rights": {
+        "title": "User Rights",
+        "intro": "You have the right to:",
+        "access": "Access and request a copy of your data",
+        "correction": "Request corrections to inaccurate data",
+        "deletion": "Request deletion of your personal data",
+        "contact": "To exercise these rights, contact us at"
+      },
+      "data_security": {
+        "title": "Data Security",
+        "policy": "We implement reasonable security measures to protect your information from unauthorized access, use, or disclosure."
+      },
+      "policy_updates": {
+        "title": "Policy Updates",
+        "policy": "We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "website": "Website",
+        "email": "Email"
+      }
+    },
+    "web_apps": {
+      "title": "Privacy Policy - Web Applications",
+      "subtitle": "How we handle data in our web-based services",
+      "back_to_privacy": "Back to Privacy Policy",
+      "effective_date": "Effective Date",
+      "date": "September 20, 2025",
+      "data_collection": {
+        "title": "Information We Collect",
+        "usage_analytics": "Website usage analytics and performance data",
+        "form_data": "Information submitted through forms",
+        "cookies": "Cookies and similar tracking technologies",
+        "device_info": "Device and browser information"
+      },
+      "data_usage": {
+        "title": "How We Use Information",
+        "app_functionality": "To provide core application functionality",
+        "user_experience": "To improve user experience and performance",
+        "analytics": "To analyze usage patterns and optimize services",
+        "support": "To provide customer support and assistance"
+      },
+      "cookies": {
+        "title": "Cookies and Tracking",
+        "description": "We use cookies and similar technologies to:",
+        "essential": "Provide essential website functionality",
+        "analytics": "Analyze website performance and usage",
+        "preferences": "Remember your preferences and settings"
+      },
+      "third_party": {
+        "title": "Third-Party Services",
+        "description": "We may use third-party services such as:",
+        "analytics_services": "Analytics services (Google Analytics)",
+        "hosting_providers": "Hosting and infrastructure providers",
+        "payment_processors": "Payment processing services (when applicable)"
+      },
+      "data_retention": {
+        "title": "Data Retention",
+        "policy": "We retain personal information only as long as necessary to fulfill the purposes outlined in this policy or as required by law."
+      },
+      "user_rights": {
+        "title": "Your Rights",
+        "intro": "Depending on your location, you may have rights including:",
+        "access": "Right to access your personal information",
+        "correction": "Right to correct inaccurate information",
+        "deletion": "Right to request deletion of your data",
+        "portability": "Right to data portability",
+        "objection": "Right to object to certain processing",
+        "contact": "To exercise these rights, contact us at"
+      },
+      "data_security": {
+        "title": "Data Security",
+        "policy": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "website": "Website",
+        "email": "Email"
+      }
+    }
   }
 }
