@@ -1,8 +1,41 @@
+import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  const seoTitles = {
+    en: "Web Applications Privacy Policy - Chaowalit Greepoke | App Data Protection",
+    th: "นโยบายความเป็นส่วนตัวสำหรับเว็บแอปพลิเคชัน - เชาวลิต กรีโภค | การปกป้องข้อมูลแอป"
+  };
+
+  const seoDescriptions = {
+    en: "Privacy policy for web-based applications and services. Learn about data collection, cookies, user rights, and security measures in our web applications.",
+    th: "นโยบายความเป็นส่วนตัวสำหรับเว็บแอปพลิเคชันและบริการ เรียนรู้เกี่ยวกับการเก็บข้อมูล cookies สิทธิของผู้ใช้ และมาตรการรักษาความปลอดภัยในเว็บแอปพลิเคชันของเรา"
+  };
+
+  return {
+    title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
+    description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+    robots: 'index, follow',
+    alternates: {
+      canonical: `/${locale}/privacy/web-apps`,
+      languages: {
+        'en': '/en/privacy/web-apps',
+        'th': '/th/privacy/web-apps',
+        'x-default': '/en/privacy/web-apps'
+      }
+    },
+  };
+}
 
 export default function WebAppsPrivacyPage() {
   const t = useTranslations('privacy.web_apps');

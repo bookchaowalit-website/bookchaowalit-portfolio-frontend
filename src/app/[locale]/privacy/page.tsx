@@ -1,7 +1,40 @@
+import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  const seoTitles = {
+    en: "Privacy Policy - Chaowalit Greepoke | Data Protection & Privacy Rights",
+    th: "นโยบายความเป็นส่วนตัว - เชาวลิต กรีโภค | การปกป้องข้อมูลและสิทธิด้านความเป็นส่วนตัว"
+  };
+
+  const seoDescriptions = {
+    en: "Read our comprehensive privacy policy explaining how we collect, use, and protect your personal information. Learn about your privacy rights and data protection measures.",
+    th: "อ่านนโยบายความเป็นส่วนตัวที่ครอบคลุมของเรา อธิบายวิธีที่เราเก็บรวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคลของคุณ เรียนรู้เกี่ยวกับสิทธิด้านความเป็นส่วนตัวและมาตรการป้องกันข้อมูล"
+  };
+
+  return {
+    title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
+    description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+    robots: 'index, follow',
+    alternates: {
+      canonical: `/${locale}/privacy`,
+      languages: {
+        'en': '/en/privacy',
+        'th': '/th/privacy',
+        'x-default': '/en/privacy'
+      }
+    },
+  };
+}
 
 export default function PrivacyPage() {
   const t = useTranslations('privacy');

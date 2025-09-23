@@ -1,8 +1,41 @@
+import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  const seoTitles = {
+    en: "Messenger Bot Privacy Policy - Chaowalit Greepoke | Chatbot Data Protection",
+    th: "นโยบายความเป็นส่วนตัวสำหรับ Messenger Bot - เชาวลิต กรีโภค | การปกป้องข้อมูล Chatbot"
+  };
+
+  const seoDescriptions = {
+    en: "Privacy policy for Facebook Messenger bot services. Learn how we handle chatbot interactions, data collection, and user privacy in our automated messaging systems.",
+    th: "นโยบายความเป็นส่วนตัวสำหรับบริการ Facebook Messenger bot เรียนรู้วิธีที่เราจัดการกับการโต้ตอบของ chatbot การเก็บข้อมูล และความเป็นส่วนตัวของผู้ใช้ในระบบข้อความอัตโนมัติ"
+  };
+
+  return {
+    title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
+    description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+    robots: 'index, follow',
+    alternates: {
+      canonical: `/${locale}/privacy/messenger-bot`,
+      languages: {
+        'en': '/en/privacy/messenger-bot',
+        'th': '/th/privacy/messenger-bot',
+        'x-default': '/en/privacy/messenger-bot'
+      }
+    },
+  };
+}
 
 export default function MessengerBotPrivacyPage() {
   const t = useTranslations('privacy.messenger_bot');

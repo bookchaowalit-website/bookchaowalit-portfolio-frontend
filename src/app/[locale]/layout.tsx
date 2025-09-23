@@ -33,6 +33,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
 });
 
 const sarabun = Sarabun({
@@ -40,7 +42,8 @@ const sarabun = Sarabun({
   subsets: ["latin", "thai"],
   weight: ["300", "400", "500", "600"],
   display: "swap",
-  fallback: ["system-ui", "arial"],
+  preload: true,
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
 const itim = Itim({
@@ -48,7 +51,8 @@ const itim = Itim({
   subsets: ["latin", "thai"],
   weight: "400",
   display: "swap",
-  fallback: ["system-ui", "arial"],
+  preload: false, // Only preload critical fonts
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
