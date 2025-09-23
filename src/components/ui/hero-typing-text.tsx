@@ -70,7 +70,7 @@ export function HeroTypingText({
     return (
       <>
         {greetingPart}
-        <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent pb-1 inline-block">
           {namePart}
         </span>
       </>
