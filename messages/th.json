@@ -18,7 +18,9 @@
     "techJourney": "การเดินทางด้านเทคโนโลยี",
     "techJourneyDesc": "วิวัฒนาการจากอิเล็กทรอนิกส์สู่ AI และการพัฒนา full-stack",
     "tradingJourney": "การเทรดและลงทุน",
-    "tradingJourneyDesc": "เส้นทางของฉันในตลาดการเงินและระบบเทรดที่ขับเคลื่อนด้วย AI"
+    "tradingJourneyDesc": "เส้นทางของฉันในตลาดการเงินและระบบเทรดที่ขับเคลื่อนด้วย AI",
+    "openMobileMenu": "เปิดเมนูนำทาง",
+    "closeMobileMenu": "ปิดเมนูนำทาง"
   },
   "home": {
     "greeting": "สวัสดีครับ ผม",

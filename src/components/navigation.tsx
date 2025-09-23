@@ -115,6 +115,9 @@ export function Navigation() {
               size="sm"
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? t('closeMobileMenu') || 'Close menu' : t('openMobileMenu') || 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </Button>
@@ -123,7 +126,7 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-background">
+          <div id="mobile-navigation" className="md:hidden border-t bg-background">
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <Link

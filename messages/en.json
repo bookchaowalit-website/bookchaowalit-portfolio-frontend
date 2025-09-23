@@ -18,7 +18,9 @@
     "techJourney": "Tech Journey",
     "techJourneyDesc": "My evolution from electronics to AI and full-stack development",
     "tradingJourney": "Trading & Investing",
-    "tradingJourneyDesc": "My journey in financial markets and AI-powered trading systems"
+    "tradingJourneyDesc": "My journey in financial markets and AI-powered trading systems",
+    "openMobileMenu": "Open navigation menu",
+    "closeMobileMenu": "Close navigation menu"
   },
   "home": {
     "greeting": "Hello, I'm",

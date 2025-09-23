@@ -155,9 +155,9 @@ export function StudyGuideBox({
       <div className="flex items-start gap-3">
         <span className="text-2xl">{icons[type]}</span>
         <div>
-          <h4 className="font-[family-name:var(--font-comic)] font-bold text-lg mb-2 uppercase tracking-wide">
+          <div className="font-[family-name:var(--font-comic)] font-bold text-lg mb-2 uppercase tracking-wide" role="heading" aria-level={3}>
             {title}
-          </h4>
+          </div>
           <div className="font-[family-name:var(--font-doodle)] text-sm leading-relaxed">
             {children}
           </div>

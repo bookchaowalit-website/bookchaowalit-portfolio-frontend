@@ -1,11 +1,31 @@
 import { Metadata } from 'next';
+          import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/lazy/hero-section';
-import { SkillsSection } from '@/components/lazy/skills-section';
-import { AboutSection } from '@/components/lazy/about-section';
-import { FeaturedProjects } from '@/components/lazy/featured-projects';
-import { BusinessSection } from '@/components/lazy/business-section';
-import { BlogSection } from '@/components/lazy/blog-section';
-import { ContactSection } from '@/components/lazy/contact-section';
+
+// Lazy load below-the-fold components
+const SkillsSection = dynamic(() => import('@/components/lazy/skills-section').then(mod => ({ default: mod.SkillsSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
+
+const AboutSection = dynamic(() => import('@/components/lazy/about-section').then(mod => ({ default: mod.AboutSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
+
+const FeaturedProjects = dynamic(() => import('@/components/lazy/featured-projects').then(mod => ({ default: mod.FeaturedProjects })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
+
+const BusinessSection = dynamic(() => import('@/components/lazy/business-section').then(mod => ({ default: mod.BusinessSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
+
+const BlogSection = dynamic(() => import('@/components/lazy/blog-section').then(mod => ({ default: mod.BlogSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
+
+const ContactSection = dynamic(() => import('@/components/lazy/contact-section').then(mod => ({ default: mod.ContactSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+});
 
 type Props = {
   params: Promise<{ locale: string }>;

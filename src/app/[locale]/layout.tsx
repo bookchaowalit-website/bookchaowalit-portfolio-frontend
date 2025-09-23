@@ -1,50 +1,46 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Kalam, Caveat, Amatic_SC, Sarabun, Itim, Mali } from "next/font/google";
+import { Geist, Geist_Mono, Sarabun, Itim } from "next/font/google";
+import dynamic from "next/dynamic";
 import "../globals.css";
 import { Navigation } from "@/components/navigation";
 import { PageTransition } from "@/components/page-transition";
-import { FloatingDoodles } from "@/components/ui/floating-doodles";
-import { Footer } from "@/components/footer";
 import { Analytics } from '@vercel/analytics/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { GoogleAnalytics } from '@/components/google-analytics';
+
+const FloatingDoodles = dynamic(() => import("@/components/ui/floating-doodles").then(mod => ({ default: mod.FloatingDoodles })), {
+  loading: () => null
+});
+
+const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
+  loading: () => null
+});
+
+const GoogleAnalytics = dynamic(() => import("@/components/google-analytics").then(mod => ({ default: mod.GoogleAnalytics })), {
+  loading: () => null
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const kalam = Kalam({
-  variable: "--font-kalam",
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const amaticSC = Amatic_SC({
-  variable: "--font-amatic",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  display: "swap",
 });
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
   subsets: ["latin", "thai"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 const itim = Itim({
@@ -52,13 +48,7 @@ const itim = Itim({
   subsets: ["latin", "thai"],
   weight: "400",
   display: "swap",
-});
-
-const mali = Mali({
-  variable: "--font-mali",
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export const metadata: Metadata = {
@@ -142,7 +132,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${kalam.variable} ${caveat.variable} ${amaticSC.variable} ${sarabun.variable} ${itim.variable} ${mali.variable} antialiased ${isThai ? 'font-thai' : ''}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sarabun.variable} ${itim.variable} antialiased ${isThai ? 'font-thai' : ''}`}
       >
         <NextIntlClientProvider messages={messages}>
           <FloatingDoodles />
@@ -153,7 +143,7 @@ export default async function LocaleLayout({
             </PageTransition>
           </main>
           <Footer />
-          <Analytics />
+          <Analytics mode="production" />
           {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
           )}
