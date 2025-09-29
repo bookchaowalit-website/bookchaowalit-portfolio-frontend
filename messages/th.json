@@ -37,30 +37,66 @@
     "getInTouch": "ติดต่อ",
     "skillsTitle": "ทักษะและเทคโนโลยี",
     "skillsSubtitle": "เครื่องมือและเทคโนโลยีที่ผมทำงานด้วยในปัจจุบัน",
-    "frontendSkillsTitle": "ทักษะด้าน Frontend และ Framework",
-    "backendSkillsTitle": "เทคโนโลยีด้าน Backend และ AI",
-    "businessSkillsTitle": "เครื่องมือทางธุรกิจและการวิเคราะห์",
-    "frontendSkills": [
+    "computerLanguageTitle": "ภาษาคอมพิวเตอร์",
+    "libraryTitle": "ไลบรารี",
+    "frameworkTitle": "เฟรมเวิร์ก",
+    "databaseTitle": "ฐานข้อมูล",
+    "cloudTitle": "คลาวด์",
+    "runtimeTitle": "รันไทม์",
+    "computerLanguageSkills": [
+      "Python",
+      "C#",
+      "Java",
+      "HTML",
+      "CSS",
+      "Javascript",
+      "PHP",
+      "Liquid",
+      "SQL",
+      "Dart",
+      "Go"
+    ],
+    "librarySkills": [
+      "jQuery",
       "React",
+      "Pandas",
+      "Numpy",
+      "Plotly",
+      "Axios",
+      "Huggingface",
+      "Gofiber"
+    ],
+    "frameworkSkills": [
+      "Express.js",
+      "FastAPI",
       "Next.js",
-      "TypeScript",
+      ".Net",
+      "Spring Boot",
+      "Laravel",
+      "Llamaindex",
+      "Langchain",
+      "Pytorch",
+      "Apache Airflow",
       "Flutter"
     ],
-    "backendSkills": [
-      "FastAPI",
-      "Python",
-      "PostgreSQL",
-      "LlamaIndex",
-      "LangChain",
-      "AI/RAG",
-      "Multi-agent Systems"
+    "databaseSkills": [
+      "SQLite",
+      "Postgresql",
+      "SQL Server",
+      "MongoDB",
+      "Neon",
+      "Supabase"
     ],
-    "businessSkills": [
-      "Shopify",
-      "SEO",
-      "Facebook API",
-      "Google Analytics",
-      "Data Analysis"
+    "cloudSkills": [
+      "DigitalOcean",
+      "GCP",
+      "Docker",
+      "AWS",
+      "K8s",
+      "Lens"
+    ],
+    "runtimeSkills": [
+      "Nodejs"
     ],
     "featuredProjectsTitle": "ผลงานเด่น",
     "aboutTitle": "เกี่ยวกับฉัน",

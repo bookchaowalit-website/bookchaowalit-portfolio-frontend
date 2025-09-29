@@ -37,30 +37,66 @@
     "getInTouch": "Get In Touch",
     "skillsTitle": "Skills & Technologies",
     "skillsSubtitle": "My current toolkit & technologies I work with",
-    "frontendSkillsTitle": "Frontend & Framework Skills",
-    "backendSkillsTitle": "Backend & AI Technologies",
-    "businessSkillsTitle": "Business & Analytics Tools",
-    "frontendSkills": [
+    "computerLanguageTitle": "Computer Language",
+    "libraryTitle": "Library",
+    "frameworkTitle": "Framework",
+    "databaseTitle": "Database",
+    "cloudTitle": "Cloud",
+    "runtimeTitle": "Runtime",
+    "computerLanguageSkills": [
+      "Python",
+      "C#",
+      "Java",
+      "HTML",
+      "CSS",
+      "Javascript",
+      "PHP",
+      "Liquid",
+      "SQL",
+      "Dart",
+      "Go"
+    ],
+    "librarySkills": [
+      "jQuery",
       "React",
+      "Pandas",
+      "Numpy",
+      "Plotly",
+      "Axios",
+      "Huggingface",
+      "Gofiber"
+    ],
+    "frameworkSkills": [
+      "Express.js",
+      "FastAPI",
       "Next.js",
-      "TypeScript",
+      ".Net",
+      "Spring Boot",
+      "Laravel",
+      "Llamaindex",
+      "Langchain",
+      "Pytorch",
+      "Apache Airflow",
       "Flutter"
     ],
-    "backendSkills": [
-      "FastAPI",
-      "Python",
-      "PostgreSQL",
-      "LlamaIndex",
-      "LangChain",
-      "AI/RAG",
-      "Multi-agent Systems"
+    "databaseSkills": [
+      "SQLite",
+      "Postgresql",
+      "SQL Server",
+      "MongoDB",
+      "Neon",
+      "Supabase"
     ],
-    "businessSkills": [
-      "Shopify",
-      "SEO",
-      "Facebook API",
-      "Google Analytics",
-      "Data Analysis"
+    "cloudSkills": [
+      "DigitalOcean",
+      "GCP",
+      "Docker",
+      "AWS",
+      "K8s",
+      "Lens"
+    ],
+    "runtimeSkills": [
+      "Nodejs"
     ],
     "featuredProjectsTitle": "Featured Projects",
     "aboutTitle": "About Me",
