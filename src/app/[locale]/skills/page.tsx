@@ -9,13 +9,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const seoTitles = {
-    en: "Skills & Expertise - Chaowalit Greepoke",
-    th: "ทักษะและความเชี่ยวชาญ - เชาวลิต กรีโภค"
+    en: "Technical Skills - Computer Languages, Frameworks & Tools - Chaowalit Greepoke",
+    th: "ทักษะทางเทคนิค - ภาษาคอมพิวเตอร์ เฟรมเวิร์ก และเครื่องมือ - เชาวลิต กรีโภค"
   };
 
   const seoDescriptions = {
-    en: "Explore my comprehensive skill set across technology, design, video editing, and creative domains. From full-stack development to digital content creation.",
-    th: "สำรวจทักษะที่ครอบคลุมของฉันในด้านเทคโนโลยี การออกแบบ การตัดต่อวิดีโอ และโดเมนสร้างสรรค์ ตั้งแต่การพัฒนา full-stack ไปจนถึงการสร้างเนื้อหาดิจิทัล"
+    en: "Comprehensive technical skills across computer languages (Python, C#, Java, HTML, CSS, JavaScript, PHP, Liquid, SQL, Dart, Go), libraries, frameworks, databases, cloud platforms, and runtime environments.",
+    th: "ทักษะทางเทคนิคที่ครอบคลุมในภาษาคอมพิวเตอร์ (Python, C#, Java, HTML, CSS, JavaScript, PHP, Liquid, SQL, Dart, Go), ไลบรารี, เฟรมเวิร์ก, ฐานข้อมูล, แพลตฟอร์มคลาวด์ และสภาพแวดล้อมรันไทม์"
   };
 
   return {
@@ -23,16 +23,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
-      'Skills Portfolio',
-      'Technical Skills',
-      'Creative Skills',
-      'Video Editing',
-      'Full Stack Development',
-      'UI/UX Design',
-      'Digital Content Creation',
-      'Programming Skills',
-      'Design Skills',
-      'Technology Expertise'
+      'Python Developer',
+      'React Next.js',
+      'Flutter Developer',
+      'FastAPI',
+      'PostgreSQL',
+      'Docker',
+      'AWS',
+      'Node.js',
+      'MongoDB',
+      'Langchain',
+      'Pytorch',
+      'Kubernetes',
+      'Full Stack Developer',
+      'AI ML Engineer',
+      'Cloud Computing',
+      'Database Design',
+      'API Development',
+      'Web Development',
+      'Mobile Development'
     ].join(', '),
     robots: 'index, follow',
     alternates: {

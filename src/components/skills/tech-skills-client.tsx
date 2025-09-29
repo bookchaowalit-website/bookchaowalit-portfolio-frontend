@@ -12,47 +12,88 @@ import { Globe, Cpu, Server, Settings } from "lucide-react";
 export function TechSkillsClient() {
   const skillCategories = [
     {
-      title: 'Frontend Development',
+      title: 'Computer Language',
       icon: <Globe className="w-6 h-6" />,
       color: 'text-blue-600',
       skills: [
-        { name: 'React/Next.js', level: 95, experience: '3+ years', projects: 15 },
-        { name: 'TypeScript', level: 90, experience: '2+ years', projects: 12 },
-        { name: 'Tailwind CSS', level: 95, experience: '2+ years', projects: 20 },
-        { name: 'JavaScript (ES6+)', level: 95, experience: '3+ years', projects: 25 }
+        { name: 'Python', level: 95, experience: '3+ years', projects: 20 },
+        { name: 'C#', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'Java', level: 80, experience: '2+ years', projects: 6 },
+        { name: 'HTML', level: 95, experience: '4+ years', projects: 30 },
+        { name: 'CSS', level: 95, experience: '4+ years', projects: 30 },
+        { name: 'Javascript', level: 95, experience: '3+ years', projects: 25 },
+        { name: 'PHP', level: 85, experience: '2+ years', projects: 10 },
+        { name: 'Liquid', level: 80, experience: '1+ year', projects: 5 },
+        { name: 'SQL', level: 90, experience: '3+ years', projects: 15 },
+        { name: 'Dart', level: 85, experience: '1+ year', projects: 3 },
+        { name: 'Go', level: 75, experience: '1+ year', projects: 2 }
       ]
     },
     {
-      title: 'Backend Development',
+      title: 'Library',
       icon: <Server className="w-6 h-6" />,
       color: 'text-green-600',
       skills: [
-        { name: 'Python/FastAPI', level: 90, experience: '2+ years', projects: 8 },
-        { name: 'Node.js/Express', level: 85, experience: '2+ years', projects: 6 },
-        { name: 'PostgreSQL', level: 85, experience: '2+ years', projects: 10 },
-        { name: 'REST APIs', level: 90, experience: '3+ years', projects: 15 }
+        { name: 'jQuery', level: 90, experience: '3+ years', projects: 15 },
+        { name: 'React', level: 95, experience: '3+ years', projects: 20 },
+        { name: 'Pandas', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'Numpy', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'Plotly', level: 80, experience: '1+ year', projects: 5 },
+        { name: 'Axios', level: 90, experience: '2+ years', projects: 12 },
+        { name: 'Huggingface', level: 75, experience: '1+ year', projects: 4 },
+        { name: 'Gofiber', level: 70, experience: '6 months', projects: 2 }
       ]
     },
     {
-      title: 'AI & Machine Learning',
+      title: 'Framework',
       icon: <Cpu className="w-6 h-6" />,
       color: 'text-purple-600',
       skills: [
-        { name: 'LlamaIndex/RAG', level: 85, experience: '1+ year', projects: 5 },
-        { name: 'LangChain', level: 80, experience: '1+ year', projects: 4 },
-        { name: 'Multi-agent Systems', level: 75, experience: '1+ year', projects: 3 },
-        { name: 'Data Analysis', level: 85, experience: '2+ years', projects: 8 }
+        { name: 'Express.js', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'FastAPI', level: 90, experience: '2+ years', projects: 10 },
+        { name: 'Next.js', level: 95, experience: '2+ years', projects: 15 },
+        { name: '.Net', level: 80, experience: '2+ years', projects: 6 },
+        { name: 'Spring Boot', level: 75, experience: '1+ year', projects: 4 },
+        { name: 'Laravel', level: 80, experience: '2+ years', projects: 7 },
+        { name: 'Llamaindex', level: 85, experience: '1+ year', projects: 5 },
+        { name: 'Langchain', level: 80, experience: '1+ year', projects: 4 },
+        { name: 'Pytorch', level: 75, experience: '1+ year', projects: 3 },
+        { name: 'Apache Airflow', level: 70, experience: '6 months', projects: 2 },
+        { name: 'Flutter', level: 85, experience: '1+ year', projects: 3 }
       ]
     },
     {
-      title: 'Tools & Technologies',
+      title: 'Database',
       icon: <Settings className="w-6 h-6" />,
       color: 'text-orange-600',
       skills: [
-        { name: 'Git/GitHub', level: 90, experience: '3+ years', projects: 30 },
-        { name: 'Docker', level: 75, experience: '1+ year', projects: 5 },
-        { name: 'AWS/Vercel', level: 80, experience: '2+ years', projects: 12 },
-        { name: 'Linux/CLI', level: 85, experience: '3+ years', projects: 25 }
+        { name: 'SQLite', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'Postgresql', level: 90, experience: '3+ years', projects: 12 },
+        { name: 'SQL Server', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'MongoDB', level: 80, experience: '2+ years', projects: 6 },
+        { name: 'Neon', level: 75, experience: '1+ year', projects: 4 },
+        { name: 'Supabase', level: 80, experience: '1+ year', projects: 5 }
+      ]
+    },
+    {
+      title: 'Cloud',
+      icon: <Globe className="w-6 h-6" />,
+      color: 'text-cyan-600',
+      skills: [
+        { name: 'DigitalOcean', level: 85, experience: '2+ years', projects: 8 },
+        { name: 'GCP', level: 80, experience: '1+ year', projects: 5 },
+        { name: 'Docker', level: 85, experience: '2+ years', projects: 10 },
+        { name: 'AWS', level: 80, experience: '2+ years', projects: 7 },
+        { name: 'K8s', level: 70, experience: '1+ year', projects: 3 },
+        { name: 'Lens', level: 65, experience: '6 months', projects: 2 }
+      ]
+    },
+    {
+      title: 'Runtime',
+      icon: <Server className="w-6 h-6" />,
+      color: 'text-red-600',
+      skills: [
+        { name: 'Nodejs', level: 90, experience: '3+ years', projects: 18 }
       ]
     }
   ];

@@ -13,42 +13,73 @@ export function SkillsClient() {
   const skillCategories = [
     {
       id: 'tech',
-      title: 'Technical Skills',
-      description: 'Programming, development, and technical expertise',
+      title: 'Computer Language',
+      description: 'Programming languages and core technologies',
       icon: <Code className="w-8 h-8 text-blue-600" />,
       color: 'from-blue-500 to-cyan-500',
-      skills: ['Full-Stack Development', 'AI/ML Integration', 'Database Design', 'API Development', 'System Architecture'],
+      skills: ['Python', 'C#', 'Java', 'HTML', 'CSS', 'Javascript', 'PHP', 'Liquid', 'SQL', 'Dart', 'Go'],
       href: '/skills/tech'
     },
     {
-      id: 'art',
-      title: 'Creative & Design',
-      description: 'Visual design, creative work, and artistic skills',
+      id: 'library',
+      title: 'Library',
+      description: 'Libraries and packages for development',
       icon: <Palette className="w-8 h-8 text-purple-600" />,
       color: 'from-purple-500 to-pink-500',
-      skills: ['UI/UX Design', 'Graphic Design', 'Brand Identity', 'Visual Communication', 'Creative Direction'],
-      href: '/skills/art'
+      skills: ['jQuery', 'React', 'Pandas', 'Numpy', 'Plotly', 'Axios', 'Huggingface', 'Gofiber'],
+      href: '/skills/tech'
     },
     {
-      id: 'video',
-      title: 'Video & Media',
-      description: 'Video editing, production, and multimedia creation',
+      id: 'framework',
+      title: 'Framework',
+      description: 'Development frameworks and platforms',
       icon: <Video className="w-8 h-8 text-red-600" />,
       color: 'from-red-500 to-orange-500',
-      skills: ['Video Editing', 'Motion Graphics', 'Content Production', 'Audio Editing', 'Visual Effects'],
-      href: '/skills/video'
+      skills: ['Express.js', 'FastAPI', 'Next.js', '.Net', 'Spring Boot', 'Laravel', 'Llamaindex', 'Langchain', 'Pytorch', 'Apache Airflow', 'Flutter'],
+      href: '/skills/tech'
+    },
+    {
+      id: 'database',
+      title: 'Database',
+      description: 'Database systems and technologies',
+      icon: <Code className="w-8 h-8 text-green-600" />,
+      color: 'from-green-500 to-teal-500',
+      skills: ['SQLite', 'Postgresql', 'SQL Server', 'MongoDB', 'Neon', 'Supabase'],
+      href: '/skills/tech'
+    },
+    {
+      id: 'cloud',
+      title: 'Cloud',
+      description: 'Cloud platforms and containerization',
+      icon: <Palette className="w-8 h-8 text-indigo-600" />,
+      color: 'from-indigo-500 to-blue-500',
+      skills: ['DigitalOcean', 'GCP', 'Docker', 'AWS', 'K8s', 'Lens'],
+      href: '/skills/tech'
+    },
+    {
+      id: 'runtime',
+      title: 'Runtime',
+      description: 'Runtime environments and platforms',
+      icon: <Video className="w-8 h-8 text-orange-600" />,
+      color: 'from-orange-500 to-red-500',
+      skills: ['Nodejs'],
+      href: '/skills/tech'
     }
   ];
 
   const quickSkills = [
+    { name: 'Python', level: 'Expert', category: 'tech' },
     { name: 'React/Next.js', level: 'Expert', category: 'tech' },
-    { name: 'Python', level: 'Advanced', category: 'tech' },
-    { name: 'UI/UX Design', level: 'Advanced', category: 'art' },
-    { name: 'Video Editing', level: 'Expert', category: 'video' },
-    { name: 'AI Integration', level: 'Advanced', category: 'tech' },
-    { name: 'Figma', level: 'Expert', category: 'art' },
-    { name: 'Adobe Premiere', level: 'Expert', category: 'video' },
-    { name: 'TypeScript', level: 'Advanced', category: 'tech' }
+    { name: 'FastAPI', level: 'Advanced', category: 'tech' },
+    { name: 'PostgreSQL', level: 'Advanced', category: 'tech' },
+    { name: 'Docker', level: 'Advanced', category: 'tech' },
+    { name: 'Flutter', level: 'Advanced', category: 'tech' },
+    { name: 'AWS', level: 'Advanced', category: 'tech' },
+    { name: 'Nodejs', level: 'Expert', category: 'tech' },
+    { name: 'MongoDB', level: 'Advanced', category: 'tech' },
+    { name: 'Langchain', level: 'Advanced', category: 'tech' },
+    { name: 'Pytorch', level: 'Intermediate', category: 'tech' },
+    { name: 'K8s', level: 'Intermediate', category: 'tech' }
   ];
 
   return (
