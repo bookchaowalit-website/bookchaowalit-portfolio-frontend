@@ -6,9 +6,78 @@ import { NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typo
 import { NotebookPaper } from "@/components/ui/notebook-elements";
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export function SkillsSection() {
   const t = useTranslations('home');
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger animations after component mounts
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const skillCategories = [
+    {
+      title: t('computerLanguageTitle'),
+      type: "tip" as const,
+      skills: t.raw('computerLanguageSkills'),
+      borderColor: "border-blue-300",
+      rotationClass: "rotate-1"
+    },
+    {
+      title: t('libraryTitle'),
+      type: "note" as const,
+      skills: t.raw('librarySkills'),
+      borderColor: "border-green-300",
+      rotationClass: "-rotate-1"
+    },
+    {
+      title: t('frameworkTitle'),
+      type: "important" as const,
+      skills: t.raw('frameworkSkills'),
+      borderColor: "border-purple-300",
+      rotationClass: "rotate-0.5"
+    },
+    {
+      title: t('databaseTitle'),
+      type: "tip" as const,
+      skills: t.raw('databaseSkills'),
+      borderColor: "border-orange-300",
+      rotationClass: "-rotate-1"
+    },
+    {
+      title: t('cloudTitle'),
+      type: "note" as const,
+      skills: t.raw('cloudSkills'),
+      borderColor: "border-cyan-300",
+      rotationClass: "rotate-1"
+    },
+    {
+      title: t('runtimeTitle'),
+      type: "important" as const,
+      skills: t.raw('runtimeSkills'),
+      borderColor: "border-red-300",
+      rotationClass: "-rotate-0.5"
+    }
+  ];
 
   return (
     <ScrollReveal>
@@ -17,199 +86,49 @@ export function SkillsSection() {
           title={t('skillsTitle')}
           subtitle={t('skillsSubtitle')}
         />
-        <div className="space-y-6">
-          <StudyGuideBox
-            title={t('computerLanguageTitle')}
-            type="tip"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('computerLanguageSkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: index * 0.05,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-blue-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1)}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-
-          <StudyGuideBox
-            title={t('libraryTitle')}
-            type="note"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('librarySkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 0.5 + index * 0.04,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-green-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? -1 : 1)}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-
-          <StudyGuideBox
-            title={t('frameworkTitle')}
-            type="important"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('frameworkSkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 1.0 + index * 0.03,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-purple-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.5}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-
-          <StudyGuideBox
-            title={t('databaseTitle')}
-            type="tip"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('databaseSkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 1.5 + index * 0.03,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-orange-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? -1 : 1)}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-
-          <StudyGuideBox
-            title={t('cloudTitle')}
-            type="note"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('cloudSkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 2.0 + index * 0.03,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-cyan-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1)}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-
-          <StudyGuideBox
-            title={t('runtimeTitle')}
-            type="important"
-            className="mb-4"
-          >
-            <div className="flex flex-wrap gap-2">
-              {t.raw('runtimeSkills').map((skill: string, index: number) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 2.5 + index * 0.05,
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <Badge
-                    variant="secondary"
-                    className="text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-red-300"
-                    style={{ transform: `rotate(${(index % 2 === 0 ? -1 : 1) * 0.5}deg)` }}
-                  >
-                    {skill}
-                  </Badge>
-                </motion.div>
-              ))}
-            </div>
-          </StudyGuideBox>
-        </div>
+        <motion.div
+          className="space-y-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+        >
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              variants={itemVariants}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <StudyGuideBox
+                title={category.title}
+                type={category.type}
+                className="mb-4"
+              >
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill: string, skillIndex: number) => (
+                    <motion.div
+                      key={skill}
+                      className={`group relative transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 ${category.rotationClass}`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        duration: 0.15,
+                        delay: categoryIndex * 0.06 + skillIndex * 0.01,
+                        ease: "easeOut"
+                      }}
+                    >
+                      <Badge
+                        variant="secondary"
+                        className={`text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border ${category.borderColor} transition-all duration-200 group-hover:shadow-sm group-hover:border-opacity-80`}
+                      >
+                        {skill}
+                      </Badge>
+                    </motion.div>
+                  ))}
+                </div>
+              </StudyGuideBox>
+            </motion.div>
+          ))}
+        </motion.div>
       </NotebookPaper>
     </ScrollReveal>
   );
