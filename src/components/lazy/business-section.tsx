@@ -31,9 +31,9 @@ export function BusinessSection() {
       <div className="text-center space-y-4">
         <MixedTypographyTitle
           words={[
-            { text: "My", style: "cursive", color: "text-purple-700", size: "lg" },
-            { text: "Business", style: "bubble", color: "text-blue-600", size: "lg" },
-            { text: "Ventures", style: "filled", color: "text-green-700", size: "lg" }
+            { text: "My", style: "cursive", size: "lg" },
+            { text: "Business", style: "bubble", size: "lg" },
+            { text: "Ventures", style: "filled", size: "lg" }
           ]}
           className="mb-4"
         />
@@ -44,8 +44,8 @@ export function BusinessSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg max-w-2xl mx-auto">
-            <p className="text-slate-700 text-center">
+          <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-center">
               As a <strong>solopreneur</strong>, I build businesses that combine technology with genuine value creation 🚀
             </p>
           </div>
@@ -72,8 +72,8 @@ export function BusinessSection() {
                       variant="secondary"
                       className={`${
                         business.status === 'Active'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
+                          ? 'bg-muted text-foreground'
+                          : 'bg-muted text-foreground'
                       } text-xs`}
                     >
                       {business.status}
@@ -81,10 +81,10 @@ export function BusinessSection() {
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="font-[family-name:var(--font-script)] font-bold text-slate-800 text-lg mb-2">
+                    <h3 className="font-[family-name:var(--font-script)] font-bold text-foreground text-lg mb-2">
                       {business.title}
                     </h3>
-                    <p className="text-slate-600 font-[family-name:var(--font-doodle)] text-sm leading-relaxed">
+                    <p className="text-muted-foreground font-[family-name:var(--font-doodle)] text-sm leading-relaxed">
                       {business.description}
                     </p>
                   </div>

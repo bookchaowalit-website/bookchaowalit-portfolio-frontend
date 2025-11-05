@@ -43,7 +43,7 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="border-b bg-gradient-to-r from-background/95 via-background/95 to-background/95 backdrop-blur supports-[backdrop-filter]:from-background/85 supports-[backdrop-filter]:via-primary/5 supports-[backdrop-filter]:to-background/85 sticky top-0 z-50 border-b-primary/10">
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <NavigationBrand />

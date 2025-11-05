@@ -28,7 +28,7 @@ export function ProjectsClient() {
         >
           <MixedTypographyTitle 
             words={[
-              { text: "My", style: "cursive", color: "text-primary", size: "xl" },
+              { text: "My", style: "cursive", size: "xl" },
               { text: "Amazing", style: "bubble", size: "xl" },
               { text: "Projects", style: "filled", size: "xl" },
               { text: "✨", style: "block", size: "lg" }
@@ -44,7 +44,7 @@ export function ProjectsClient() {
           transition={{ duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-            <p className="text-slate-700 text-center">
+            <p className="text-muted-foreground text-center">
               A showcase of different technologies and creative approaches to problem-solving 🚀
             </p>
           </div>
@@ -80,7 +80,7 @@ export function ProjectsClient() {
                   <div className="flex flex-col h-full">
                     <div className="space-y-4 flex-1">
                       <div className="flex items-center justify-between">
-                        <Badge variant="secondary" className="bg-orange-100 text-orange-800 border-orange-300">
+                        <Badge variant="secondary" className="bg-orange-100 text-foreground border-orange-300">
                           Featured
                         </Badge>
                         <div className="flex gap-2">
@@ -102,10 +102,10 @@ export function ProjectsClient() {
                       </div>
                       
                       <div>
-                        <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-2">
+                        <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
                           {project.title}
                         </h3>
-                        <p className="text-slate-600 font-[family-name:var(--font-doodle)] leading-relaxed">
+                        <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed">
                           {project.description}
                         </p>
                       </div>
@@ -120,12 +120,12 @@ export function ProjectsClient() {
                       
                       {project.highlights && project.highlights.length > 0 && (
                         <div className="space-y-2">
-                          <h4 className="font-[family-name:var(--font-comic)] font-bold text-slate-700 uppercase text-sm tracking-wide">
+                          <h4 className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground uppercase text-sm tracking-wide">
                             Highlights
                           </h4>
                           <ul className="space-y-1">
                             {project.highlights.map((highlight, idx) => (
-                              <li key={idx} className="text-sm text-slate-600 flex items-start">
+                              <li key={idx} className="text-sm text-muted-foreground flex items-start">
                                 <span className="text-primary mr-2">•</span>
                                 {highlight}
                               </li>
@@ -221,10 +221,10 @@ export function ProjectsClient() {
         className="text-center space-y-6"
       >
         <NotebookPaper className="p-8 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+          <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             Interested in Working Together?
           </h2>
-          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             I'm always excited to work on new projects and collaborate with other developers. 
             Let's discuss how we can bring your ideas to life!
           </p>

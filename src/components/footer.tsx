@@ -7,7 +7,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 py-12 border-t border-slate-200">
+    <footer className="mt-16 py-12 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-6">
           {/* Hand-drawn title */}
@@ -17,7 +17,7 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <h2 className="text-3xl font-[family-name:var(--font-script)] text-slate-800 mb-4">
+            <h2 className="text-3xl font-[family-name:var(--font-script)] text-foreground mb-4">
               Thanks for visiting!
             </h2>
             {/* Hand-drawn underline */}
@@ -50,7 +50,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(1deg)` }}
               >
                 Home
@@ -59,7 +59,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/about"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-0.5deg)` }}
               >
                 About
@@ -68,7 +68,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/projects"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(0.5deg)` }}
               >
                 Projects
@@ -77,7 +77,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/business"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-0.8deg)` }}
               >
                 Business
@@ -86,7 +86,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/blog"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(-1deg)` }}
               >
                 Blog
@@ -95,7 +95,7 @@ export function Footer() {
             <motion.div whileHover={{ y: -2, scale: 1.05 }}>
               <Link
                 href="/contact"
-                className="text-slate-700 hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                 style={{ transform: `rotate(0.5deg)` }}
               >
                 Contact
@@ -115,7 +115,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="GitHub"
             >
               🐙
@@ -125,7 +125,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="LinkedIn"
             >
               💼
@@ -135,7 +135,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="Twitter"
             >
               🐦
@@ -145,7 +145,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="Upwork"
             >
               🔧
@@ -155,7 +155,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="Fastwork"
             >
               ⚡
@@ -163,7 +163,7 @@ export function Footer() {
             <motion.a
               href="mailto:bookchaowalit@gmail.com"
               whileHover={{ y: -2, scale: 1.1 }}
-              className="text-slate-600 hover:text-primary transition-colors duration-200"
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
               title="Email"
             >
               📧
@@ -199,7 +199,7 @@ export function Footer() {
               width="24"
               height="20"
               viewBox="0 0 24 20"
-              className="text-red-400/60"
+              className="text-foreground/60"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -239,13 +239,13 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center"
           >
-            <p className="text-sm text-slate-600 font-[family-name:var(--font-doodle)]">
+            <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)]">
               © {currentYear} Book (เชาวลิต กรีโภค)
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-foreground mt-1">
               Made with ❤️ in Bangkok, Thailand 🇹🇭
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-foreground mt-1">
               Solopreneur • Full-Stack Developer • AI Specialist
             </p>
           </motion.div>

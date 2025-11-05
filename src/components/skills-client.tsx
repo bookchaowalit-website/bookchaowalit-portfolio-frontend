@@ -15,8 +15,8 @@ export function SkillsClient() {
       id: 'tech',
       title: 'Computer Language',
       description: 'Programming languages and core technologies',
-      icon: <Code className="w-8 h-8 text-blue-600" />,
-      color: 'from-blue-500 to-cyan-500',
+      icon: <Code className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
       skills: ['Python', 'C#', 'Java', 'HTML', 'CSS', 'Javascript', 'PHP', 'Liquid', 'SQL', 'Dart', 'Go'],
       href: '/skills/tech'
     },
@@ -24,8 +24,8 @@ export function SkillsClient() {
       id: 'library',
       title: 'Library',
       description: 'Libraries and packages for development',
-      icon: <Palette className="w-8 h-8 text-purple-600" />,
-      color: 'from-purple-500 to-pink-500',
+      icon: <Palette className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
       skills: ['jQuery', 'React', 'Pandas', 'Numpy', 'Plotly', 'Axios', 'Huggingface', 'Gofiber'],
       href: '/skills/tech'
     },
@@ -33,17 +33,17 @@ export function SkillsClient() {
       id: 'framework',
       title: 'Framework',
       description: 'Development frameworks and platforms',
-      icon: <Video className="w-8 h-8 text-red-600" />,
-      color: 'from-red-500 to-orange-500',
-      skills: ['Express.js', 'FastAPI', 'Next.js', '.Net', 'Spring Boot', 'Laravel', 'Llamaindex', 'Langchain', 'Pytorch', 'Apache Airflow', 'Flutter'],
+      icon: <Video className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
+      skills: ['Express.js', 'FastAPI', 'Next.js', 'Angular', 'Vue', '.Net', 'Spring Boot', 'Laravel', 'Llamaindex', 'Langchain', 'Pytorch', 'Apache Airflow', 'Flutter'],
       href: '/skills/tech'
     },
     {
       id: 'database',
       title: 'Database',
       description: 'Database systems and technologies',
-      icon: <Code className="w-8 h-8 text-green-600" />,
-      color: 'from-green-500 to-teal-500',
+      icon: <Code className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
       skills: ['SQLite', 'Postgresql', 'SQL Server', 'MongoDB', 'Neon', 'Supabase'],
       href: '/skills/tech'
     },
@@ -51,8 +51,8 @@ export function SkillsClient() {
       id: 'cloud',
       title: 'Cloud',
       description: 'Cloud platforms and containerization',
-      icon: <Palette className="w-8 h-8 text-indigo-600" />,
-      color: 'from-indigo-500 to-blue-500',
+      icon: <Palette className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
       skills: ['DigitalOcean', 'GCP', 'Docker', 'AWS', 'K8s', 'Lens'],
       href: '/skills/tech'
     },
@@ -60,8 +60,8 @@ export function SkillsClient() {
       id: 'runtime',
       title: 'Runtime',
       description: 'Runtime environments and platforms',
-      icon: <Video className="w-8 h-8 text-orange-600" />,
-      color: 'from-orange-500 to-red-500',
+      icon: <Video className="w-8 h-8 text-background" />,
+      color: 'from-foreground to-foreground',
       skills: ['Nodejs'],
       href: '/skills/tech'
     }
@@ -223,10 +223,10 @@ export function SkillsClient() {
         viewport={{ once: true }}
       >
         <NotebookPaper className="p-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🚀 Continuous Learning & Growth
           </h2>
-          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Technology and creative fields evolve rapidly. I'm committed to staying current with the latest
             tools, techniques, and trends. Each skill category represents an ongoing journey of learning and mastery.
           </p>

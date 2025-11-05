@@ -19,8 +19,8 @@ export function ContactSection() {
       <div className="text-center">
         <MixedTypographyTitle
           words={[
-            { text: "Let's", style: "cursive", color: "text-purple-700", size: "lg" },
-            { text: "Connect!", style: "bubble", color: "text-blue-600", size: "lg" },
+            { text: "Let's", style: "cursive", size: "lg" },
+            { text: "Connect!", style: "bubble", size: "lg" },
             { text: "🤝", style: "block", size: "md" }
           ]}
           className="mb-6"
@@ -38,22 +38,22 @@ export function ContactSection() {
             <div className="space-y-6 text-center">
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
-                  <Badge variant="secondary" className="bg-green-100 text-green-800">
+                  <Badge variant="secondary" className="bg-muted text-foreground">
                     📧 Quick Response
                   </Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                  <Badge variant="secondary" className="bg-muted text-foreground">
                     🌏 Available Globally
                   </Badge>
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                  <Badge variant="secondary" className="bg-muted text-foreground">
                     💬 Multiple Channels
                   </Badge>
                 </div>
 
-                <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+                <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
                   Ready to Work Together?
                 </h3>
 
-                <p className="text-slate-700 font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto">
+                <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto">
                   Whether you need <strong>AI integration</strong>, <strong>full-stack development</strong>,
                   or <strong>strategic consulting</strong> - I'm here to help your business grow.
                   Based in <strong>Bangkok</strong> but working with clients worldwide! 🇹🇭
@@ -62,27 +62,27 @@ export function ContactSection() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                  <div className="p-4 rounded-lg bg-muted border border-border">
                     <div className="text-2xl mb-2">💻</div>
-                    <p className="font-[family-name:var(--font-comic)] font-bold text-slate-700 text-sm">
+                    <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Development Projects
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-purple-50 border border-purple-200">
+                  <div className="p-4 rounded-lg bg-muted border border-border">
                     <div className="text-2xl mb-2">🤖</div>
-                    <p className="font-[family-name:var(--font-comic)] font-bold text-slate-700 text-sm">
+                    <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       AI Consultation
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-green-50 border border-green-200">
+                  <div className="p-4 rounded-lg bg-muted border border-border">
                     <div className="text-2xl mb-2">📈</div>
-                    <p className="font-[family-name:var(--font-comic)] font-bold text-slate-700 text-sm">
+                    <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Business Growth
                     </p>
                   </div>

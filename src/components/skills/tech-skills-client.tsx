@@ -52,6 +52,8 @@ export function TechSkillsClient() {
         { name: 'Express.js', level: 85, experience: '2+ years', projects: 8 },
         { name: 'FastAPI', level: 90, experience: '2+ years', projects: 10 },
         { name: 'Next.js', level: 95, experience: '2+ years', projects: 15 },
+        { name: 'Angular', level: 80, experience: '2+ years', projects: 6 },
+        { name: 'Vue', level: 80, experience: '2+ years', projects: 7 },
         { name: '.Net', level: 80, experience: '2+ years', projects: 6 },
         { name: 'Spring Boot', level: 75, experience: '1+ year', projects: 4 },
         { name: 'Laravel', level: 80, experience: '2+ years', projects: 7 },
@@ -135,10 +137,10 @@ export function TechSkillsClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Technical", style: "cursive", color: "text-blue-700", size: "xl" },
-              { text: "Skills", style: "bubble", color: "text-purple-600", size: "xl" },
-              { text: "&", style: "filled", color: "text-green-700", size: "lg" },
-              { text: "Expertise", style: "block", color: "text-orange-600", size: "xl" },
+              { text: "Technical", style: "cursive", size: "xl" },
+              { text: "Skills", style: "bubble", size: "xl" },
+              { text: "&", style: "filled", size: "lg" },
+              { text: "Expertise", style: "block", size: "xl" },
               { text: "⚡", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -169,7 +171,7 @@ export function TechSkillsClient() {
           >
             <NotebookPaper className="py-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className={`${category.color} bg-slate-100 p-3 rounded-lg`}>
+                <div className={`${category.color} bg-muted p-3 rounded-lg`}>
                   {category.icon}
                 </div>
                 <div>
@@ -271,10 +273,10 @@ export function TechSkillsClient() {
         viewport={{ once: true }}
       >
         <NotebookPaper className="p-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🎓 Continuous Learning & Certifications
           </h2>
-          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Technology evolves rapidly, and I'm committed to staying current. I regularly
             update my skills through online courses, certifications, and hands-on projects.
           </p>

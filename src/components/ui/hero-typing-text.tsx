@@ -11,12 +11,12 @@ interface HeroTypingTextProps {
   onComplete?: () => void;
 }
 
-export function HeroTypingText({ 
-  greeting, 
+export function HeroTypingText({
+  greeting,
   name,
-  delay = 0, 
-  speed = 80, 
-  onComplete 
+  delay = 0,
+  speed = 80,
+  onComplete
 }: HeroTypingTextProps) {
   const fullText = `${greeting} ${name}`;
   const [displayText, setDisplayText] = useState(fullText); // Start with full text for SSR
@@ -57,20 +57,20 @@ export function HeroTypingText({
   // Render text with gradient on name part
   const renderText = () => {
     const greetingWithSpace = `${greeting} `;
-    
+
     if (displayText.length <= greetingWithSpace.length) {
       // Still typing greeting part
       return displayText;
     }
-    
+
     // Typing name part - apply gradient
     const greetingPart = greetingWithSpace;
     const namePart = displayText.substring(greetingWithSpace.length);
-    
+
     return (
       <>
         {greetingPart}
-        <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent pb-1 inline-block">
+        <span className="font-bold text-foreground pb-1 inline-block">
           {namePart}
         </span>
       </>

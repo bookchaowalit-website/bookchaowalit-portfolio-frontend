@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export function BlogHero() {
   return (
-    <motion.div 
+    <motion.div
       className="text-center space-y-8 mb-12"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -19,7 +19,7 @@ export function BlogHero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <MixedTypographyTitle 
+        <MixedTypographyTitle
           words={[
             { text: "My", style: "cursive", color: "text-purple-700", size: "xl" },
             { text: "Blog", style: "bubble", color: "text-blue-600", size: "xl" },
@@ -28,15 +28,15 @@ export function BlogHero() {
           className="mb-6"
         />
       </motion.div>
-      
+
       <motion.div
         className="max-w-md mx-auto"
         initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
         animate={{ opacity: 1, scale: 1, rotate: 1 }}
         transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
       >
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-          <p className="text-slate-700 text-center">
+        <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg">
+          <p className="text-foreground text-center">
             Thoughts on web development, technology, and everything in between! 💭
           </p>
         </div>
@@ -47,7 +47,7 @@ export function BlogHero() {
 
 export function BlogSearchBar() {
   return (
-    <motion.div 
+    <motion.div
       className="max-w-md mx-auto mb-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -66,7 +66,7 @@ export function BlogSearchBar() {
 
 export function BlogNewsletter() {
   return (
-    <motion.section 
+    <motion.section
       className="mt-16"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export function BlogNewsletter() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
           >
-            <MixedTypographyTitle 
+            <MixedTypographyTitle
               words={[
                 { text: "Stay", style: "cursive", color: "text-purple-700", size: "lg" },
                 { text: "Updated!", style: "bubble", color: "text-blue-600", size: "lg" },
@@ -88,21 +88,21 @@ export function BlogNewsletter() {
               className="mb-6"
             />
           </motion.div>
-          
+
           <motion.div
             className="max-w-sm mx-auto mb-6"
             initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
             animate={{ opacity: 1, scale: 1, rotate: -1 }}
             transition={{ duration: 0.8, delay: 1.2, ease: "backOut" }}
           >
-            <div className="bg-green-50 border-l-4 border-green-400 p-3 rounded-r-lg">
-              <p className="text-slate-700 text-center text-sm">
+            <div className="bg-muted border-l-4 border-border p-3 rounded-r-lg">
+              <p className="text-foreground text-center text-sm">
                 Get the latest articles and updates delivered straight to your inbox! 📨
               </p>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,21 +121,21 @@ export function BlogNewsletter() {
   );
 }
 
-export function NotebookSection({ 
-  title, 
-  subtitle, 
-  children, 
-  className = "" 
-}: { 
-  title: string; 
-  subtitle: string; 
-  children: React.ReactNode; 
-  className?: string; 
+export function NotebookSection({
+  title,
+  subtitle,
+  children,
+  className = ""
+}: {
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <NotebookPaper className={`py-8 ${className}`}>
-      <NotebookSectionHeader 
-        title={title} 
+      <NotebookSectionHeader
+        title={title}
         subtitle={subtitle}
         className="mb-8"
       />

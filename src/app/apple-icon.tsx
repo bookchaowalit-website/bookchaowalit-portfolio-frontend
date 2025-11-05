@@ -22,7 +22,7 @@ export default function AppleIcon() {
         <div
           style={{
             fontSize: 72,
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: '#000000',
             width: '180px',
             height: '180px',
             display: 'flex',

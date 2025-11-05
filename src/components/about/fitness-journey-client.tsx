@@ -24,8 +24,8 @@ export function FitnessJourneyClient() {
         >
           <MixedTypographyTitle 
             words={[
-              { text: "Fitness", style: "block", color: "text-green-700", size: "xl" },
-              { text: "Journey", style: "cursive", color: "text-blue-600", size: "xl" },
+              { text: "Fitness", style: "block", size: "xl" },
+              { text: "Journey", style: "cursive", size: "xl" },
               { text: "💪", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -39,7 +39,7 @@ export function FitnessJourneyClient() {
           transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <StickyNote color="blue" rotation={-1} className="text-center">
-            <p className="text-sm text-slate-800">
+            <p className="text-sm text-foreground">
               How <HandDrawnHighlight color="green">fitness principles</HandDrawnHighlight> shape my approach to{" "}
               <HandDrawnHighlight color="yellow">problem-solving</HandDrawnHighlight> and{" "}
               <HandDrawnHighlight color="pink">building sustainable solutions</HandDrawnHighlight>
@@ -58,7 +58,7 @@ export function FitnessJourneyClient() {
           />
           <div className="space-y-6">
             <StudyGuideBox title="Progressive Overload = Continuous Learning" type="tip">
-              <p className="text-slate-800 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Just like in fitness, I believe in <HandDrawnHighlight color="green">progressive overload</HandDrawnHighlight> in learning new technologies. 
                 I gradually increase the complexity of projects I take on, ensuring steady growth without burnout. 
                 Whether it's mastering a new framework or understanding complex AI concepts, consistency beats intensity.
@@ -66,7 +66,7 @@ export function FitnessJourneyClient() {
             </StudyGuideBox>
             
             <StudyGuideBox title="Recovery and Reflection" type="note">
-              <p className="text-slate-800 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Recovery days in fitness taught me the importance of <HandDrawnHighlight color="blue">stepping back and reflecting</HandDrawnHighlight>. 
                 In my work, I regularly take time to review code, analyze project outcomes, and plan improvements. 
                 This prevents technical debt and ensures long-term sustainability.
@@ -88,7 +88,7 @@ export function FitnessJourneyClient() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-4">
                 <h4 className="font-semibold flex items-center gap-2">
-                  <Target className="h-4 w-4 text-green-600" />
+                  <Target className="h-4 w-4 text-foreground" />
                   Weekly Structure
                 </h4>
                 <ul className="text-sm space-y-2">
@@ -117,7 +117,7 @@ export function FitnessJourneyClient() {
               
               <div className="space-y-4">
                 <h4 className="font-semibold flex items-center gap-2">
-                  <Brain className="h-4 w-4 text-blue-600" />
+                  <Brain className="h-4 w-4 text-foreground" />
                   Mental Benefits
                 </h4>
                 <ul className="text-sm space-y-2">
@@ -144,21 +144,21 @@ export function FitnessJourneyClient() {
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
-                <Heart className="h-8 w-8 text-red-500 mx-auto mb-2" />
+                <Heart className="h-8 w-8 text-foreground mx-auto mb-2" />
                 <h4 className="font-semibold">Cardiovascular</h4>
                 <p className="text-sm text-muted-foreground">Target: Sub-6 min/km 5K</p>
                 <p className="text-sm">Current: 6:20 min/km</p>
               </div>
               
               <div className="text-center">
-                <Zap className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+                <Zap className="h-8 w-8 text-foreground mx-auto mb-2" />
                 <h4 className="font-semibold">Strength</h4>
                 <p className="text-sm text-muted-foreground">Target: 1.5x BW Bench</p>
                 <p className="text-sm">Current: 1.2x BW</p>
               </div>
               
               <div className="text-center">
-                <Target className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                <Target className="h-8 w-8 text-foreground mx-auto mb-2" />
                 <h4 className="font-semibold">Consistency</h4>
                 <p className="text-sm text-muted-foreground">Target: 85% weekly</p>
                 <p className="text-sm">Current: 78%</p>
@@ -176,7 +176,7 @@ export function FitnessJourneyClient() {
           />
           <div className="space-y-6">
             <StudyGuideBox title="Compound Movements = System Architecture" type="important">
-              <p className="text-slate-800 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 <HandDrawnHighlight color="pink">Compound exercises</HandDrawnHighlight> work multiple muscle groups efficiently, 
                 just like good system architecture addresses multiple concerns with elegant solutions. 
                 I focus on building systems that solve multiple problems rather than one-off fixes.
@@ -184,7 +184,7 @@ export function FitnessJourneyClient() {
             </StudyGuideBox>
             
             <StudyGuideBox title="Form Over Weight = Code Quality Over Speed" type="tip">
-              <p className="text-slate-800 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Perfect form with lighter weights prevents injury and builds better habits. Similarly, 
                 <HandDrawnHighlight color="green">writing clean, maintainable code</HandDrawnHighlight> is more valuable 
                 than rushing to meet deadlines with technical debt.
@@ -192,7 +192,7 @@ export function FitnessJourneyClient() {
             </StudyGuideBox>
             
             <StudyGuideBox title="Tracking Progress = Analytics & Metrics" type="note">
-              <p className="text-slate-800 leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 I log every workout with sets, reps, and weights. This same <HandDrawnHighlight color="blue">data-driven approach</HandDrawnHighlight> applies 
                 to tracking project metrics, user analytics, and performance optimization in my development work.
               </p>
@@ -208,7 +208,7 @@ export function FitnessJourneyClient() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 As a solopreneur, I am both my greatest asset and my single point of failure. Maintaining physical fitness isn't just about health—it's about business continuity and peak performance.
               </p>
               

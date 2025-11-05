@@ -41,7 +41,7 @@ export default function MessengerBotPrivacyPage() {
   const t = useTranslations('privacy.messenger_bot');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
+    <div className="min-h-screen bg-background py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <Link href="/privacy">

@@ -92,8 +92,8 @@ export function ContactClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Let's", style: "cursive", color: "text-purple-700", size: "xl" },
-              { text: "Connect!", style: "bubble", color: "text-blue-600", size: "xl" },
+              { text: "Let's", style: "cursive", size: "xl" },
+              { text: "Connect!", style: "bubble", size: "xl" },
               { text: "🚀", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -106,8 +106,8 @@ export function ContactClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-            <p className="text-slate-700 text-center leading-relaxed">
+          <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg">
+            <p className="text-foreground text-center leading-relaxed">
               Always interested in <strong>new opportunities</strong>, <strong>AI projects</strong>, and innovative collaborations from <strong>Bangkok, Thailand</strong>! 🇹🇭
             </p>
           </div>
@@ -123,10 +123,10 @@ export function ContactClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-2">
+              <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
                 Send Me a Message! ✍️
               </h3>
-              <p className="text-sm text-slate-600 font-[family-name:var(--font-doodle)] mb-6">
+              <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
                 Fill out the form below and I'll get back to you ASAP!
               </p>
             </motion.div>
@@ -135,8 +135,8 @@ export function ContactClient() {
             {submitStatus.type && (
               <div className={`mb-6 p-4 rounded-lg ${
                 submitStatus.type === 'success'
-                  ? 'bg-green-50 border border-green-200 text-green-800'
-                  : 'bg-red-50 border border-red-200 text-red-800'
+                  ? 'bg-muted border border-border text-foreground'
+                  : 'bg-muted border border-border text-foreground'
               }`}>
                 <p className="text-sm font-medium">
                   {submitStatus.type === 'success' ? '✅ ' : '❌ '}

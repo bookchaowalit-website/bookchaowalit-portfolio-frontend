@@ -41,7 +41,7 @@ export default function WebAppsPrivacyPage() {
   const t = useTranslations('privacy.web_apps');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 py-20">
+    <div className="min-h-screen bg-background py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <Link href="/privacy">

@@ -43,9 +43,9 @@ export function BusinessClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "My", style: "cursive", color: "text-purple-700", size: "xl" },
-              { text: "Business", style: "bubble", color: "text-blue-600", size: "xl" },
-              { text: "Journey", style: "filled", color: "text-green-700", size: "xl" },
+              { text: "My", style: "cursive", size: "xl" },
+              { text: "Business", style: "bubble", size: "xl" },
+              { text: "Journey", style: "filled", size: "xl" },
               { text: "🚀", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -62,19 +62,19 @@ export function BusinessClient() {
             <NotebookPaper className="p-8">
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 text-lg px-4 py-2">
+                  <Badge variant="secondary" className="text-lg px-4 py-2">
                     💼 Solopreneur
                   </Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 text-lg px-4 py-2">
+                  <Badge variant="secondary" className="text-lg px-4 py-2">
                     🇹🇭 Bangkok Based
                   </Badge>
                 </div>
 
-                <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+                <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
                   Building Ionomad: Deeptech & Marketing Agency
                 </h2>
 
-                <p className="text-lg text-slate-700 font-[family-name:var(--font-doodle)] leading-relaxed">
+                <p className="text-lg text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed">
                   As a <strong>solopreneur</strong>, I'm passionate about creating innovative solutions that solve real problems.
                   Through <strong>Ionomad</strong>, I combine <strong>cutting-edge deeptech</strong> with
                   <strong>strategic marketing</strong> to help businesses navigate the digital landscape. My agency focuses on
@@ -132,12 +132,7 @@ export function BusinessClient() {
                     <div className="space-y-4 flex-1">
                       <div className="flex items-center justify-between">
                         <Badge
-                          variant="secondary"
-                          className={`${
-                            business.status === 'Active'
-                              ? 'bg-green-100 text-green-800 border-green-300'
-                              : 'bg-yellow-100 text-yellow-800 border-yellow-300'
-                          }`}
+                          variant={business.status === 'Active' ? 'default' : 'secondary'}
                         >
                           {business.status}
                         </Badge>
@@ -147,16 +142,16 @@ export function BusinessClient() {
                       </div>
 
                       <div>
-                        <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-2">
+                        <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
                           {business.title}
                         </h3>
-                        <p className="text-slate-600 font-[family-name:var(--font-doodle)] leading-relaxed text-sm">
+                        <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed text-sm">
                           {business.description}
                         </p>
                       </div>
 
                       <div className="space-y-3">
-                        <h4 className="font-[family-name:var(--font-comic)] font-bold text-slate-700 uppercase text-xs tracking-wide">
+                        <h4 className="font-[family-name:var(--font-comic)] font-bold text-foreground uppercase text-xs tracking-wide">
                           Services
                         </h4>
                         <div className="flex flex-wrap gap-1">
@@ -169,7 +164,7 @@ export function BusinessClient() {
                       </div>
 
                       <div className="space-y-3">
-                        <h4 className="font-[family-name:var(--font-comic)] font-bold text-slate-700 uppercase text-xs tracking-wide">
+                        <h4 className="font-[family-name:var(--font-comic)] font-bold text-foreground uppercase text-xs tracking-wide">
                           Connect
                         </h4>
                         <div className="flex flex-wrap gap-2">
@@ -228,10 +223,10 @@ export function BusinessClient() {
       >
         <NotebookPaper className="p-8">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+            <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
               🚀 Future Ventures & Services
             </h2>
-            <p className="text-slate-600 font-[family-name:var(--font-doodle)]">
+            <p className="text-muted-foreground font-[family-name:var(--font-doodle)]">
               Exciting projects and services I'm developing to expand my impact in technology and finance
             </p>
           </div>
@@ -246,7 +241,7 @@ export function BusinessClient() {
                     <Badge variant="outline" className="text-xs mt-1">Coming Soon</Badge>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Developing algorithmic trading systems using machine learning and AI for automated,
                   data-driven investment strategies across multiple asset classes.
                 </p>
@@ -268,7 +263,7 @@ export function BusinessClient() {
                     <Badge variant="outline" className="text-xs mt-1">Service Offering</Badge>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Helping fintech startups and traditional financial institutions integrate AI,
                   blockchain, and modern data technologies into their operations.
                 </p>
@@ -290,7 +285,7 @@ export function BusinessClient() {
                     <Badge variant="outline" className="text-xs mt-1">In Development</Badge>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Building comprehensive analytics tools for portfolio management,
                   risk assessment, and investment decision-making with real-time data visualization.
                 </p>
@@ -312,7 +307,7 @@ export function BusinessClient() {
                     <Badge variant="outline" className="text-xs mt-1">Service Offering</Badge>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Sharing knowledge and experience in trading strategies, risk management,
                   and technical analysis through personalized mentorship and educational content.
                 </p>
@@ -336,10 +331,10 @@ export function BusinessClient() {
         className="text-center space-y-6"
       >
         <NotebookPaper className="p-8 max-w-3xl mx-auto">
-          <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+          <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             Ready to Work Together?
           </h2>
-          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Whether you need AI-powered marketing strategies, deeptech solutions, or digital transformation consulting,
             Ionomad is here to help your business grow. Let's discuss how we can leverage technology and data to achieve your goals!
           </p>

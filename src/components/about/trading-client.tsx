@@ -27,9 +27,9 @@ export function TradingClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Trading", style: "cursive", color: "text-green-700", size: "xl" },
-              { text: "&", style: "bubble", color: "text-blue-600", size: "lg" },
-              { text: "Investing", style: "filled", color: "text-purple-700", size: "xl" },
+              { text: "Trading", style: "cursive", size: "xl" },
+              { text: "&", style: "bubble", size: "lg" },
+              { text: "Investing", style: "filled", size: "xl" },
               { text: "📈", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -60,7 +60,7 @@ export function TradingClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StudyGuideBox title="Risk-First Approach" type="note">
             <div className="flex items-start gap-3">
-              <Shield className="w-5 h-5 text-green-600 mt-1" />
+              <Shield className="w-5 h-5 text-foreground mt-1" />
               <div>
                 <p className="text-sm">
                   Risk management is the foundation of all trading decisions.
@@ -72,7 +72,7 @@ export function TradingClient() {
 
           <StudyGuideBox title="Data-Driven Decisions" type="tip">
             <div className="flex items-start gap-3">
-              <BarChart3 className="w-5 h-5 text-blue-600 mt-1" />
+              <BarChart3 className="w-5 h-5 text-foreground mt-1" />
               <div>
                 <p className="text-sm">
                   Every trade must be backed by data and analysis.
@@ -84,7 +84,7 @@ export function TradingClient() {
 
           <StudyGuideBox title="Continuous Learning" type="important">
             <div className="flex items-start gap-3">
-              <Target className="w-5 h-5 text-purple-600 mt-1" />
+              <Target className="w-5 h-5 text-foreground mt-1" />
               <div>
                 <p className="text-sm">
                   Markets evolve constantly. Staying updated with new strategies,
@@ -96,7 +96,7 @@ export function TradingClient() {
 
           <StudyGuideBox title="AI Integration" type="note">
             <div className="flex items-start gap-3">
-              <Brain className="w-5 h-5 text-orange-600 mt-1" />
+              <Brain className="w-5 h-5 text-foreground mt-1" />
               <div>
                 <p className="text-sm">
                   Leveraging AI and machine learning for pattern recognition,
@@ -113,14 +113,14 @@ export function TradingClient() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-green-600" />
+              <TrendingUp className="w-5 h-5 text-foreground" />
               Trading Experience
             </CardTitle>
             <CardDescription>My journey through different markets and strategies</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h4 className="font-semibold text-green-700">Cryptocurrency Trading</h4>
+              <h4 className="font-semibold text-foreground">Cryptocurrency Trading</h4>
               <p className="text-sm text-muted-foreground mb-2">2021 - Present</p>
               <p className="text-sm">
                 Started with Bitcoin and Ethereum, expanded to altcoins and DeFi protocols.
@@ -131,7 +131,7 @@ export function TradingClient() {
             <Separator />
 
             <div>
-              <h4 className="font-semibold text-blue-700">Forex & Commodities</h4>
+              <h4 className="font-semibold text-foreground">Forex & Commodities</h4>
               <p className="text-sm text-muted-foreground mb-2">2022 - Present</p>
               <p className="text-sm">
                 Trading major currency pairs and commodities like gold, silver, and oil.
@@ -142,7 +142,7 @@ export function TradingClient() {
             <Separator />
 
             <div>
-              <h4 className="font-semibold text-purple-700">Stock Market Analysis</h4>
+              <h4 className="font-semibold text-foreground">Stock Market Analysis</h4>
               <p className="text-sm text-muted-foreground mb-2">2023 - Present</p>
               <p className="text-sm">
                 Focus on technology stocks, ETFs, and options strategies.
@@ -155,7 +155,7 @@ export function TradingClient() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-orange-600" />
+              <Zap className="w-5 h-5 text-foreground" />
               Tools & Platforms
             </CardTitle>
             <CardDescription>Technology stack for trading and analysis</CardDescription>
@@ -247,7 +247,7 @@ export function TradingClient() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 border rounded-lg">
-              <h4 className="font-semibold text-green-700 mb-2">Crypto Prediction Model</h4>
+              <h4 className="font-semibold text-foreground mb-2">Crypto Prediction Model</h4>
               <p className="text-sm text-muted-foreground">
                 Machine learning model for predicting cryptocurrency price movements
                 using technical indicators and market sentiment data.
@@ -255,7 +255,7 @@ export function TradingClient() {
             </div>
 
             <div className="p-4 border rounded-lg">
-              <h4 className="font-semibold text-blue-700 mb-2">Automated Trading Bot</h4>
+              <h4 className="font-semibold text-foreground mb-2">Automated Trading Bot</h4>
               <p className="text-sm text-muted-foreground">
                 AI-powered trading bot for executing trades across multiple exchanges
                 with real-time risk management and performance monitoring.
@@ -263,7 +263,7 @@ export function TradingClient() {
             </div>
 
             <div className="p-4 border rounded-lg">
-              <h4 className="font-semibold text-purple-700 mb-2">Portfolio Optimizer</h4>
+              <h4 className="font-semibold text-foreground mb-2">Portfolio Optimizer</h4>
               <p className="text-sm text-muted-foreground">
                 Advanced portfolio optimization tool using modern portfolio theory
                 and AI-driven asset allocation strategies.
@@ -271,7 +271,7 @@ export function TradingClient() {
             </div>
 
             <div className="p-4 border rounded-lg">
-              <h4 className="font-semibold text-orange-700 mb-2">Market Sentiment Analyzer</h4>
+              <h4 className="font-semibold text-foreground mb-2">Market Sentiment Analyzer</h4>
               <p className="text-sm text-muted-foreground">
                 NLP-powered tool for analyzing market sentiment from news,
                 social media, and financial reports to inform trading decisions.
@@ -292,7 +292,7 @@ export function TradingClient() {
         <p className="text-muted-foreground mb-4">
           Interested in discussing trading strategies, AI applications in finance, or collaboration opportunities?
         </p>
-        <Button asChild className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+        <Button asChild>
           <Link href="/contact">
             Let's Connect
           </Link>

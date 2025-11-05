@@ -12,7 +12,7 @@ export function AboutClient() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
-      <motion.div 
+      <motion.div
         className="text-center space-y-8 py-8"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -28,13 +28,13 @@ export function AboutClient() {
             <AvatarFallback className="text-3xl">CG</AvatarFallback>
           </Avatar>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <MixedTypographyTitle 
+          <MixedTypographyTitle
             words={[
               { text: "About", style: "cursive", color: "text-purple-700", size: "xl" },
               { text: "Me", style: "bubble", color: "text-blue-600", size: "xl" },
@@ -43,7 +43,7 @@ export function AboutClient() {
             className="mb-6"
           />
         </motion.div>
-        
+
         <motion.div
           className="max-w-lg mx-auto"
           initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
@@ -51,19 +51,10 @@ export function AboutClient() {
           transition={{ duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
           <StickyNote color="green" rotation={1} className="text-center">
-            <p className="text-sm text-slate-800">
-              <HandDrawnHighlight color="yellow">
-                Tech Generalist
-              </HandDrawnHighlight>
-              {" "}with 3+ years of experience in{" "}
-              <HandDrawnHighlight color="blue">
-                full-stack development, AI integration
-              </HandDrawnHighlight>
-              {" "}and{" "}
-              <HandDrawnHighlight color="pink">
-                SEO optimization
-              </HandDrawnHighlight>
-              {" "}from Bangkok 🇹🇭
+            <p className="text-sm text-foreground">
+              <strong>Tech Generalist</strong> with 3+ years of experience in{" "}
+              <strong>full-stack development, AI integration</strong>{" "}
+              and <strong>SEO optimization</strong> from Bangkok 🇹🇭
             </p>
           </StickyNote>
         </motion.div>
@@ -72,27 +63,27 @@ export function AboutClient() {
       <div className="space-y-12">
         {/* Bio Section */}
         <NotebookPaper className="py-8">
-          <NotebookSectionHeader 
-            title="My Story" 
+          <NotebookSectionHeader
+            title="My Story"
             subtitle="How I became a tech generalist"
             className="mb-6"
           />
           <div className="space-y-6">
             <StudyGuideBox title="Who I Am" type="note">
-              <p className="text-slate-800 leading-relaxed">
-                Hello, I'm <HandDrawnHighlight color="yellow">Book</HandDrawnHighlight> — a Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end.
+              <p className="text-foreground leading-relaxed">
+                Hello, I'm <strong>Book</strong> — a Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end.
               </p>
-              <p className="text-slate-800 leading-relaxed mt-4">
-                I work across the spectrum of <HandDrawnHighlight color="green">software engineering, data, AI, and digital growth</HandDrawnHighlight>, connecting different tools and technologies to create solutions that are practical and scalable. My background ranges from developing web platforms to designing data workflows, analyzing information, and applying AI to support smarter decision-making.
+              <p className="text-foreground leading-relaxed mt-4">
+                I work across the spectrum of <strong>software engineering, data, AI, and digital growth</strong>, connecting different tools and technologies to create solutions that are practical and scalable. My background ranges from developing web platforms to designing data workflows, analyzing information, and applying AI to support smarter decision-making.
               </p>
             </StudyGuideBox>
-            
+
             <StudyGuideBox title="What I Do" type="tip">
-              <p className="text-slate-800 leading-relaxed">
-                Beyond development, I focus on <HandDrawnHighlight color="pink">analysis and growth strategies</HandDrawnHighlight> — turning data into insights and insights into action. Whether it's improving websites, optimizing digital marketing, or creating automated systems, I help businesses and individuals reach their goals more effectively.
+              <p className="text-foreground leading-relaxed">
+                Beyond development, I focus on <strong>analysis and growth strategies</strong> — turning data into insights and insights into action. Whether it's improving websites, optimizing digital marketing, or creating automated systems, I help businesses and individuals reach their goals more effectively.
               </p>
-              <p className="text-slate-800 leading-relaxed mt-4">
-                As a solopreneur, I wear many hats — <HandDrawnHighlight color="blue">developer, engineer, analyst, and strategist</HandDrawnHighlight> — which allows me to stay flexible and adapt quickly to any challenge.
+              <p className="text-foreground leading-relaxed mt-4">
+                As a solopreneur, I wear many hats — <strong>developer, engineer, analyst, and strategist</strong> — which allows me to stay flexible and adapt quickly to any challenge.
               </p>
             </StudyGuideBox>
           </div>
@@ -100,8 +91,8 @@ export function AboutClient() {
 
         {/* Skills Section */}
         <NotebookPaper className="py-8">
-          <NotebookSectionHeader 
-            title="Technical Skills" 
+          <NotebookSectionHeader
+            title="Technical Skills"
             subtitle="Technologies and tools I work with regularly"
             className="mb-6"
           />
@@ -118,8 +109,8 @@ export function AboutClient() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    <Badge 
-                      variant="secondary" 
+                    <Badge
+                      variant="secondary"
                       className="font-[family-name:var(--font-doodle)] border border-green-300"
                       style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.5}deg)` }}
                     >
@@ -129,7 +120,7 @@ export function AboutClient() {
                 ))}
               </div>
             </StudyGuideBox>
-            
+
             <StudyGuideBox title="Backend & AI" type="note">
               <div className="flex flex-wrap gap-2">
                 {[
@@ -142,8 +133,8 @@ export function AboutClient() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 + index * 0.05 }}
                   >
-                    <Badge 
-                      variant="secondary" 
+                    <Badge
+                      variant="secondary"
                       className="font-[family-name:var(--font-doodle)] border border-blue-300"
                       style={{ transform: `rotate(${(index % 2 === 0 ? -1 : 1) * 0.5}deg)` }}
                     >
@@ -153,7 +144,7 @@ export function AboutClient() {
                 ))}
               </div>
             </StudyGuideBox>
-            
+
             <StudyGuideBox title="Tools & Analytics" type="important">
               <div className="flex flex-wrap gap-2">
                 {[
@@ -166,8 +157,8 @@ export function AboutClient() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.6 + index * 0.05 }}
                   >
-                    <Badge 
-                      variant="secondary" 
+                    <Badge
+                      variant="secondary"
                       className="font-[family-name:var(--font-doodle)] border border-red-300"
                       style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.3}deg)` }}
                     >
@@ -196,9 +187,9 @@ export function AboutClient() {
                   back-end with FastAPI. Created analytics tools using Facebook Graph API.
                 </p>
               </div>
-              
+
               <Separator />
-              
+
               <div>
                 <h4 className="font-semibold">SEO Specialist & Data Analyst</h4>
                 <p className="text-sm text-muted-foreground">Turfmapp • May 2022 - Jan 2024</p>
@@ -208,9 +199,9 @@ export function AboutClient() {
                   decisions using A/B testing and experimental approaches.
                 </p>
               </div>
-              
+
               <Separator />
-              
+
               <div>
                 <h4 className="font-semibold">Data Center Technician</h4>
                 <p className="text-sm text-muted-foreground">JasTel Network Co. Ltd. • May 2021 - Apr 2022</p>
@@ -219,9 +210,9 @@ export function AboutClient() {
                   data center operations to ensure optimal performance and uptime.
                 </p>
               </div>
-              
+
               <Separator />
-              
+
               <div>
                 <h4 className="font-semibold">Technical Staff (Apprenticeship)</h4>
                 <p className="text-sm text-muted-foreground">True Corporation • Oct 2020 - Feb 2021</p>
@@ -244,9 +235,9 @@ export function AboutClient() {
               <h4 className="font-semibold">High Vocational Certificate in Electronics</h4>
               <p className="text-sm text-muted-foreground">Chitralada Technology Institute</p>
             </div>
-            
+
             <Separator />
-            
+
             <div>
               <h4 className="font-semibold">Certifications</h4>
               <ul className="text-sm text-muted-foreground mt-2 space-y-1">

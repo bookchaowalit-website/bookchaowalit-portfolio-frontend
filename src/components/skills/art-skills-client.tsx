@@ -125,10 +125,10 @@ export function ArtSkillsClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Creative", style: "cursive", color: "text-purple-700", size: "xl" },
-              { text: "&", style: "bubble", color: "text-pink-600", size: "lg" },
-              { text: "Design", style: "filled", color: "text-blue-700", size: "xl" },
-              { text: "Skills", style: "block", color: "text-green-600", size: "xl" },
+              { text: "Creative", style: "cursive", size: "xl" },
+              { text: "&", style: "bubble", size: "lg" },
+              { text: "Design", style: "filled", size: "xl" },
+              { text: "Skills", style: "block", size: "xl" },
               { text: "🎨", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -159,7 +159,7 @@ export function ArtSkillsClient() {
           >
             <NotebookPaper className="py-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className={`${category.color} bg-slate-100 p-3 rounded-lg`}>
+                <div className={`${category.color} bg-muted p-3 rounded-lg`}>
                   {category.icon}
                 </div>
                 <div>
@@ -185,9 +185,9 @@ export function ArtSkillsClient() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className="w-full bg-muted rounded-full h-2">
                             <motion.div
-                              className="bg-purple-600 h-2 rounded-full"
+                              className="bg-foreground h-2 rounded-full"
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.level}%` }}
                               transition={{ duration: 1, delay: skillIndex * 0.1 }}
@@ -226,7 +226,7 @@ export function ArtSkillsClient() {
             >
               <Card className="text-center h-full">
                 <CardHeader>
-                  <div className="mx-auto w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                  <div className="mx-auto w-12 h-12 bg-foreground rounded-full flex items-center justify-center mb-4">
                     {principle.icon}
                   </div>
                   <CardTitle className="text-lg">{principle.title}</CardTitle>
@@ -288,10 +288,10 @@ export function ArtSkillsClient() {
         viewport={{ once: true }}
       >
         <NotebookPaper className="p-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-slate-800 mb-4">
+          <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🎨 My Creative Process
           </h2>
-          <p className="text-slate-600 font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
+          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Every design project starts with understanding the problem, researching the users,
             and iterating through multiple concepts. I believe great design is invisible -
             it solves problems without drawing attention to itself.

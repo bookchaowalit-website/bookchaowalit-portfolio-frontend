@@ -39,21 +39,21 @@ export function SkillsSection() {
       title: t('computerLanguageTitle'),
       type: "tip" as const,
       skills: t.raw('computerLanguageSkills'),
-      borderColor: "border-blue-300",
+      borderColor: "border-border",
       rotationClass: "rotate-1"
     },
     {
       title: t('libraryTitle'),
       type: "note" as const,
       skills: t.raw('librarySkills'),
-      borderColor: "border-green-300",
+      borderColor: "border-border",
       rotationClass: "-rotate-1"
     },
     {
       title: t('frameworkTitle'),
       type: "important" as const,
       skills: t.raw('frameworkSkills'),
-      borderColor: "border-purple-300",
+      borderColor: "border-border",
       rotationClass: "rotate-0.5"
     },
     {
@@ -74,7 +74,7 @@ export function SkillsSection() {
       title: t('runtimeTitle'),
       type: "important" as const,
       skills: t.raw('runtimeSkills'),
-      borderColor: "border-red-300",
+      borderColor: "border-border",
       rotationClass: "-rotate-0.5"
     }
   ];

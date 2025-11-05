@@ -12,10 +12,10 @@ interface SmoothTypingTextProps {
   highlightAfter?: string; // Text after which to apply gradient
 }
 
-export function SmoothTypingText({ 
-  fullText, 
-  delay = 0, 
-  speed = 80, 
+export function SmoothTypingText({
+  fullText,
+  delay = 0,
+  speed = 80,
   className = "",
   onComplete,
   highlightAfter
@@ -73,7 +73,7 @@ export function SmoothTypingText({
     return (
       <>
         {beforeHighlight}
-        <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+        <span className="font-semibold text-foreground">
           {afterHighlight}
         </span>
       </>

@@ -22,8 +22,8 @@ export function AboutSection() {
       <div className="text-center">
         <MixedTypographyTitle 
           words={[
-            { text: "About", style: "cursive", color: "text-blue-700", size: "lg" },
-            { text: "Me", style: "bubble", color: "text-green-600", size: "lg" },
+            { text: "About", style: "cursive", size: "lg" },
+            { text: "Me", style: "bubble", size: "lg" },
             { text: "👨‍💻", style: "block", size: "md" }
           ]}
           className="mb-6"
@@ -40,37 +40,37 @@ export function AboutSection() {
           <NotebookPaper className="p-8">
             <div className="space-y-6">
               <div className="flex flex-wrap justify-center gap-3 mb-6">
-                <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                <Badge variant="secondary" className="bg-muted text-foreground">
                   🇹🇭 Bangkok Based
                 </Badge>
-                <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                <Badge variant="secondary" className="bg-muted text-foreground">
                   💼 3+ Years Experience
                 </Badge>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-muted text-foreground">
                   🚀 Tech Generalist
                 </Badge>
               </div>
               
-              <p className="text-center text-slate-700 max-w-3xl mx-auto text-lg font-[family-name:var(--font-doodle)] leading-relaxed">
+              <p className="text-center text-muted-foreground max-w-3xl mx-auto text-lg font-[family-name:var(--font-doodle)] leading-relaxed">
                 {t('aboutDescription')}
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div className="space-y-1">
                   <div className="text-2xl">🤖</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-slate-700">AI Integration</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">AI Integration</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">📊</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-slate-700">Data Analytics</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">Data Analytics</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">🌐</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-slate-700">Full-Stack Dev</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">Full-Stack Dev</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">📈</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-slate-700">SEO & Growth</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">SEO & Growth</p>
                 </div>
               </div>
               
