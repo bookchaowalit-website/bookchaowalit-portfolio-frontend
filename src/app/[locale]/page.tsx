@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
           import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/lazy/hero-section';
+import GitHubActivity from '@/components/github-activity';
 
 // Lazy load below-the-fold components
 const SkillsSection = dynamic(() => import('@/components/lazy/skills-section').then(mod => ({ default: mod.SkillsSection })), {
@@ -105,6 +106,7 @@ export default function Home() {
       <SkillsSection />
       <AboutSection />
       <FeaturedProjects />
+      <GitHubActivity />
       <BusinessSection />
       <BlogSection />
       <ContactSection />

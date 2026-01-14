@@ -87,6 +87,24 @@ Write your blog post content here using Markdown and MDX.
 - **Projects**: Update the projects array in the Projects page
 - **Social Links**: Update social media links in the Contact page
 
+## GitHub Activity (Edge Function)
+
+This project includes an Edge API route that fetches your latest GitHub repositories and serves them from the Edge. To enable:
+
+- **Add environment variables**:
+  - `GITHUB_USERNAME=your-username`
+  - `GITHUB_TOKEN=ghp_...` (optional but recommended to avoid rate limits)
+
+- **Local test**:
+  - Run: `GITHUB_USERNAME=your-username npm run dev`
+  - Open: `http://localhost:3000/api/github`
+
+- **On Vercel**:
+  - Add `GITHUB_USERNAME` and `GITHUB_TOKEN` in Project → Settings → Environment Variables.
+  - The route will run as an Edge Function on Vercel.
+
+**Cache and rate-limit notes**: The route sets CDN caching headers (`s-maxage`, `stale-while-revalidate`) and returns `429` with `Retry-After` if GitHub rate limits are hit.
+
 ## 🚀 Deployment
 
 ### Build for Production

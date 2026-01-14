@@ -47,8 +47,8 @@
 }
 
 :root {
-  --radius: 0.1875rem;
-  /* Notion-like white theme */
+  --radius: 0rem;
+  /* Minimal, timeless white theme */
   --background: oklch(1 0 0); /* Pure white */
   --foreground: oklch(0.22 0 0); /* Almost black text */
   --card: oklch(1 0 0); /* White cards */
@@ -65,7 +65,7 @@
   --accent: oklch(0.96 0 0); /* Light gray accent */
   --accent-foreground: oklch(0.22 0 0);
   --destructive: oklch(0.55 0.22 25); /* Red for destructive actions */
-  --border: oklch(0.91 0 0); /* Light gray borders */
+  --border: transparent; /* No borders for minimal design */
   --input: oklch(0.91 0 0);
   --ring: oklch(0.22 0 0); /* Black focus ring */
   --chart-1: oklch(0.30 0 0);
@@ -79,12 +79,12 @@
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.96 0 0);
   --sidebar-accent-foreground: oklch(0.22 0 0);
-  --sidebar-border: oklch(0.91 0 0);
+  --sidebar-border: transparent;
   --sidebar-ring: oklch(0.22 0 0);
 }
 
 .dark {
-  /* Notion-like dark theme */
+  /* Minimal, timeless dark theme */
   --background: oklch(0.15 0 0); /* Very dark gray, not pure black */
   --foreground: oklch(0.95 0 0); /* Off-white text */
   --card: oklch(0.18 0 0); /* Slightly lighter dark cards */
@@ -101,7 +101,7 @@
   --accent: oklch(0.25 0 0); /* Subtle accent */
   --accent-foreground: oklch(0.95 0 0);
   --destructive: oklch(0.55 0.22 25); /* Red for destructive actions */
-  --border: oklch(0.28 0 0); /* Subtle borders */
+  --border: transparent; /* No borders for minimal design */
   --input: oklch(0.28 0 0);
   --ring: oklch(0.95 0 0); /* Light focus ring */
   --chart-1: oklch(0.85 0 0);
@@ -115,7 +115,7 @@
   --sidebar-primary-foreground: oklch(0.15 0 0);
   --sidebar-accent: oklch(0.25 0 0);
   --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.28 0 0);
+  --sidebar-border: transparent;
   --sidebar-ring: oklch(0.95 0 0);
 }
 
@@ -128,11 +128,11 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply outline-ring/50;
   }
   body {
     @apply text-foreground;
-    /* Clean, flat background like Notion */
+    /* Clean, flat background */
     background: oklch(1 0 0);
     min-height: 100vh;
   }
@@ -231,7 +231,6 @@
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--foreground);
   padding-left: 1rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -283,25 +282,20 @@
 }
 
 .prose hr {
-  border: 1px solid var(--border);
   margin: 3rem 0;
 }
 
 .prose img {
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid var(--border);
   margin: 2rem 0;
 }
 
 .prose th, .prose td {
-  border: 1px solid var(--border);
   padding: 0.75rem 1rem;
   text-align: left;
 }
