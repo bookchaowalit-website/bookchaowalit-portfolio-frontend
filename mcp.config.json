@@ -1,0 +1,93 @@
+{
+  "name": "bookchaowalit-portfolio-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for Chaowalit Greepoke's Portfolio - Provides access to projects, skills, blog posts, and GitHub activity",
+  "author": "Chaowalit Greepoke",
+  "license": "MIT",
+  "endpoint": "/api/mcp",
+  "transport": "http",
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "tools": [
+    {
+      "name": "get_projects",
+      "description": "Get information about Chaowalit Greepoke's projects including title, description, technologies used, demo URLs, and GitHub repositories.",
+      "parameters": {
+        "featured": {
+          "type": "boolean",
+          "description": "If true, only return featured projects",
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "get_skills",
+      "description": "Get information about Chaowalit Greepoke's technical skills organized by category (languages, frameworks, databases, cloud/tools).",
+      "parameters": {
+        "category": {
+          "type": "string",
+          "enum": ["languages", "frameworks", "databases", "cloud"],
+          "description": "Filter skills by category",
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "get_blog_posts",
+      "description": "Get a list of Chaowalit Greepoke's blog posts with titles, excerpts, publication dates, reading time, and tags.",
+      "parameters": {
+        "limit": {
+          "type": "number",
+          "description": "Maximum number of posts to return (1-50)",
+          "optional": true
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "If true, only return featured posts",
+          "optional": true
+        },
+        "tag": {
+          "type": "string",
+          "description": "Filter posts by tag",
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "get_blog_post",
+      "description": "Get the full content of a specific blog post by slug.",
+      "parameters": {
+        "slug": {
+          "type": "string",
+          "description": "The slug of the blog post to retrieve",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "get_github_repos",
+      "description": "Get information about Chaowalit Greepoke's GitHub repositories including name, description, URL, stars, language, and last updated date.",
+      "parameters": {
+        "limit": {
+          "type": "number",
+          "description": "Maximum number of repositories to return (1-30)",
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "get_contact_info",
+      "description": "Get contact information for Chaowalit Greepoke including name, title, location, and available contact channels.",
+      "parameters": {}
+    }
+  ],
+  "deployment": {
+    "vercel": {
+      "enabled": true,
+      "environment": "production"
+    }
+  }
+}
