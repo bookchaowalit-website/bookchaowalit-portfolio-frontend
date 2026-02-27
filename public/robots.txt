@@ -1,4 +1,5 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
-Sitemap: https://bookchaowalit-portfolio.vercel.app/sitemap.xml
+Sitemap: https://bookchaowalit.com/sitemap.xml
