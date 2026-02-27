@@ -23,16 +23,9 @@ export default function middleware(request: NextRequest) {
 export const config = {
   // Match only internationalized pathnames
   matcher: [
-    // Enable a redirect to a matching locale at the root
-    '/',
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
-    '/(th|en)/:path*',
-
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    // Exclude API routes, _next, _vercel, and static files
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
     '/((?!api|_next|_vercel|.*\\..*).*)'
   ]
 };
