@@ -1,0 +1,16 @@
+{
+  "home": "Home",
+  "about": "About",
+  "projects": "Projects",
+  "blog": "Blog",
+  "contact": "Contact",
+  "business": "Business",
+  "skills": "Skills",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  }
+}
