@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -43,7 +43,7 @@ async function fetchWithAuth(url: string, attempts = 2) {
   throw lastError;
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const username = process.env.GITHUB_USERNAME;
   if (!username) {
     return NextResponse.json({ error: 'GITHUB_USERNAME not set' }, { status: 400 });

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
+import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
 
 export function AboutClient() {
