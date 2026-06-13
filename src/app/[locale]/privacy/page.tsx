@@ -58,17 +58,17 @@ export default function PrivacyPage() {
           <CardContent className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.effective_date')}</h3>
-              <p className="text-gray-600">{t('general.date')}</p>
+              <p className="text-muted-foreground">{t('general.date')}</p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.intro_title')}</h3>
-              <p className="text-gray-600">{t('general.intro_text')}</p>
+              <p className="text-muted-foreground">{t('general.intro_text')}</p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.data_collection.title')}</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
+              <ul className="list-disc list-inside text-muted-foreground space-y-1">
                 <li>{t('general.data_collection.website_analytics')}</li>
                 <li>{t('general.data_collection.contact_info')}</li>
                 <li>{t('general.data_collection.usage_data')}</li>
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
 
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.data_usage.title')}</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
+              <ul className="list-disc list-inside text-muted-foreground space-y-1">
                 <li>{t('general.data_usage.improve_services')}</li>
                 <li>{t('general.data_usage.respond_inquiries')}</li>
                 <li>{t('general.data_usage.analytics')}</li>
@@ -86,11 +86,11 @@ export default function PrivacyPage() {
 
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.contact.title')}</h3>
-              <p className="text-gray-600">
-                {t('general.contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 hover:underline">bookchaowalit@gmail.com</a>
+              <p className="text-muted-foreground">
+                {t('general.contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a>
               </p>
-              <p className="text-gray-600">
-                {t('general.contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 hover:underline">https://bookchaowalit.com</a>
+              <p className="text-muted-foreground">
+                {t('general.contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 dark:text-blue-400 hover:underline">https://bookchaowalit.com</a>
               </p>
             </div>
           </CardContent>
@@ -101,20 +101,20 @@ export default function PrivacyPage() {
             <CardTitle className="text-2xl">{t('apps.title')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600 mb-6">{t('apps.description')}</p>
+            <p className="text-muted-foreground mb-6">{t('apps.description')}</p>
 
             <div className="grid md:grid-cols-2 gap-4">
               <Link href="/privacy/messenger-bot">
                 <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
                   <div className="text-lg font-semibold">{t('apps.messenger_bot.title')}</div>
-                  <div className="text-sm text-gray-600 text-center">{t('apps.messenger_bot.description')}</div>
+                  <div className="text-sm text-muted-foreground text-center">{t('apps.messenger_bot.description')}</div>
                 </Button>
               </Link>
 
               <Link href="/privacy/web-apps">
                 <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
                   <div className="text-lg font-semibold">{t('apps.web_apps.title')}</div>
-                  <div className="text-sm text-gray-600 text-center">{t('apps.web_apps.description')}</div>
+                  <div className="text-sm text-muted-foreground text-center">{t('apps.web_apps.description')}</div>
                 </Button>
               </Link>
             </div>

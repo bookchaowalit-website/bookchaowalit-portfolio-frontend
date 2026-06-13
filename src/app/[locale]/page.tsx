@@ -5,27 +5,27 @@ import GitHubActivity from '@/components/github-activity';
 
 // Lazy load below-the-fold components
 const SkillsSection = dynamic(() => import('@/components/lazy/skills-section').then(mod => ({ default: mod.SkillsSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 const AboutSection = dynamic(() => import('@/components/lazy/about-section').then(mod => ({ default: mod.AboutSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 const FeaturedProjects = dynamic(() => import('@/components/lazy/featured-projects').then(mod => ({ default: mod.FeaturedProjects })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 const BusinessSection = dynamic(() => import('@/components/lazy/business-section').then(mod => ({ default: mod.BusinessSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 const BlogSection = dynamic(() => import('@/components/lazy/blog-section').then(mod => ({ default: mod.BlogSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 const ContactSection = dynamic(() => import('@/components/lazy/contact-section').then(mod => ({ default: mod.ContactSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-64 animate-pulse bg-muted rounded-lg" />
 });
 
 type Props = {

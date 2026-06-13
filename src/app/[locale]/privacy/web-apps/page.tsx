@@ -52,10 +52,10 @@ export default function WebAppsPrivacyPage() {
           </Link>
 
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-foreground mb-4">
               {t('title')}
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-muted-foreground">
               {t('subtitle')}
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function WebAppsPrivacyPage() {
             <CardTitle className="text-xl">{t('effective_date')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600">{t('date')}</p>
+            <p className="text-muted-foreground">{t('date')}</p>
           </CardContent>
         </Card>
 
@@ -76,7 +76,7 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('data_collection.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>{t('data_collection.usage_analytics')}</li>
                 <li>{t('data_collection.form_data')}</li>
                 <li>{t('data_collection.cookies')}</li>
@@ -90,7 +90,7 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('data_usage.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>{t('data_usage.app_functionality')}</li>
                 <li>{t('data_usage.user_experience')}</li>
                 <li>{t('data_usage.analytics')}</li>
@@ -104,8 +104,8 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('cookies.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4">{t('cookies.description')}</p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <p className="text-muted-foreground mb-4">{t('cookies.description')}</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>{t('cookies.essential')}</li>
                 <li>{t('cookies.analytics')}</li>
                 <li>{t('cookies.preferences')}</li>
@@ -118,8 +118,8 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('third_party.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4">{t('third_party.description')}</p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <p className="text-muted-foreground mb-4">{t('third_party.description')}</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>{t('third_party.analytics_services')}</li>
                 <li>{t('third_party.hosting_providers')}</li>
                 <li>{t('third_party.payment_processors')}</li>
@@ -132,7 +132,7 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('data_retention.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">{t('data_retention.policy')}</p>
+              <p className="text-muted-foreground">{t('data_retention.policy')}</p>
             </CardContent>
           </Card>
 
@@ -141,16 +141,16 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('user_rights.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4">{t('user_rights.intro')}</p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <p className="text-muted-foreground mb-4">{t('user_rights.intro')}</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>{t('user_rights.access')}</li>
                 <li>{t('user_rights.correction')}</li>
                 <li>{t('user_rights.deletion')}</li>
                 <li>{t('user_rights.portability')}</li>
                 <li>{t('user_rights.objection')}</li>
               </ul>
-              <p className="text-gray-600 mt-4">
-                {t('user_rights.contact')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 hover:underline">bookchaowalit@gmail.com</a>
+              <p className="text-muted-foreground mt-4">
+                {t('user_rights.contact')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a>
               </p>
             </CardContent>
           </Card>
@@ -160,7 +160,7 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('data_security.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">{t('data_security.policy')}</p>
+              <p className="text-muted-foreground">{t('data_security.policy')}</p>
             </CardContent>
           </Card>
 
@@ -169,10 +169,10 @@ export default function WebAppsPrivacyPage() {
               <CardTitle>{t('contact.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-gray-600">
+              <div className="text-muted-foreground">
                 <p>Bookchaowalit</p>
-                <p>{t('contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 hover:underline">https://bookchaowalit.com</a></p>
-                <p>{t('contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 hover:underline">bookchaowalit@gmail.com</a></p>
+                <p>{t('contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 dark:text-blue-400 hover:underline">https://bookchaowalit.com</a></p>
+                <p>{t('contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a></p>
               </div>
             </CardContent>
           </Card>

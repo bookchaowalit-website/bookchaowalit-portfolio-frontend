@@ -17,6 +17,20 @@ export default function GitHubActivity() {
 
   useEffect(() => {
     let mounted = true;
+
+    // Check sessionStorage cache first (5-min TTL)
+    try {
+      const cached = sessionStorage.getItem('github-activity');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        const age = Date.now() - new Date(parsed.fetchedAt).getTime();
+        if (age < 5 * 60 * 1000) {
+          setData(parsed);
+          return;
+        }
+      }
+    } catch { /* ignore cache errors */ }
+
     fetch('/api/github')
       .then((r) => {
         if (!r.ok) throw new Error(`Status ${r.status}`);
@@ -25,6 +39,8 @@ export default function GitHubActivity() {
       .then((json) => {
         if (!mounted) return;
         setData(json);
+        // Cache in sessionStorage
+        try { sessionStorage.setItem('github-activity', JSON.stringify(json)); } catch { /* ignore */ }
       })
       .catch((err) => {
         if (!mounted) return;
