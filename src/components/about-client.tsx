@@ -52,7 +52,7 @@ export function AboutClient() {
         >
           <StickyNote color="green" rotation={1} className="text-center">
             <p className="text-sm text-foreground">
-              <strong>Tech Generalist</strong> with 3+ years of experience in{" "}
+              <strong>Tech Generalist</strong> with 5+ years of experience in{" "}
               <strong>full-stack development, AI integration</strong>{" "}
               and <strong>SEO optimization</strong> from Bangkok 🇹🇭
             </p>

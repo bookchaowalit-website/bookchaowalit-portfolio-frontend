@@ -294,6 +294,13 @@ export function ContactClient() {
                 </Button>
 
                 <Button variant="outline" className="justify-start" asChild>
+                  <a href="https://medium.com/@bookchaowalit" target="_blank" rel="noopener noreferrer">
+                    <span className="mr-2">📖</span>
+                    Medium
+                  </a>
+                </Button>
+
+                <Button variant="outline" className="justify-start" asChild>
                   <a href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">🔧</span>
                     Upwork

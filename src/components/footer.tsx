@@ -123,6 +123,26 @@ export function Footer() {
               🐦
             </motion.a>
             <motion.a
+              href="https://dev.to/bookchaowalit"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2, scale: 1.1 }}
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
+              title="Dev.to"
+            >
+              ✍️
+            </motion.a>
+            <motion.a
+              href="https://medium.com/@bookchaowalit"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2, scale: 1.1 }}
+              className="text-muted-foreground hover:text-primary transition-colors duration-200"
+              title="Medium"
+            >
+              📖
+            </motion.a>
+            <motion.a
               href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
               target="_blank"
               rel="noopener noreferrer"
