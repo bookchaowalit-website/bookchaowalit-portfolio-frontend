@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         // Send email using Resend
         const { data, error } = await resend.emails.send({
             from: 'Contact Form <onboarding@resend.dev>', // Use your verified domain
-            to: process.env.CONTACT_EMAIL || 'your-email@example.com', // Your email
+            to: process.env.CONTACT_EMAIL || 'contact@bookchaowalit.com',
             subject: `New Contact: ${subject}`,
             html: `
         <!DOCTYPE html>

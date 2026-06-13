@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'),
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'profile',
       locale: locale,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale}/about`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale}/about`,
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',

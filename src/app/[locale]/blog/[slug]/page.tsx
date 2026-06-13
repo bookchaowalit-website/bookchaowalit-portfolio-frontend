@@ -37,10 +37,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const baseTitle = `${post.title} | Chaowalit Greepoke`;
-  const blogUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
+  const blogUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'),
     title: baseTitle,
     description: post.excerpt,
     keywords: [
@@ -106,7 +106,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://chaowalitgreepoke.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
+  const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
