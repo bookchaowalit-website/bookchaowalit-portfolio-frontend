@@ -1,26 +1,33 @@
 # MCP Server Documentation
 
-## 🚀 Overview
+The portfolio exposes a **Model Context Protocol (MCP)** endpoint at `/api/mcp` that allows AI assistants (Claude, ChatGPT, etc.) to query portfolio data as tools.
 
-This portfolio website now includes an **MCP (Model Context Protocol) Server** that provides AI assistants like Claude with access to:
-- 📁 Projects information
-- 🛠️ Technical skills
-- 📝 Blog posts
-- 💻 GitHub repositories
-- 📧 Contact information
+---
 
-## 📍 Endpoint
+## Endpoints
+
+| Method | URL | Description |
+|--------|-----|-------------|
+| `GET` | `/api/mcp` | Server info, capabilities, and tool listing |
+| `POST` | `/api/mcp` | MCP protocol requests (initialize, tools/list, tools/call) |
+| `OPTIONS` | `/api/mcp` | CORS preflight (allows all origins) |
 
 **Production:** `https://bookchaowalit.com/api/mcp`
 **Local:** `http://localhost:3000/api/mcp`
 
-## 🛠️ Available Tools
+---
 
-### 1. `get_projects`
-Get information about Chaowalit Greepoke's projects.
+## Available Tools
+
+### `get_projects`
+
+List all portfolio projects with tech stacks, descriptions, and links.
 
 **Parameters:**
-- `featured` (boolean, optional): If true, only return featured projects
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `featured` | `boolean` | No | If `true`, only return featured projects |
 
 **Example:**
 ```json
@@ -30,11 +37,17 @@ Get information about Chaowalit Greepoke's projects.
 }
 ```
 
-### 2. `get_skills`
-Get technical skills organized by category.
+---
+
+### `get_skills`
+
+Get technical, creative, and multimedia skills organized by category.
 
 **Parameters:**
-- `category` (string, optional): Filter by category - "languages", "frameworks", "databases", "cloud"
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `category` | `string` | No | Filter by category (e.g., `languages`, `frameworks`, `databases`, `cloud`) |
 
 **Example:**
 ```json
@@ -44,13 +57,19 @@ Get technical skills organized by category.
 }
 ```
 
-### 3. `get_blog_posts`
-Get a list of blog posts.
+---
+
+### `get_blog_posts`
+
+List all MDX blog posts with metadata.
 
 **Parameters:**
-- `limit` (number, optional): Maximum number of posts (1-50)
-- `featured` (boolean, optional): If true, only return featured posts
-- `tag` (string, optional): Filter by tag
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `limit` | `number` | No | Maximum number of posts (1–50) |
+| `featured` | `boolean` | No | If `true`, only return featured posts |
+| `tag` | `string` | No | Filter by tag |
 
 **Example:**
 ```json
@@ -60,25 +79,37 @@ Get a list of blog posts.
 }
 ```
 
-### 4. `get_blog_post`
-Get the full content of a specific blog post.
+---
+
+### `get_blog_post`
+
+Get the full content of a specific blog post by slug.
 
 **Parameters:**
-- `slug` (string, required): The slug of the blog post
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `slug` | `string` | Yes | The blog post slug (e.g., `building-scalable-react-applications`) |
 
 **Example:**
 ```json
 {
   "tool": "get_blog_post",
-  "args": { "slug": "essential-ai-tools-2025" }
+  "args": { "slug": "building-scalable-react-applications" }
 }
 ```
 
-### 5. `get_github_repos`
-Get GitHub repositories information (live data from GitHub API).
+---
+
+### `get_github_repos`
+
+Fetch recent GitHub repositories (live data from GitHub API).
 
 **Parameters:**
-- `limit` (number, optional): Maximum number of repos (1-30), default 8
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `limit` | `number` | No | Maximum number of repos (1–30), default 8 |
 
 **Example:**
 ```json
@@ -88,10 +119,11 @@ Get GitHub repositories information (live data from GitHub API).
 }
 ```
 
-### 6. `get_contact_info`
-Get contact information.
+---
 
-**Parameters:** None
+### `get_contact_info`
+
+Get contact details and social links. No parameters.
 
 **Example:**
 ```json
@@ -101,9 +133,78 @@ Get contact information.
 }
 ```
 
-## 🔧 Usage with Claude Desktop
+---
 
-Add this to your Claude Desktop MCP config file:
+## Protocol Details
+
+The server supports the following MCP message types via `POST`:
+
+| Message Type | Description |
+|-------------|-------------|
+| `initialize` | Returns server info and capabilities |
+| `tools/list` | Returns all available tools with input schemas |
+| `tools/call` | Executes a tool and returns the result |
+| `ping` | Returns `pong` (health check) |
+
+### Request Format (tools/call)
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_projects",
+    "arguments": { "featured": true }
+  },
+  "id": 1
+}
+```
+
+### Simplified Format (also supported)
+
+```json
+{
+  "tool": "get_projects",
+  "args": { "featured": true }
+}
+```
+
+### Response Format
+
+**Success:**
+```json
+{
+  "type": "tools/call/response",
+  "tool": "get_projects",
+  "result": "{ ... JSON data ... }"
+}
+```
+
+**Error:**
+```json
+{
+  "type": "tools/call/response",
+  "tool": "get_projects",
+  "error": true,
+  "result": "{ ... error details ... }"
+}
+```
+
+### JSON-RPC Error Codes
+
+| Code | Meaning |
+|------|---------|
+| `-32700` | Parse error (invalid JSON) |
+| `-32601` | Method not found / tool not found |
+| `-32602` | Invalid params (missing required fields) |
+
+---
+
+## Integration with AI Assistants
+
+### Claude Desktop
+
+Add to your Claude Desktop MCP config:
 
 **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
@@ -120,6 +221,7 @@ Add this to your Claude Desktop MCP config file:
 ```
 
 For local development:
+
 ```json
 {
   "mcpServers": {
@@ -131,53 +233,74 @@ For local development:
 }
 ```
 
-## 🧪 Testing
-
-Run the test script to verify the MCP server is working:
+### cURL
 
 ```bash
-# Make sure the dev server is running first
+# Server info
+curl https://bookchaowalit.com/api/mcp
+
+# List tools
+curl -X POST https://bookchaowalit.com/api/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"type": "tools/list"}'
+
+# Call a tool
+curl -X POST https://bookchaowalit.com/api/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"tool": "get_projects", "args": {}}'
+```
+
+---
+
+## Testing
+
+```bash
+# Start the dev server
 npm run dev
 
-# In another terminal, run:
+# In another terminal — run the test script
 npm run mcp:test
 ```
 
-## 📡 API Response Format
+The test script (`scripts/test-mcp.mjs`) verifies all six tools return valid responses.
 
-All MCP responses follow this format:
+---
 
-```json
-{
-  "type": "tools/call/response",
-  "tool": "tool_name",
-  "result": "{ ... JSON data ... }"
-}
+## Architecture
+
+```
+src/app/api/mcp/route.ts       # Route handler (POST, GET, OPTIONS)
+src/lib/mcp/
+├── config.ts                   # Server name, version, capabilities
+├── types.ts                    # TypeScript interfaces
+└── tools/
+    ├── index.ts                # Tool registry (mcpToolsMap)
+    ├── get-projects.ts         # Portfolio projects handler
+    ├── get-skills.ts           # Skills handler
+    ├── get-blog-posts.ts       # Blog listing handler
+    ├── get-blog-post.ts        # Single blog post handler
+    ├── get-github-repos.ts     # GitHub API handler
+    └── get-contact-info.ts     # Contact info handler
 ```
 
-Error responses:
-```json
-{
-  "type": "tools/call/response",
-  "tool": "tool_name",
-  "error": true,
-  "result": "{ ... error details ... }"
-}
-```
+- **Runtime:** Node.js (required for full MCP SDK compatibility)
+- **Data sources:** Static project data, MDX files, GitHub API
+- **Auth:** None required — all data is public
+- **CORS:** Enabled (`Access-Control-Allow-Origin: *`)
 
-## 🔒 Security
+---
 
-- The MCP server uses read-only operations
-- No authentication required for public data
-- Rate limiting applies to GitHub API calls
-- CORS enabled for development
+## Security
 
-## 🚢 Deployment
+- All operations are **read-only**
+- No authentication required (public portfolio data)
+- GitHub API calls are rate-limited (60 req/hr unauthenticated, 5000 with token)
+- CORS is open — restrict in production if needed via Vercel Edge Config
 
-The MCP server is deployed on Vercel and uses the Node.js runtime for full MCP SDK compatibility.
+---
 
-## 📚 Additional Resources
+## Resources
 
 - [MCP Protocol Specification](https://spec.modelcontextprotocol.io/)
 - [Claude MCP Documentation](https://docs.anthropic.com/claude/docs/mcp)
-- [GitHub Repository](https://github.com/bookchaowalit/bookchaowalit-portfolio)
+- [GitHub Repository](https://github.com/bookchaowalit/bookchaowalit-portfolio-frontend)
