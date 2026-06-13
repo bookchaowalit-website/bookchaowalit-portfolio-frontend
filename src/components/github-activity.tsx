@@ -38,38 +38,38 @@ export default function GitHubActivity() {
 
   if (error) {
     return (
-      <section className="rounded-lg border p-4 bg-white">
-        <h3 className="text-lg font-semibold">Latest GitHub activity</h3>
-        <p className="text-sm text-red-600">{error}</p>
+      <section className="rounded-lg border p-4 bg-background dark:bg-card">
+        <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
+        <p className="text-sm text-destructive">{error}</p>
       </section>
     );
   }
 
   if (!data) {
     return (
-      <section className="rounded-lg border p-4 bg-white">
-        <h3 className="text-lg font-semibold">Latest GitHub activity</h3>
-        <p className="text-sm text-gray-500">Loading…</p>
+      <section className="rounded-lg border p-4 bg-background dark:bg-card">
+        <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
+        <p className="text-sm text-muted-foreground">Loading…</p>
       </section>
     );
   }
 
   return (
-    <section className="rounded-lg border p-4 bg-white">
+    <section className="rounded-lg border p-4 bg-background dark:bg-card">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-lg font-semibold">Latest GitHub activity</h3>
-        <small className="text-sm text-gray-500">Updated {new Date(data.fetchedAt).toLocaleString()}</small>
+        <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
+        <small className="text-sm text-muted-foreground">Updated {new Date(data.fetchedAt).toLocaleString()}</small>
       </div>
       <ul className="mt-3 space-y-3">
         {data.repos.map((r) => (
           <li key={r.url} className="flex flex-col">
-            <a className="text-sm font-medium text-sky-600 hover:underline" href={r.url} target="_blank" rel="noreferrer">
+            <a className="text-sm font-medium text-sky-600 dark:text-sky-400 hover:underline" href={r.url} target="_blank" rel="noreferrer">
               {r.name}
             </a>
-            <div className="text-xs text-gray-600">
-              {r.description ?? <span className="text-gray-400">No description</span>}
+            <div className="text-xs text-muted-foreground">
+              {r.description ?? <span className="text-muted-foreground/70">No description</span>}
             </div>
-            <div className="text-xs text-gray-500 mt-1">
+            <div className="text-xs text-muted-foreground mt-1">
               {r.language ? <span className="mr-2">{r.language}</span> : null}
               {r.stars ? <span>★ {r.stars}</span> : null}
               <span className="ml-2">· Updated {new Date(r.updatedAt).toLocaleDateString()}</span>

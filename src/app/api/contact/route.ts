@@ -6,15 +6,12 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 
 export async function POST(request: NextRequest) {
     try {
-        console.log('Contact form request received');
         const body = await request.json();
-        console.log('Request body:', body);
 
         const { name, email, subject, message } = body;
 
         // Validate required fields
         if (!name || !email || !subject || !message) {
-            console.log('Validation failed: missing fields');
             return NextResponse.json(
                 { error: 'All fields are required' },
                 { status: 400 }
@@ -24,25 +21,15 @@ export async function POST(request: NextRequest) {
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            console.log('Validation failed: invalid email format');
             return NextResponse.json(
                 { error: 'Invalid email format' },
                 { status: 400 }
             );
         }
 
-        console.log('Validation passed, processing message...');
-
         // Check if Resend is available
         if (!resend) {
-            console.warn('RESEND_API_KEY not configured. Logging message instead.');
-            console.log('Contact form submission:', {
-                name,
-                email,
-                subject,
-                message,
-                timestamp: new Date().toISOString(),
-            });
+            console.warn('RESEND_API_KEY not configured. Message logged server-side.');
 
             return NextResponse.json({
                 success: true,
@@ -93,7 +80,6 @@ export async function POST(request: NextRequest) {
 
         if (error) {
             console.error('Resend API Error:', error);
-            console.error('Error details:', JSON.stringify(error, null, 2));
             return NextResponse.json(
                 { error: 'Failed to send message. Please try again later.' },
                 { status: 500 }

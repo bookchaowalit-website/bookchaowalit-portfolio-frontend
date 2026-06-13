@@ -43,7 +43,7 @@ export function ProjectsClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
-          <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+          <div className="bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-r-lg">
             <p className="text-muted-foreground text-center">
               A showcase of different technologies and creative approaches to problem-solving 🚀
             </p>

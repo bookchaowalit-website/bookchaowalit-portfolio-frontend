@@ -53,6 +53,8 @@ export function ShareButton({ title, url }: ShareButtonProps) {
       size="sm"
       onClick={handleShare}
       className="gap-2"
+      aria-label={copied ? "Link copied to clipboard" : `Share ${title}`}
+      aria-live="polite"
     >
       {copied ? (
         <>

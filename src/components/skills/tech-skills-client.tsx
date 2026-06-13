@@ -197,9 +197,9 @@ export function TechSkillsClient() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <motion.div
-                              className="bg-blue-600 h-2 rounded-full"
+                              className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full"
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.level}%` }}
                               transition={{ duration: 1, delay: skillIndex * 0.1 }}

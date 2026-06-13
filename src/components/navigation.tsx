@@ -18,13 +18,16 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RouteHref = any;
+
 export function Navigation() {
   const pathname = usePathname();
   const t = useTranslations('nav');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 
-  const navItems = [
+  const navItems: { name: string; href: RouteHref }[] = [
     { name: t('home'), href: "/" },
     { name: t('projects'), href: "/projects" },
     { name: t('business'), href: "/business" },
@@ -33,7 +36,7 @@ export function Navigation() {
     { name: t('contact'), href: "/contact" },
   ];
 
-  const aboutSubpages = [
+  const aboutSubpages: { name: string; href: RouteHref; description: string }[] = [
     { name: t('aboutOverview'), href: "/about", description: t('aboutOverviewDesc') },
     { name: t('fitnessJourney'), href: "/about/fitness", description: t('fitnessJourneyDesc') },
     { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc') },
@@ -54,7 +57,7 @@ export function Navigation() {
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
                     <Link
-                      href={item.href as any}
+                      href={item.href}
                       prefetch={true}
                       className={cn(
                         "px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
@@ -87,7 +90,7 @@ export function Navigation() {
                       {aboutSubpages.map((subpage) => (
                         <NavigationMenuLink asChild key={subpage.href}>
                           <Link
-                            href={subpage.href as any}
+                            href={subpage.href}
                             prefetch={true}
                             className={cn(
                               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -126,12 +129,12 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div id="mobile-navigation" className="md:hidden border-t bg-background">
+          <div id="mobile-navigation" className="md:hidden border-t dark:border-gray-700 bg-background dark:bg-background">
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href as any}
+                  href={item.href}
                   prefetch={true}
                   className={cn(
                     "block px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md",
@@ -153,7 +156,7 @@ export function Navigation() {
                 {aboutSubpages.map((subpage) => (
                   <Link
                     key={subpage.href}
-                    href={subpage.href as any}
+                    href={subpage.href}
                     prefetch={true}
                     className={cn(
                       "block px-6 py-2 text-sm transition-colors hover:text-primary rounded-md",
