@@ -4,7 +4,7 @@ import { allProjects, categoryMeta } from "@/data/app-projects";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
-import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { StickyNote } from "@/components/ui/notebook-elements";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 
 const stickyColors = ["yellow", "pink", "green", "blue"] as const;
@@ -27,8 +27,7 @@ export function FeaturedProjects() {
         />
       </div>
 
-      <NotebookPaper className="py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featured.map((project, index) => (
             <StickyNote
               key={project.slug}
@@ -57,8 +56,7 @@ export function FeaturedProjects() {
               </a>
             </StickyNote>
           ))}
-        </div>
-      </NotebookPaper>
+      </div>
 
       <div className="text-center">
         <Link
