@@ -329,9 +329,9 @@ export function ProjectsClient() {
       </div>
 
       {/* Search & Filters */}
-      <div className="py-8">
+      <div className="py-8 space-y-4">
         {/* Search */}
-        <div className="max-w-md mx-auto mb-6">
+        <div className="max-w-md mx-auto">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <input
@@ -346,34 +346,36 @@ export function ProjectsClient() {
           </div>
         </div>
 
-        {/* Status filters */}
-        <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto" role="group" aria-label="Filter by status">
-          {(["all", "live", "wip", "archived"] as const).map((status, i) => {
+        {/* Status filters — pill chips */}
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by status">
+          {(["all", "live", "wip", "archived"] as const).map((status) => {
             const isActive = activeStatus === status;
             const label = status === "all" ? "All" : statusConfig[status].label;
             const count = countByStatus[status] || 0;
+            const dotClass = status !== "all" ? statusConfig[status].dot : "";
             return (
               <button
                 key={status}
                 onClick={() => handleStatusChange(status)}
-                className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  i > 0 ? "border-l border-border" : ""
-                } ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
-                    : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
+                {dotClass && (
+                  <span className={`size-1.5 shrink-0 rounded-full ${dotClass} ${isActive ? "opacity-60" : ""}`} />
+                )}
                 {label}
-                <span className="opacity-50 tabular-nums">{count}</span>
+                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-40"}`}>{count}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Category filters — progressive disclosure: show top 4, expand on demand */}
-        <div className="flex flex-wrap justify-center border border-border max-w-2xl mx-auto" role="group" aria-label="Filter by category">
-          {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat, i) => {
+        {/* Category filters — flowing pill chips with progressive disclosure */}
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by category">
+          {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
             const isActive = activeCategory === cat;
             const label = cat === "all" ? "All" : categoryMeta[cat].label;
             const count = countByCategory[cat] || 0;
@@ -381,28 +383,36 @@ export function ProjectsClient() {
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  i > 0 ? "border-l border-border" : ""
-                } ${
+                className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
-                    : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
+              >
+                {label}
+                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-40"}`}>{count}</span>
+              </button>
+            );
+          })}
+          {categories.length > 4 && !categoriesExpanded && (
+            <button
+              onClick={() => setCategoriesExpanded(true)}
+              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              {label}
-              <span className="ml-1 opacity-50 tabular-nums">{count}</span>
+              <ChevronDown className="size-3" />
+              +{categories.length - 4} more
             </button>
-          );
-        })}
-        {categories.length > 4 && (
-          <button
-            onClick={() => setCategoriesExpanded((v) => !v)}
-            className="px-3 py-2 text-xs font-medium bg-background text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors border-l border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            {categoriesExpanded ? "Less" : `+${categories.length - 4} more`}
-          </button>
-        )}
-      </div>
+          )}
+          {categoriesExpanded && categories.length > 4 && (
+            <button
+              onClick={() => setCategoriesExpanded(false)}
+              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ChevronDown className="size-3 rotate-180" />
+              Less
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Featured Projects */}
