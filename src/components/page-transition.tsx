@@ -3,11 +3,13 @@
 import { usePathname } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     setIsMounted(true);
@@ -31,18 +33,18 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       {isLoading ? (
         <motion.div 
           key="loading"
-          initial={{ opacity: 0 }}
+          initial={reducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
+          exit={reducedMotion ? undefined : { opacity: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.15, ease: "easeOut" }}
           className="flex items-center justify-center min-h-[40vh]"
         >
           <motion.div
-            animate={{ 
+            animate={reducedMotion ? undefined : { 
               rotate: 360,
               scale: [1, 1.1, 1],
             }}
-            transition={{ 
+            transition={reducedMotion ? { duration: 0 } : { 
               rotate: { duration: 0.8, repeat: Infinity, ease: "linear" },
               scale: { duration: 0.6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
             }}
@@ -52,10 +54,10 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       ) : (
         <motion.div
           key={pathname}
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ 
+          exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
+          transition={reducedMotion ? { duration: 0 } : { 
             duration: 0.4,
             ease: [0.25, 0.1, 0.25, 1]
           }}

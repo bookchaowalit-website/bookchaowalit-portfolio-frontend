@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 interface SmoothTypingTextProps {
   fullText: string;
@@ -24,6 +25,7 @@ export function SmoothTypingText({
   const [currentIndex, setCurrentIndex] = useState(fullText.length); // Start at end
   const [isAnimating, setIsAnimating] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     // Start the typing animation after mount
@@ -85,8 +87,8 @@ export function SmoothTypingText({
       {renderText()}
       {showCursor && (
         <motion.span
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+          animate={reducedMotion ? {} : { opacity: [1, 0, 1] }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
           className="inline-block"
         >
           |

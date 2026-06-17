@@ -53,7 +53,7 @@ export function ContactSection() {
                   Ready to Work Together?
                 </h3>
 
-                <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto">
+                <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto text-pretty">
                   Whether you need <strong>AI integration</strong>, <strong>full-stack development</strong>,
                   or <strong>strategic consulting</strong> - I'm here to help your business grow.
                   Based in <strong>Bangkok</strong> but working with clients worldwide! 🇹🇭

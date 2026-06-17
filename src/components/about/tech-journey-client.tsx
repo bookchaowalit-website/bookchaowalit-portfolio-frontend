@@ -24,8 +24,8 @@ export function TechJourneyClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Tech", style: "block", color: "text-blue-700", size: "xl" },
-              { text: "Journey", style: "cursive", color: "text-indigo-600", size: "xl" },
+              { text: "Tech", style: "block", size: "xl" },
+              { text: "Journey", style: "cursive", size: "xl" },
               { text: "🚀", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -38,11 +38,11 @@ export function TechJourneyClient() {
           animate={{ opacity: 1, scale: 1, rotate: -1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <StickyNote color="blue" rotation={1} className="text-center">
-            <p className="text-sm text-slate-800">
-              From <HandDrawnHighlight color="yellow">hardware tinkering</HandDrawnHighlight> to{" "}
-              <HandDrawnHighlight color="green">AI systems</HandDrawnHighlight> — the evolution of a{" "}
-              <HandDrawnHighlight color="pink">Tech Generalist</HandDrawnHighlight>
+          <StickyNote rotation={1} className="text-center">
+            <p className="text-sm text-foreground">
+              From <HandDrawnHighlight>hardware tinkering</HandDrawnHighlight> to{" "}
+              <HandDrawnHighlight>AI systems</HandDrawnHighlight> — the evolution of a{" "}
+              <HandDrawnHighlight>Tech Generalist</HandDrawnHighlight>
             </p>
           </StickyNote>
         </motion.div>
@@ -57,99 +57,62 @@ export function TechJourneyClient() {
             className="mb-6"
           />
           <div className="space-y-8">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+            <div className="space-y-6">
+                <StudyGuideBox title="2018-2021: Electronics Foundation" type="note">
+                  <p className="text-foreground leading-relaxed text-sm">
+                    Started with electronics at Chitralada Technology Institute.
+                    Learned circuit analysis, microcontroller programming, and digital systems.
+                    This hardware foundation taught me how computers really work at the lowest level.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge variant="outline" className="text-xs">Arduino</Badge>
+                    <Badge variant="outline" className="text-xs">Circuit Design</Badge>
+                    <Badge variant="outline" className="text-xs">Embedded C</Badge>
+                  </div>
+                </StudyGuideBox>
 
-              <div className="space-y-8">
-                {/* 2018-2021: Electronics Foundation */}
-                <div className="relative flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-foreground rounded-full flex items-center justify-center">
-                    <Cpu className="h-8 w-8 text-background" />
+                <StudyGuideBox title="2021-2022: Infrastructure & Networking" type="tip">
+                  <p className="text-foreground leading-relaxed text-sm">
+                    Worked in data centers and ISP operations. Learned about scalable infrastructure,
+                    network protocols, and how the internet actually works. This experience shapes how I think about
+                    performance and reliability in software systems.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge variant="outline" className="text-xs">Fiber Optics</Badge>
+                    <Badge variant="outline" className="text-xs">Network Administration</Badge>
+                    <Badge variant="outline" className="text-xs">Server Management</Badge>
                   </div>
-                  <div className="flex-grow">
-                    <StudyGuideBox title="2018-2021: Electronics Foundation" type="note">
-                      <p className="text-slate-800 leading-relaxed text-sm">
-                        Started with <HandDrawnHighlight color="blue">electronics at Chitralada Technology Institute</HandDrawnHighlight>.
-                        Learned circuit analysis, microcontroller programming, and digital systems.
-                        This hardware foundation taught me how computers really work at the lowest level.
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <Badge variant="outline" className="text-xs">Arduino</Badge>
-                        <Badge variant="outline" className="text-xs">Circuit Design</Badge>
-                        <Badge variant="outline" className="text-xs">Embedded C</Badge>
-                      </div>
-                    </StudyGuideBox>
-                  </div>
-                </div>
+                </StudyGuideBox>
 
-                {/* 2021-2022: Infrastructure Experience */}
-                <div className="relative flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-foreground rounded-full flex items-center justify-center">
-                    <Database className="h-8 w-8 text-background" />
+                <StudyGuideBox title="2022-2024: Web Development & SEO" type="important">
+                  <p className="text-foreground leading-relaxed text-sm">
+                    Transitioned into web development and digital marketing. Self-taught React, Next.js, and SEO.
+                    Started with Shopify sites and grew into full-stack applications. This is where I discovered
+                    my love for solving business problems with technology.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge variant="outline" className="text-xs">React</Badge>
+                    <Badge variant="outline" className="text-xs">Next.js</Badge>
+                    <Badge variant="outline" className="text-xs">SEO</Badge>
+                    <Badge variant="outline" className="text-xs">Google Analytics</Badge>
                   </div>
-                  <div className="flex-grow">
-                    <StudyGuideBox title="2021-2022: Infrastructure & Networking" type="tip">
-                      <p className="text-slate-800 leading-relaxed text-sm">
-                        Worked in data centers and ISP operations. <HandDrawnHighlight color="blue">Learned about scalable infrastructure</HandDrawnHighlight>,
-                        network protocols, and how the internet actually works. This experience shapes how I think about
-                        performance and reliability in software systems.
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <Badge variant="outline" className="text-xs">Fiber Optics</Badge>
-                        <Badge variant="outline" className="text-xs">Network Administration</Badge>
-                        <Badge variant="outline" className="text-xs">Server Management</Badge>
-                      </div>
-                    </StudyGuideBox>
-                  </div>
-                </div>
+                </StudyGuideBox>
 
-                {/* 2022-2024: Web Development Transition */}
-                <div className="relative flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-foreground rounded-full flex items-center justify-center">
-                    <Code className="h-8 w-8 text-background" />
+                <StudyGuideBox title="2024-Present: AI & Full-Stack Mastery" type="tip">
+                  <p className="text-foreground leading-relaxed text-sm">
+                    Deep dive into AI/ML with RAG systems, LangChain, and multi-agent architectures.
+                    Combining full-stack development with AI to create intelligent applications.
+                    This is where my generalist approach really pays off.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge variant="outline" className="text-xs">LangChain</Badge>
+                    <Badge variant="outline" className="text-xs">LlamaIndex</Badge>
+                    <Badge variant="outline" className="text-xs">FastAPI</Badge>
+                    <Badge variant="outline" className="text-xs">Multi-Agent Systems</Badge>
                   </div>
-                  <div className="flex-grow">
-                    <StudyGuideBox title="2022-2024: Web Development & SEO" type="important">
-                      <p className="text-slate-800 leading-relaxed text-sm">
-                        Transitioned into web development and digital marketing. <HandDrawnHighlight color="pink">Self-taught React, Next.js, and SEO</HandDrawnHighlight>.
-                        Started with Shopify sites and grew into full-stack applications. This is where I discovered
-                        my love for solving business problems with technology.
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <Badge variant="outline" className="text-xs">React</Badge>
-                        <Badge variant="outline" className="text-xs">Next.js</Badge>
-                        <Badge variant="outline" className="text-xs">SEO</Badge>
-                        <Badge variant="outline" className="text-xs">Google Analytics</Badge>
-                      </div>
-                    </StudyGuideBox>
-                  </div>
-                </div>
-
-                {/* 2024-Present: AI Integration */}
-                <div className="relative flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-foreground rounded-full flex items-center justify-center">
-                    <Brain className="h-8 w-8 text-background" />
-                  </div>
-                  <div className="flex-grow">
-                    <StudyGuideBox title="2024-Present: AI & Full-Stack Mastery" type="tip">
-                      <p className="text-slate-800 leading-relaxed text-sm">
-                        Deep dive into AI/ML with <HandDrawnHighlight color="green">RAG systems, LangChain, and multi-agent architectures</HandDrawnHighlight>.
-                        Combining full-stack development with AI to create intelligent applications.
-                        This is where my generalist approach really pays off.
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <Badge variant="outline" className="text-xs">LangChain</Badge>
-                        <Badge variant="outline" className="text-xs">LlamaIndex</Badge>
-                        <Badge variant="outline" className="text-xs">FastAPI</Badge>
-                        <Badge variant="outline" className="text-xs">Multi-Agent Systems</Badge>
-                      </div>
-                    </StudyGuideBox>
-                  </div>
-                </div>
+                </StudyGuideBox>
               </div>
             </div>
-          </div>
         </NotebookPaper>
 
         {/* Key Turning Points */}
@@ -162,8 +125,8 @@ export function TechJourneyClient() {
             <CardDescription>Key decisions and discoveries that shaped my path</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="space-y-6">
-              <div className="border-l-4 border-yellow-400 pl-4">
+              <div className="grid gap-px bg-border">
+              <div className="bg-background p-4">
                 <h4 className="font-semibold">The First Bug Fix</h4>
                 <p className="text-sm text-muted-foreground mb-2">When debugging became addictive</p>
                 <p className="text-sm">
@@ -171,8 +134,7 @@ export function TechJourneyClient() {
                   the satisfaction was incredible. That's when I knew I loved problem-solving and would chase that feeling forever.
                 </p>
               </div>
-
-              <div className="border-l-4 border-blue-400 pl-4">
+              <div className="bg-background p-4">
                 <h4 className="font-semibold">Discovering the Web</h4>
                 <p className="text-sm text-muted-foreground mb-2">Realizing software could reach millions</p>
                 <p className="text-sm">
@@ -181,8 +143,7 @@ export function TechJourneyClient() {
                   convinced me to make the transition.
                 </p>
               </div>
-
-              <div className="border-l-4 border-green-400 pl-4">
+              <div className="bg-background p-4">
                 <h4 className="font-semibold">The AI Awakening</h4>
                 <p className="text-sm text-muted-foreground mb-2">When GPT-3 changed everything</p>
                 <p className="text-sm">
@@ -190,8 +151,7 @@ export function TechJourneyClient() {
                   fundamental shift in how software could work. Started learning ML/AI seriously to stay ahead of the curve.
                 </p>
               </div>
-
-              <div className="border-l-4 border-purple-400 pl-4">
+              <div className="bg-background p-4">
                 <h4 className="font-semibold">Going Solo</h4>
                 <p className="text-sm text-muted-foreground mb-2">The leap into entrepreneurship</p>
                 <p className="text-sm">
@@ -199,7 +159,7 @@ export function TechJourneyClient() {
                   The freedom to choose projects, learn continuously, and directly impact clients' success is incredibly fulfilling.
                 </p>
               </div>
-            </div>
+              </div>
           </CardContent>
         </Card>
 
@@ -212,24 +172,24 @@ export function TechJourneyClient() {
           />
           <div className="space-y-6">
             <StudyGuideBox title="Hardware Thinking for Software Problems" type="tip">
-              <p className="text-slate-800 leading-relaxed">
-                My electronics background makes me think about <HandDrawnHighlight color="green">performance, power consumption, and constraints</HandDrawnHighlight>
+              <p className="text-foreground leading-relaxed">
+                My electronics background makes me think about <HandDrawnHighlight>performance, power consumption, and constraints</HandDrawnHighlight>
                 even in software. I naturally consider resource usage, optimization, and failure modes—habits that lead to
                 more robust applications.
               </p>
             </StudyGuideBox>
 
             <StudyGuideBox title="Infrastructure-Aware Development" type="note">
-              <p className="text-slate-800 leading-relaxed">
-                Having worked in data centers, I understand <HandDrawnHighlight color="blue">how code translates to actual hardware</HandDrawnHighlight>.
+              <p className="text-foreground leading-relaxed">
+                Having worked in data centers, I understand <HandDrawnHighlight>how code translates to actual hardware</HandDrawnHighlight>.
                 This makes me conscious of deployment environments, scaling bottlenecks, and operational concerns from
                 the early stages of development.
               </p>
             </StudyGuideBox>
 
             <StudyGuideBox title="Business-Driven Technology Choices" type="important">
-              <p className="text-slate-800 leading-relaxed">
-                My journey through different industries taught me that <HandDrawnHighlight color="pink">technology should serve business goals</HandDrawnHighlight>,
+              <p className="text-foreground leading-relaxed">
+                My journey through different industries taught me that <HandDrawnHighlight>technology should serve business goals</HandDrawnHighlight>,
                 not exist for its own sake. I choose tools and architectures based on actual needs, not just what's trendy
                 or technically interesting.
               </p>
@@ -258,7 +218,7 @@ export function TechJourneyClient() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Badge variant="secondary" className="border border-blue-200">
+                      <Badge variant="secondary">
                         {tech}
                       </Badge>
                     </motion.div>
@@ -276,7 +236,7 @@ export function TechJourneyClient() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 + index * 0.1 }}
                     >
-                      <Badge variant="secondary" className="border border-green-200">
+                      <Badge variant="secondary">
                         {tech}
                       </Badge>
                     </motion.div>
@@ -294,7 +254,7 @@ export function TechJourneyClient() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.6 + index * 0.1 }}
                     >
-                      <Badge variant="secondary" className="border border-purple-200">
+                      <Badge variant="secondary">
                         {tech}
                       </Badge>
                     </motion.div>
@@ -314,24 +274,24 @@ export function TechJourneyClient() {
           />
           <div className="space-y-6">
             <StudyGuideBox title="AI-First Development" type="tip">
-              <p className="text-slate-800 leading-relaxed">
-                I see a future where <HandDrawnHighlight color="green">AI augments every step of the development process</HandDrawnHighlight>.
+              <p className="text-foreground leading-relaxed">
+                I see a future where <HandDrawnHighlight>AI augments every step of the development process</HandDrawnHighlight>.
                 Not just code generation, but intelligent testing, automated optimization, and self-healing systems.
                 I'm positioning myself to be at the forefront of this transformation.
               </p>
             </StudyGuideBox>
 
             <StudyGuideBox title="Edge Computing & IoT Renaissance" type="note">
-              <p className="text-slate-800 leading-relaxed">
-                My electronics background makes me excited about <HandDrawnHighlight color="blue">edge computing and IoT</HandDrawnHighlight>.
+              <p className="text-foreground leading-relaxed">
+                My electronics background makes me excited about <HandDrawnHighlight>edge computing and IoT</HandDrawnHighlight>.
                 As AI models get smaller and hardware gets more powerful, there will be incredible opportunities
                 to build intelligent systems that work offline and respond instantly.
               </p>
             </StudyGuideBox>
 
             <StudyGuideBox title="Teaching & Community Building" type="important">
-              <p className="text-slate-800 leading-relaxed">
-                I want to help others make similar transitions. <HandDrawnHighlight color="pink">Creating educational content and mentoring</HandDrawnHighlight>
+              <p className="text-foreground leading-relaxed">
+                I want to help others make similar transitions. <HandDrawnHighlight>Creating educational content and mentoring</HandDrawnHighlight>
                 the next generation of developers who can bridge hardware and software, technical and business,
                 local and global perspectives.
               </p>

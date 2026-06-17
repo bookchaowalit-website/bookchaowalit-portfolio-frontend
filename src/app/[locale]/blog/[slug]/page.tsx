@@ -128,7 +128,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             ))}
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
             {post.title}
           </h1>
 

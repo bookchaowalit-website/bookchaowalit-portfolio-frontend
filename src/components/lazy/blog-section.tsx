@@ -12,11 +12,11 @@ export async function BlogSection() {
 
   return (
     <section className="space-y-8">
-      <h2 className="text-3xl font-bold text-center">{t('latestBlogTitle')}</h2>
+      <h2 className="text-3xl font-bold text-center text-balance">{t('latestBlogTitle')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post, index) => (
           <Link key={index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <Card className="hover:bg-secondary transition-colors cursor-pointer h-full">
               <CardHeader>
                 <CardTitle className="text-lg line-clamp-2">{post.title}</CardTitle>
                 <CardDescription className="line-clamp-2">{post.excerpt}</CardDescription>

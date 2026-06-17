@@ -1,35 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 // Hand-drawn highlight marker effect
 export function HandDrawnHighlight({
   children,
-  color = "yellow",
   className = ""
 }: {
   children: React.ReactNode;
-  color?: "yellow" | "pink" | "blue" | "green";
   className?: string;
 }) {
-  const colors = {
-    yellow: "bg-muted",
-    pink: "bg-muted",
-    blue: "bg-muted",
-    green: "bg-muted"
-  };
-
+  const reducedMotion = useReducedMotion();
   return (
     <span className={`relative ${className}`}>
       <motion.span
-        className={`absolute inset-0 ${colors[color]} -m-1 rounded-sm`}
+        className={`absolute inset-0 bg-muted -m-1`}
         style={{
           transform: "rotate(-1deg) skew(-2deg)",
           clipPath: "polygon(2% 10%, 98% 5%, 96% 90%, 4% 95%)"
         }}
-        initial={{ scaleX: 0, opacity: 0 }}
+        initial={reducedMotion ? false : { scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, ease: "easeInOut" }}
       />
       <span className="relative z-10">{children}</span>
     </span>
@@ -41,7 +34,7 @@ export function NotebookPaper({ children, className = "" }: { children: React.Re
   return (
     <div className={`relative ${className}`}>
       {/* Paper texture background */}
-      <div className="absolute inset-0 bg-background rounded-lg" />
+      <div className="absolute inset-0 bg-background" />
 
       {/* Notebook lines */}
       <div className="absolute inset-0 pointer-events-none">
@@ -51,7 +44,7 @@ export function NotebookPaper({ children, className = "" }: { children: React.Re
             className="absolute left-0 right-0 h-px bg-border"
             style={{
               top: `${(i + 1) * 5}%`,
-              transform: `rotate(${(Math.random() - 0.5) * 0.5}deg)`
+              transform: `rotate(${((i % 3) - 1) * 0.2}deg)`
             }}
           />
         ))}
@@ -76,33 +69,25 @@ export function NotebookPaper({ children, className = "" }: { children: React.Re
 // Hand-drawn sticky note
 export function StickyNote({
   children,
-  color = "yellow",
   rotation = 0,
   className = ""
 }: {
   children: React.ReactNode;
-  color?: "yellow" | "pink" | "blue" | "green";
   rotation?: number;
   className?: string;
 }) {
-  const colors = {
-    yellow: "bg-muted border-border",
-    pink: "bg-muted border-border",
-    blue: "bg-muted border-border",
-    green: "bg-muted border-border"
-  };
-
+  const reducedMotion = useReducedMotion();
   return (
     <motion.div
-      className={`${colors[color]} border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] ${className}`}
+      className={`bg-muted border-border border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] ${className}`}
       style={{
         transform: `rotate(${rotation}deg)`,
         clipPath: "polygon(0% 0%, 95% 0%, 100% 8%, 100% 100%, 5% 100%, 0% 92%)"
       }}
-      initial={{ scale: 0, rotate: rotation - 45 }}
+      initial={reducedMotion ? false : { scale: 0, rotate: rotation - 45 }}
       animate={{ scale: 1, rotate: rotation }}
-      transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      whileHover={{ scale: 1.05, rotate: rotation + 2 }}
+      transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
+      whileHover={reducedMotion ? undefined : { scale: 1.05, rotate: rotation + 2 }}
     >
       {children}
     </motion.div>
@@ -121,6 +106,7 @@ export function SketchArrow({
   className?: string;
   label?: string;
 }) {
+  const reducedMotion = useReducedMotion();
   const rotations = { right: 0, down: 90, left: 180, up: 270 };
 
   const paths = {
@@ -144,9 +130,9 @@ export function SketchArrow({
           strokeWidth="2.5"
           fill="none"
           strokeLinecap="round"
-          initial={{ pathLength: 0 }}
+          initial={reducedMotion ? false : { pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 1.5, ease: "easeInOut" }}
         />
         <motion.path
           d="M65 12l8 3-3 3"
@@ -154,17 +140,17 @@ export function SketchArrow({
           strokeWidth="2.5"
           fill="none"
           strokeLinecap="round"
-          initial={{ pathLength: 0 }}
+          initial={reducedMotion ? false : { pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 0.5, delay: 1.5, ease: "easeInOut" }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.5, ease: "easeInOut" }}
         />
       </motion.svg>
       {label && (
         <motion.span
           className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs font-[family-name:var(--font-doodle)] text-muted-foreground whitespace-nowrap"
-          initial={{ opacity: 0, y: 10 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 2 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 2 }}
         >
           {label}
         </motion.span>
@@ -183,15 +169,16 @@ export function SketchyFrame({
   className?: string;
   variant?: "dashed" | "double" | "wavy";
 }) {
+  const reducedMotion = useReducedMotion();
   return (
     <div className={`relative ${className}`}>
       {children}
       <motion.svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         fill="none"
-        initial={{ pathLength: 0 }}
+        initial={reducedMotion ? false : { pathLength: 0 }}
         animate={{ pathLength: 1 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 2, ease: "easeInOut" }}
       >
         {variant === "dashed" && (
           <motion.rect
@@ -236,6 +223,7 @@ export function HandDrawnBracket({
   height?: number;
   className?: string;
 }) {
+  const reducedMotion = useReducedMotion();
   const path = side === "left"
     ? `M15 5 Q5 5 5 ${height/2} Q5 ${height-5} 15 ${height-5}`
     : `M5 5 Q15 5 15 ${height/2} Q15 ${height-5} 5 ${height-5}`;
@@ -253,9 +241,9 @@ export function HandDrawnBracket({
         strokeWidth="3"
         fill="none"
         strokeLinecap="round"
-        initial={{ pathLength: 0 }}
+        initial={reducedMotion ? false : { pathLength: 0 }}
         animate={{ pathLength: 1 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 1, ease: "easeInOut" }}
       />
     </motion.svg>
   );

@@ -131,7 +131,7 @@ export default function MessengerBotPrivacyPage() {
                 <li>{t('user_rights.deletion')}</li>
               </ul>
               <p className="text-muted-foreground mt-4">
-                {t('user_rights.contact')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a>
+                {t('user_rights.contact')}: <a href="mailto:bookchaowalit@gmail.com" className="text-foreground hover:underline">bookchaowalit@gmail.com</a>
               </p>
             </CardContent>
           </Card>
@@ -161,8 +161,8 @@ export default function MessengerBotPrivacyPage() {
             <CardContent>
               <div className="text-muted-foreground">
                 <p>Bookchaowalit</p>
-                <p>{t('contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 dark:text-blue-400 hover:underline">https://bookchaowalit.com</a></p>
-                <p>{t('contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a></p>
+                <p>{t('contact.website')}: <a href="https://bookchaowalit.com" className="text-foreground hover:underline">https://bookchaowalit.com</a></p>
+                <p>{t('contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-foreground hover:underline">bookchaowalit@gmail.com</a></p>
               </div>
             </CardContent>
           </Card>

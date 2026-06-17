@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export function ContactClient() {
   const [formData, setFormData] = useState({
@@ -26,6 +26,21 @@ export function ContactClient() {
     message: string;
   }>({ type: null, message: '' });
 
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const errors = useMemo(() => {
+    const errs: Record<string, string> = {};
+    if (touched.name && formData.name.trim().length < 2) errs.name = 'Name must be at least 2 characters';
+    if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = 'Please enter a valid email address';
+    if (touched.subject && formData.subject.trim().length < 3) errs.subject = 'Subject must be at least 3 characters';
+    if (touched.message && formData.message.trim().length < 10) errs.message = 'Message must be at least 10 characters';
+    return errs;
+  }, [formData, touched]);
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -39,6 +54,12 @@ export function ContactClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Mark all fields as touched to show any remaining errors
+    setTouched({ name: true, email: true, subject: true, message: true });
+    if (Object.keys(errors).length > 0) {
+      setSubmitStatus({ type: 'error', message: 'Please fix the errors above before submitting.' });
+      return;
+    }
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
@@ -106,7 +127,7 @@ export function ContactClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg">
+          <div className="bg-muted border border-border p-4">
             <p className="text-foreground text-center leading-relaxed">
               Always interested in <strong>new opportunities</strong>, <strong>AI projects</strong>, and innovative collaborations from <strong>Bangkok, Thailand</strong>! 🇹🇭
             </p>
@@ -155,9 +176,12 @@ export function ContactClient() {
                   placeholder="Your full name"
                   value={formData.name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   required
                   disabled={isSubmitting}
+                  aria-invalid={!!errors.name}
                 />
+                {errors.name && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
@@ -169,9 +193,12 @@ export function ContactClient() {
                   placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   required
                   disabled={isSubmitting}
+                  aria-invalid={!!errors.email}
                 />
+                {errors.email && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
@@ -183,9 +210,12 @@ export function ContactClient() {
                   placeholder="What's this about?"
                   value={formData.subject}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   required
                   disabled={isSubmitting}
+                  aria-invalid={!!errors.subject}
                 />
+                {errors.subject && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.subject}</p>}
               </div>
 
               <div className="space-y-2">
@@ -197,9 +227,12 @@ export function ContactClient() {
                   className="min-h-32"
                   value={formData.message}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   required
                   disabled={isSubmitting}
+                  aria-invalid={!!errors.message}
                 />
+                {errors.message && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.message}</p>}
               </div>
 
               <Button type="submit" className="w-full" disabled={isSubmitting}>

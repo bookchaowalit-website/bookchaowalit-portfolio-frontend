@@ -22,7 +22,7 @@ export function ArtSkillsClient() {
     {
       title: 'UI/UX Design',
       icon: <Monitor className="w-6 h-6" />,
-      color: 'text-purple-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Figma', level: 95, experience: '2+ years', projects: 25 },
         { name: 'User Research', level: 85, experience: '2+ years', projects: 15 },
@@ -33,7 +33,7 @@ export function ArtSkillsClient() {
     {
       title: 'Visual Design',
       icon: <Palette className="w-6 h-6" />,
-      color: 'text-pink-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Brand Identity', level: 85, experience: '2+ years', projects: 12 },
         { name: 'Graphic Design', level: 90, experience: '3+ years', projects: 30 },
@@ -44,7 +44,7 @@ export function ArtSkillsClient() {
     {
       title: 'Digital Art',
       icon: <PenTool className="w-6 h-6" />,
-      color: 'text-blue-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Digital Illustration', level: 80, experience: '2+ years', projects: 15 },
         { name: 'Concept Art', level: 75, experience: '1+ year', projects: 8 },
@@ -55,7 +55,7 @@ export function ArtSkillsClient() {
     {
       title: 'Design Tools',
       icon: <Layers className="w-6 h-6" />,
-      color: 'text-green-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Adobe Creative Suite', level: 85, experience: '3+ years', projects: 35 },
         { name: 'Sketch', level: 80, experience: '1+ year', projects: 10 },
@@ -298,15 +298,15 @@ export function ArtSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote color="pink" rotation={-2}>
+            <StickyNote rotation={-2}>
               <div className="font-semibold text-sm">Research First</div>
               <div className="text-xs text-muted-foreground mt-1">Understand users & problems</div>
             </StickyNote>
-            <StickyNote color="blue" rotation={1}>
+            <StickyNote rotation={1}>
               <div className="font-semibold text-sm">Iterate Often</div>
               <div className="text-xs text-muted-foreground mt-1">Test & refine designs</div>
             </StickyNote>
-            <StickyNote color="green" rotation={-1}>
+            <StickyNote rotation={-1}>
               <div className="font-semibold text-sm">User Focus</div>
               <div className="text-xs text-muted-foreground mt-1">Design for real people</div>
             </StickyNote>

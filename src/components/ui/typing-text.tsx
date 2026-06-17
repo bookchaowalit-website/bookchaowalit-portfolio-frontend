@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 interface TypingTextProps {
   text: string;
@@ -22,6 +23,7 @@ export function TypingText({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     setIsMounted(true);
@@ -57,8 +59,8 @@ export function TypingText({
       {displayText}
       {!isComplete && (
         <motion.span
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+          animate={reducedMotion ? {} : { opacity: [1, 0, 1] }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
           className="inline-block"
         >
           |

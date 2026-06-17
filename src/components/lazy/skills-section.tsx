@@ -39,42 +39,36 @@ export function SkillsSection() {
       title: t('computerLanguageTitle'),
       type: "tip" as const,
       skills: t.raw('computerLanguageSkills'),
-      borderColor: "border-border",
       rotationClass: "rotate-1"
     },
     {
       title: t('libraryTitle'),
       type: "note" as const,
       skills: t.raw('librarySkills'),
-      borderColor: "border-border",
       rotationClass: "-rotate-1"
     },
     {
       title: t('frameworkTitle'),
       type: "important" as const,
       skills: t.raw('frameworkSkills'),
-      borderColor: "border-border",
       rotationClass: "rotate-0.5"
     },
     {
       title: t('databaseTitle'),
       type: "tip" as const,
       skills: t.raw('databaseSkills'),
-      borderColor: "border-orange-300",
       rotationClass: "-rotate-1"
     },
     {
       title: t('cloudTitle'),
       type: "note" as const,
       skills: t.raw('cloudSkills'),
-      borderColor: "border-cyan-300",
       rotationClass: "rotate-1"
     },
     {
       title: t('runtimeTitle'),
       type: "important" as const,
       skills: t.raw('runtimeSkills'),
-      borderColor: "border-border",
       rotationClass: "-rotate-0.5"
     }
   ];
@@ -118,7 +112,7 @@ export function SkillsSection() {
                     >
                       <Badge
                         variant="secondary"
-                        className={`text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border ${category.borderColor} transition-all duration-200 group-hover:shadow-sm group-hover:border-opacity-80`}
+                        className={`text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-border transition-all duration-200 group-hover:shadow-sm group-hover:border-opacity-80`}
                       >
                         {skill}
                       </Badge>

@@ -51,7 +51,7 @@ export function AboutSection() {
                 </Badge>
               </div>
               
-              <p className="text-center text-muted-foreground max-w-3xl mx-auto text-lg font-[family-name:var(--font-doodle)] leading-relaxed">
+              <p className="text-center text-muted-foreground max-w-3xl mx-auto text-lg font-[family-name:var(--font-doodle)] leading-relaxed text-pretty">
                 {t('aboutDescription')}
               </p>
               

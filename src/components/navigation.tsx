@@ -14,8 +14,11 @@ import { cn } from "@/lib/utils";
 import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
 import { NavigationBrand } from './navigation-brand';
+import { ThemeToggle } from './theme-toggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { CommandPalette } from './command-palette';
+import { HelpDialog } from './help-dialog';
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -112,6 +115,9 @@ export function Navigation() {
           </NavigationMenu>
 
           <div className="flex items-center gap-2">
+            <HelpDialog />
+            <CommandPalette />
+            <ThemeToggle />
             <LanguageSwitcher />
             <Button
               variant="outline"
@@ -129,7 +135,7 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div id="mobile-navigation" className="md:hidden border-t dark:border-gray-700 bg-background dark:bg-background">
+          <div id="mobile-navigation" className="md:hidden border-t bg-background">
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <Link
@@ -137,7 +143,7 @@ export function Navigation() {
                   href={item.href}
                   prefetch={true}
                   className={cn(
-                    "block px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md",
+                    "block px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     pathname === item.href
                       ? "text-primary bg-primary/10"
                       : "text-muted-foreground hover:bg-muted"
@@ -159,7 +165,7 @@ export function Navigation() {
                     href={subpage.href}
                     prefetch={true}
                     className={cn(
-                      "block px-6 py-2 text-sm transition-colors hover:text-primary rounded-md",
+                      "block px-6 py-2 text-sm transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       pathname === subpage.href
                         ? "text-primary bg-primary/10"
                         : "text-muted-foreground hover:bg-muted"

@@ -1,247 +1,500 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
-import { projects } from "@/data/projects";
-import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import {
+  allProjects,
+  categoryMeta,
+  type ProjectCategory,
+  type AppProject,
+  type ProjectStatus,
+} from "@/data/app-projects";
+import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+import {
+  ExternalLink,
+  Search,
+  ArrowUpRight,
+  ChevronDown,
+  Star,
+  Github,
+} from "lucide-react";
 
-export function ProjectsClient() {
-  const featuredProjects = projects.filter(project => project.featured);
-  const otherProjects = projects.filter(project => !project.featured);
+const categories: ("all" | ProjectCategory)[] = [
+  "all",
+  "tools",
+  "productivity",
+  "content",
+  "creative",
+  "business",
+  "social",
+  "ai-data",
+  "misc",
+  "client-work",
+];
+
+const PAGE_SIZE = 24;
+
+const statusConfig: Record<
+  ProjectStatus,
+  { label: string; dot: string; text: string }
+> = {
+  live: { label: "Live", dot: "bg-foreground", text: "text-foreground" },
+  wip: { label: "WIP", dot: "bg-muted-foreground", text: "text-muted-foreground" },
+  archived: { label: "Archived", dot: "bg-muted-foreground/50", text: "text-muted-foreground/50" },
+};
+
+function getFaviconUrl(projectUrl: string): string {
+  try {
+    const url = new URL(projectUrl);
+    return `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=32`;
+  } catch {
+    return "";
+  }
+}
+
+function ProjectCard({
+  project,
+  stars,
+  starsError,
+  showScreenshot = false,
+}: {
+  project: AppProject;
+  stars: number;
+  starsError?: boolean;
+  showScreenshot?: boolean;
+}) {
+  const [imgError, setImgError] = useState(false);
+  const [screenshotError, setScreenshotError] = useState(false);
+  const favicon = getFaviconUrl(project.url);
+  const status = statusConfig[project.status];
+  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <motion.div 
-        className="text-center space-y-8 mb-12"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <MixedTypographyTitle 
-            words={[
-              { text: "My", style: "cursive", size: "xl" },
-              { text: "Amazing", style: "bubble", size: "xl" },
-              { text: "Projects", style: "filled", size: "xl" },
-              { text: "✨", style: "block", size: "lg" }
-            ]}
-            className="mb-6"
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block bg-background p-6 transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      {showScreenshot && (
+        <div className="mb-4 aspect-video bg-secondary overflow-hidden">
+          {!screenshotError ? (
+            <img
+              src={screenshotUrl}
+              alt={`${project.name} screenshot`}
+              className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity"
+              onError={() => setScreenshotError(true)}
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
+              Screenshot unavailable
+            </div>
+          )}
+        </div>
+      )}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-center gap-2 min-w-0">
+          {favicon && !imgError ? (
+            <img
+              src={favicon}
+              alt=""
+              width={16}
+              height={16}
+              className="shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"
+              onError={() => setImgError(true)}
+              loading="lazy"
+            />
+          ) : null}
+          <h3 className="text-sm font-semibold leading-tight group-hover:underline truncate">
+            {project.name}
+          </h3>
+        </div>
+        <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
+      </div>
+      <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+        {project.description}
+      </p>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
+            {categoryMeta[project.category].label}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className={`size-1.5 rounded-full ${status.dot}`} />
+            <span className={`text-xs font-mono ${status.text}`}>
+              {status.label}
+            </span>
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          {stars > 0 && (
+            <span className="flex items-center gap-0.5 text-xs font-mono text-muted-foreground/60">
+              <Star className="size-2.5" />
+              {stars}
+            </span>
+          )}
+          {starsError && stars === 0 && project.githubUrl && (
+            <span className="text-xs font-mono text-muted-foreground/40" title="Stars unavailable">
+              —
+            </span>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="text-muted-foreground/40 hover:text-foreground transition-colors"
+            >
+              <Github className="size-3" />
+            </a>
+          )}
+        </div>
+      </div>
+    </a>
+  );
+}
+
+export function ProjectsClient() {
+  const [activeCategory, setActiveCategory] = useState<"all" | ProjectCategory>("all");
+  const [activeStatus, setActiveStatus] = useState<"all" | ProjectStatus>("all");
+  const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [starsMap, setStarsMap] = useState<Record<string, number>>({});
+  const [totalStars, setTotalStars] = useState(0);
+  const [starsError, setStarsError] = useState(false);
+  const [categoriesExpanded, setCategoriesExpanded] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // Fetch GitHub stars
+  useEffect(() => {
+    fetch("/api/github-stars")
+      .then((r) => r.json())
+      .then((data: { slug: string; stars: number }[]) => {
+        const map: Record<string, number> = {};
+        let total = 0;
+        for (const d of data) {
+          map[d.slug] = d.stars;
+          total += d.stars;
+        }
+        setStarsMap(map);
+        setTotalStars(total);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch GitHub stars:', err);
+        setStarsError(true);
+      });
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // "/" to focus search
+      if (e.key === "/" && document.activeElement !== searchRef.current) {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+      // Escape to clear search
+      if (e.key === "Escape" && document.activeElement === searchRef.current) {
+        setSearch("");
+        setVisibleCount(PAGE_SIZE);
+        searchRef.current?.blur();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Featured projects
+  const featuredProjects = useMemo(
+    () => allProjects.filter((p) => p.featured),
+    []
+  );
+
+  // Stats
+  const stats = useMemo(() => {
+    const live = allProjects.filter((p) => p.status === "live").length;
+    const wip = allProjects.filter((p) => p.status === "wip").length;
+    const archived = allProjects.filter((p) => p.status === "archived").length;
+    return { live, wip, archived };
+  }, []);
+
+  // Filtered projects
+  const filtered = useMemo(() => {
+    let list = allProjects;
+    if (activeCategory !== "all") {
+      list = list.filter((p) => p.category === activeCategory);
+    }
+    if (activeStatus !== "all") {
+      list = list.filter((p) => p.status === activeStatus);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.tech.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }, [activeCategory, activeStatus, search]);
+
+  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+  const hasMore = visibleCount < filtered.length;
+
+  const countByCategory = useMemo(() => {
+    const map: Record<string, number> = { all: allProjects.length };
+    for (const p of allProjects) {
+      map[p.category] = (map[p.category] || 0) + 1;
+    }
+    return map;
+  }, []);
+
+  const countByStatus = useMemo(() => {
+    const map: Record<string, number> = { all: allProjects.length };
+    for (const p of allProjects) {
+      map[p.status] = (map[p.status] || 0) + 1;
+    }
+    return map;
+  }, []);
+
+  const handleCategoryChange = useCallback((cat: "all" | ProjectCategory) => {
+    setActiveCategory(cat);
+    setVisibleCount(PAGE_SIZE);
+  }, []);
+
+  const handleStatusChange = useCallback((status: "all" | ProjectStatus) => {
+    setActiveStatus(status);
+    setVisibleCount(PAGE_SIZE);
+  }, []);
+
+  const handleSearchChange = useCallback((value: string) => {
+    setSearch(value);
+    setVisibleCount(PAGE_SIZE);
+  }, []);
+
+  const showFeatured = activeCategory === "all" && activeStatus === "all" && !search.trim();
+
+  return (
+    <div className="container mx-auto px-4 py-12 max-w-6xl">
+      {/* Header */}
+      <div className="text-center space-y-4 mb-8">
+        <MixedTypographyTitle
+          words={[
+            { text: "All", style: "cursive", size: "xl" },
+            { text: "Projects", style: "filled", size: "xl" },
+          ]}
+          className="mb-4"
+        />
+        <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
+          {allProjects.length} micro-frontends deployed on Vercel, organized by purpose.
+        </p>
+      </div>
+
+      {/* Stats Banner — uses the same gap-px grid language */}
+      <div className="grid grid-cols-5 max-w-lg mx-auto mb-10 gap-px bg-border">
+        <div className="bg-background flex flex-col items-center py-3 px-2">
+          <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Total</span>
+        </div>
+        <div className="bg-background flex flex-col items-center py-3 px-2">
+          <span className="flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-foreground" />
+            <span className="text-lg font-bold tabular-nums">{stats.live}</span>
+          </span>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Live</span>
+        </div>
+        <div className="bg-background flex flex-col items-center py-3 px-2">
+          <span className="flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-muted-foreground" />
+            <span className="text-lg font-bold tabular-nums">{stats.wip}</span>
+          </span>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">WIP</span>
+        </div>
+        <div className="bg-background flex flex-col items-center py-3 px-2">
+          <span className="flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-muted-foreground/50" />
+            <span className="text-lg font-bold tabular-nums">{stats.archived}</span>
+          </span>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Archived</span>
+        </div>
+        <div className="bg-background flex flex-col items-center py-3 px-2">
+          <span className="flex items-center gap-1.5">
+            <Star className="size-3.5 text-muted-foreground" />
+            <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
+          </span>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Stars</span>
+        </div>
+      </div>
+
+      {/* Search */}
+      <div className="max-w-md mx-auto mb-6">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <input
+            ref={searchRef}
+            type="text"
+            placeholder="Search projects... (press / to focus)"
+            value={search}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            className="w-full pl-10 pr-4 py-2.5 bg-secondary text-foreground placeholder:text-muted-foreground text-sm outline-none focus:ring-2 focus:ring-ring"
           />
-        </motion.div>
-        
-        <motion.div
-          className="max-w-lg mx-auto"
-          initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 1 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "backOut" }}
-        >
-          <div className="bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-r-lg">
-            <p className="text-muted-foreground text-center">
-              A showcase of different technologies and creative approaches to problem-solving 🚀
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
+
+      {/* Status filters */}
+      <div className="flex flex-wrap justify-center gap-px bg-border mb-4 max-w-md mx-auto">
+        {(["all", "live", "wip", "archived"] as const).map((status) => {
+          const isActive = activeStatus === status;
+          const label = status === "all" ? "All" : statusConfig[status].label;
+          const count = countByStatus[status] || 0;
+          return (
+            <button
+              key={status}
+              onClick={() => handleStatusChange(status)}
+              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                isActive
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+              }`}
+            >
+              {label}
+              <span className="opacity-50 tabular-nums">{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Category filters — progressive disclosure: show top 4, expand on demand */}
+      <div className="flex flex-wrap justify-center gap-px bg-border mb-12 max-w-2xl mx-auto">
+        {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
+          const isActive = activeCategory === cat;
+          const label = cat === "all" ? "All" : categoryMeta[cat].label;
+          const count = countByCategory[cat] || 0;
+          return (
+            <button
+              key={cat}
+              onClick={() => handleCategoryChange(cat)}
+              className={`px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                isActive
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+              }`}
+            >
+              {label}
+              <span className="ml-1 opacity-50 tabular-nums">{count}</span>
+            </button>
+          );
+        })}
+        {categories.length > 4 && (
+          <button
+            onClick={() => setCategoriesExpanded((v) => !v)}
+            className="px-3 py-2 text-xs font-medium bg-background text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {categoriesExpanded ? "Less" : `+${categories.length - 4} more`}
+          </button>
+        )}
+      </div>
 
       {/* Featured Projects */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="mb-16"
-      >
-        <NotebookSectionHeader 
-          title="Featured Projects" 
-          subtitle="My best work that I'm most proud of"
-          className="mb-8"
-        />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 1 + index * 0.2,
-                ease: "backOut"
-              }}
-            >
-              <SketchyFrame variant="double" className="h-full">
-                <NotebookPaper className="p-6 h-full">
-                  <div className="flex flex-col h-full">
-                    <div className="space-y-4 flex-1">
-                      <div className="flex items-center justify-between">
-                        <Badge variant="secondary" className="bg-orange-100 text-foreground border-orange-300">
-                          Featured
-                        </Badge>
-                        <div className="flex gap-2">
-                          {project.demoUrl && (
-                            <Button size="sm" asChild>
-                              <Link href={project.demoUrl} target="_blank">
-                                Demo
-                              </Link>
-                            </Button>
-                          )}
-                          {project.githubUrl && (
-                            <Button variant="outline" size="sm" asChild>
-                              <Link href={project.githubUrl} target="_blank">
-                                Code
-                              </Link>
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {Array.isArray(project.tech) && project.tech.map((tech) => (
-                          <Badge key={tech} variant="outline" className="font-[family-name:var(--font-doodle)]">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                      
-                      {project.highlights && project.highlights.length > 0 && (
-                        <div className="space-y-2">
-                          <h4 className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground uppercase text-sm tracking-wide">
-                            Highlights
-                          </h4>
-                          <ul className="space-y-1">
-                            {project.highlights.map((highlight, idx) => (
-                              <li key={idx} className="text-sm text-muted-foreground flex items-start">
-                                <span className="text-primary mr-2">•</span>
-                                {highlight}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </NotebookPaper>
-              </SketchyFrame>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Other Projects */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.4 }}
-        className="mb-16"
-      >
-        <NotebookSectionHeader 
-          title="Other Projects" 
-          subtitle="More cool stuff I've built"
-          className="mb-8"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.4, 
-                delay: 1.6 + index * 0.1 
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                rotate: 1,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{project.title}</CardTitle>
-                    <div className="flex gap-1">
-                      {project.demoUrl && (
-                        <Button size="sm" variant="outline" asChild>
-                          <Link href={project.demoUrl} target="_blank">
-                            Demo
-                          </Link>
-                        </Button>
-                      )}
-                      {project.githubUrl && (
-                        <Button size="sm" variant="ghost" asChild>
-                          <Link href={project.githubUrl} target="_blank">
-                            Code
-                          </Link>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-1">
-                    {Array.isArray(project.tech) && project.tech.slice(0, 3).map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                    {Array.isArray(project.tech) && project.tech.length > 3 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{project.tech.length - 3}
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Call to Action */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 2 }}
-        className="text-center space-y-6"
-      >
-        <NotebookPaper className="p-8 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-            Interested in Working Together?
+      {showFeatured && (
+        <div className="mb-12">
+          <h2 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
+            <Star className="size-3.5 text-foreground" />
+            Featured
           </h2>
-          <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
-            I'm always excited to work on new projects and collaborate with other developers. 
-            Let's discuss how we can bring your ideas to life!
-          </p>
-          <div className="flex gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" asChild>
-                <Link href="/contact">Get In Touch</Link>
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="outline" size="lg" asChild>
-                <Link href="/about">Learn More About Me</Link>
-              </Button>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+            {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                stars={starsMap[project.slug] ?? 0}
+                starsError={starsError}
+                showScreenshot={true}
+              />
+            ))}
           </div>
-        </NotebookPaper>
-      </motion.div>
+        </div>
+      )}
+
+      {/* Results count */}
+      <div className="mb-6">
+        <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+          {filtered.length} project{filtered.length !== 1 ? "s" : ""}
+          {activeCategory !== "all" && ` in ${categoryMeta[activeCategory].label}`}
+          {activeStatus !== "all" && ` · ${statusConfig[activeStatus].label}`}
+          {search && ` matching "${search}"`}
+          {hasMore && ` · showing ${visible.length}`}
+        </p>
+      </div>
+
+      {/* Project grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+        {visible.map((project) => (
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            stars={starsMap[project.slug] ?? 0}
+            starsError={starsError}
+          />
+        ))}
+      </div>
+
+      {/* Show more */}
+      {hasMore && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <ChevronDown className="size-4" />
+            Show more ({filtered.length - visible.length} remaining)
+          </button>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {filtered.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-muted-foreground text-sm">No projects found.</p>
+          <button
+            onClick={() => {
+              setActiveCategory("all");
+              setActiveStatus("all");
+              setSearch("");
+            }}
+            className="mt-4 text-sm underline underline-offset-4 text-foreground hover:text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
+
+      {/* Footer CTA */}
+      <div className="text-center mt-16 space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Every project is a standalone Next.js app deployed independently on Vercel.
+        </p>
+        <div className="flex gap-4 justify-center">
+          <Link
+            href="/contact"
+            className="inline-flex items-center px-6 py-2.5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Get in touch
+          </Link>
+          <a
+            href="https://github.com/bookchaowalit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
+          >
+            <ExternalLink className="size-3.5" />
+            GitHub
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

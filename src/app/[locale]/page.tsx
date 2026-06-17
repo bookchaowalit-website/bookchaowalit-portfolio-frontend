@@ -2,6 +2,7 @@ import { Metadata } from 'next';
           import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/lazy/hero-section';
 import GitHubActivity from '@/components/github-activity';
+import { SectionNav } from '@/components/section-nav';
 
 // Lazy load below-the-fold components
 const SkillsSection = dynamic(() => import('@/components/lazy/skills-section').then(mod => ({ default: mod.SkillsSection })), {
@@ -92,24 +93,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       creator: '@bookchaowalit',
       images: ['/og-home.jpg']
-    },
-    verification: {
-      google: 'your-google-verification-code'
     }
   };
 }
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8 space-y-16 md:space-y-20 lg:space-y-24">
-      <HeroSection />
-      <SkillsSection />
-      <AboutSection />
-      <FeaturedProjects />
-      <GitHubActivity />
-      <BusinessSection />
-      <BlogSection />
-      <ContactSection />
-    </div>
+    <>
+      <SectionNav />
+      <div className="container mx-auto px-4 py-8 space-y-16 md:space-y-20 lg:space-y-24">
+      <div id="hero">
+        <HeroSection />
+      </div>
+      <div id="skills">
+        <SkillsSection />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="projects">
+        <FeaturedProjects />
+      </div>
+      <div id="activity">
+        <GitHubActivity />
+      </div>
+      <div id="business">
+        <BusinessSection />
+      </div>
+      <div id="blog">
+        <BlogSection />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
+      </div>
+    </>
   );
 }

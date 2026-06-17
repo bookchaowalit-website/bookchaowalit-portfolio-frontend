@@ -87,10 +87,10 @@ export default function PrivacyPage() {
             <div>
               <h3 className="text-lg font-semibold mb-2">{t('general.contact.title')}</h3>
               <p className="text-muted-foreground">
-                {t('general.contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">bookchaowalit@gmail.com</a>
+                {t('general.contact.email')}: <a href="mailto:bookchaowalit@gmail.com" className="text-foreground hover:underline">bookchaowalit@gmail.com</a>
               </p>
               <p className="text-muted-foreground">
-                {t('general.contact.website')}: <a href="https://bookchaowalit.com" className="text-blue-600 dark:text-blue-400 hover:underline">https://bookchaowalit.com</a>
+                {t('general.contact.website')}: <a href="https://bookchaowalit.com" className="text-foreground hover:underline">https://bookchaowalit.com</a>
               </p>
             </div>
           </CardContent>

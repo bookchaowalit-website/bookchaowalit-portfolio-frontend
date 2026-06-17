@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reducedMotion = useReducedMotion();
 
   const variants = {
     hidden: {
@@ -36,9 +38,9 @@ export function ScrollReveal({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView || reducedMotion ? "visible" : "hidden"}
       variants={variants}
-      transition={{ 
+      transition={reducedMotion ? { duration: 0 } : { 
         duration: 0.6, 
         delay,
         ease: "easeOut"

@@ -14,7 +14,7 @@ export function TechSkillsClient() {
     {
       title: 'Computer Language',
       icon: <Globe className="w-6 h-6" />,
-      color: 'text-blue-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Python', level: 95, experience: '3+ years', projects: 20 },
         { name: 'C#', level: 85, experience: '2+ years', projects: 8 },
@@ -32,7 +32,7 @@ export function TechSkillsClient() {
     {
       title: 'Library',
       icon: <Server className="w-6 h-6" />,
-      color: 'text-green-600',
+      color: 'text-foreground',
       skills: [
         { name: 'jQuery', level: 90, experience: '3+ years', projects: 15 },
         { name: 'React', level: 95, experience: '3+ years', projects: 20 },
@@ -47,7 +47,7 @@ export function TechSkillsClient() {
     {
       title: 'Framework',
       icon: <Cpu className="w-6 h-6" />,
-      color: 'text-purple-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Express.js', level: 85, experience: '2+ years', projects: 8 },
         { name: 'FastAPI', level: 90, experience: '2+ years', projects: 10 },
@@ -67,7 +67,7 @@ export function TechSkillsClient() {
     {
       title: 'Database',
       icon: <Settings className="w-6 h-6" />,
-      color: 'text-orange-600',
+      color: 'text-foreground',
       skills: [
         { name: 'SQLite', level: 85, experience: '2+ years', projects: 8 },
         { name: 'Postgresql', level: 90, experience: '3+ years', projects: 12 },
@@ -80,7 +80,7 @@ export function TechSkillsClient() {
     {
       title: 'Cloud',
       icon: <Globe className="w-6 h-6" />,
-      color: 'text-cyan-600',
+      color: 'text-foreground',
       skills: [
         { name: 'DigitalOcean', level: 85, experience: '2+ years', projects: 8 },
         { name: 'GCP', level: 80, experience: '1+ year', projects: 5 },
@@ -93,7 +93,7 @@ export function TechSkillsClient() {
     {
       title: 'Runtime',
       icon: <Server className="w-6 h-6" />,
-      color: 'text-red-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Nodejs', level: 90, experience: '3+ years', projects: 18 }
       ]
@@ -197,9 +197,9 @@ export function TechSkillsClient() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div className="w-full bg-muted rounded-full h-2">
                             <motion.div
-                              className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full"
+                              className="bg-foreground h-2 rounded-full"
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.level}%` }}
                               transition={{ duration: 1, delay: skillIndex * 0.1 }}
@@ -282,15 +282,15 @@ export function TechSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote color="blue" rotation={-2}>
+            <StickyNote rotation={-2}>
               <div className="font-semibold text-sm">Google Cloud</div>
               <div className="text-xs text-muted-foreground mt-1">Secure BigLake Data</div>
             </StickyNote>
-            <StickyNote color="yellow" rotation={1}>
+            <StickyNote rotation={1}>
               <div className="font-semibold text-sm">Meta</div>
               <div className="text-xs text-muted-foreground mt-1">Graph API Integration</div>
             </StickyNote>
-            <StickyNote color="pink" rotation={-1}>
+            <StickyNote rotation={-1}>
               <div className="font-semibold text-sm">Ongoing</div>
               <div className="text-xs text-muted-foreground mt-1">AI & ML Courses</div>
             </StickyNote>

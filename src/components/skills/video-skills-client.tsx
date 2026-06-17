@@ -14,7 +14,7 @@ export function VideoSkillsClient() {
     {
       title: 'Video Editing',
       icon: <Scissors className="w-6 h-6" />,
-      color: 'text-red-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Adobe Premiere Pro', level: 90, experience: '3+ years', projects: 45 },
         { name: 'DaVinci Resolve', level: 85, experience: '2+ years', projects: 30 },
@@ -25,7 +25,7 @@ export function VideoSkillsClient() {
     {
       title: 'Motion Graphics',
       icon: <Zap className="w-6 h-6" />,
-      color: 'text-purple-600',
+      color: 'text-foreground',
       skills: [
         { name: 'After Effects', level: 85, experience: '3+ years', projects: 40 },
         { name: 'Cinema 4D', level: 75, experience: '1+ year', projects: 15 },
@@ -36,7 +36,7 @@ export function VideoSkillsClient() {
     {
       title: 'Video Production',
       icon: <Camera className="w-6 h-6" />,
-      color: 'text-blue-600',
+      color: 'text-foreground',
       skills: [
         { name: 'Camera Operation', level: 80, experience: '2+ years', projects: 25 },
         { name: 'Lighting Setup', level: 75, experience: '2+ years', projects: 20 },
@@ -47,7 +47,7 @@ export function VideoSkillsClient() {
     {
       title: 'Content Creation',
       icon: <Play className="w-6 h-6" />,
-      color: 'text-green-600',
+      color: 'text-foreground',
       skills: [
         { name: 'YouTube Production', level: 88, experience: '3+ years', projects: 50 },
         { name: 'Social Media Content', level: 90, experience: '3+ years', projects: 60 },
@@ -290,15 +290,15 @@ export function VideoSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote color="pink" rotation={-2}>
+            <StickyNote rotation={-2}>
               <div className="font-semibold text-sm">Pre-Production</div>
               <div className="text-xs text-muted-foreground mt-1">Planning & storyboarding</div>
             </StickyNote>
-            <StickyNote color="blue" rotation={1}>
+            <StickyNote rotation={1}>
               <div className="font-semibold text-sm">Production</div>
               <div className="text-xs text-muted-foreground mt-1">Shooting & recording</div>
             </StickyNote>
-            <StickyNote color="green" rotation={-1}>
+            <StickyNote rotation={-1}>
               <div className="font-semibold text-sm">Post-Production</div>
               <div className="text-xs text-muted-foreground mt-1">Editing & finishing</div>
             </StickyNote>

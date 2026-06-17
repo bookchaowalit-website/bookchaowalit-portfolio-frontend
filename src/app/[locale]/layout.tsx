@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Sarabun, Itim } from "next/font/google";
+import { Geist, Geist_Mono, Sarabun, Kalam } from "next/font/google";
 import dynamic from "next/dynamic";
 import "../globals.css";
 import { Navigation } from "@/components/navigation";
@@ -10,10 +10,6 @@ import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { ErrorBoundary } from '@/components/error-boundary';
-
-const FloatingDoodles = dynamic(() => import("@/components/ui/floating-doodles").then(mod => ({ default: mod.FloatingDoodles })), {
-  loading: () => null
-});
 
 const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
   loading: () => null
@@ -47,13 +43,12 @@ const sarabun = Sarabun({
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
-const itim = Itim({
-  variable: "--font-itim",
-  subsets: ["latin", "thai"],
-  weight: "400",
+const kalam = Kalam({
+  variable: "--font-kalam",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
   display: "swap",
   preload: false,
-  fallback: ["Sarabun", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -137,7 +132,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sarabun.variable} ${itim.variable} antialiased ${isThai ? 'font-thai' : ''}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sarabun.variable} ${kalam.variable} antialiased ${isThai ? 'font-thai' : ''}`}
       >
         <NextIntlClientProvider messages={messages}>
           <a
@@ -146,7 +141,6 @@ export default async function LocaleLayout({
           >
             Skip to content
           </a>
-          <FloatingDoodles />
           <Navigation />
           <main id="main-content" className="min-h-screen relative z-10">
             <ErrorBoundary>

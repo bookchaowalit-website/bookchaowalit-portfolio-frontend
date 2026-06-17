@@ -44,7 +44,7 @@ export function BusinessSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg max-w-2xl mx-auto">
+          <div className="bg-muted border border-border p-4 max-w-2xl mx-auto">
             <p className="text-muted-foreground text-center">
               As a <strong>solopreneur</strong>, I build businesses that combine technology with genuine value creation 🚀
             </p>

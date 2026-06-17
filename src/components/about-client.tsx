@@ -36,8 +36,8 @@ export function AboutClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "About", style: "cursive", color: "text-purple-700", size: "xl" },
-              { text: "Me", style: "bubble", color: "text-blue-600", size: "xl" },
+              { text: "About", style: "cursive", size: "xl" },
+              { text: "Me", style: "bubble", size: "xl" },
               { text: "👨‍💻", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -50,7 +50,7 @@ export function AboutClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
-          <StickyNote color="green" rotation={1} className="text-center">
+          <StickyNote rotation={1} className="text-center">
             <p className="text-sm text-foreground">
               <strong>Tech Generalist</strong> with 5+ years of experience in{" "}
               <strong>full-stack development, AI integration</strong>{" "}
@@ -111,7 +111,7 @@ export function AboutClient() {
                   >
                     <Badge
                       variant="secondary"
-                      className="font-[family-name:var(--font-doodle)] border border-green-300"
+                      className="font-[family-name:var(--font-doodle)] border border-border"
                       style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.5}deg)` }}
                     >
                       {skill}
@@ -135,7 +135,7 @@ export function AboutClient() {
                   >
                     <Badge
                       variant="secondary"
-                      className="font-[family-name:var(--font-doodle)] border border-blue-300"
+                      className="font-[family-name:var(--font-doodle)] border border-border"
                       style={{ transform: `rotate(${(index % 2 === 0 ? -1 : 1) * 0.5}deg)` }}
                     >
                       {skill}
@@ -159,7 +159,7 @@ export function AboutClient() {
                   >
                     <Badge
                       variant="secondary"
-                      className="font-[family-name:var(--font-doodle)] border border-red-300"
+                      className="font-[family-name:var(--font-doodle)] border border-border"
                       style={{ transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.3}deg)` }}
                     >
                       {skill}

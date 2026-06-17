@@ -79,7 +79,7 @@ export default function GitHubActivity() {
       <ul className="mt-3 space-y-3">
         {data.repos.map((r) => (
           <li key={r.url} className="flex flex-col">
-            <a className="text-sm font-medium text-sky-600 dark:text-sky-400 hover:underline" href={r.url} target="_blank" rel="noreferrer">
+            <a className="text-sm font-medium text-foreground hover:underline" href={r.url} target="_blank" rel="noreferrer">
               {r.name}
             </a>
             <div className="text-xs text-muted-foreground">

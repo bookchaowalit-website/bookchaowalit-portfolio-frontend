@@ -1,7 +1,7 @@
 "use client";
 
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 interface Props {
   children: ReactNode;
@@ -40,17 +40,38 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div
           role="alert"
-          className="flex flex-col items-center justify-center min-h-[200px] p-8 rounded-lg border bg-background dark:bg-card text-center space-y-4"
+          className="min-h-[300px] flex items-center justify-center p-8"
         >
-          <h2 className="text-lg font-semibold text-foreground">
-            Something went wrong
-          </h2>
-          <p className="text-sm text-muted-foreground max-w-md">
-            {this.state.error?.message || "An unexpected error occurred."}
-          </p>
-          <Button variant="outline" onClick={this.handleReset}>
-            Try again
-          </Button>
+          <motion.div
+            className="relative bg-muted border border-border p-6 max-w-md text-center space-y-4"
+            style={{
+              clipPath: "polygon(0% 0%, 95% 0%, 100% 5%, 100% 100%, 5% 100%, 0% 95%)"
+            }}
+            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+            animate={{ opacity: 1, scale: 1, rotate: -0.5 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+          >
+            {/* Notebook margin line */}
+            <div className="absolute left-10 top-0 bottom-0 w-px bg-border/60" />
+
+            <div className="relative">
+              <p className="text-4xl font-[family-name:var(--font-doodle)] text-muted-foreground mb-2">
+                oops!
+              </p>
+              <h2 className="text-lg font-[family-name:var(--font-comic)] font-bold text-foreground">
+                Something went wrong ✏️
+              </h2>
+              <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mt-2">
+                {this.state.error?.message || "An unexpected error occurred."}
+              </p>
+              <button
+                onClick={this.handleReset}
+                className="mt-4 px-4 py-2 border border-border bg-background hover:bg-muted font-[family-name:var(--font-doodle)] text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                try again →
+              </button>
+            </div>
+          </motion.div>
         </div>
       );
     }

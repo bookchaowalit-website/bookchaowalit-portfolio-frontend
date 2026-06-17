@@ -74,8 +74,18 @@ export function HeroSection() {
             />
           </div>
 
+          {/* Concrete value prop — immediately communicates what I do */}
+          <motion.p
+            className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto text-balance font-[family-name:var(--font-sarabun)]"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            {t('heroValueProp')}
+          </motion.p>
+
           <div className="flex justify-center">
-            <div className="bg-muted border-l-4 border-border p-4 rounded-r-lg max-w-md">
+            <div className="bg-muted border border-border p-4 max-w-md">
               <p className="text-muted-foreground text-center leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('heroSubtitle') }} />
             </div>
           </div>

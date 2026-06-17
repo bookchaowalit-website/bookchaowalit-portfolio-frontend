@@ -38,11 +38,11 @@ export function FitnessJourneyClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <StickyNote color="blue" rotation={-1} className="text-center">
+          <StickyNote rotation={-1} className="text-center">
             <p className="text-sm text-foreground">
-              How <HandDrawnHighlight color="green">fitness principles</HandDrawnHighlight> shape my approach to{" "}
-              <HandDrawnHighlight color="yellow">problem-solving</HandDrawnHighlight> and{" "}
-              <HandDrawnHighlight color="pink">building sustainable solutions</HandDrawnHighlight>
+              How <HandDrawnHighlight>fitness principles</HandDrawnHighlight> shape my approach to{" "}
+              <HandDrawnHighlight>problem-solving</HandDrawnHighlight> and{" "}
+              <HandDrawnHighlight>building sustainable solutions</HandDrawnHighlight>
             </p>
           </StickyNote>
         </motion.div>
@@ -59,7 +59,7 @@ export function FitnessJourneyClient() {
           <div className="space-y-6">
             <StudyGuideBox title="Progressive Overload = Continuous Learning" type="tip">
               <p className="text-foreground leading-relaxed">
-                Just like in fitness, I believe in <HandDrawnHighlight color="green">progressive overload</HandDrawnHighlight> in learning new technologies. 
+                Just like in fitness, I believe in <HandDrawnHighlight>progressive overload</HandDrawnHighlight> in learning new technologies. 
                 I gradually increase the complexity of projects I take on, ensuring steady growth without burnout. 
                 Whether it's mastering a new framework or understanding complex AI concepts, consistency beats intensity.
               </p>
@@ -67,7 +67,7 @@ export function FitnessJourneyClient() {
             
             <StudyGuideBox title="Recovery and Reflection" type="note">
               <p className="text-foreground leading-relaxed">
-                Recovery days in fitness taught me the importance of <HandDrawnHighlight color="blue">stepping back and reflecting</HandDrawnHighlight>. 
+                Recovery days in fitness taught me the importance of <HandDrawnHighlight>stepping back and reflecting</HandDrawnHighlight>. 
                 In my work, I regularly take time to review code, analyze project outcomes, and plan improvements. 
                 This prevents technical debt and ensures long-term sustainability.
               </p>
@@ -177,7 +177,7 @@ export function FitnessJourneyClient() {
           <div className="space-y-6">
             <StudyGuideBox title="Compound Movements = System Architecture" type="important">
               <p className="text-foreground leading-relaxed">
-                <HandDrawnHighlight color="pink">Compound exercises</HandDrawnHighlight> work multiple muscle groups efficiently, 
+                <HandDrawnHighlight>Compound exercises</HandDrawnHighlight> work multiple muscle groups efficiently, 
                 just like good system architecture addresses multiple concerns with elegant solutions. 
                 I focus on building systems that solve multiple problems rather than one-off fixes.
               </p>
@@ -186,14 +186,14 @@ export function FitnessJourneyClient() {
             <StudyGuideBox title="Form Over Weight = Code Quality Over Speed" type="tip">
               <p className="text-foreground leading-relaxed">
                 Perfect form with lighter weights prevents injury and builds better habits. Similarly, 
-                <HandDrawnHighlight color="green">writing clean, maintainable code</HandDrawnHighlight> is more valuable 
+                <HandDrawnHighlight>writing clean, maintainable code</HandDrawnHighlight> is more valuable 
                 than rushing to meet deadlines with technical debt.
               </p>
             </StudyGuideBox>
             
             <StudyGuideBox title="Tracking Progress = Analytics & Metrics" type="note">
               <p className="text-foreground leading-relaxed">
-                I log every workout with sets, reps, and weights. This same <HandDrawnHighlight color="blue">data-driven approach</HandDrawnHighlight> applies 
+                I log every workout with sets, reps, and weights. This same <HandDrawnHighlight>data-driven approach</HandDrawnHighlight> applies 
                 to tracking project metrics, user analytics, and performance optimization in my development work.
               </p>
             </StudyGuideBox>

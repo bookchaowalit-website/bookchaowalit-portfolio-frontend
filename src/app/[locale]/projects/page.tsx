@@ -9,13 +9,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const seoTitles = {
-    en: "Projects Portfolio - Chaowalit Greepoke | Full-Stack & AI Development Showcase",
-    th: "ผลงานโครงการ - เชาวลิต กรีโภค | แสดงผลงาน Full-Stack และ AI Development"
+    en: "Projects Gallery - 100 Micro-Frontends | Chaowalit Greepoke",
+    th: "แกลเลอรีผลงาน - 100 ไมโครฟรอนต์เอนด์ | เชาวลิต กรีโภค"
   };
 
   const seoDescriptions = {
-    en: "Explore Chaowalit's portfolio of full-stack web applications, AI integration projects, and data analytics solutions. Built with Next.js, React, Python FastAPI, and modern technologies. Bangkok-based developer.",
-    th: "สำรวจผลงานของ เชาวลิต กรีโภค ในด้านการพัฒนาเว็บแอปพลิเคชัน full-stack, โครงการรวม AI และโซลูชันการวิเคราะห์ข้อมูล พัฒนาด้วย Next.js, React, Python FastAPI และเทคโนโลยีทันสมัย นักพัฒนาจากกรุงเทพฯ"
+    en: "Browse 100 independently deployed micro-frontends organized by category: tools, productivity, content, creative, business, social, AI & data. Built with Next.js and TypeScript by Bangkok-based developer Chaowalit Greepoke.",
+    th: "เรียกดู 100 ไมโครฟรอนต์เอนด์ที่ deploy อย่างอิสระ จัดตามหมวดหมู่: เครื่องมือ, ผลผลิต, เนื้อหา, สร้างสรรค์, ธุรกิจ, โซเชียล, AI และข้อมูล พัฒนาโดย เชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
   };
 
   return {
@@ -23,16 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
-      'Portfolio Projects Bangkok',
-      'Full-Stack Projects Showcase',
-      'Next.js React Projects',
-      'AI Integration Projects',
-      'Python FastAPI Projects',
+      '100 Projects Portfolio',
+      'Micro-Frontend Gallery',
+      'Next.js TypeScript Projects',
+      'Developer Tools Collection',
       'Web Development Portfolio Thailand',
-      'SEO Analytics Projects',
-      'Social Media Analytics',
-      'RAG Systems LlamaIndex',
-      'Data Center Management Projects'
+      'AI Data Projects',
+      'Productivity Apps',
+      'Independent Deployments Vercel',
+      'Chaowalit Greepoke',
+      'Bangkok Developer'
     ].join(', '),
     robots: 'index, follow',
     alternates: {
@@ -51,10 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',
       images: [{
-        url: '/og-projects.jpg',
+        url: `/${locale}/projects/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: 'Chaowalit Greepoke Projects Portfolio - Full-Stack & AI Development'
+        alt: 'Chaowalit Greepoke Projects Gallery - 100 Micro-Frontends'
       }]
     },
     twitter: {
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       creator: '@bookchaowalit',
-      images: ['/og-projects.jpg']
+      images: [`/${locale}/projects/opengraph-image`]
     }
   };
 }
