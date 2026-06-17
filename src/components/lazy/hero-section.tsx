@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from 'next-intl';
 import { HeroTypingText } from "@/components/ui/hero-typing-text";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+import { StickyNote } from "@/components/ui/notebook-elements";
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -86,9 +87,9 @@ export function HeroSection() {
           </motion.p>
 
           <div className="flex justify-center">
-            <div className="bg-muted border border-border p-4 max-w-md">
-              <p className="text-muted-foreground text-center leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('heroSubtitle') }} />
-            </div>
+            <StickyNote color="pink" rotation={-1.5} className="max-w-md">
+              <p className="text-sm text-foreground/80 text-center leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('heroSubtitle') }} />
+            </StickyNote>
           </div>
 
         </div>

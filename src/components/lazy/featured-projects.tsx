@@ -4,6 +4,11 @@ import { allProjects, categoryMeta } from "@/data/app-projects";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
+import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+
+const stickyColors = ["yellow", "pink", "green", "blue"] as const;
+const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
 
 export function FeaturedProjects() {
   const t = useTranslations("home");
@@ -12,34 +17,48 @@ export function FeaturedProjects() {
 
   return (
     <section className="space-y-8">
-      <h2 className="text-3xl font-bold text-center text-balance">
-        {t("featuredProjectsTitle")}
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-        {featured.map((project) => (
-          <a
-            key={project.slug}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block bg-background p-6 transition-colors hover:bg-secondary"
-          >
-            <div className="flex items-start justify-between gap-3 mb-2">
-              <h3 className="text-sm font-semibold leading-tight group-hover:underline">
-                {project.name}
-              </h3>
-              <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              {project.description}
-            </p>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
-              {categoryMeta[project.category].label}
-            </span>
-          </a>
-        ))}
+      <div className="text-center">
+        <MixedTypographyTitle
+          words={[
+            { text: "Featured", style: "cursive", size: "lg" },
+            { text: "Projects", style: "filled", size: "lg" },
+          ]}
+          className="mb-2"
+        />
       </div>
+
+      <NotebookPaper className="py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          {featured.map((project, index) => (
+            <StickyNote
+              key={project.slug}
+              color={stickyColors[index % 4]}
+              rotation={rotations[index % rotations.length]}
+              className="h-full"
+            >
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full"
+              >
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h3 className="text-sm font-bold leading-tight group-hover:underline">
+                    {project.name}
+                  </h3>
+                  <ArrowUpRight className="size-3.5 shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" />
+                </div>
+                <p className="text-xs text-foreground/70 leading-relaxed mb-3">
+                  {project.description}
+                </p>
+                <span className="text-xs uppercase tracking-wider text-foreground/50">
+                  {categoryMeta[project.category].label}
+                </span>
+              </a>
+            </StickyNote>
+          ))}
+        </div>
+      </NotebookPaper>
 
       <div className="text-center">
         <Link
