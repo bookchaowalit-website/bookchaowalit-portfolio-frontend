@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Chaowalit — Portfolio Media Kit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  :root {
+    --bg: #FFFDF7; --text: #1a1a1a; --muted: #6b7280; --accent: #2563eb;
+    --card: #FFFFFF; --border: #e5e7eb; --tag-bg: #f0f4ff; --tag-text: #2563eb;
+    --green: #059669; --orange: #d97706; --purple: #7c3aed;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .page { max-width: 800px; margin: 0 auto; padding: 40px 48px; }
+
+  /* Header */
+  .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 2px solid var(--text); margin-bottom: 32px; }
+  .header-left h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+  .header-left .title { font-size: 14px; font-weight: 500; color: var(--muted); margin-top: 4px; }
+  .header-right { text-align: right; font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .header-right a { color: var(--accent); text-decoration: none; }
+
+  /* Stats bar */
+  .stats { display: flex; gap: 0; margin-bottom: 32px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .stat { flex: 1; padding: 16px; text-align: center; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; }
+
+  /* Sections */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+  /* Services */
+  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .service-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .service-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .service-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .service-icon { font-size: 20px; margin-bottom: 8px; }
+
+  /* Tech stack */
+  .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .tech-tag { background: var(--tag-bg); color: var(--tag-text); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+  .tech-tag.expert { background: #ecfdf5; color: var(--green); }
+  .tech-tag.ai { background: #faf5ff; color: var(--purple); }
+
+  /* Projects */
+  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .project { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .project h4 { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .project .desc { font-size: 11px; color: var(--muted); }
+  .project .tech-used { font-size: 10px; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+  .project .badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 6px; }
+  .badge-live { background: #ecfdf5; color: var(--green); }
+  .badge-featured { background: #fff7ed; color: var(--orange); }
+
+  /* Experience */
+  .exp-item { display: flex; gap: 16px; margin-bottom: 14px; }
+  .exp-date { font-size: 11px; color: var(--muted); min-width: 110px; font-weight: 500; padding-top: 2px; }
+  .exp-content h4 { font-size: 14px; font-weight: 700; }
+  .exp-content .company { font-size: 12px; color: var(--accent); font-weight: 600; }
+  .exp-content p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* Blog */
+  .blog-list { display: flex; flex-direction: column; gap: 8px; }
+  .blog-item { display: flex; justify-content: space-between; align-items: baseline; }
+  .blog-item .blog-title { font-size: 13px; font-weight: 600; }
+  .blog-item .blog-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 12px; }
+
+  /* Footer */
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+  /* Print */
+  @media print {
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 24px 32px; }
+    .stat-num { color: var(--accent) !important; }
+    .tech-tag, .service-card, .project { border-color: #ddd !important; }
+  }
+  @page { margin: 16mm; size: A4; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Chaowalit Greepoke</h1>
+      <div class="title">Full-Stack Developer &bull; AI Integration Specialist &bull; Bangkok, Thailand</div>
+    </div>
+    <div class="header-right">
+      <a href="https://bookchaowalit.com">bookchaowalit.com</a><br>
+      bookchaowalit@gmail.com<br>
+      GitHub: @bookchaowalit
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Web Apps Shipped</div></div>
+    <div class="stat"><div class="stat-num">93</div><div class="stat-label">Live on Production</div></div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat"><div class="stat-num">4.7</div><div class="stat-label">Client Rating</div></div>
+  </div>
+
+  <!-- Services -->
+  <div class="section">
+    <div class="section-title">Services</div>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">&#9881;</div>
+        <h3>AI Integration</h3>
+        <p>RAG pipelines, chatbots, multi-agent systems, streaming LLM responses, cost-optimized API calls. LangChain, LlamaIndex, OpenAI, Anthropic.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9000;</div>
+        <h3>Full-Stack Development</h3>
+        <p>Next.js 15, React, TypeScript, FastAPI, PostgreSQL, Supabase. From idea to deployed production app with CI/CD.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#128200;</div>
+        <h3>SEO & Growth</h3>
+        <p>Google Analytics certified. Technical SEO, Core Web Vitals, data-driven strategy, Facebook Graph API, A/B testing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9889;</div>
+        <h3>AI-Assisted Development</h3>
+        <p>Rapid MVP building using AI-powered workflows. Production-quality code delivered in days, not months. You own everything.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section">
+    <div class="section-title">Tech Stack</div>
+    <div class="tech-row">
+      <span class="tech-tag expert">Next.js</span>
+      <span class="tech-tag expert">React</span>
+      <span class="tech-tag expert">TypeScript</span>
+      <span class="tech-tag expert">Node.js</span>
+      <span class="tech-tag expert">Python</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">Supabase</span>
+      <span class="tech-tag">Docker</span>
+      <span class="tech-tag">AWS</span>
+      <span class="tech-tag">Vercel</span>
+    </div>
+    <div class="tech-row">
+      <span class="tech-tag ai">LangChain</span>
+      <span class="tech-tag ai">LlamaIndex</span>
+      <span class="tech-tag ai">RAG</span>
+      <span class="tech-tag ai">Multi-Agent</span>
+      <span class="tech-tag ai">OpenAI API</span>
+      <span class="tech-tag ai">Anthropic</span>
+      <span class="tech-tag ai">HuggingFace</span>
+      <span class="tech-tag">Flutter</span>
+      <span class="tech-tag">MongoDB</span>
+      <span class="tech-tag">Redis</span>
+      <span class="tech-tag">Tailwind CSS</span>
+    </div>
+  </div>
+
+  <!-- Featured Projects -->
+  <div class="section">
+    <div class="section-title">Featured Projects &mdash; <a href="https://bookchaowalit.com/projects" style="color:var(--accent);">view all 100 at bookchaowalit.com/projects</a></div>
+    <div class="project-grid">
+      <div class="project">
+        <h4>100 Micro-Frontends Architecture <span class="badge badge-live">93 LIVE</span></h4>
+        <p class="desc">Every project is a standalone Next.js app deployed independently on Vercel with its own CI/CD pipeline. Tools, productivity apps, AI playgrounds, and business dashboards.</p>
+        <p class="tech-used">Next.js &middot; TypeScript &middot; Vercel &middot; GitHub Actions</p>
+      </div>
+      <div class="project">
+        <h4>RAG Analytics Platform <span class="badge badge-featured">AI</span></h4>
+        <p class="desc">Multi-agent AI system using RAG with LlamaIndex + LangChain. Analyzes agricultural data and generates automated reports with ReAct reasoning method.</p>
+        <p class="tech-used">FastAPI &middot; LlamaIndex &middot; LangChain &middot; PostgreSQL</p>
+      </div>
+      <div class="project">
+        <h4>Developer Tools Suite <span class="badge badge-live">22 TOOLS</span></h4>
+        <p class="desc">JSON converter, regex tester, webhook debugger, cron expression builder, markdown editor, diff checker, and 16 more — all live and free to use.</p>
+        <p class="tech-used">Next.js &middot; React &middot; Client-side Processing</p>
+      </div>
+      <div class="project">
+        <h4>AI Chat Playground <span class="badge badge-featured">AI</span></h4>
+        <p class="desc">Multi-model chat interface with streaming responses, prompt caching, fallback chains, and cost controls. Supports OpenAI, Anthropic, and open-source models.</p>
+        <p class="tech-used">Next.js &middot; AI SDK &middot; Streaming &middot; Edge Functions</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+    <div class="exp-item">
+      <div class="exp-date">Jan 2024 &ndash; May 2025</div>
+      <div class="exp-content">
+        <h4>Full-Stack Developer</h4>
+        <div class="company">Turfmapp</div>
+        <p>Built RAG-powered analytics with LlamaIndex + LangChain multi-agent systems. Next.js frontend, FastAPI backend, Facebook Graph API integration.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">May 2022 &ndash; Jan 2024</div>
+      <div class="exp-content">
+        <h4>SEO Specialist & Data Analyst</h4>
+        <div class="company">Turfmapp</div>
+        <p>Technical SEO research, social media data analysis, A/B testing, Google Analytics, and growth strategy implementation.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2022 &ndash; Present</div>
+      <div class="exp-content">
+        <h4>Solopreneur & Freelance Developer</h4>
+        <div class="company">Ionomad / Self-employed</div>
+        <p>Built 100+ web apps. Deep-tech & marketing agency. AI-driven solutions, content marketing, digital transformation. 28 orders on Fastwork, 4.7 rating.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog / Thought Leadership -->
+  <div class="section">
+    <div class="section-title">Technical Writing &mdash; <a href="https://bookchaowalit.com/blog" style="color:var(--accent);">bookchaowalit.com/blog</a></div>
+    <div class="blog-list">
+      <div class="blog-item"><span class="blog-title">AI Integration Patterns for Web Developers</span><span class="blog-date">Apr 2026</span></div>
+      <div class="blog-item"><span class="blog-title">Building 100 Micro-Frontends: Lessons from a Solopreneur Journey</span><span class="blog-date">Mar 2026</span></div>
+      <div class="blog-item"><span class="blog-title">The Solopreneur Tech Stack: Tools and Systems for One-Person Operations</span><span class="blog-date">May 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="section">
+    <div class="section-title">Certifications</div>
+    <div style="font-size:13px; display:flex; flex-wrap:wrap; gap:16px;">
+      <span>Google Analytics Certified</span>
+      <span>Google Secure BigLake Data</span>
+      <span>Facebook Graph API Integration</span>
+      <span>ETL & Data Pipeline Management</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Available for freelance & contract work</span>
+    <span>Generated June 2026 &middot; bookchaowalit.com</span>
+  </div>
+
+</div>
+</body>
+</html>
