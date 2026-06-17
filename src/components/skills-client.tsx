@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { NotebookPaper, StickyNote } from '@/components/ui/notebook-elements';
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Code, Palette, Database, Cloud, Server } from "lucide-react";
@@ -127,31 +127,31 @@ export function SkillsClient() {
           animate={{ opacity: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
         >
-          {skillCategories.map((category, index) => (
+          {skillCategories.map((category, index) => {
+            const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["yellow", "pink", "green", "blue", "yellow", "pink"];
+            const rotations = [-2, 1, -1, 2, -1, 1];
+            return (
             <motion.div
               key={category.id}
               initial={reducedMotion ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 * index }}
-              whileHover={reducedMotion ? undefined : { y: -5 }}
             >
-              <a href={category.href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
-                <Card className="h-full hover:bg-secondary transition-colors cursor-pointer group border hover:border-primary/20">
-                  <CardHeader className="text-center pb-4">
+              <a href={category.href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <StickyNote color={colors[index]} rotation={rotations[index]} className="h-full p-6 cursor-pointer group">
+                  <div className="text-center space-y-4">
                     <motion.div
-                      className="w-16 h-16 mx-auto bg-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-                      whileHover={reducedMotion ? undefined : { rotate: 5 }}
+                      className="w-16 h-16 mx-auto bg-foreground/10 rounded-full flex items-center justify-center"
+                      whileHover={reducedMotion ? undefined : { rotate: 5, scale: 1.1 }}
                     >
                       {category.icon}
                     </motion.div>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
                       {category.title}
-                    </CardTitle>
-                    <CardDescription className="text-base">
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
                       {category.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
+                    </p>
                     <div className="space-y-3">
                       <div className="flex flex-wrap gap-2 justify-center">
                         {category.skills.slice(0, 3).map((skill) => (
@@ -169,11 +169,12 @@ export function SkillsClient() {
                         Explore Skills →
                       </Button>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </StickyNote>
               </a>
             </motion.div>
-          ))}
+            );
+          })}
         </motion.div>
       </NotebookPaper>
 

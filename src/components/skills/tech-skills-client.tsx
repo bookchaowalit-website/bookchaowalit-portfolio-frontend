@@ -231,17 +231,20 @@ export function TechSkillsClient() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["blue", "green", "yellow", "pink", "blue", "green"];
+            const rotations = [-1, 2, -2, 1, -1, 2];
+            return (
             <motion.div
               key={project.title}
               initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full">
-                <CardHeader>
+              <StickyNote color={colors[index]} rotation={rotations[index]} className="h-full p-5">
+                <div className="space-y-3">
                   <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg">{project.title}</CardTitle>
+                    <h3 className="text-lg font-bold">{project.title}</h3>
                     <Badge variant={
                       project.complexity === 'Expert' ? 'destructive' :
                       project.complexity === 'Advanced' ? 'default' : 'secondary'
@@ -249,9 +252,7 @@ export function TechSkillsClient() {
                       {project.complexity}
                     </Badge>
                   </div>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
+                  <p className="text-sm text-muted-foreground">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
                       <Badge key={tech} variant="outline" className="text-xs">
@@ -259,10 +260,11 @@ export function TechSkillsClient() {
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </StickyNote>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </NotebookPaper>
 

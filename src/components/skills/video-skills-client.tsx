@@ -214,26 +214,28 @@ export function VideoSkillsClient() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {videoTechniques.map((technique, index) => (
+          {videoTechniques.map((technique, index) => {
+            const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["yellow", "pink", "green", "blue"];
+            const rotations = [-2, 1, -1, 2];
+            return (
             <motion.div
               key={technique.title}
               initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="text-center h-full">
-                <CardHeader>
-                  <div className="mx-auto w-12 h-12 bg-foreground flex items-center justify-center mb-4">
+              <StickyNote color={colors[index]} rotation={rotations[index]} className="text-center h-full p-5">
+                <div className="space-y-3">
+                  <div className="mx-auto w-12 h-12 bg-foreground/10 rounded-full flex items-center justify-center">
                     {technique.icon}
                   </div>
-                  <CardTitle className="text-lg">{technique.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
+                  <h3 className="text-lg font-bold">{technique.title}</h3>
                   <p className="text-sm text-muted-foreground">{technique.description}</p>
-                </CardContent>
-              </Card>
+                </div>
+              </StickyNote>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </NotebookPaper>
 
@@ -246,22 +248,23 @@ export function VideoSkillsClient() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {portfolioItems.map((item, index) => (
+          {portfolioItems.map((item, index) => {
+            const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["pink", "blue", "green", "yellow"];
+            const rotations = [1, -1, 2, -2];
+            return (
             <motion.div
               key={item.title}
               initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full">
-                <CardHeader>
+              <StickyNote color={colors[index]} rotation={rotations[index]} className="h-full p-5">
+                <div className="space-y-3">
                   <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                    <h3 className="text-lg font-bold">{item.title}</h3>
                     <Badge variant="secondary">{item.type}</Badge>
                   </div>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {item.tools.map((tool) => (
                       <Badge key={tool} variant="outline" className="text-xs">
@@ -269,10 +272,11 @@ export function VideoSkillsClient() {
                       </Badge>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </StickyNote>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </NotebookPaper>
 

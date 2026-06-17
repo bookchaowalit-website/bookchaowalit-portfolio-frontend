@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { getAllBlogPosts } from '@/lib/blog';
 import { getTranslations } from 'next-intl/server';
-import { NotebookPaper } from '@/components/ui/notebook-elements';
+import { NotebookPaper, StickyNote } from '@/components/ui/notebook-elements';
 
 export async function BlogSection() {
   const t = await getTranslations('home');
@@ -16,24 +16,24 @@ export async function BlogSection() {
       <h2 className="text-3xl font-bold text-center text-balance">{t('latestBlogTitle')}</h2>
       <NotebookPaper className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, index) => (
+          {blogPosts.map((post, index) => {
+            const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["yellow", "pink", "green"];
+            const rotations = [-2, 1, -1];
+            return (
             <Link key={index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
-              <Card className="hover:bg-secondary transition-colors cursor-pointer h-full">
-                <CardHeader>
-                  <CardTitle className="text-lg line-clamp-2">{post.title}</CardTitle>
-                  <CardDescription className="line-clamp-2">{post.excerpt}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(post.publishedAt).toLocaleDateString()}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{post.readTime}</p>
+              <StickyNote color={colors[index]} rotation={rotations[index]} className="cursor-pointer h-full p-5 hover:scale-105 transition-transform">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-bold line-clamp-2">{post.title}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                    <span>{post.readTime}</span>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </StickyNote>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </NotebookPaper>
       <div className="text-center">
