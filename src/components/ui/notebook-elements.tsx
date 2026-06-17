@@ -6,17 +6,26 @@ import { useReducedMotion } from '@/hooks/use-reduced-motion';
 // Hand-drawn highlight marker effect
 export function HandDrawnHighlight({
   children,
-  className = ""
+  className = "",
+  color = "yellow"
 }: {
   children: React.ReactNode;
   className?: string;
+  color?: "yellow" | "pink" | "green" | "blue";
 }) {
   const reducedMotion = useReducedMotion();
+  const colorMap = {
+    yellow: "oklch(0.92 0.08 95 / 0.6)",
+    pink: "oklch(0.88 0.10 350 / 0.5)",
+    green: "oklch(0.88 0.08 150 / 0.5)",
+    blue: "oklch(0.88 0.06 230 / 0.5)"
+  };
   return (
     <span className={`relative ${className}`}>
       <motion.span
-        className={`absolute inset-0 bg-muted -m-1`}
+        className="absolute inset-0 -m-1"
         style={{
+          background: colorMap[color],
           transform: "rotate(-1deg) skew(-2deg)",
           clipPath: "polygon(2% 10%, 98% 5%, 96% 90%, 4% 95%)"
         }}
@@ -33,33 +42,34 @@ export function HandDrawnHighlight({
 export function NotebookPaper({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`relative ${className}`}>
-      {/* Paper texture background */}
-      <div className="absolute inset-0 bg-background" />
+      {/* Warm paper texture background */}
+      <div className="absolute inset-0" style={{ background: "oklch(0.985 0.005 90)" }} />
 
-      {/* Notebook lines */}
+      {/* Notebook ruled lines */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 20 }, (_, i) => (
           <div
             key={i}
-            className="absolute left-0 right-0 h-px bg-border"
+            className="absolute left-0 right-0 h-px"
             style={{
               top: `${(i + 1) * 5}%`,
-              transform: `rotate(${((i % 3) - 1) * 0.2}deg)`
+              transform: `rotate(${((i % 3) - 1) * 0.2}deg)`,
+              background: "oklch(0.85 0.01 250 / 0.5)"
             }}
           />
         ))}
       </div>
 
-      {/* Margin line */}
+      {/* Red margin line */}
       <div
-        className="absolute left-12 top-0 bottom-0 w-px bg-border"
-        style={{ transform: "rotate(0.2deg)" }}
+        className="absolute left-12 top-0 bottom-0 w-px"
+        style={{ background: "oklch(0.70 0.15 25 / 0.6)", transform: "rotate(0.2deg)" }}
       />
 
       {/* Three-ring holes */}
-      <div className="absolute left-4 top-1/4 w-3 h-3 rounded-full bg-muted shadow-inner" />
-      <div className="absolute left-4 top-1/2 w-3 h-3 rounded-full bg-muted shadow-inner" />
-      <div className="absolute left-4 top-3/4 w-3 h-3 rounded-full bg-muted shadow-inner" />
+      <div className="absolute left-4 top-1/4 w-3 h-3 rounded-full bg-background shadow-inner border border-border/50" />
+      <div className="absolute left-4 top-1/2 w-3 h-3 rounded-full bg-background shadow-inner border border-border/50" />
+      <div className="absolute left-4 top-3/4 w-3 h-3 rounded-full bg-background shadow-inner border border-border/50" />
 
       <div className="relative z-10 p-8">{children}</div>
     </div>
@@ -70,17 +80,28 @@ export function NotebookPaper({ children, className = "" }: { children: React.Re
 export function StickyNote({
   children,
   rotation = 0,
-  className = ""
+  className = "",
+  color = "yellow"
 }: {
   children: React.ReactNode;
   rotation?: number;
   className?: string;
+  color?: "yellow" | "pink" | "green" | "blue";
 }) {
   const reducedMotion = useReducedMotion();
+  const colorMap = {
+    yellow: { bg: "oklch(0.95 0.06 95)", border: "oklch(0.80 0.08 95)" },
+    pink: { bg: "oklch(0.93 0.05 350)", border: "oklch(0.78 0.06 350)" },
+    green: { bg: "oklch(0.93 0.05 150)", border: "oklch(0.78 0.06 150)" },
+    blue: { bg: "oklch(0.93 0.04 230)", border: "oklch(0.78 0.05 230)" }
+  };
+  const c = colorMap[color];
   return (
     <motion.div
-      className={`bg-muted border-border border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] ${className}`}
+      className={`border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] ${className}`}
       style={{
+        background: c.bg,
+        borderColor: c.border,
         transform: `rotate(${rotation}deg)`,
         clipPath: "polygon(0% 0%, 95% 0%, 100% 8%, 100% 100%, 5% 100%, 0% 92%)"
       }}
