@@ -12,13 +12,13 @@ export function BlogHero() {
   return (
     <motion.div
       className="text-center space-y-8 mb-12"
-      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
     >
       <motion.div
-        initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
       >
         <MixedTypographyTitle
@@ -33,8 +33,8 @@ export function BlogHero() {
 
       <motion.div
         className="max-w-md mx-auto"
-        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
-        animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+        initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -1 }}
+        animate={{ opacity: 1, scale: 1, rotate: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
       >
         <div className="bg-muted border border-border p-4">
@@ -52,8 +52,8 @@ export function BlogSearchBar() {
   return (
     <motion.div
       className="max-w-md mx-auto mb-12"
-      initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
     >
       <div className="bg-muted border border-border p-2 hover:border-primary/40 transition-colors">
@@ -72,15 +72,15 @@ export function BlogNewsletter() {
   return (
     <motion.section
       className="mt-16"
-      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
     >
       <SketchyFrame variant="double">
         <NotebookPaper className="p-8 text-center">
           <motion.div
-            initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 1.0 }}
           >
             <MixedTypographyTitle
@@ -95,8 +95,8 @@ export function BlogNewsletter() {
 
           <motion.div
             className="max-w-sm mx-auto mb-6"
-            initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: 2 }}
-            animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: -1 }}
+            initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: 2 }}
+            animate={{ opacity: 1, scale: 1, rotate: -1 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 1.2, ease: "backOut" }}
           >
             <div className="bg-muted border border-border p-3">
@@ -108,8 +108,8 @@ export function BlogNewsletter() {
 
           <motion.div
             className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-            initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 1.4 }}
           >
             <Input

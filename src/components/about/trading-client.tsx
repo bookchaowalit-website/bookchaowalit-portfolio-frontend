@@ -17,13 +17,13 @@ export function TradingClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -39,8 +39,8 @@ export function TradingClient() {
 
         <motion.div
           className="max-w-2xl mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
@@ -285,8 +285,8 @@ export function TradingClient() {
       {/* Call to Action */}
       <motion.div
         className="text-center py-8"
-        initial={reducedMotion ? undefined : { opacity: 0 }}
-        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        initial={reducedMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >

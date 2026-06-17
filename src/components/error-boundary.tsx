@@ -26,8 +26,8 @@ function AnimatedErrorFallback({ error, onReset }: { error: Error | null; onRese
         style={{
           clipPath: "polygon(0% 0%, 95% 0%, 100% 5%, 100% 100%, 5% 100%, 0% 95%)"
         }}
-        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -2 }}
-        animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: -0.5 }}
+        initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -2 }}
+        animate={{ opacity: 1, scale: 1, rotate: -0.5 }}
         transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
       >
         {/* Notebook margin line */}

@@ -23,8 +23,8 @@ function BackToTop() {
   return (
     <motion.button
       onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" })}
-      initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
-      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
       exit={reducedMotion ? undefined : { opacity: 0, y: 10 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
       className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -49,8 +49,8 @@ export function Footer() {
           <div className="text-center space-y-6">
             {/* Hand-drawn title */}
             <motion.div
-              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
               className="relative"
             >
@@ -62,8 +62,8 @@ export function Footer() {
             {/* Navigation with doodle style */}
             <motion.nav
               className="flex flex-wrap justify-center gap-6 mb-8"
-              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
             >
               <motion.div whileHover={hoverSecondary}>
@@ -125,8 +125,8 @@ export function Footer() {
             {/* Social Media Links */}
             <motion.div
               className="flex flex-wrap justify-center gap-4 mb-6"
-              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
             >
               <motion.a
@@ -212,8 +212,8 @@ export function Footer() {
             {/* Hand-drawn doodle symbols */}
             <motion.div
               className="flex justify-center items-center gap-8 mb-6"
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
             >
               {/* Star doodle */}
@@ -269,8 +269,8 @@ export function Footer() {
 
             {/* Simple copyright */}
             <motion.div
-              initial={reducedMotion ? undefined : { opacity: 0 }}
-              animate={reducedMotion ? undefined : { opacity: 1 }}
+              initial={reducedMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
               className="text-center"
             >

@@ -83,13 +83,13 @@ export function SkillsClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -106,8 +106,8 @@ export function SkillsClient() {
 
         <motion.div
           className="max-w-3xl mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
@@ -120,15 +120,15 @@ export function SkillsClient() {
       {/* Skill Categories Grid */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-        initial={reducedMotion ? undefined : { opacity: 0 }}
-        animate={reducedMotion ? undefined : { opacity: 1 }}
+        initial={reducedMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
       >
         {skillCategories.map((category, index) => (
           <motion.div
             key={category.id}
-            initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 * index }}
             whileHover={reducedMotion ? undefined : { y: -5 }}
           >
@@ -185,8 +185,8 @@ export function SkillsClient() {
           {quickSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <StickyNote
@@ -209,7 +209,7 @@ export function SkillsClient() {
       {/* Learning & Growth */}
       <motion.div
         className="text-center py-8"
-        initial={reducedMotion ? undefined : { opacity: 0 }}
+        initial={reducedMotion ? false : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}

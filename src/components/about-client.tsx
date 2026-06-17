@@ -14,13 +14,13 @@ export function AboutClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { scale: 0, rotate: -180 }}
-          animate={reducedMotion ? undefined : { scale: 1, rotate: 0 }}
+          initial={reducedMotion ? false : { scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
           transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
         >
           <Avatar className="w-32 h-32 mx-auto">
@@ -30,8 +30,8 @@ export function AboutClient() {
         </motion.div>
 
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <MixedTypographyTitle
@@ -46,8 +46,8 @@ export function AboutClient() {
 
         <motion.div
           className="max-w-lg mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -1 }}
+          animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
           <StickyNote rotation={1} className="text-center">
@@ -105,8 +105,8 @@ export function AboutClient() {
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}
-                    initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
-                    animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                    initial={reducedMotion ? false : { opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={reducedMotion ? { duration: 0 } : { delay: index * 0.05 }}
                   >
                     <Badge
@@ -129,8 +129,8 @@ export function AboutClient() {
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}
-                    initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
-                    animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                    initial={reducedMotion ? false : { opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={reducedMotion ? { duration: 0 } : { delay: 0.3 + index * 0.05 }}
                   >
                     <Badge
@@ -153,8 +153,8 @@ export function AboutClient() {
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}
-                    initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
-                    animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                    initial={reducedMotion ? false : { opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={reducedMotion ? { duration: 0 } : { delay: 0.6 + index * 0.05 }}
                   >
                     <Badge

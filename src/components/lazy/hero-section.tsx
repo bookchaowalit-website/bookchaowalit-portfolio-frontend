@@ -23,14 +23,14 @@ export function HeroSection() {
     <section className={heroSpacing}>
       <motion.div
         className="space-y-4"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
       >
         <motion.div
           className="relative w-32 h-32 mx-auto"
-          initial={reducedMotion ? undefined : { scale: 0, rotate: -180 }}
-          animate={reducedMotion ? undefined : { scale: 1, rotate: 0 }}
+          initial={reducedMotion ? false : { scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
           transition={reducedMotion ? { duration: 0 } : {
             type: "spring",
             stiffness: 260,
@@ -78,8 +78,8 @@ export function HeroSection() {
           {/* Concrete value prop — immediately communicates what I do */}
           <motion.p
             className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto text-balance font-[family-name:var(--font-sarabun)]"
-            initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
           >
             {t('heroValueProp')}

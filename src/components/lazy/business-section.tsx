@@ -23,8 +23,8 @@ export function BusinessSection() {
 
   return (
     <motion.section
-      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       viewport={{ once: true }}
       className="space-y-8"
@@ -40,8 +40,8 @@ export function BusinessSection() {
         />
 
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-          whileInView={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
@@ -57,8 +57,8 @@ export function BusinessSection() {
         {highlightedBusinesses.map((business, index) => (
           <motion.div
             key={index}
-            initial={reducedMotion ? undefined : { opacity: 0, y: 20, rotate: -2 }}
-            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, rotate: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 20, rotate: -2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.3 + index * 0.1 }}
             viewport={{ once: true }}
             whileHover={reducedMotion ? undefined : { y: -5, scale: 1.02 }}
@@ -98,8 +98,8 @@ export function BusinessSection() {
 
       <motion.div
         className="text-center pt-4"
-        initial={reducedMotion ? undefined : { opacity: 0 }}
-        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        initial={reducedMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
         viewport={{ once: true }}
       >

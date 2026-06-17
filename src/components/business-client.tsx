@@ -33,13 +33,13 @@ export function BusinessClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 mb-16"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -55,8 +55,8 @@ export function BusinessClient() {
 
         <motion.div
           className="max-w-4xl mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -1 }}
+          animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <SketchyFrame variant="dashed">
@@ -104,8 +104,8 @@ export function BusinessClient() {
 
       {/* Business Cards */}
       <motion.div
-        initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
         className="mb-16"
       >
@@ -119,8 +119,8 @@ export function BusinessClient() {
           {businesses.map((business, index) => (
             <motion.div
               key={index}
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8, rotate: -2 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.8, rotate: -2 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={reducedMotion ? { duration: 0 } : {
                 duration: 0.6,
                 delay: 1 + index * 0.2,
@@ -217,8 +217,8 @@ export function BusinessClient() {
 
       {/* Future Ventures */}
       <motion.div
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 1.5 }}
         className="mt-16"
       >
@@ -326,8 +326,8 @@ export function BusinessClient() {
 
       {/* Call to Action */}
       <motion.div
-        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-        animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+        initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 2 }}
         className="text-center space-y-6"
       >

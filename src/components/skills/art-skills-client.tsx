@@ -116,13 +116,13 @@ export function ArtSkillsClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -139,8 +139,8 @@ export function ArtSkillsClient() {
 
         <motion.div
           className="max-w-3xl mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
@@ -155,8 +155,8 @@ export function ArtSkillsClient() {
         {designCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
-            initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: categoryIndex * 0.2 }}
           >
             <NotebookPaper className="py-6">
@@ -174,8 +174,8 @@ export function ArtSkillsClient() {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    initial={reducedMotion ? undefined : { opacity: 0, x: -20 }}
-                    animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+                    initial={reducedMotion ? false : { opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: skillIndex * 0.1 }}
                   >
                     <Card>
@@ -190,8 +190,8 @@ export function ArtSkillsClient() {
                           <div className="w-full bg-muted h-2">
                             <motion.div
                               className="bg-foreground h-2"
-                              initial={reducedMotion ? undefined : { width: 0 }}
-                              animate={reducedMotion ? undefined : { width: `${skill.level}%` }}
+                              initial={reducedMotion ? false : { width: 0 }}
+                              animate={{ width: `${skill.level}%` }}
                               transition={reducedMotion ? { duration: 0 } : { duration: 1, delay: skillIndex * 0.1 }}
                             />
                           </div>
@@ -222,8 +222,8 @@ export function ArtSkillsClient() {
           {designPrinciples.map((principle, index) => (
             <motion.div
               key={principle.title}
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="text-center h-full">
@@ -254,8 +254,8 @@ export function ArtSkillsClient() {
           {portfolioItems.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="h-full">
@@ -284,8 +284,8 @@ export function ArtSkillsClient() {
       {/* Creative Process */}
       <motion.div
         className="text-center py-8"
-        initial={reducedMotion ? undefined : { opacity: 0 }}
-        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        initial={reducedMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >

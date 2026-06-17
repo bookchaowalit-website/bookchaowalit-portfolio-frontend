@@ -103,13 +103,13 @@ export function ContactClient() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <motion.div
         className="text-center space-y-8 mb-12"
-        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -124,8 +124,8 @@ export function ContactClient() {
 
         <motion.div
           className="max-w-lg mx-auto"
-          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
-          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -1 }}
+          animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <div className="bg-muted border border-border p-4">
@@ -141,8 +141,8 @@ export function ContactClient() {
         <SketchyFrame variant="dashed" className="min-h-[600px]">
           <NotebookPaper className="p-6 h-full">
             <motion.div
-              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">

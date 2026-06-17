@@ -104,8 +104,8 @@ export function SkillsSection() {
                     <motion.div
                       key={skill}
                       className={`group relative transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 ${category.rotationClass}`}
-                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
-                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={reducedMotion ? { duration: 0 } : {
                         duration: 0.15,
                         delay: categoryIndex * 0.06 + skillIndex * 0.01,

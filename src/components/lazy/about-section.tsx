@@ -14,8 +14,8 @@ export function AboutSection() {
   
   return (
     <motion.section 
-      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       viewport={{ once: true }}
       className="space-y-8"
@@ -32,8 +32,8 @@ export function AboutSection() {
       </div>
 
       <motion.div
-        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
-        whileInView={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+        initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: -1 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
       >

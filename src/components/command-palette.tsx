@@ -282,8 +282,8 @@ export function CommandPalette() {
             {/* Backdrop */}
             <motion.div
               className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
-              initial={reducedMotion ? undefined : { opacity: 0 }}
-              animate={reducedMotion ? undefined : { opacity: 1 }}
+              initial={reducedMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={reducedMotion ? undefined : { opacity: 0 }}
               transition={transition}
               onClick={() => setOpen(false)}
@@ -296,8 +296,8 @@ export function CommandPalette() {
               aria-label="Command palette"
               aria-modal="true"
               className="fixed left-1/2 top-[20%] z-[70] w-full max-w-lg -translate-x-1/2 border border-border bg-background"
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.96, y: -10 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.96, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, scale: 0.96, y: -10 }}
               transition={transition}
               onKeyDown={handleKeyDown}

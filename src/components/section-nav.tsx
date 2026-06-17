@@ -62,8 +62,8 @@ export function SectionNav() {
     <>
       {/* Desktop: side dots */}
       <motion.nav
-        initial={reducedMotion ? undefined : { opacity: 0, x: -20 }}
-        animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
         exit={reducedMotion ? undefined : { opacity: 0, x: -20 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
         className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2"
@@ -99,8 +99,8 @@ export function SectionNav() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8, y: 10 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.8, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, scale: 0.8, y: 10 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
               className="absolute bottom-12 right-0 bg-background border border-border rounded p-2 grid grid-cols-2 gap-1 min-w-[200px]"

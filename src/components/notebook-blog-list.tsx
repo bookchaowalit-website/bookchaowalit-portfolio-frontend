@@ -34,8 +34,8 @@ function NotebookPostEntry({
   return (
     <motion.article
       className={`group relative ${featured ? "col-span-1 md:col-span-2" : ""}`}
-      initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
-      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.08 }}
     >
       {/* Notebook entry container */}
@@ -136,8 +136,8 @@ export function NotebookBlogList({
         <section>
           <motion.div
             className="mb-6"
-            initial={reducedMotion ? undefined : { opacity: 0, x: -10 }}
-            animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.4 }}
           >
             <h2 className="font-[family-name:var(--font-script)] text-2xl md:text-3xl text-foreground">
@@ -160,8 +160,8 @@ export function NotebookBlogList({
         <section>
           <motion.div
             className="mb-6"
-            initial={reducedMotion ? undefined : { opacity: 0, x: -10 }}
-            animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: 0.1 }}
           >
             <h2 className="font-[family-name:var(--font-script)] text-2xl md:text-3xl text-foreground">

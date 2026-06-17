@@ -69,8 +69,8 @@ export function HelpDialog() {
         {open && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            initial={reducedMotion ? undefined : { opacity: 0 }}
-            animate={reducedMotion ? undefined : { opacity: 1 }}
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={reducedMotion ? undefined : { opacity: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
           >
@@ -90,8 +90,8 @@ export function HelpDialog() {
               style={{
                 clipPath: "polygon(0% 0%, 96% 0%, 100% 4%, 100% 100%, 4% 100%, 0% 96%)"
               }}
-              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.95, y: 10 }}
-              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, scale: 0.95, y: 10 }}
               transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 25 }}
             >
