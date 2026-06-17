@@ -14,8 +14,8 @@ export function BusinessSection() {
 
   const highlightedBusinesses = [
     {
-      title: "Ionomad",
-      description: "A deeptech and marketing agency specializing in AI-driven solutions, content marketing, and digital transformation.",
+      title: t('ionomadTitle'),
+      description: t('ionomadDesc'),
       icon: "🚀",
       status: t('activeStatus')
     }
@@ -32,9 +32,9 @@ export function BusinessSection() {
       <div className="text-center space-y-4">
         <MixedTypographyTitle
           words={[
-            { text: "My", style: "cursive", size: "lg" },
-            { text: "Business", style: "bubble", size: "lg" },
-            { text: "Ventures", style: "filled", size: "lg" }
+            { text: t('myVenturesTitle'), style: "cursive", size: "lg" },
+            { text: t('myVenturesSubtitle'), style: "bubble", size: "lg" },
+            { text: t('myVenturesIcon'), style: "filled", size: "lg" }
           ]}
           className="mb-4"
         />
@@ -47,7 +47,7 @@ export function BusinessSection() {
         >
           <div className="bg-muted border border-border p-4 max-w-2xl mx-auto">
             <p className="text-muted-foreground text-center">
-              As a <strong>solopreneur</strong>, I build businesses that combine technology with genuine value creation 🚀
+              {t('homeHeroDescription')}
             </p>
           </div>
         </motion.div>
@@ -71,11 +71,7 @@ export function BusinessSection() {
                     <span className="text-2xl">{business.icon}</span>
                     <Badge
                       variant="secondary"
-                      className={`${
-                        business.status === 'Active'
-                          ? 'bg-muted text-foreground'
-                          : 'bg-muted text-foreground'
-                      } text-xs`}
+                      className="bg-muted text-foreground text-xs"
                     >
                       {business.status}
                     </Badge>
@@ -106,7 +102,7 @@ export function BusinessSection() {
         <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
           <Button size="lg" asChild>
             <Link href="/business">
-              Explore All My Ventures
+              {t('exploreVenturesButton')}
             </Link>
           </Button>
         </motion.div>

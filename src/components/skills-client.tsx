@@ -1,5 +1,3 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
@@ -8,54 +6,57 @@ import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Code, Palette, Database, Cloud, Server } from "lucide-react";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useTranslations } from "next-intl";
 
 export function SkillsClient() {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('skills');
+
   const skillCategories = [
     {
       id: 'tech',
-      title: 'Programming Languages',
-      description: 'Programming languages and core technologies',
+      title: t('category1Title'),
+      description: t('category1Desc'),
       icon: <Code className="w-8 h-8 text-background" />,
       skills: ['Python', 'C#', 'Java', 'HTML', 'CSS', 'Javascript', 'PHP', 'Liquid', 'SQL', 'Dart', 'Go'],
       href: '/skills/tech'
     },
     {
       id: 'library',
-      title: 'Library',
-      description: 'Libraries and packages for development',
+      title: t('category2Title'),
+      description: t('category2Desc'),
       icon: <Palette className="w-8 h-8 text-background" />,
       skills: ['jQuery', 'React', 'Pandas', 'Numpy', 'Plotly', 'Axios', 'Huggingface', 'Gofiber'],
       href: '/skills/tech'
     },
     {
       id: 'framework',
-      title: 'Framework',
-      description: 'Development frameworks and platforms',
+      title: t('category3Title'),
+      description: t('category3Desc'),
       icon: <Server className="w-8 h-8 text-background" />,
       skills: ['Express.js', 'FastAPI', 'Next.js', 'Angular', 'Vue', '.Net', 'Spring Boot', 'Laravel', 'Llamaindex', 'Langchain', 'Pytorch', 'Apache Airflow', 'Flutter'],
       href: '/skills/tech'
     },
     {
       id: 'database',
-      title: 'Database',
-      description: 'Database systems and technologies',
+      title: t('category4Title'),
+      description: t('category4Desc'),
       icon: <Database className="w-8 h-8 text-background" />,
       skills: ['SQLite', 'Postgresql', 'SQL Server', 'MongoDB', 'Neon', 'Supabase'],
       href: '/skills/tech'
     },
     {
       id: 'cloud',
-      title: 'Cloud',
-      description: 'Cloud platforms and containerization',
+      title: t('category5Title'),
+      description: t('category5Desc'),
       icon: <Cloud className="w-8 h-8 text-background" />,
       skills: ['DigitalOcean', 'GCP', 'Docker', 'AWS', 'K8s', 'Lens'],
       href: '/skills/tech'
     },
     {
       id: 'runtime',
-      title: 'Runtime',
-      description: 'Runtime environments and platforms',
+      title: t('category6Title'),
+      description: t('category6Desc'),
       icon: <Server className="w-8 h-8 text-background" />,
       skills: ['Nodejs'],
       href: '/skills/tech'
@@ -63,18 +64,18 @@ export function SkillsClient() {
   ];
 
   const quickSkills = [
-    { name: 'Python', level: 'Expert', category: 'tech' },
-    { name: 'React/Next.js', level: 'Expert', category: 'tech' },
-    { name: 'FastAPI', level: 'Advanced', category: 'tech' },
-    { name: 'PostgreSQL', level: 'Advanced', category: 'tech' },
-    { name: 'Docker', level: 'Advanced', category: 'tech' },
-    { name: 'Flutter', level: 'Advanced', category: 'tech' },
-    { name: 'AWS', level: 'Advanced', category: 'tech' },
-    { name: 'Nodejs', level: 'Expert', category: 'tech' },
-    { name: 'MongoDB', level: 'Advanced', category: 'tech' },
-    { name: 'Langchain', level: 'Advanced', category: 'tech' },
-    { name: 'Pytorch', level: 'Intermediate', category: 'tech' },
-    { name: 'K8s', level: 'Intermediate', category: 'tech' }
+    { name: 'Python', level: t('levelExpert'), category: 'tech' },
+    { name: 'React/Next.js', level: t('levelExpert'), category: 'tech' },
+    { name: 'FastAPI', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'PostgreSQL', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'Docker', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'Flutter', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'AWS', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'Nodejs', level: t('levelExpert'), category: 'tech' },
+    { name: 'MongoDB', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'Langchain', level: t('levelAdvanced'), category: 'tech' },
+    { name: 'Pytorch', level: t('levelIntermediate'), category: 'tech' },
+    { name: 'K8s', level: t('levelIntermediate'), category: 'tech' }
   ];
 
   return (
@@ -93,11 +94,10 @@ export function SkillsClient() {
           >
             <MixedTypographyTitle
               words={[
-                { text: "My", style: "cursive", size: "xl" },
-                { text: "Skills", style: "bubble", size: "xl" },
-                { text: "&", style: "filled", size: "lg" },
-                { text: "Expertise", style: "block", size: "xl" },
-                { text: "🚀", style: "block", size: "lg" }
+                { text: t("journeyWord1"), style: "cursive", size: "xl" },
+                { text: t("journeyWord2"), style: "bubble", size: "xl" },
+                { text: t("journeyWord3"), style: "filled", size: "lg" },
+                { text: t("journeyWord4"), style: "block", size: "xl" }
               ]}
               className="mb-6"
             />
@@ -110,8 +110,7 @@ export function SkillsClient() {
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
           >
             <p className="text-lg text-muted-foreground">
-              A comprehensive showcase of my technical, creative, and multimedia skills.
-              Click on each category to explore detailed breakdowns and real-world applications.
+              {t('heroDescription')}
             </p>
           </motion.div>
         </motion.div>
@@ -137,8 +136,8 @@ export function SkillsClient() {
                 <StickyNote color={colors[index]} rotation={rotations[index]} className="h-full p-6 cursor-pointer group">
                   <div className="text-center space-y-4">
                     <motion.div
-                      className="w-16 h-16 mx-auto bg-primary/10 flex items-center justify-center"
-                      whileHover={reducedMotion ? undefined : { rotate: 5, scale: 1.1 }}
+                       className="w-16 h-16 mx-auto bg-primary/10 flex items-center justify-center"
+                       whileHover={reducedMotion ? undefined : { rotate: 5, scale: 1.1 }}
                     >
                       {category.icon}
                     </motion.div>
@@ -157,12 +156,12 @@ export function SkillsClient() {
                         ))}
                         {category.skills.length > 3 && (
                           <Badge variant="outline" className="text-xs">
-                            +{category.skills.length - 3} more
+                            {t('moreText', { count: category.skills.length - 3 })}
                           </Badge>
                         )}
                       </div>
                       <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        Explore Skills →
+                        {t('exploreButton')}
                       </Button>
                     </div>
                   </div>
@@ -176,8 +175,8 @@ export function SkillsClient() {
       {/* Quick Skills Overview */}
       <div className="mb-8">
         <NotebookSectionHeader
-          title="Quick Skills Overview"
-          subtitle="My proficiency levels across different technologies and tools"
+          title={t("quickOverviewTitle")}
+          subtitle={t("quickOverviewSubtitle")}
           className="mb-6"
         />
 
@@ -196,7 +195,7 @@ export function SkillsClient() {
               >
                 <div className="font-semibold text-sm">{skill.name}</div>
                 <Badge
-                  variant={skill.level === 'Expert' ? 'default' : 'secondary'}
+                  variant={skill.level === t('levelExpert') ? 'default' : 'secondary'}
                   className="text-xs mt-1"
                 >
                   {skill.level}
@@ -217,21 +216,20 @@ export function SkillsClient() {
       >
         <div className="p-8 max-w-4xl mx-auto space-y-6">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-            Continuous Learning & Growth
+            {t('learningGrowthTitle')}
           </h2>
           <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
-            Technology and creative fields evolve rapidly. I'm committed to staying current with the latest
-            tools, techniques, and trends. Each skill category represents an ongoing journey of learning and mastery.
+            {t('learningGrowthDesc')}
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button asChild>
-                <Link href="/contact">Discuss a Project</Link>
+                <Link href="/contact">{t('discussProjectButton')}</Link>
               </Button>
             </motion.div>
             <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button variant="outline" asChild>
-                <Link href="/about">Learn My Story</Link>
+                <Link href="/about">{t('learnStoryButton')}</Link>
               </Button>
             </motion.div>
           </div>

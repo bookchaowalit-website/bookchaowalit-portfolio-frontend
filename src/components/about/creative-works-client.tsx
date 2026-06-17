@@ -5,10 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Palette, Lightbulb, Camera, Brush, Code, Sparkles } from "lucide-react";
 
 export function CreativeWorksClient() {
+  const t = useTranslations("about_creative");
   const reducedMotion = useReducedMotion();
+  
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
@@ -25,8 +28,8 @@ export function CreativeWorksClient() {
         >
           <MixedTypographyTitle 
             words={[
-              { text: "Creative", style: "cursive", size: "xl" },
-              { text: "Works", style: "block", size: "xl" },
+              { text: t("titleWord1"), style: "cursive", size: "xl" },
+              { text: t("titleWord2"), style: "block", size: "xl" },
               { text: "🎨", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -41,8 +44,10 @@ export function CreativeWorksClient() {
         >
           <StickyNote rotation={1} className="text-center" color="yellow">
             <p className="text-sm text-foreground">
-              Where <HandDrawnHighlight color="yellow">technology meets artistry</HandDrawnHighlight> and{" "}
-              <HandDrawnHighlight color="pink">innovation blends with expression</HandDrawnHighlight>
+              {t.rich("heroStickNote", {
+                yellow: (chunks) => <HandDrawnHighlight color="yellow">{chunks}</HandDrawnHighlight>,
+                pink: (chunks) => <HandDrawnHighlight color="pink">{chunks}</HandDrawnHighlight>
+              })}
             </p>
           </StickyNote>
         </motion.div>
@@ -52,24 +57,24 @@ export function CreativeWorksClient() {
         {/* Creative Philosophy */}
         <div className="py-8">
           <NotebookSectionHeader 
-            title="Design Philosophy" 
-            subtitle="How creativity enhances technical solutions"
+            title={t("philosophyTitle")} 
+            subtitle={t("philosophySubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Form Follows Function, Beauty Enhances Both" type="note">
+            <StudyGuideBox title={t("philosophy1Title")} type="note">
               <p className="text-foreground leading-relaxed">
-                I believe that <HandDrawnHighlight color="green">beautiful design isn't just decoration</HandDrawnHighlight>—it's functional. 
-                Good design reduces cognitive load, improves user experience, and makes complex systems more approachable. 
-                Every color choice, spacing decision, and interaction pattern serves a purpose.
+                {t.rich("philosophy1Content", {
+                  green: (chunks) => <HandDrawnHighlight color="green">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Constraints Fuel Creativity" type="tip">
+            <StudyGuideBox title={t("philosophy2Title")} type="tip">
               <p className="text-foreground leading-relaxed">
-                Working within technical constraints or business requirements often leads to my most creative solutions. 
-                <HandDrawnHighlight color="blue">Limitations force innovation</HandDrawnHighlight>—whether it's designing a responsive layout 
-                that works across all devices or creating an intuitive interface for complex data.
+                {t.rich("philosophy2Content", {
+                  blue: (chunks) => <HandDrawnHighlight color="blue">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>
@@ -80,16 +85,16 @@ export function CreativeWorksClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Palette className="h-5 w-5" />
-              Design Skills & Tools
+              {t("toolsTitle")}
             </CardTitle>
-            <CardDescription>Creative tools that complement my development skills</CardDescription>
+            <CardDescription>{t("toolsSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold flex items-center gap-2 mb-3">
                   <Brush className="h-4 w-4 text-foreground" />
-                  Design Tools
+                  {t("toolsDesign")}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {["Figma", "Adobe XD", "Canva", "Framer", "Photoshop", "Illustrator"].map((tool, index) => (
@@ -110,7 +115,7 @@ export function CreativeWorksClient() {
               <div>
                 <h4 className="font-semibold flex items-center gap-2 mb-3">
                   <Code className="h-4 w-4 text-foreground" />
-                  Creative Coding
+                  {t("toolsCoding")}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {["CSS Animation", "SVG Graphics", "Canvas API", "Three.js", "Framer Motion", "Lottie"].map((skill, index) => (
@@ -136,34 +141,31 @@ export function CreativeWorksClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Sparkles className="h-5 w-5" />
-              Recent Creative Projects
+              {t("projectsTitle")}
             </CardTitle>
-            <CardDescription>Blending artistry with functionality</CardDescription>
+            <CardDescription>{t("projectsSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid gap-px bg-border">
               <div className="bg-background p-4">
-                <h4 className="font-semibold">Interactive Data Visualizations</h4>
-                <p className="text-sm text-muted-foreground mb-2">Making complex analytics beautiful and understandable</p>
+                <h4 className="font-semibold">{t("project1Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("project1Desc")}</p>
                 <p className="text-sm">
-                  Created animated dashboard components that transform boring spreadsheet data into engaging visual stories. 
-                  Used D3.js and custom CSS animations to make business metrics come alive.
+                  {t("project1Content")}
                 </p>
               </div>
               <div className="bg-background p-4">
-                <h4 className="font-semibold">Brand Identity Systems</h4>
-                <p className="text-sm text-muted-foreground mb-2">Cohesive visual languages for digital products</p>
+                <h4 className="font-semibold">{t("project2Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("project2Desc")}</p>
                 <p className="text-sm">
-                  Developed complete design systems including typography scales, color palettes, and component libraries 
-                  that maintain brand consistency across web and mobile platforms.
+                  {t("project2Content")}
                 </p>
               </div>
               <div className="bg-background p-4">
-                <h4 className="font-semibold">Micro-Interactions & Animations</h4>
-                <p className="text-sm text-muted-foreground mb-2">Details that delight users and enhance usability</p>
+                <h4 className="font-semibold">{t("project3Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("project3Desc")}</p>
                 <p className="text-sm">
-                  Crafted subtle hover effects, loading animations, and transition states that provide feedback 
-                  and guide users through complex workflows without being distracting.
+                  {t("project3Content")}
                 </p>
               </div>
             </div>
@@ -173,40 +175,41 @@ export function CreativeWorksClient() {
         {/* Creative Process */}
         <div className="py-8">
           <NotebookSectionHeader 
-            title="My Creative Process" 
-            subtitle="From inspiration to implementation"
+            title={t("processTitle")} 
+            subtitle={t("processSubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <StudyGuideBox title="1. Research & Inspiration" type="tip">
+              <StudyGuideBox title={t("process1Title")} type="tip">
                 <p className="text-foreground leading-relaxed text-sm">
-                  I gather inspiration from <HandDrawnHighlight color="yellow">diverse sources</HandDrawnHighlight>
-                  architecture, nature, minimalist art, and even street photography. I maintain a collection 
-                  of design patterns and color combinations that catch my eye.
+                  {t.rich("process1Content", {
+                    yellow: (chunks) => <HandDrawnHighlight color="yellow">{chunks}</HandDrawnHighlight>
+                  })}
                 </p>
               </StudyGuideBox>
               
-              <StudyGuideBox title="2. Sketch & Wireframe" type="note">
+              <StudyGuideBox title={t("process2Title")} type="note">
                 <p className="text-foreground leading-relaxed text-sm">
-                  Before touching any digital tools, I <HandDrawnHighlight color="pink">sketch ideas on paper</HandDrawnHighlight>. 
-                  This helps me think through user flows and information hierarchy without getting distracted 
-                  by colors or fancy effects.
+                  {t.rich("process2Content", {
+                    pink: (chunks) => <HandDrawnHighlight color="pink">{chunks}</HandDrawnHighlight>
+                  })}
                 </p>
               </StudyGuideBox>
               
-              <StudyGuideBox title="3. Prototype & Test" type="important">
+              <StudyGuideBox title={t("process3Title")} type="important">
                 <p className="text-foreground leading-relaxed text-sm">
-                  I create <HandDrawnHighlight color="green">interactive prototypes</HandDrawnHighlight> to test ideas 
-                  with real users. This reveals usability issues early and validates design decisions 
-                  before development begins.
+                  {t.rich("process3Content", {
+                    green: (chunks) => <HandDrawnHighlight color="green">{chunks}</HandDrawnHighlight>
+                  })}
                 </p>
               </StudyGuideBox>
               
-              <StudyGuideBox title="4. Iterate & Refine" type="tip">
+              <StudyGuideBox title={t("process4Title")} type="tip">
                 <p className="text-foreground leading-relaxed text-sm">
-                  Design is never finished on the first try. I <HandDrawnHighlight color="blue">embrace feedback</HandDrawnHighlight> 
-                  and continuously refine based on user behavior data and stakeholder input.
+                  {t.rich("process4Content", {
+                    blue: (chunks) => <HandDrawnHighlight color="blue">{chunks}</HandDrawnHighlight>
+                  })}
                 </p>
               </StudyGuideBox>
             </div>
@@ -218,33 +221,33 @@ export function CreativeWorksClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lightbulb className="h-5 w-5" />
-              Sources of Creative Inspiration
+              {t("inspirationTitle")}
             </CardTitle>
-            <CardDescription>What fuels my creative thinking</CardDescription>
+            <CardDescription>{t("inspirationSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <Camera className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Photography</h4>
+                <h4 className="font-semibold">{t("insp1Title")}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Street photography and architectural details teach me about composition, lighting, and visual hierarchy.
+                  {t("insp1Content")}
                 </p>
               </div>
               
               <div className="text-center">
                 <Brush className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Minimalism</h4>
+                <h4 className="font-semibold">{t("insp2Title")}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Less is more. Scandinavian design and Japanese aesthetics influence my approach to clean, functional interfaces.
+                  {t("insp2Content")}
                 </p>
               </div>
               
               <div className="text-center">
                 <Sparkles className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Nature Patterns</h4>
+                <h4 className="font-semibold">{t("insp3Title")}</h4>
                 <p className="text-sm text-muted-foreground">
-                  Fibonacci sequences, organic curves, and natural color palettes provide endless inspiration for digital designs.
+                  {t("insp3Content")}
                 </p>
               </div>
             </div>
@@ -254,32 +257,32 @@ export function CreativeWorksClient() {
         {/* Connection to Tech Work */}
         <div className="py-8">
           <NotebookSectionHeader 
-            title="Creativity → Better Tech" 
-            subtitle="How creative thinking improves my development"
+            title={t("techTitle")} 
+            subtitle={t("techSubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="User-Centered Development" type="important">
+            <StudyGuideBox title={t("tech1Title")} type="important">
               <p className="text-foreground leading-relaxed">
-                My design background means I always <HandDrawnHighlight color="yellow">start with the user experience</HandDrawnHighlight> 
-                when architecting systems. I think about information architecture, user flows, and edge cases before 
-                writing the first line of code.
+                {t.rich("tech1Content", {
+                  yellow: (chunks) => <HandDrawnHighlight color="yellow">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Creative Problem Solving" type="tip">
+            <StudyGuideBox title={t("tech2Title")} type="tip">
               <p className="text-foreground leading-relaxed">
-                Creative exercises train lateral thinking. When stuck on a technical problem, I often 
-                <HandDrawnHighlight color="pink">apply design thinking methods</HandDrawnHighlight>—brainstorming wildly, 
-                then constraining solutions, or approaching from completely different angles.
+                {t.rich("tech2Content", {
+                  pink: (chunks) => <HandDrawnHighlight color="pink">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Aesthetic Code" type="note">
+            <StudyGuideBox title={t("tech3Title")} type="note">
               <p className="text-foreground leading-relaxed">
-                I believe code can be beautiful. <HandDrawnHighlight color="green">Clean architecture, consistent naming, 
-                and elegant solutions</HandDrawnHighlight> have an aesthetic quality that makes codebases more 
-                maintainable and enjoyable to work with.
+                {t.rich("tech3Content", {
+                  green: (chunks) => <HandDrawnHighlight color="green">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>

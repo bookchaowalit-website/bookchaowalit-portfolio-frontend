@@ -10,9 +10,11 @@ import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mix
 import { SketchyFrame, StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Bot, BarChart3, Code, ShoppingBag, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
 
 export function ContactClient() {
+  const t = useTranslations("contact");
   const reducedMotion = useReducedMotion();
 
   const [formData, setFormData] = useState({
@@ -32,12 +34,12 @@ export function ContactClient() {
 
   const errors = useMemo(() => {
     const errs: Record<string, string> = {};
-    if (touched.name && formData.name.trim().length < 2) errs.name = 'Name must be at least 2 characters';
-    if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = 'Please enter a valid email address';
-    if (touched.subject && formData.subject.trim().length < 3) errs.subject = 'Subject must be at least 3 characters';
-    if (touched.message && formData.message.trim().length < 10) errs.message = 'Message must be at least 10 characters';
+    if (touched.name && formData.name.trim().length < 2) errs.name = t("errorNameMin");
+    if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = t("errorEmailInvalid");
+    if (touched.subject && formData.subject.trim().length < 3) errs.subject = t("errorSubjectMin");
+    if (touched.message && formData.message.trim().length < 10) errs.message = t("errorMessageMin");
     return errs;
-  }, [formData, touched]);
+  }, [formData, touched, t]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTouched((prev) => ({ ...prev, [e.target.name]: true }));
@@ -59,7 +61,7 @@ export function ContactClient() {
     // Mark all fields as touched to show any remaining errors
     setTouched({ name: true, email: true, subject: true, message: true });
     if (Object.keys(errors).length > 0) {
-      setSubmitStatus({ type: 'error', message: 'Please fix the errors above before submitting.' });
+      setSubmitStatus({ type: 'error', message: t("errorFixErrors") });
       return;
     }
     setIsSubmitting(true);
@@ -79,21 +81,21 @@ export function ContactClient() {
       if (response.ok) {
         setSubmitStatus({
           type: 'success',
-          message: data.message || 'Message sent successfully! I\'ll get back to you soon.'
+          message: data.message || t("successMessage")
         });
         // Clear form on success
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setSubmitStatus({
           type: 'error',
-          message: data.error || 'Failed to send message. Please try again.'
+          message: data.error || t("errorMessage")
         });
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Network error. Please check your connection and try again.'
+        message: t("errorNetwork")
       });
     } finally {
       setIsSubmitting(false);
@@ -115,8 +117,8 @@ export function ContactClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Let's", style: "cursive", size: "xl" },
-              { text: "Connect!", style: "bubble", size: "xl" },
+              { text: t("connectWord1"), style: "cursive", size: "xl" },
+              { text: t("connectWord2"), style: "bubble", size: "xl" },
               { text: "🚀", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -130,9 +132,7 @@ export function ContactClient() {
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <div className="bg-muted border border-border p-4">
-            <p className="text-foreground text-center leading-relaxed">
-              Always interested in <strong>new opportunities</strong>, <strong>AI projects</strong>, and innovative collaborations from <strong>Bangkok, Thailand</strong>!
-            </p>
+            <p className="text-foreground text-center leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw("introText") }} />
           </div>
         </motion.div>
       </motion.div>
@@ -147,10 +147,10 @@ export function ContactClient() {
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
-                Send Me a Message!
+                {t("sendMessage")}
               </h3>
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
-                Fill out the form below and I'll get back to you ASAP!
+                {t("formDescription")}
               </p>
             </motion.div>
             <div>
@@ -170,12 +170,12 @@ export function ContactClient() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t("name")}</Label>
                 <Input
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Your full name"
+                  placeholder={t("namePlaceholder")}
                   value={formData.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -188,12 +188,12 @@ export function ContactClient() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("email")}</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  placeholder={t("emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -206,12 +206,12 @@ export function ContactClient() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
+                <Label htmlFor="subject">{t("subject")}</Label>
                 <Input
                   id="subject"
                   name="subject"
                   type="text"
-                  placeholder="What's this about?"
+                  placeholder={t("subjectPlaceholder")}
                   value={formData.subject}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -224,11 +224,11 @@ export function ContactClient() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message">{t("message")}</Label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Tell me about your project or how I can help..."
+                  placeholder={t("messagePlaceholder")}
                   className="min-h-32"
                   value={formData.message}
                   onChange={handleChange}
@@ -245,10 +245,10 @@ export function ContactClient() {
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Sending...
+                    {t("sending")}
                   </>
                 ) : (
-                  'Send Message'
+                  t("sendButton")
                 )}
               </Button>
             </form>
@@ -259,14 +259,14 @@ export function ContactClient() {
         {/* Contact Info */}
         <div className="space-y-6">
           <div className="py-8">
-            <NotebookSectionHeader title="Contact Information" subtitle="How to reach me" className="mb-4" />
+            <NotebookSectionHeader title={t("contactInfo")} subtitle={t("howToReachMe")} className="mb-4" />
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 flex items-center justify-center">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-medium">Email</p>
+                  <p className="font-medium">{t("email")}</p>
                   <p className="text-sm text-muted-foreground">bookchaowalit@gmail.com</p>
                 </div>
               </div>
@@ -276,7 +276,7 @@ export function ContactClient() {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-medium">Phone</p>
+                  <p className="font-medium">{t("phone")}</p>
                   <p className="text-sm text-muted-foreground">+66 65-416-9146</p>
                 </div>
               </div>
@@ -286,15 +286,15 @@ export function ContactClient() {
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="font-medium">Location</p>
-                  <p className="text-sm text-muted-foreground">Bangkok Metropolitan Area, Thailand</p>
+                  <p className="font-medium">{t("location")}</p>
+                  <p className="text-sm text-muted-foreground">{t("locationDetails")}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="py-8">
-            <NotebookSectionHeader title="Social Media & Freelance Platforms" subtitle="Connect with me or hire me" className="mb-4" />
+            <NotebookSectionHeader title={t("socialMediaFreelancePlatforms")} subtitle={t("connectHireDescription")} className="mb-4" />
             <div className="grid grid-cols-2 gap-4">
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://github.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
@@ -348,52 +348,51 @@ export function ContactClient() {
           </div>
 
           <StickyNote rotation={-1}>
-            <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">What I Can Help With</h3>
+            <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">{t("whatICanHelp")}</h3>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary"><Bot className="w-3 h-3" /></Badge>
-                <span className="text-sm">AI integration & RAG systems</span>
+                <span className="text-sm">{t("helpAi")}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary"><BarChart3 className="w-3 h-3" /></Badge>
-                <span className="text-sm">SEO optimization & analytics</span>
+                <span className="text-sm">{t("helpSeo")}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary"><Code className="w-3 h-3" /></Badge>
-                <span className="text-sm">Full-stack development</span>
+                <span className="text-sm">{t("helpFullStack")}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary"><ShoppingBag className="w-3 h-3" /></Badge>
-                <span className="text-sm">Shopify e-commerce solutions</span>
+                <span className="text-sm">{t("helpShopify")}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary"><TrendingUp className="w-3 h-3" /></Badge>
-                <span className="text-sm">Data analysis & social media insights</span>
+                <span className="text-sm">{t("helpData")}</span>
               </div>
             </div>
           </StickyNote>
 
           <div className="py-8">
-            <NotebookSectionHeader title="Response Time" subtitle="When to expect a reply" className="mb-4" />
+            <NotebookSectionHeader title={t("responseTime")} subtitle={t("whenToExpectReply")} className="mb-4" />
             <p className="text-sm text-muted-foreground">
-              I typically respond to messages within 24-48 hours (Bangkok timezone UTC+7).
-              For urgent AI or development projects, please mention it in the subject line.
+              {t("responseDescription")}
             </p>
 
             <Separator className="my-4" />
 
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm">General inquiries</span>
-                <Badge variant="outline">24-48 hours</Badge>
+                <span className="text-sm">{t("generalInquiries")}</span>
+                <Badge variant="outline">{t("timeGeneral")}</Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm">AI/Development projects</span>
-                <Badge variant="outline">Same day</Badge>
+                <span className="text-sm">{t("projectDiscussions")}</span>
+                <Badge variant="outline">{t("timeProjects")}</Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm">Urgent matters</span>
-                <Badge variant="outline">2-4 hours</Badge>
+                <span className="text-sm">{t("urgentMatters")}</span>
+                <Badge variant="outline">{t("timeUrgent")}</Badge>
               </div>
             </div>
           </div>

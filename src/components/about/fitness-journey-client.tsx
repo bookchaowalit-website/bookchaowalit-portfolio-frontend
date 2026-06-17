@@ -5,10 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Dumbbell, Target, TrendingUp, Heart, Brain, Zap } from "lucide-react";
 
 export function FitnessJourneyClient() {
+  const t = useTranslations("about_fitness");
   const reducedMotion = useReducedMotion();
+  
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
@@ -25,8 +28,8 @@ export function FitnessJourneyClient() {
         >
           <MixedTypographyTitle 
             words={[
-              { text: "Fitness", style: "block", size: "xl" },
-              { text: "Journey", style: "cursive", size: "xl" },
+              { text: t("titleWord1"), style: "block", size: "xl" },
+              { text: t("titleWord2"), style: "cursive", size: "xl" },
               { text: "💪", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -41,9 +44,11 @@ export function FitnessJourneyClient() {
         >
           <StickyNote rotation={-1} className="text-center" color="pink">
             <p className="text-sm text-foreground">
-              How <HandDrawnHighlight color="yellow">fitness principles</HandDrawnHighlight> shape my approach to{" "}
-              <HandDrawnHighlight color="pink">problem-solving</HandDrawnHighlight> and{" "}
-              <HandDrawnHighlight color="green">building sustainable solutions</HandDrawnHighlight>
+              {t.rich("heroStickNote", {
+                yellow: (chunks) => <HandDrawnHighlight color="yellow">{chunks}</HandDrawnHighlight>,
+                pink: (chunks) => <HandDrawnHighlight color="pink">{chunks}</HandDrawnHighlight>,
+                green: (chunks) => <HandDrawnHighlight color="green">{chunks}</HandDrawnHighlight>
+              })}
             </p>
           </StickyNote>
         </motion.div>
@@ -53,24 +58,24 @@ export function FitnessJourneyClient() {
         {/* Philosophy Section */}
         <div className="py-8">
           <NotebookSectionHeader 
-            title="Mind-Body Connection" 
-            subtitle="How fitness shapes my tech mindset"
+            title={t("philosophyTitle")} 
+            subtitle={t("philosophySubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Progressive Overload = Continuous Learning" type="tip">
+            <StudyGuideBox title={t("progressiveOverloadTitle")} type="tip">
               <p className="text-foreground leading-relaxed">
-                Just like in fitness, I believe in <HandDrawnHighlight color="blue">progressive overload</HandDrawnHighlight> in learning new technologies. 
-                I gradually increase the complexity of projects I take on, ensuring steady growth without burnout. 
-                Whether it's mastering a new framework or understanding complex AI concepts, consistency beats intensity.
+                {t.rich("progressiveOverloadContent", {
+                  blue: (chunks) => <HandDrawnHighlight color="blue">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Recovery and Reflection" type="note">
+            <StudyGuideBox title={t("recoveryReflectionTitle")} type="note">
               <p className="text-foreground leading-relaxed">
-                Recovery days in fitness taught me the importance of <HandDrawnHighlight color="yellow">stepping back and reflecting</HandDrawnHighlight>. 
-                In my work, I regularly take time to review code, analyze project outcomes, and plan improvements. 
-                This prevents technical debt and ensures long-term sustainability.
+                {t.rich("recoveryReflectionContent", {
+                  yellow: (chunks) => <HandDrawnHighlight color="yellow">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>
@@ -81,37 +86,37 @@ export function FitnessJourneyClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Dumbbell className="h-5 w-5" />
-              Current Fitness Routine
+              {t("routineTitle")}
             </CardTitle>
-            <CardDescription>How I stay physically and mentally sharp</CardDescription>
+            <CardDescription>{t("routineSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-4">
                 <h4 className="font-semibold flex items-center gap-2">
                   <Target className="h-4 w-4 text-foreground" />
-                  Weekly Structure
+                  {t("weeklyStructure")}
                 </h4>
                 <ul className="text-sm space-y-2">
                   <li className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">Mon/Thu</Badge>
-                    Upper Body Strength
+                    <Badge variant="secondary" className="text-xs">{t("dayMonThu")}</Badge>
+                    {t("routineMonThu")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">Tue/Fri</Badge>
-                    Lower Body Strength
+                    <Badge variant="secondary" className="text-xs">{t("dayTueFri")}</Badge>
+                    {t("routineTueFri")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">Wed</Badge>
-                    Cardio & Mobility
+                    <Badge variant="secondary" className="text-xs">{t("dayWed")}</Badge>
+                    {t("routineWed")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">Sat</Badge>
-                    Active Recovery
+                    <Badge variant="secondary" className="text-xs">{t("daySat")}</Badge>
+                    {t("routineSat")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">Sun</Badge>
-                    Complete Rest
+                    <Badge variant="secondary" className="text-xs">{t("daySun")}</Badge>
+                    {t("routineSun")}
                   </li>
                 </ul>
               </div>
@@ -119,14 +124,14 @@ export function FitnessJourneyClient() {
               <div className="space-y-4">
                 <h4 className="font-semibold flex items-center gap-2">
                   <Brain className="h-4 w-4 text-foreground" />
-                  Mental Benefits
+                  {t("mentalBenefits")}
                 </h4>
                 <ul className="text-sm space-y-2">
-                  <li>• Enhanced problem-solving clarity</li>
-                  <li>• Better stress management during tight deadlines</li>
-                  <li>• Improved focus during long coding sessions</li>
-                  <li>• Higher energy levels throughout the day</li>
-                  <li>• Better sleep quality for cognitive recovery</li>
+                  <li>• {t("benefit1")}</li>
+                  <li>• {t("benefit2")}</li>
+                  <li>• {t("benefit3")}</li>
+                  <li>• {t("benefit4")}</li>
+                  <li>• {t("benefit5")}</li>
                 </ul>
               </div>
             </div>
@@ -138,31 +143,31 @@ export function FitnessJourneyClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5" />
-              Goals & Progress Tracking
+              {t("goalsTitle")}
             </CardTitle>
-            <CardDescription>Data-driven approach to fitness, just like in tech</CardDescription>
+            <CardDescription>{t("goalsSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <Heart className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Cardiovascular</h4>
-                <p className="text-sm text-muted-foreground">Target: Sub-6 min/km 5K</p>
-                <p className="text-sm">Current: 6:20 min/km</p>
+                <h4 className="font-semibold">{t("cardio")}</h4>
+                <p className="text-sm text-muted-foreground">{t("cardioTarget")}</p>
+                <p className="text-sm">{t("cardioCurrent")}</p>
               </div>
               
               <div className="text-center">
                 <Zap className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Strength</h4>
-                <p className="text-sm text-muted-foreground">Target: 1.5x BW Bench</p>
-                <p className="text-sm">Current: 1.2x BW</p>
+                <h4 className="font-semibold">{t("strength")}</h4>
+                <p className="text-sm text-muted-foreground">{t("strengthTarget")}</p>
+                <p className="text-sm">{t("strengthCurrent")}</p>
               </div>
               
               <div className="text-center">
                 <Target className="h-8 w-8 text-foreground mx-auto mb-2" />
-                <h4 className="font-semibold">Consistency</h4>
-                <p className="text-sm text-muted-foreground">Target: 85% weekly</p>
-                <p className="text-sm">Current: 78%</p>
+                <h4 className="font-semibold">{t("consistency")}</h4>
+                <p className="text-sm text-muted-foreground">{t("consistencyTarget")}</p>
+                <p className="text-sm">{t("consistencyCurrent")}</p>
               </div>
             </div>
           </CardContent>
@@ -171,31 +176,32 @@ export function FitnessJourneyClient() {
         {/* Lessons Applied to Tech */}
         <div className="py-8">
           <NotebookSectionHeader 
-            title="Fitness → Tech Lessons" 
-            subtitle="Principles I apply from gym to code"
+            title={t("lessonsTitle")} 
+            subtitle={t("lessonsSubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Compound Movements = System Architecture" type="important">
+            <StudyGuideBox title={t("compoundTitle")} type="important">
               <p className="text-foreground leading-relaxed">
-                <HandDrawnHighlight color="pink">Compound exercises</HandDrawnHighlight> work multiple muscle groups efficiently, 
-                just like good system architecture addresses multiple concerns with elegant solutions. 
-                I focus on building systems that solve multiple problems rather than one-off fixes.
+                {t.rich("compoundContent", {
+                  pink: (chunks) => <HandDrawnHighlight color="pink">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Form Over Weight = Code Quality Over Speed" type="tip">
+            <StudyGuideBox title={t("formTitle")} type="tip">
               <p className="text-foreground leading-relaxed">
-                Perfect form with lighter weights prevents injury and builds better habits. Similarly, 
-                <HandDrawnHighlight color="green">writing clean, maintainable code</HandDrawnHighlight> is more valuable 
-                than rushing to meet deadlines with technical debt.
+                {t.rich("formContent", {
+                  green: (chunks) => <HandDrawnHighlight color="green">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
             
-            <StudyGuideBox title="Tracking Progress = Analytics & Metrics" type="note">
+            <StudyGuideBox title={t("trackingTitle")} type="note">
               <p className="text-foreground leading-relaxed">
-                I log every workout with sets, reps, and weights. This same <HandDrawnHighlight color="blue">data-driven approach</HandDrawnHighlight> applies 
-                to tracking project metrics, user analytics, and performance optimization in my development work.
+                {t.rich("trackingContent", {
+                  blue: (chunks) => <HandDrawnHighlight color="blue">{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>
@@ -204,33 +210,33 @@ export function FitnessJourneyClient() {
         {/* Connection to Solopreneur Journey */}
         <Card>
           <CardHeader>
-            <CardTitle>Fitness as a Solopreneur Advantage</CardTitle>
-            <CardDescription>Why physical health is crucial for independent work</CardDescription>
+            <CardTitle>{t("solopreneurTitle")}</CardTitle>
+            <CardDescription>{t("solopreneurSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
-                As a solopreneur, I am both my greatest asset and my single point of failure. Maintaining physical fitness isn't just about health—it's about business continuity and peak performance.
+                {t("solopreneurDescription")}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div>
-                  <h4 className="font-semibold mb-2">Physical Benefits</h4>
+                  <h4 className="font-semibold mb-2">{t("physicalBenefits")}</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Reduced back pain from long coding sessions</li>
-                    <li>• Higher energy levels for client meetings</li>
-                    <li>• Better posture during video calls</li>
-                    <li>• Improved immune system (less sick days)</li>
+                    <li>• {t("phys1")}</li>
+                    <li>• {t("phys2")}</li>
+                    <li>• {t("phys3")}</li>
+                    <li>• {t("phys4")}</li>
                   </ul>
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold mb-2">Mental Benefits</h4>
+                  <h4 className="font-semibold mb-2">{t("mentalBenefits")}</h4>
                   <ul className="text-sm space-y-1">
-                    <li>• Enhanced creativity during problem-solving</li>
-                    <li>• Better decision-making under pressure</li>
-                    <li>• Increased confidence in presentations</li>
-                    <li>• Improved work-life balance</li>
+                    <li>• {t("ment1")}</li>
+                    <li>• {t("ment2")}</li>
+                    <li>• {t("ment3")}</li>
+                    <li>• {t("ment4")}</li>
                   </ul>
                 </div>
               </div>

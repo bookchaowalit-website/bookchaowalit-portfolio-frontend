@@ -23,8 +23,8 @@ export function AboutSection() {
       <div className="text-center">
         <MixedTypographyTitle 
           words={[
-            { text: "About", style: "cursive", size: "lg" },
-            { text: "Me", style: "bubble", size: "lg" },
+            { text: t('aboutWord1'), style: "cursive", size: "lg" },
+            { text: t('aboutWord2'), style: "bubble", size: "lg" },
             { text: "👨‍💻", style: "block", size: "md" }
           ]}
           className="mb-6"
@@ -42,13 +42,13 @@ export function AboutSection() {
             <div className="space-y-6">
               <div className="flex flex-wrap justify-center gap-3 mb-6">
                 <Badge variant="secondary" className="bg-muted text-foreground">
-                  🇹🇭 Bangkok Based
+                  {t('bangkokBased')}
                 </Badge>
                 <Badge variant="secondary" className="bg-muted text-foreground">
-                  💼 3+ Years Experience
+                  {t('yearsExperience')}
                 </Badge>
                 <Badge variant="secondary" className="bg-muted text-foreground">
-                  🚀 Tech Generalist
+                  {t('techGeneralist')}
                 </Badge>
               </div>
               
@@ -59,19 +59,19 @@ export function AboutSection() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div className="space-y-1">
                   <div className="text-2xl">🤖</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">AI Integration</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('aiIntegration')}</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">📊</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">Data Analytics</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('dataAnalytics')}</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">🌐</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">Full-Stack Dev</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('fullStackDev')}</p>
                 </div>
                 <div className="space-y-1">
                   <div className="text-2xl">📈</div>
-                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">SEO & Growth</p>
+                  <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('seoGrowth')}</p>
                 </div>
               </div>
               

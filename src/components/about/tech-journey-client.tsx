@@ -5,10 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Zap, Rocket } from "lucide-react";
 
 export function TechJourneyClient() {
+  const t = useTranslations("about_tech");
   const reducedMotion = useReducedMotion();
+  
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
@@ -25,8 +28,8 @@ export function TechJourneyClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "Tech", style: "block", size: "xl" },
-              { text: "Journey", style: "cursive", size: "xl" },
+              { text: t("titleWord1"), style: "block", size: "xl" },
+              { text: t("titleWord2"), style: "cursive", size: "xl" },
               { text: "🚀", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -41,9 +44,9 @@ export function TechJourneyClient() {
         >
           <StickyNote rotation={1} className="text-center">
             <p className="text-sm text-foreground">
-              From <HandDrawnHighlight>hardware tinkering</HandDrawnHighlight> to{" "}
-              <HandDrawnHighlight>AI systems</HandDrawnHighlight> — the evolution of a{" "}
-              <HandDrawnHighlight>Tech Generalist</HandDrawnHighlight>
+              {t.rich("heroStickNote", {
+                highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+              })}
             </p>
           </StickyNote>
         </motion.div>
@@ -53,17 +56,15 @@ export function TechJourneyClient() {
         {/* Timeline */}
         <div className="py-8">
           <NotebookSectionHeader
-            title="The Journey So Far"
-            subtitle="Key milestones in my technical evolution"
+            title={t("timelineTitle")}
+            subtitle={t("timelineSubtitle")}
             className="mb-6"
           />
           <div className="space-y-8">
             <div className="space-y-6">
-                <StudyGuideBox title="2018-2021: Electronics Foundation" type="note">
+                <StudyGuideBox title={t("milestone1Title")} type="note">
                   <p className="text-foreground leading-relaxed text-sm">
-                    Started with electronics at Chitralada Technology Institute.
-                    Learned circuit analysis, microcontroller programming, and digital systems.
-                    This hardware foundation taught me how computers really work at the lowest level.
+                    {t("milestone1Content")}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Badge variant="outline" className="text-xs">Arduino</Badge>
@@ -72,11 +73,9 @@ export function TechJourneyClient() {
                   </div>
                 </StudyGuideBox>
 
-                <StudyGuideBox title="2021-2022: Infrastructure & Networking" type="tip">
+                <StudyGuideBox title={t("milestone2Title")} type="tip">
                   <p className="text-foreground leading-relaxed text-sm">
-                    Worked in data centers and ISP operations. Learned about scalable infrastructure,
-                    network protocols, and how the internet actually works. This experience shapes how I think about
-                    performance and reliability in software systems.
+                    {t("milestone2Content")}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Badge variant="outline" className="text-xs">Fiber Optics</Badge>
@@ -85,11 +84,9 @@ export function TechJourneyClient() {
                   </div>
                 </StudyGuideBox>
 
-                <StudyGuideBox title="2022-2024: Web Development & SEO" type="important">
+                <StudyGuideBox title={t("milestone3Title")} type="important">
                   <p className="text-foreground leading-relaxed text-sm">
-                    Transitioned into web development and digital marketing. Self-taught React, Next.js, and SEO.
-                    Started with Shopify sites and grew into full-stack applications. This is where I discovered
-                    my love for solving business problems with technology.
+                    {t("milestone3Content")}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Badge variant="outline" className="text-xs">React</Badge>
@@ -99,11 +96,9 @@ export function TechJourneyClient() {
                   </div>
                 </StudyGuideBox>
 
-                <StudyGuideBox title="2024-Present: AI & Full-Stack Mastery" type="tip">
+                <StudyGuideBox title={t("milestone4Title")} type="tip">
                   <p className="text-foreground leading-relaxed text-sm">
-                    Deep dive into AI/ML with RAG systems, LangChain, and multi-agent architectures.
-                    Combining full-stack development with AI to create intelligent applications.
-                    This is where my generalist approach really pays off.
+                    {t("milestone4Content")}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <Badge variant="outline" className="text-xs">LangChain</Badge>
@@ -121,43 +116,38 @@ export function TechJourneyClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap className="h-5 w-5" />
-              Pivotal Moments
+              {t("pivotalTitle")}
             </CardTitle>
-            <CardDescription>Key decisions and discoveries that shaped my path</CardDescription>
+            <CardDescription>{t("pivotalSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
               <div className="grid gap-px bg-border">
               <div className="bg-background p-4">
-                <h4 className="font-semibold">The First Bug Fix</h4>
-                <p className="text-sm text-muted-foreground mb-2">When debugging became addictive</p>
+                <h4 className="font-semibold">{t("moment1Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("moment1Desc")}</p>
                 <p className="text-sm">
-                  Spent 6 hours debugging a simple circuit that wouldn't work. When I finally found the loose connection,
-                  the satisfaction was incredible. That's when I knew I loved problem-solving and would chase that feeling forever.
+                  {t("moment1Content")}
                 </p>
               </div>
               <div className="bg-background p-4">
-                <h4 className="font-semibold">Discovering the Web</h4>
-                <p className="text-sm text-muted-foreground mb-2">Realizing software could reach millions</p>
+                <h4 className="font-semibold">{t("moment2Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("moment2Desc")}</p>
                 <p className="text-sm">
-                  Built my first website to showcase electronics projects. Seeing people from around the world visit and
-                  interact with something I created was mind-blowing. The reach and impact potential of web development
-                  convinced me to make the transition.
+                  {t("moment2Content")}
                 </p>
               </div>
               <div className="bg-background p-4">
-                <h4 className="font-semibold">The AI Awakening</h4>
-                <p className="text-sm text-muted-foreground mb-2">When GPT-3 changed everything</p>
+                <h4 className="font-semibold">{t("moment3Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("moment3Desc")}</p>
                 <p className="text-sm">
-                  First experimented with GPT-3 API in early 2021. Realized this wasn't just another tool—it was a
-                  fundamental shift in how software could work. Started learning ML/AI seriously to stay ahead of the curve.
+                  {t("moment3Content")}
                 </p>
               </div>
               <div className="bg-background p-4">
-                <h4 className="font-semibold">Going Solo</h4>
-                <p className="text-sm text-muted-foreground mb-2">The leap into entrepreneurship</p>
+                <h4 className="font-semibold">{t("moment4Title")}</h4>
+                <p className="text-sm text-muted-foreground mb-2">{t("moment4Desc")}</p>
                 <p className="text-sm">
-                  Decided to become a solopreneur after realizing I could combine my technical skills with business needs.
-                  The freedom to choose projects, learn continuously, and directly impact clients' success is incredibly fulfilling.
+                  {t("moment4Content")}
                 </p>
               </div>
               </div>
@@ -167,32 +157,32 @@ export function TechJourneyClient() {
         {/* Technical Philosophy */}
         <div className="py-8">
           <NotebookSectionHeader
-            title="Technical Philosophy"
-            subtitle="How my journey shaped my approach to technology"
+            title={t("philosophyTitle")}
+            subtitle={t("philosophySubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Hardware Thinking for Software Problems" type="tip">
+            <StudyGuideBox title={t("philosophy1Title")} type="tip">
               <p className="text-foreground leading-relaxed">
-                My electronics background makes me think about <HandDrawnHighlight>performance, power consumption, and constraints</HandDrawnHighlight>
-                even in software. I naturally consider resource usage, optimization, and failure modes—habits that lead to
-                more robust applications.
+                {t.rich("philosophy1Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Infrastructure-Aware Development" type="note">
+            <StudyGuideBox title={t("philosophy2Title")} type="note">
               <p className="text-foreground leading-relaxed">
-                Having worked in data centers, I understand <HandDrawnHighlight>how code translates to actual hardware</HandDrawnHighlight>.
-                This makes me conscious of deployment environments, scaling bottlenecks, and operational concerns from
-                the early stages of development.
+                {t.rich("philosophy2Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Business-Driven Technology Choices" type="important">
+            <StudyGuideBox title={t("philosophy3Title")} type="important">
               <p className="text-foreground leading-relaxed">
-                My journey through different industries taught me that <HandDrawnHighlight>technology should serve business goals</HandDrawnHighlight>,
-                not exist for its own sake. I choose tools and architectures based on actual needs, not just what's trendy
-                or technically interesting.
+                {t.rich("philosophy3Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>
@@ -203,14 +193,14 @@ export function TechJourneyClient() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Rocket className="h-5 w-5" />
-              Current Tech Arsenal
+              {t("stackTitle")}
             </CardTitle>
-            <CardDescription>Tools and technologies I'm actively using in 2024-2025</CardDescription>
+            <CardDescription>{t("stackSubtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <h4 className="font-semibold mb-3">Frontend</h4>
+                <h4 className="font-semibold mb-3">{t("stackFrontend")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"].map((tech, index) => (
                     <motion.div
@@ -228,7 +218,7 @@ export function TechJourneyClient() {
               </div>
 
               <div>
-                <h4 className="font-semibold mb-3">Backend & AI</h4>
+                <h4 className="font-semibold mb-3">{t("stackBackend")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {["Python", "FastAPI", "LangChain", "LlamaIndex", "PostgreSQL", "Redis"].map((tech, index) => (
                     <motion.div
@@ -246,7 +236,7 @@ export function TechJourneyClient() {
               </div>
 
               <div>
-                <h4 className="font-semibold mb-3">Tools & Analytics</h4>
+                <h4 className="font-semibold mb-3">{t("stackTools")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {["Google Analytics", "Facebook API", "Docker", "Git", "Vercel", "AWS"].map((tech, index) => (
                     <motion.div
@@ -269,32 +259,32 @@ export function TechJourneyClient() {
         {/* What's Next */}
         <div className="py-8">
           <NotebookSectionHeader
-            title="The Road Ahead"
-            subtitle="Where technology is taking me next"
+            title={t("nextTitle")}
+            subtitle={t("nextSubtitle")}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="AI-First Development" type="tip">
+            <StudyGuideBox title={t("road1Title")} type="tip">
               <p className="text-foreground leading-relaxed">
-                I see a future where <HandDrawnHighlight>AI augments every step of the development process</HandDrawnHighlight>.
-                Not just code generation, but intelligent testing, automated optimization, and self-healing systems.
-                I'm positioning myself to be at the forefront of this transformation.
+                {t.rich("road1Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Edge Computing & IoT Renaissance" type="note">
+            <StudyGuideBox title={t("road2Title")} type="note">
               <p className="text-foreground leading-relaxed">
-                My electronics background makes me excited about <HandDrawnHighlight>edge computing and IoT</HandDrawnHighlight>.
-                As AI models get smaller and hardware gets more powerful, there will be incredible opportunities
-                to build intelligent systems that work offline and respond instantly.
+                {t.rich("road2Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Teaching & Community Building" type="important">
+            <StudyGuideBox title={t("road3Title")} type="important">
               <p className="text-foreground leading-relaxed">
-                I want to help others make similar transitions. <HandDrawnHighlight>Creating educational content and mentoring</HandDrawnHighlight>
-                the next generation of developers who can bridge hardware and software, technical and business,
-                local and global perspectives.
+                {t.rich("road3Content", {
+                  highlight: (chunks) => <HandDrawnHighlight>{chunks}</HandDrawnHighlight>
+                })}
               </p>
             </StudyGuideBox>
           </div>

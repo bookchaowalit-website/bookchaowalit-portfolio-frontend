@@ -8,6 +8,7 @@ import { Link } from "@/i18n/routing";
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ShareButton } from "@/components/share-button";
+import { getTranslations } from 'next-intl/server';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -28,10 +29,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const post = getBlogPost(slug);
+  const t = await getTranslations({ locale, namespace: 'blog' });
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: t('postNotFound'),
       robots: 'noindex, nofollow'
     };
   }
@@ -106,6 +108,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const t = await getTranslations({ locale, namespace: 'blog' });
   const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
 
   return (
@@ -113,7 +116,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       {/* Back button */}
       <div className="mb-8">
         <Button variant="ghost" asChild>
-          <Link href="/blog">← Back to Blog</Link>
+          <Link href="/blog">{t("backToBlog")}</Link>
         </Button>
       </div>
 
@@ -149,7 +152,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <div>
               <p className="font-medium">{post.author}</p>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <time>{new Date(post.publishedAt).toLocaleDateString('en-US', {
+                <time>{new Date(post.publishedAt).toLocaleDateString(locale === 'en' ? 'en-US' : 'th-TH', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
@@ -168,7 +171,9 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             />
           </div>
         </div>
-      </header>      {/* Article content */}
+      </header>
+
+      {/* Article content */}
       <article className="prose prose-lg max-w-none">
         <MDXRemote source={post.content} />
       </article>
@@ -183,17 +188,16 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <AvatarFallback className="text-lg">CG</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2">About {post.author}</h3>
+            <h3 className="text-lg font-semibold mb-2">{t("aboutAuthor", { author: post.author })}</h3>
             <p className="text-muted-foreground mb-4">
-              Tech Generalist from Bangkok, Thailand with expertise in AI integration, full-stack development, and SEO optimization.
-              I love sharing knowledge and helping developers build innovative solutions with modern technologies.
+              {t("authorBio")}
             </p>
             <div className="flex space-x-2">
               <Button variant="outline" size="sm" asChild>
-                <Link href="/about">Learn More</Link>
+                <Link href="/about">{t("learnMore")}</Link>
               </Button>
               <Button variant="outline" size="sm" asChild>
-                <Link href="/contact">Get In Touch</Link>
+                <Link href="/contact">{t("getInTouch")}</Link>
               </Button>
             </div>
           </div>
@@ -204,10 +208,10 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <section className="mt-12">
         <div className="flex justify-between items-center">
           <Button variant="ghost" asChild>
-            <Link href="/blog">← All Posts</Link>
+            <Link href="/blog">{t("allPosts")}</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/projects">View My Projects →</Link>
+            <Link href="/projects">{t("viewProjects")}</Link>
           </Button>
         </div>
       </section>

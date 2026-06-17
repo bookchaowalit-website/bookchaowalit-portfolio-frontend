@@ -12,11 +12,12 @@ const stickyColors = ["yellow", "pink", "green", "blue"] as const;
 const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
 
 function StatusBadge({ status }: { status: AppProject["status"] }) {
+  const t = useTranslations("projects");
   if (status === "live") {
     return (
       <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-green-700 bg-green-100 px-1.5 py-0.5">
         <span className="size-1.5 rounded-full bg-green-500 animate-pulse" />
-        Live
+        {t("statusLive")}
       </span>
     );
   }
@@ -24,13 +25,13 @@ function StatusBadge({ status }: { status: AppProject["status"] }) {
     return (
       <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-amber-700 bg-amber-100 px-1.5 py-0.5">
         <span className="size-1.5 rounded-full bg-amber-500" />
-        WIP
+        {t("statusWip")}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5">
-      Archived
+      {t("statusArchived")}
     </span>
   );
 }
@@ -42,13 +43,14 @@ function ProjectPreviewModal({
   project: AppProject;
   onClose: () => void;
 }) {
+  const t = useTranslations("projects");
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-foreground/40 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`${project.name} preview`}
+      aria-label={`${project.name} ${t("preview")}`}
     >
       <div
         className="bg-background border border-border max-w-lg w-full p-6 relative shadow-xl"
@@ -57,7 +59,7 @@ function ProjectPreviewModal({
         <button
           onClick={onClose}
           className="absolute top-3 right-3 size-8 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Close preview"
+          aria-label={t("closePreview")}
         >
           <X className="size-4" />
         </button>
@@ -74,7 +76,7 @@ function ProjectPreviewModal({
 
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
-              Tech Stack
+              {t("techStack")}
             </p>
             <div className="flex flex-wrap gap-1.5">
               {project.tech.map((t) => (
@@ -89,7 +91,7 @@ function ProjectPreviewModal({
           </div>
 
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="uppercase tracking-wider font-medium">Category:</span>
+            <span className="uppercase tracking-wider font-medium">{t("category")}:</span>
             <span>{categoryMeta[project.category].label}</span>
           </div>
 
@@ -101,7 +103,7 @@ function ProjectPreviewModal({
               className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               <Globe className="size-3.5" />
-              Live Demo
+              {t("liveDemo")}
               <ExternalLink className="size-3" />
             </a>
             <a
@@ -111,7 +113,7 @@ function ProjectPreviewModal({
               className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-border text-foreground hover:bg-muted transition-colors"
             >
               <Github className="size-3.5" />
-              Source Code
+              {t("sourceCode")}
             </a>
           </div>
         </div>
@@ -122,6 +124,7 @@ function ProjectPreviewModal({
 
 export function FeaturedProjects() {
   const t = useTranslations("home");
+  const tProjects = useTranslations("projects");
   const [preview, setPreview] = useState<AppProject | null>(null);
 
   const featured = allProjects.filter((p) => p.featured).slice(0, 6);
@@ -131,8 +134,8 @@ export function FeaturedProjects() {
       <div className="text-center">
         <MixedTypographyTitle
           words={[
-            { text: "Featured", style: "cursive", size: "lg" },
-            { text: "Projects", style: "filled", size: "lg" },
+            { text: tProjects("featuredWord1"), style: "cursive", size: "lg" },
+            { text: tProjects("featuredWord2"), style: "filled", size: "lg" },
           ]}
           className="mb-2"
         />
@@ -179,7 +182,7 @@ export function FeaturedProjects() {
                     className="text-[10px] uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors underline underline-offset-2"
                     aria-label={`Preview ${project.name}`}
                   >
-                    Preview
+                    {tProjects("preview")}
                   </button>
                   <a
                     href={project.url}

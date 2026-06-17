@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useTranslations } from "next-intl";
 import { ArrowUp, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Mail } from "lucide-react";
 
 const SCROLL_THRESHOLD = 400;
 
 function BackToTop() {
+  const t = useTranslations("footer");
   const [visible, setVisible] = useState(false);
   const reducedMotion = useReducedMotion();
 
@@ -28,7 +30,7 @@ function BackToTop() {
       exit={reducedMotion ? undefined : { opacity: 0, y: 10 }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
       className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label="Back to top"
+      aria-label={t("backToTop")}
     >
       <ArrowUp className="size-4" />
     </motion.button>
@@ -36,6 +38,8 @@ function BackToTop() {
 }
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
   const currentYear = new Date().getFullYear();
   const reducedMotion = useReducedMotion();
 
@@ -55,14 +59,14 @@ export function Footer() {
               className="relative"
             >
               <h2 className="text-3xl font-[family-name:var(--font-script)] text-foreground mb-4">
-                Thanks for visiting!
+                {t("thanksVisiting")}
               </h2>
             </motion.div>
 
             {/* Navigation with doodle style */}
             <motion.nav
               className="flex flex-wrap justify-center gap-6 mb-8"
-              aria-label="Footer navigation"
+              aria-label={t("footerNavigation")}
               initial={reducedMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
@@ -73,7 +77,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(1deg)` }}
                 >
-                  Home
+                  {tNav("home")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -82,7 +86,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(-0.5deg)` }}
                 >
-                  About
+                  {tNav("about")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -91,7 +95,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(0.5deg)` }}
                 >
-                  Projects
+                  {tNav("projects")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -100,7 +104,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(-0.8deg)` }}
                 >
-                  Business
+                  {tNav("business")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -109,7 +113,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(-1deg)` }}
                 >
-                  Blog
+                  {tNav("blog")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -118,7 +122,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(0.5deg)` }}
                 >
-                  Contact
+                  {tNav("contact")}
                 </Link>
               </motion.div>
             </motion.nav>
@@ -276,13 +280,11 @@ export function Footer() {
               className="text-center"
             >
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)]">
-                © {currentYear} Book (เชาวลิต กรีโภค)
+                {t("copyright", { year: currentYear })}
               </p>
-              <p className="text-xs text-foreground mt-1 flex items-center justify-center gap-1">
-                Made with <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 20" className="inline text-red-500/70"><path d="M12 18s-8-4-8-10c0-3 2-5 5-5 2 0 3 1 3 1s1-1 3-1c3 0 5 2 5 5 0 6-8 10-8 10z" fill="currentColor" stroke="none" /></svg></span><span className="sr-only">love</span> in Bangkok, Thailand
-              </p>
+              <p className="text-xs text-foreground mt-1 flex items-center justify-center gap-1" dangerouslySetInnerHTML={{ __html: t.raw("madeWith") }} />
               <p className="text-xs text-foreground mt-1">
-                Solopreneur • Full-Stack Developer • AI Specialist
+                {t("roles")}
               </p>
             </motion.div>
           </div>

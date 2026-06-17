@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import {
   allProjects,
-  categoryMeta,
   type ProjectCategory,
   type AppProject,
   type ProjectStatus,
@@ -64,6 +64,7 @@ function ProjectCard({
   starsError?: boolean;
   showScreenshot?: boolean;
 }) {
+  const t = useTranslations("projects");
   const [imgError, setImgError] = useState(false);
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
@@ -114,12 +115,12 @@ function ProjectCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
-            {categoryMeta[project.category].label}
+            {t("cat_" + project.category)}
           </span>
           <span className="flex items-center gap-1">
             <span className={`size-1.5 rounded-full ${status.dot}`} />
             <span className={`text-xs font-mono ${status.text}`}>
-              {status.label}
+              {t("status_" + project.status)}
             </span>
           </span>
         </div>
@@ -154,6 +155,7 @@ function ProjectCard({
 }
 
 export function ProjectsClient() {
+  const t = useTranslations("projects");
   const [activeCategory, setActiveCategory] = useState<"all" | ProjectCategory>("all");
   const [activeStatus, setActiveStatus] = useState<"all" | ProjectStatus>("all");
   const [search, setSearch] = useState("");
@@ -281,13 +283,13 @@ export function ProjectsClient() {
         <div className="text-center space-y-4">
           <MixedTypographyTitle
             words={[
-              { text: "All", style: "cursive", size: "xl" },
-              { text: "Projects", style: "filled", size: "xl" },
+              { text: t("titleWord1"), style: "cursive", size: "xl" },
+              { text: t("titleWord2"), style: "filled", size: "xl" },
             ]}
             className="mb-4"
           />
           <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-            {allProjects.length} micro-frontends deployed on Vercel, organized by purpose.
+            {t("subtitle", { count: allProjects.length })}
           </p>
         </div>
 
@@ -295,35 +297,35 @@ export function ProjectsClient() {
         <div className="grid grid-cols-5 max-w-lg mx-auto mt-8 gap-px bg-border">
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Total</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statTotal")}</span>
           </div>
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="flex items-center gap-1.5">
               <span className="size-1.5 rounded-full bg-foreground" />
               <span className="text-lg font-bold tabular-nums">{stats.live}</span>
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Live</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statLive")}</span>
           </div>
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="flex items-center gap-1.5">
               <span className="size-1.5 rounded-full bg-muted-foreground" />
               <span className="text-lg font-bold tabular-nums">{stats.wip}</span>
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">WIP</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statWip")}</span>
           </div>
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="flex items-center gap-1.5">
               <span className="size-1.5 rounded-full bg-muted-foreground/50" />
               <span className="text-lg font-bold tabular-nums">{stats.archived}</span>
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Archived</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statArchived")}</span>
           </div>
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="flex items-center gap-1.5">
               <Star className="size-3.5 text-muted-foreground" />
               <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Stars</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statStars")}</span>
           </div>
         </div>
       </div>
@@ -337,8 +339,8 @@ export function ProjectsClient() {
             <input
               ref={searchRef}
               type="text"
-              aria-label="Search projects"
-              placeholder="Search projects... (press / to focus)"
+              aria-label={t("searchLabel")}
+              placeholder={t("searchPlaceholder")}
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 bg-secondary text-foreground placeholder:text-muted-foreground text-sm outline-none focus:ring-2 focus:ring-ring"
@@ -347,10 +349,10 @@ export function ProjectsClient() {
         </div>
 
         {/* Status filters — pill chips */}
-        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by status">
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByStatus")}>
           {(["all", "live", "wip", "archived"] as const).map((status) => {
             const isActive = activeStatus === status;
-            const label = status === "all" ? "All" : statusConfig[status].label;
+            const label = status === "all" ? t("filterAll") : t("status_" + status);
             const count = countByStatus[status] || 0;
             const dotClass = status !== "all" ? statusConfig[status].dot : "";
             return (
@@ -374,10 +376,10 @@ export function ProjectsClient() {
         </div>
 
         {/* Category filters — flowing pill chips with progressive disclosure */}
-        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by category">
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByCategory")}>
           {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
             const isActive = activeCategory === cat;
-            const label = cat === "all" ? "All" : categoryMeta[cat].label;
+            const label = cat === "all" ? t("filterAll") : t("cat_" + cat);
             const count = countByCategory[cat] || 0;
             return (
               <button
@@ -400,7 +402,7 @@ export function ProjectsClient() {
               className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3" />
-              +{categories.length - 4} more
+              {t("moreCategories", { count: categories.length - 4 })}
             </button>
           )}
           {categoriesExpanded && categories.length > 4 && (
@@ -409,7 +411,7 @@ export function ProjectsClient() {
               className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3 rotate-180" />
-              Less
+              {t("lessCategories")}
             </button>
           )}
         </div>
@@ -420,7 +422,7 @@ export function ProjectsClient() {
         <div className="py-8">
           <h2 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
             <Star className="size-3.5 text-foreground" />
-            Featured
+            {t("featured")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
             {featuredProjects.map((project) => (
@@ -441,10 +443,10 @@ export function ProjectsClient() {
         {/* Results count */}
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
-            {filtered.length} project{filtered.length !== 1 ? "s" : ""}
-            {activeCategory !== "all" && ` in ${categoryMeta[activeCategory].label}`}
-            {activeStatus !== "all" && ` · ${statusConfig[activeStatus].label}`}
-            {search && ` matching "${search}"`}
+            {filtered.length} {filtered.length === 1 ? t("singleProject") : t("pluralProjects")}
+            {activeCategory !== "all" && ` ${t("inCategory")} ${t("cat_" + activeCategory)}`}
+            {activeStatus !== "all" && ` · ${t("status_" + activeStatus)}`}
+            {search && ` ${t("matchingSearch")} "${search}"`}
             {hasMore && ` · showing ${visible.length}`}
           </p>
         </div>
@@ -469,7 +471,7 @@ export function ProjectsClient() {
               className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-4" />
-              Show more ({filtered.length - visible.length} remaining)
+              {t("showMore", { count: filtered.length - visible.length })}
             </button>
           </div>
         )}
@@ -477,7 +479,7 @@ export function ProjectsClient() {
         {/* Empty state */}
         {filtered.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-muted-foreground text-sm">No projects found.</p>
+            <p className="text-muted-foreground text-sm">{t("noProjectsFound")}</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -486,7 +488,7 @@ export function ProjectsClient() {
               }}
               className="mt-4 text-sm underline underline-offset-4 text-foreground hover:text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              Clear filters
+              {t("clearFilters")}
             </button>
           </div>
         )}
@@ -496,14 +498,14 @@ export function ProjectsClient() {
       <div className="py-8">
         <div className="text-center space-y-4">
           <p className="text-sm text-muted-foreground">
-            Every project is a standalone Next.js app deployed independently on Vercel.
+            {t("footerDescription")}
           </p>
           <div className="flex gap-4 justify-center">
             <Link
               href="/contact"
               className="inline-flex items-center px-6 py-2.5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
-              Get in touch
+              {t("getInTouch")}
             </Link>
             <a
               href="https://github.com/bookchaowalit"
@@ -512,7 +514,7 @@ export function ProjectsClient() {
               className="inline-flex items-center gap-1.5 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
             >
               <ExternalLink className="size-3.5" />
-              GitHub
+              {t("github")}
             </a>
           </div>
         </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -7,9 +5,12 @@ import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/co
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { Bot, BarChart3, Globe, Wrench, Lightbulb } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function AboutClient() {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('about');
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
@@ -37,8 +38,8 @@ export function AboutClient() {
         >
           <MixedTypographyTitle
             words={[
-              { text: "About", style: "cursive", size: "xl" },
-              { text: "Me", style: "bubble", size: "xl" },
+              { text: t("titleWord1"), style: "cursive", size: "xl" },
+              { text: t("titleWord2"), style: "bubble", size: "xl" },
               { text: "👨‍💻", style: "block", size: "lg" }
             ]}
             className="mb-6"
@@ -52,11 +53,7 @@ export function AboutClient() {
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6, ease: "backOut" }}
         >
           <StickyNote rotation={1} className="text-center">
-            <p className="text-sm text-foreground">
-              <strong>Tech Generalist</strong> with 5+ years of experience in{" "}
-              <strong>full-stack development, AI integration</strong>{" "}
-              and <strong>SEO optimization</strong> from Bangkok 🇹🇭
-            </p>
+            <p className="text-sm text-foreground" dangerouslySetInnerHTML={{ __html: t.raw('subtitle') }} />
           </StickyNote>
         </motion.div>
       </motion.div>
@@ -65,27 +62,19 @@ export function AboutClient() {
         {/* Bio Section */}
         <div className="py-8">
           <NotebookSectionHeader
-            title="My Story"
-            subtitle="How I became a tech generalist"
+            title={t('myStoryTitle')}
+            subtitle={t('myStorySubtitle')}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Who I Am" type="note">
-              <p className="text-foreground leading-relaxed">
-                Hello, I'm <strong>Book</strong> — a Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end.
-              </p>
-              <p className="text-foreground leading-relaxed mt-4">
-                I work across the spectrum of <strong>software engineering, data, AI, and digital growth</strong>, connecting different tools and technologies to create solutions that are practical and scalable. My background ranges from developing web platforms to designing data workflows, analyzing information, and applying AI to support smarter decision-making.
-              </p>
+            <StudyGuideBox title={t('whoIAmTitle')} type="note">
+              <p className="text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('whoIAmContent1') }} />
+              <p className="text-foreground leading-relaxed mt-4" dangerouslySetInnerHTML={{ __html: t.raw('whoIAmContent2') }} />
             </StudyGuideBox>
 
-            <StudyGuideBox title="What I Do" type="tip">
-              <p className="text-foreground leading-relaxed">
-                Beyond development, I focus on <strong>analysis and growth strategies</strong> — turning data into insights and insights into action. Whether it's improving websites, optimizing digital marketing, or creating automated systems, I help businesses and individuals reach their goals more effectively.
-              </p>
-              <p className="text-foreground leading-relaxed mt-4">
-                As a solopreneur, I wear many hats — <strong>developer, engineer, analyst, and strategist</strong> — which allows me to stay flexible and adapt quickly to any challenge.
-              </p>
+            <StudyGuideBox title={t('whatIDoTitle')} type="tip">
+              <p className="text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('whatIDoContent1') }} />
+              <p className="text-foreground leading-relaxed mt-4" dangerouslySetInnerHTML={{ __html: t.raw('whatIDoContent2') }} />
             </StudyGuideBox>
           </div>
         </div>
@@ -93,12 +82,12 @@ export function AboutClient() {
         {/* Skills Section */}
         <div className="py-8">
           <NotebookSectionHeader
-            title="Technical Skills"
-            subtitle="Technologies and tools I work with regularly"
+            title={t('technicalSkillsTitle')}
+            subtitle={t('technicalSkillsDescription')}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title="Frontend Technologies" type="tip">
+            <StudyGuideBox title={t('frontendTitle')} type="tip">
               <div className="flex flex-wrap gap-2">
                 {[
                   "React", "Next.js", "TypeScript", "JavaScript",
@@ -122,7 +111,7 @@ export function AboutClient() {
               </div>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Backend & AI" type="note">
+            <StudyGuideBox title={t('backendTitle')} type="note">
               <div className="flex flex-wrap gap-2">
                 {[
                   "FastAPI", "Python", "PostgreSQL", "LlamaIndex",
@@ -146,7 +135,7 @@ export function AboutClient() {
               </div>
             </StudyGuideBox>
 
-            <StudyGuideBox title="Tools & Analytics" type="important">
+            <StudyGuideBox title={t('toolsTitle')} type="important">
               <div className="flex flex-wrap gap-2">
                 {[
                   "Google Analytics", "Facebook API", "SEO", "Git",
@@ -174,43 +163,37 @@ export function AboutClient() {
 
         {/* Experience Section */}
         <div className="py-8">
-          <NotebookSectionHeader title="Professional Experience" subtitle="My career journey" className="mb-6" />
+          <NotebookSectionHeader title={t('experienceTitle')} subtitle={t('experienceSubtitle')} className="mb-6" />
           <div className="space-y-6">
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">Full-stack Developer</h4>
-              <p className="text-sm text-muted-foreground">Turfmapp • Jan 2024 - May 2025</p>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp1Role')}</h4>
+              <p className="text-sm text-muted-foreground">{t('exp1Company')} • {t('exp1Period')}</p>
               <p className="text-sm mt-2">
-                Integrated AI solutions using RAG with LlamaIndex and LangChain, implementing
-                multi-agent systems with ReAct method. Developed front-end with Next.js and
-                back-end with FastAPI. Created analytics tools using Facebook Graph API.
+                {t('exp1Desc')}
               </p>
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">SEO Specialist & Data Analyst</h4>
-              <p className="text-sm text-muted-foreground">Turfmapp • May 2022 - Jan 2024</p>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp2Role')}</h4>
+              <p className="text-sm text-muted-foreground">{t('exp2Company')} • {t('exp2Period')}</p>
               <p className="text-sm mt-2">
-                Conducted SEO research to optimize website performance, drove improved search
-                rankings and organic traffic. Analyzed social media data for strategic marketing
-                decisions using A/B testing and experimental approaches.
+                {t('exp2Desc')}
               </p>
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">Data Center Technician</h4>
-              <p className="text-sm text-muted-foreground">JasTel Network Co. Ltd. • May 2021 - Apr 2022</p>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp3Role')}</h4>
+              <p className="text-sm text-muted-foreground">{t('exp3Company')} • {t('exp3Period')}</p>
               <p className="text-sm mt-2">
-                Connected servers to cables and fiber optic lines, monitored and maintained
-                data center operations to ensure optimal performance and uptime.
+                {t('exp3Desc')}
               </p>
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">Technical Staff (Apprenticeship)</h4>
-              <p className="text-sm text-muted-foreground">True Corporation • Oct 2020 - Feb 2021</p>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp4Role')}</h4>
+              <p className="text-sm text-muted-foreground">{t('exp4Company')} • {t('exp4Period')}</p>
               <p className="text-sm mt-2">
-                Serviced customers to troubleshoot internet problems, including router changes,
-                fiber optic repairs, and cable splicing using fusion splicers.
+                {t('exp4Desc')}
               </p>
             </div>
           </div>
@@ -218,20 +201,20 @@ export function AboutClient() {
 
         {/* Education Section */}
         <div className="py-8">
-          <NotebookSectionHeader title="Education & Certifications" subtitle="My academic background" className="mb-6" />
+          <NotebookSectionHeader title={t('educationTitle')} subtitle={t('educationSubtitle')} className="mb-6" />
           <div className="space-y-4">
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">High Vocational Certificate in Electronics</h4>
-              <p className="text-sm text-muted-foreground">Chitralada Technology Institute</p>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('edu1Title')}</h4>
+              <p className="text-sm text-muted-foreground">{t('edu1School')}</p>
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">Certifications</h4>
+              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('certTitle')}</h4>
               <ul className="text-sm text-muted-foreground mt-2 space-y-1">
-                <li>• Secure BigLake Data Skill Badge - Google (Mar 2025)</li>
-                <li>• Google Analytics Certified</li>
-                <li>• Facebook Graph API Integration</li>
-                <li>• ETL and Data Pipeline Management</li>
+                <li>• {t('cert1')}</li>
+                <li>• {t('cert2')}</li>
+                <li>• {t('cert3')}</li>
+                <li>• {t('cert4')}</li>
               </ul>
             </div>
           </div>
@@ -239,13 +222,13 @@ export function AboutClient() {
 
         {/* Fun Facts */}
         <StickyNote rotation={-1}>
-          <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">Fun Facts</h3>
+          <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">{t('funFactsTitle')}</h3>
           <ul className="space-y-2 text-muted-foreground text-sm">
-            <li className="flex items-start gap-2"><Bot className="w-4 h-4 mt-0.5 shrink-0" /> Passionate about AI research and implementing cutting-edge AI models</li>
-            <li className="flex items-start gap-2"><BarChart3 className="w-4 h-4 mt-0.5 shrink-0" /> Love analyzing data patterns and extracting meaningful insights</li>
-            <li className="flex items-start gap-2"><Globe className="w-4 h-4 mt-0.5 shrink-0" /> Always exploring new web technologies and development frameworks</li>
-            <li className="flex items-start gap-2"><Wrench className="w-4 h-4 mt-0.5 shrink-0" /> Enjoy building automated systems and data pipelines</li>
-            <li className="flex items-start gap-2"><Lightbulb className="w-4 h-4 mt-0.5 shrink-0" /> Born August 22, 2000 - Gen Z perspective on technology and innovation</li>
+            <li className="flex items-start gap-2"><Bot className="w-4 h-4 mt-0.5 shrink-0" /> {t('funFact1')}</li>
+            <li className="flex items-start gap-2"><BarChart3 className="w-4 h-4 mt-0.5 shrink-0" /> {t('funFact2')}</li>
+            <li className="flex items-start gap-2"><Globe className="w-4 h-4 mt-0.5 shrink-0" /> {t('funFact3')}</li>
+            <li className="flex items-start gap-2"><Wrench className="w-4 h-4 mt-0.5 shrink-0" /> {t('funFact4')}</li>
+            <li className="flex items-start gap-2"><Lightbulb className="w-4 h-4 mt-0.5 shrink-0" /> {t('funFact5')}</li>
           </ul>
         </StickyNote>
       </div>
