@@ -55,7 +55,7 @@ export default function GitHubActivity() {
 
   if (error) {
     return (
-      <NotebookPaper color="blue" className="py-6">
+      <NotebookPaper className="py-6">
         <h3 className="text-lg font-semibold text-foreground mb-2">Latest GitHub activity</h3>
         <p className="text-sm text-destructive">{error}</p>
       </NotebookPaper>
@@ -64,7 +64,7 @@ export default function GitHubActivity() {
 
   if (!data) {
     return (
-      <NotebookPaper color="blue" className="py-6">
+      <NotebookPaper className="py-6">
         <h3 className="text-lg font-semibold text-foreground mb-2">Latest GitHub activity</h3>
         <p className="text-sm text-muted-foreground">Loading…</p>
       </NotebookPaper>
@@ -72,7 +72,7 @@ export default function GitHubActivity() {
   }
 
   return (
-    <NotebookPaper color="blue" className="py-6">
+    <NotebookPaper className="py-6">
       <div className="flex items-baseline justify-between mb-4">
         <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
         <small className="text-sm text-muted-foreground">Updated {new Date(data.fetchedAt).toLocaleString()}</small>

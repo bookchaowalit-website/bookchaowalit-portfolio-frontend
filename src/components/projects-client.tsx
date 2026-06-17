@@ -275,7 +275,7 @@ export function ProjectsClient() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl space-y-12">
       {/* Header */}
-      <NotebookPaper color="yellow" className="py-8">
+      <NotebookPaper className="py-8">
         <div className="text-center space-y-4">
           <MixedTypographyTitle
             words={[
@@ -327,7 +327,7 @@ export function ProjectsClient() {
       </NotebookPaper>
 
       {/* Search & Filters */}
-      <NotebookPaper color="blue" className="py-8">
+      <NotebookPaper className="py-8">
         {/* Search */}
         <div className="max-w-md mx-auto mb-6">
           <div className="relative">
@@ -404,7 +404,7 @@ export function ProjectsClient() {
 
       {/* Featured Projects */}
       {showFeatured && (
-        <NotebookPaper color="pink" className="py-8">
+        <NotebookPaper className="py-8">
           <h2 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
             <Star className="size-3.5 text-foreground" />
             Featured
@@ -424,7 +424,7 @@ export function ProjectsClient() {
       )}
 
       {/* Project Grid Section */}
-      <NotebookPaper color="green" className="py-8">
+      <NotebookPaper className="py-8">
         {/* Results count */}
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
@@ -480,7 +480,7 @@ export function ProjectsClient() {
       </NotebookPaper>
 
       {/* Footer CTA */}
-      <NotebookPaper color="default" className="py-8">
+      <NotebookPaper className="py-8">
         <div className="text-center space-y-4">
           <p className="text-sm text-muted-foreground">
             Every project is a standalone Next.js app deployed independently on Vercel.

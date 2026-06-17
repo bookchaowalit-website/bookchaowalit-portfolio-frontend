@@ -81,7 +81,7 @@ export function SkillsClient() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl space-y-12">
       {/* Hero Section */}
-      <NotebookPaper color="yellow" className="py-8">
+      <NotebookPaper className="py-8">
         <motion.div
           className="text-center space-y-8"
           initial={reducedMotion ? false : { opacity: 0, y: 30 }}
@@ -120,7 +120,7 @@ export function SkillsClient() {
       </NotebookPaper>
 
       {/* Skill Categories Grid */}
-      <NotebookPaper color="blue" className="py-8">
+      <NotebookPaper className="py-8">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
           initial={reducedMotion ? false : { opacity: 0 }}

@@ -14,7 +14,7 @@ export async function BlogSection() {
   return (
     <section className="space-y-8">
       <h2 className="text-3xl font-bold text-center text-balance">{t('latestBlogTitle')}</h2>
-      <NotebookPaper color="pink" className="py-8">
+      <NotebookPaper className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => (
             <Link key={index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
