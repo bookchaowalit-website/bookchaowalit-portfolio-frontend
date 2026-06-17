@@ -223,7 +223,7 @@ export function TechSkillsClient() {
       </div>
 
       {/* Notable Projects */}
-      <NotebookPaper className="py-8 mb-8">
+      <NotebookPaper className="py-8 mb-8" color="green">
         <NotebookSectionHeader
           title="Notable Technical Projects"
           subtitle="Real-world applications showcasing my technical skills"
@@ -274,7 +274,7 @@ export function TechSkillsClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <NotebookPaper className="p-8 max-w-4xl mx-auto">
+        <div className="p-8 max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🎓 Continuous Learning & Certifications
           </h2>
@@ -308,7 +308,7 @@ export function TechSkillsClient() {
                 <Link href="/skills">← Back to Skills</Link>
               </Button>
           </div>
-        </NotebookPaper>
+        </div>
       </motion.div>
     </div>
   );

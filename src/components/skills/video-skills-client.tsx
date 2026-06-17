@@ -144,14 +144,16 @@ export function VideoSkillsClient() {
 
       {/* Video Categories */}
       <div className="space-y-8 mb-12">
-        {videoCategories.map((category, categoryIndex) => (
+        {videoCategories.map((category, categoryIndex) => {
+          const paperColors = ["default", "yellow", "green", "blue"] as const;
+          return (
           <motion.div
             key={category.title}
             initial={reducedMotion ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: categoryIndex * 0.2 }}
           >
-            <NotebookPaper className="py-6">
+            <NotebookPaper className="py-6" color={paperColors[categoryIndex % 4]}>
               <div className="flex items-center gap-3 mb-6">
                 <div className={`${category.color} bg-muted p-3`}>
                   {category.icon}
@@ -199,11 +201,12 @@ export function VideoSkillsClient() {
               </div>
             </NotebookPaper>
           </motion.div>
-        ))}
+        );
+        })}
       </div>
 
       {/* Video Techniques */}
-      <NotebookPaper className="py-8 mb-8">
+      <NotebookPaper className="py-8 mb-8" color="yellow">
         <NotebookSectionHeader
           title="Video Production Techniques"
           subtitle="Advanced skills and techniques I use in video production"
@@ -235,7 +238,7 @@ export function VideoSkillsClient() {
       </NotebookPaper>
 
       {/* Portfolio Highlights */}
-      <NotebookPaper className="py-8 mb-8">
+      <NotebookPaper className="py-8 mb-8" color="blue">
         <NotebookSectionHeader
           title="Video Portfolio Highlights"
           subtitle="Featured video projects showcasing my production expertise"
@@ -281,7 +284,7 @@ export function VideoSkillsClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <NotebookPaper className="p-8 max-w-4xl mx-auto">
+        <div className="p-8 max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🎬 My Production Process
           </h2>
@@ -318,7 +321,7 @@ export function VideoSkillsClient() {
               </Button>
             </motion.div>
           </div>
-        </NotebookPaper>
+        </div>
       </motion.div>
     </div>
   );

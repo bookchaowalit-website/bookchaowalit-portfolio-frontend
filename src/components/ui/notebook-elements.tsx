@@ -38,12 +38,28 @@ export function HandDrawnHighlight({
   );
 }
 
-// Notebook paper background
-export function NotebookPaper({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+// Notebook paper background with optional color tints
+export function NotebookPaper({
+  children,
+  className = "",
+  color = "default"
+}: {
+  children: React.ReactNode;
+  className?: string;
+  color?: "default" | "yellow" | "pink" | "green" | "blue";
+}) {
+  // Subtle paper tints — enough to distinguish sections, light enough to read on
+  const bgMap = {
+    default: "oklch(0.985 0.005 90)",
+    yellow: "oklch(0.975 0.015 95)",
+    pink: "oklch(0.975 0.012 350)",
+    green: "oklch(0.975 0.012 150)",
+    blue: "oklch(0.975 0.010 230)"
+  };
   return (
     <div className={`relative ${className}`}>
       {/* Warm paper texture background */}
-      <div className="absolute inset-0" style={{ background: "oklch(0.985 0.005 90)" }} />
+      <div className="absolute inset-0" style={{ background: bgMap[color] }} />
 
       {/* Notebook ruled lines */}
       <div className="absolute inset-0 pointer-events-none">

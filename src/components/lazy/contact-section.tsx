@@ -36,7 +36,7 @@ export function ContactSection() {
         viewport={{ once: true }}
       >
         <SketchyFrame variant="double">
-          <NotebookPaper className="p-8">
+          <NotebookPaper className="p-8" color="pink">
             <div className="space-y-6 text-center">
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">

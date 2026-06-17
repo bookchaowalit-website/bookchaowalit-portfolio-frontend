@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { NotebookPaper } from '@/components/ui/notebook-elements';
 
 type Repo = {
   name: string;
@@ -54,29 +55,29 @@ export default function GitHubActivity() {
 
   if (error) {
     return (
-      <section className="border p-4 bg-background dark:bg-card">
-        <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
+      <NotebookPaper color="blue" className="py-6">
+        <h3 className="text-lg font-semibold text-foreground mb-2">Latest GitHub activity</h3>
         <p className="text-sm text-destructive">{error}</p>
-      </section>
+      </NotebookPaper>
     );
   }
 
   if (!data) {
     return (
-      <section className="border p-4 bg-background dark:bg-card">
-        <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
+      <NotebookPaper color="blue" className="py-6">
+        <h3 className="text-lg font-semibold text-foreground mb-2">Latest GitHub activity</h3>
         <p className="text-sm text-muted-foreground">Loading…</p>
-      </section>
+      </NotebookPaper>
     );
   }
 
   return (
-    <section className="border p-4 bg-background dark:bg-card">
-      <div className="flex items-baseline justify-between">
+    <NotebookPaper color="blue" className="py-6">
+      <div className="flex items-baseline justify-between mb-4">
         <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
         <small className="text-sm text-muted-foreground">Updated {new Date(data.fetchedAt).toLocaleString()}</small>
       </div>
-      <ul className="mt-3 space-y-3">
+      <ul className="space-y-3">
         {data.repos.map((r) => (
           <li key={r.url} className="flex flex-col">
             <a className="text-sm font-medium text-foreground hover:underline" href={r.url} target="_blank" rel="noopener noreferrer">
@@ -93,6 +94,6 @@ export default function GitHubActivity() {
           </li>
         ))}
       </ul>
-    </section>
+    </NotebookPaper>
   );
 }

@@ -79,102 +79,106 @@ export function SkillsClient() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl space-y-12">
       {/* Hero Section */}
-      <motion.div
-        className="text-center space-y-8 py-8"
-        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
-      >
+      <NotebookPaper color="yellow" className="py-8">
         <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+          className="text-center space-y-8"
+          initial={reducedMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
         >
-          <MixedTypographyTitle
-            words={[
-              { text: "My", style: "cursive", size: "xl" },
-              { text: "Skills", style: "bubble", size: "xl" },
-              { text: "&", style: "filled", size: "lg" },
-              { text: "Expertise", style: "block", size: "xl" },
-              { text: "🚀", style: "block", size: "lg" }
-            ]}
-            className="mb-6"
-          />
-        </motion.div>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
+          >
+            <MixedTypographyTitle
+              words={[
+                { text: "My", style: "cursive", size: "xl" },
+                { text: "Skills", style: "bubble", size: "xl" },
+                { text: "&", style: "filled", size: "lg" },
+                { text: "Expertise", style: "block", size: "xl" },
+                { text: "🚀", style: "block", size: "lg" }
+              ]}
+              className="mb-6"
+            />
+          </motion.div>
 
-        <motion.div
-          className="max-w-3xl mx-auto"
-          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
-        >
-          <p className="text-lg text-muted-foreground">
-            A comprehensive showcase of my technical, creative, and multimedia skills.
-            Click on each category to explore detailed breakdowns and real-world applications.
-          </p>
+          <motion.div
+            className="max-w-3xl mx-auto"
+            initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
+          >
+            <p className="text-lg text-muted-foreground">
+              A comprehensive showcase of my technical, creative, and multimedia skills.
+              Click on each category to explore detailed breakdowns and real-world applications.
+            </p>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </NotebookPaper>
 
       {/* Skill Categories Grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-        initial={reducedMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
-      >
-        {skillCategories.map((category, index) => (
-          <motion.div
-            key={category.id}
-            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 * index }}
-            whileHover={reducedMotion ? undefined : { y: -5 }}
-          >
-            <a href={category.href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
-              <Card className="h-full hover:bg-secondary transition-colors cursor-pointer group border hover:border-primary/20">
-                <CardHeader className="text-center pb-4">
-                  <motion.div
-                    className="w-16 h-16 mx-auto bg-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-                    whileHover={reducedMotion ? undefined : { rotate: 5 }}
-                  >
-                    {category.icon}
-                  </motion.div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    {category.title}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {category.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {category.skills.slice(0, 3).map((skill) => (
-                        <Badge key={skill} variant="secondary" className="text-xs">
-                          {skill}
-                        </Badge>
-                      ))}
-                      {category.skills.length > 3 && (
-                        <Badge variant="outline" className="text-xs">
-                          +{category.skills.length - 3} more
-                        </Badge>
-                      )}
+      <NotebookPaper color="blue" className="py-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
+        >
+          {skillCategories.map((category, index) => (
+            <motion.div
+              key={category.id}
+              initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 * index }}
+              whileHover={reducedMotion ? undefined : { y: -5 }}
+            >
+              <a href={category.href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
+                <Card className="h-full hover:bg-secondary transition-colors cursor-pointer group border hover:border-primary/20">
+                  <CardHeader className="text-center pb-4">
+                    <motion.div
+                      className="w-16 h-16 mx-auto bg-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      whileHover={reducedMotion ? undefined : { rotate: 5 }}
+                    >
+                      {category.icon}
+                    </motion.div>
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                      {category.title}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {category.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {category.skills.slice(0, 3).map((skill) => (
+                          <Badge key={skill} variant="secondary" className="text-xs">
+                            {skill}
+                          </Badge>
+                        ))}
+                        {category.skills.length > 3 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{category.skills.length - 3} more
+                          </Badge>
+                        )}
+                      </div>
+                      <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                        Explore Skills →
+                      </Button>
                     </div>
-                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      Explore Skills →
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </a>
-          </motion.div>
-        ))}
-      </motion.div>
+                  </CardContent>
+                </Card>
+              </a>
+            </motion.div>
+          ))}
+        </motion.div>
+      </NotebookPaper>
 
       {/* Quick Skills Overview */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="mb-8">
         <NotebookSectionHeader
           title="Quick Skills Overview"
           subtitle="My proficiency levels across different technologies and tools"
@@ -205,7 +209,7 @@ export function SkillsClient() {
             </motion.div>
           ))}
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Learning & Growth */}
       <motion.div

@@ -10,6 +10,7 @@ import {
   type ProjectStatus,
 } from "@/data/app-projects";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+import { NotebookPaper } from "@/components/ui/notebook-elements";
 import {
   ExternalLink,
   Search,
@@ -272,114 +273,118 @@ export function ProjectsClient() {
   const showFeatured = activeCategory === "all" && activeStatus === "all" && !search.trim();
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-12 max-w-6xl space-y-12">
       {/* Header */}
-      <div className="text-center space-y-4 mb-8">
-        <MixedTypographyTitle
-          words={[
-            { text: "All", style: "cursive", size: "xl" },
-            { text: "Projects", style: "filled", size: "xl" },
-          ]}
-          className="mb-4"
-        />
-        <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-          {allProjects.length} micro-frontends deployed on Vercel, organized by purpose.
-        </p>
-      </div>
-
-      {/* Stats Banner — uses the same gap-px grid language */}
-      <div className="grid grid-cols-5 max-w-lg mx-auto mb-10 gap-px bg-border">
-        <div className="bg-background flex flex-col items-center py-3 px-2">
-          <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Total</span>
-        </div>
-        <div className="bg-background flex flex-col items-center py-3 px-2">
-          <span className="flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-foreground" />
-            <span className="text-lg font-bold tabular-nums">{stats.live}</span>
-          </span>
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Live</span>
-        </div>
-        <div className="bg-background flex flex-col items-center py-3 px-2">
-          <span className="flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-muted-foreground" />
-            <span className="text-lg font-bold tabular-nums">{stats.wip}</span>
-          </span>
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">WIP</span>
-        </div>
-        <div className="bg-background flex flex-col items-center py-3 px-2">
-          <span className="flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-muted-foreground/50" />
-            <span className="text-lg font-bold tabular-nums">{stats.archived}</span>
-          </span>
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Archived</span>
-        </div>
-        <div className="bg-background flex flex-col items-center py-3 px-2">
-          <span className="flex items-center gap-1.5">
-            <Star className="size-3.5 text-muted-foreground" />
-            <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
-          </span>
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Stars</span>
-        </div>
-      </div>
-
-      {/* Search */}
-      <div className="max-w-md mx-auto mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-          <input
-            ref={searchRef}
-            type="text"
-            placeholder="Search projects... (press / to focus)"
-            value={search}
-            onChange={(e) => handleSearchChange(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-secondary text-foreground placeholder:text-muted-foreground text-sm outline-none focus:ring-2 focus:ring-ring"
+      <NotebookPaper color="yellow" className="py-8">
+        <div className="text-center space-y-4">
+          <MixedTypographyTitle
+            words={[
+              { text: "All", style: "cursive", size: "xl" },
+              { text: "Projects", style: "filled", size: "xl" },
+            ]}
+            className="mb-4"
           />
+          <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
+            {allProjects.length} micro-frontends deployed on Vercel, organized by purpose.
+          </p>
         </div>
-      </div>
 
-      {/* Status filters */}
-      <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto">
-        {(["all", "live", "wip", "archived"] as const).map((status, i) => {
-          const isActive = activeStatus === status;
-          const label = status === "all" ? "All" : statusConfig[status].label;
-          const count = countByStatus[status] || 0;
-          return (
-            <button
-              key={status}
-              onClick={() => handleStatusChange(status)}
-              className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                i > 0 ? "border-l border-border" : ""
-              } ${
-                isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
-            >
-              {label}
-              <span className="opacity-50 tabular-nums">{count}</span>
-            </button>
-          );
-        })}
-      </div>
+        {/* Stats Banner — uses the same gap-px grid language */}
+        <div className="grid grid-cols-5 max-w-lg mx-auto mt-8 gap-px bg-border">
+          <div className="bg-background flex flex-col items-center py-3 px-2">
+            <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Total</span>
+          </div>
+          <div className="bg-background flex flex-col items-center py-3 px-2">
+            <span className="flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-foreground" />
+              <span className="text-lg font-bold tabular-nums">{stats.live}</span>
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Live</span>
+          </div>
+          <div className="bg-background flex flex-col items-center py-3 px-2">
+            <span className="flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-muted-foreground" />
+              <span className="text-lg font-bold tabular-nums">{stats.wip}</span>
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">WIP</span>
+          </div>
+          <div className="bg-background flex flex-col items-center py-3 px-2">
+            <span className="flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-muted-foreground/50" />
+              <span className="text-lg font-bold tabular-nums">{stats.archived}</span>
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Archived</span>
+          </div>
+          <div className="bg-background flex flex-col items-center py-3 px-2">
+            <span className="flex items-center gap-1.5">
+              <Star className="size-3.5 text-muted-foreground" />
+              <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Stars</span>
+          </div>
+        </div>
+      </NotebookPaper>
 
-      {/* Category filters — progressive disclosure: show top 4, expand on demand */}
-      <div className="flex flex-wrap justify-center border border-border mb-12 max-w-2xl mx-auto">
-        {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat, i) => {
-          const isActive = activeCategory === cat;
-          const label = cat === "all" ? "All" : categoryMeta[cat].label;
-          const count = countByCategory[cat] || 0;
-          return (
-            <button
-              key={cat}
-              onClick={() => handleCategoryChange(cat)}
-              className={`px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                i > 0 ? "border-l border-border" : ""
-              } ${
-                isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
+      {/* Search & Filters */}
+      <NotebookPaper color="blue" className="py-8">
+        {/* Search */}
+        <div className="max-w-md mx-auto mb-6">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <input
+              ref={searchRef}
+              type="text"
+              placeholder="Search projects... (press / to focus)"
+              value={search}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-secondary text-foreground placeholder:text-muted-foreground text-sm outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+        </div>
+
+        {/* Status filters */}
+        <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto">
+          {(["all", "live", "wip", "archived"] as const).map((status, i) => {
+            const isActive = activeStatus === status;
+            const label = status === "all" ? "All" : statusConfig[status].label;
+            const count = countByStatus[status] || 0;
+            return (
+              <button
+                key={status}
+                onClick={() => handleStatusChange(status)}
+                className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  i > 0 ? "border-l border-border" : ""
+                } ${
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+                }`}
+              >
+                {label}
+                <span className="opacity-50 tabular-nums">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Category filters — progressive disclosure: show top 4, expand on demand */}
+        <div className="flex flex-wrap justify-center border border-border max-w-2xl mx-auto">
+          {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat, i) => {
+            const isActive = activeCategory === cat;
+            const label = cat === "all" ? "All" : categoryMeta[cat].label;
+            const count = countByCategory[cat] || 0;
+            return (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                className={`px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  i > 0 ? "border-l border-border" : ""
+                } ${
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
+                }`}
             >
               {label}
               <span className="ml-1 opacity-50 tabular-nums">{count}</span>
@@ -395,10 +400,11 @@ export function ProjectsClient() {
           </button>
         )}
       </div>
+      </NotebookPaper>
 
       {/* Featured Projects */}
       {showFeatured && (
-        <div className="mb-12">
+        <NotebookPaper color="pink" className="py-8">
           <h2 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
             <Star className="size-3.5 text-foreground" />
             Featured
@@ -414,85 +420,90 @@ export function ProjectsClient() {
               />
             ))}
           </div>
-        </div>
+        </NotebookPaper>
       )}
 
-      {/* Results count */}
-      <div className="mb-6">
-        <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-          {filtered.length} project{filtered.length !== 1 ? "s" : ""}
-          {activeCategory !== "all" && ` in ${categoryMeta[activeCategory].label}`}
-          {activeStatus !== "all" && ` · ${statusConfig[activeStatus].label}`}
-          {search && ` matching "${search}"`}
-          {hasMore && ` · showing ${visible.length}`}
-        </p>
-      </div>
-
-      {/* Project grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-        {visible.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            project={project}
-            stars={starsMap[project.slug] ?? 0}
-            starsError={starsError}
-          />
-        ))}
-      </div>
-
-      {/* Show more */}
-      {hasMore && (
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <ChevronDown className="size-4" />
-            Show more ({filtered.length - visible.length} remaining)
-          </button>
+      {/* Project Grid Section */}
+      <NotebookPaper color="green" className="py-8">
+        {/* Results count */}
+        <div className="mb-6">
+          <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+            {filtered.length} project{filtered.length !== 1 ? "s" : ""}
+            {activeCategory !== "all" && ` in ${categoryMeta[activeCategory].label}`}
+            {activeStatus !== "all" && ` · ${statusConfig[activeStatus].label}`}
+            {search && ` matching "${search}"`}
+            {hasMore && ` · showing ${visible.length}`}
+          </p>
         </div>
-      )}
 
-      {/* Empty state */}
-      {filtered.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-muted-foreground text-sm">No projects found.</p>
-          <button
-            onClick={() => {
-              setActiveCategory("all");
-              setActiveStatus("all");
-              setSearch("");
-            }}
-            className="mt-4 text-sm underline underline-offset-4 text-foreground hover:text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            Clear filters
-          </button>
+        {/* Project grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+          {visible.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              stars={starsMap[project.slug] ?? 0}
+              starsError={starsError}
+            />
+          ))}
         </div>
-      )}
+
+        {/* Show more */}
+        {hasMore && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ChevronDown className="size-4" />
+              Show more ({filtered.length - visible.length} remaining)
+            </button>
+          </div>
+        )}
+
+        {/* Empty state */}
+        {filtered.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground text-sm">No projects found.</p>
+            <button
+              onClick={() => {
+                setActiveCategory("all");
+                setActiveStatus("all");
+                setSearch("");
+              }}
+              className="mt-4 text-sm underline underline-offset-4 text-foreground hover:text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
+      </NotebookPaper>
 
       {/* Footer CTA */}
-      <div className="text-center mt-16 space-y-4">
-        <p className="text-sm text-muted-foreground">
-          Every project is a standalone Next.js app deployed independently on Vercel.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center px-6 py-2.5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Get in touch
-          </Link>
-          <a
-            href="https://github.com/bookchaowalit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
-          >
-            <ExternalLink className="size-3.5" />
-            GitHub
-          </a>
+      <NotebookPaper color="default" className="py-8">
+        <div className="text-center space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Every project is a standalone Next.js app deployed independently on Vercel.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-6 py-2.5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Get in touch
+            </Link>
+            <a
+              href="https://github.com/bookchaowalit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
+            >
+              <ExternalLink className="size-3.5" />
+              GitHub
+            </a>
+          </div>
         </div>
-      </div>
+      </NotebookPaper>
     </div>
   );
 }
