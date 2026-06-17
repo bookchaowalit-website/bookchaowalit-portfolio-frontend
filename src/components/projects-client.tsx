@@ -339,8 +339,8 @@ export function ProjectsClient() {
       </div>
 
       {/* Status filters */}
-      <div className="flex flex-wrap justify-center gap-px bg-border mb-4 max-w-md mx-auto">
-        {(["all", "live", "wip", "archived"] as const).map((status) => {
+      <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto">
+        {(["all", "live", "wip", "archived"] as const).map((status, i) => {
           const isActive = activeStatus === status;
           const label = status === "all" ? "All" : statusConfig[status].label;
           const count = countByStatus[status] || 0;
@@ -349,6 +349,8 @@ export function ProjectsClient() {
               key={status}
               onClick={() => handleStatusChange(status)}
               className={`flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                i > 0 ? "border-l border-border" : ""
+              } ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
@@ -362,8 +364,8 @@ export function ProjectsClient() {
       </div>
 
       {/* Category filters — progressive disclosure: show top 4, expand on demand */}
-      <div className="flex flex-wrap justify-center gap-px bg-border mb-12 max-w-2xl mx-auto">
-        {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
+      <div className="flex flex-wrap justify-center border border-border mb-12 max-w-2xl mx-auto">
+        {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat, i) => {
           const isActive = activeCategory === cat;
           const label = cat === "all" ? "All" : categoryMeta[cat].label;
           const count = countByCategory[cat] || 0;
@@ -372,6 +374,8 @@ export function ProjectsClient() {
               key={cat}
               onClick={() => handleCategoryChange(cat)}
               className={`px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                i > 0 ? "border-l border-border" : ""
+              } ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "bg-background text-muted-foreground hover:text-foreground hover:bg-secondary"
@@ -385,7 +389,7 @@ export function ProjectsClient() {
         {categories.length > 4 && (
           <button
             onClick={() => setCategoriesExpanded((v) => !v)}
-            className="px-3 py-2 text-xs font-medium bg-background text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="px-3 py-2 text-xs font-medium bg-background text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors border-l border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {categoriesExpanded ? "Less" : `+${categories.length - 4} more`}
           </button>
