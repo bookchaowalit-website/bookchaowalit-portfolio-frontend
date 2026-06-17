@@ -1,0 +1,93 @@
+---
+title: "The Solopreneur Tech Stack: Tools and Systems for One-Person Operations"
+excerpt: "A deep dive into the tools, automations, and systems I use to run 100+ projects as a solo operator — from MCP servers and AI agents to deployment pipelines and analytics."
+author: "Chaowalit Greepoke"
+publishedAt: "2026-05-10"
+tags: ["Solopreneur", "Productivity", "Automation", "MCP", "Tools"]
+featured: false
+---
+
+# The Solopreneur Tech Stack: Tools and Systems for One-Person Operations
+
+Running 100+ projects solo isn't about working harder — it's about building systems that multiply your output. Here's the exact stack and workflow I use.
+
+## Core Development
+
+### Editor & AI
+- **VS Code** with GitHub Copilot for daily coding
+- **Cursor** for complex refactoring sessions
+- **Onlook** for rapid UI prototyping
+
+### Deployment
+- **Vercel** for all frontend deployments (zero-config, instant rollbacks)
+- **Cloudflare** for DNS, Workers, and edge computing
+- **GitHub Actions** for CI/CD on non-Vercel projects
+
+## Infrastructure as Code
+
+### MCP Servers
+I use Model Context Protocol (MCP) servers to give my AI tools access to real infrastructure:
+- **Cloudflare MCP** — Deploy workers, manage DNS, query analytics
+- **Vercel MCP** — Check deployments, manage environment variables
+- **GitHub MCP** — Create issues, review PRs, search repos
+- **Leantime MCP** — Track tasks and project milestones
+
+### Database
+- **Supabase** for PostgreSQL (auth, realtime, storage)
+- **Cloudflare D1** for edge SQLite databases
+- **Upstash Redis** for caching and rate limiting
+
+## Automation Layer
+
+### Daily Briefings
+Every morning, an automated briefing compiles:
+- Analytics from all properties
+- GitHub activity and PR reviews
+- Deployment status across Vercel
+- Error logs and uptime reports
+
+### Content Pipeline
+1. Write in MDX with frontmatter metadata
+2. Auto-generates OG images on deploy
+3. RSS feed updates automatically
+4. Social sharing links pre-configured
+
+## Analytics & Monitoring
+
+- **Vercel Analytics** — Core Web Vitals per deployment
+- **Google Analytics 4** — Cross-property traffic analysis
+- **Cloudflare Analytics** — Edge-level request data
+- **Custom health checks** — Automated uptime monitoring
+
+## The Productivity Multiplier
+
+The real power isn't any single tool — it's how they connect:
+
+```
+Idea → AI-assisted prototype → Deploy to Vercel → 
+Monitor via analytics → Iterate based on data → 
+Automate repetitive tasks via MCP → Ship faster
+```
+
+## Cost Breakdown
+
+Most of my stack is free or nearly free:
+- **Vercel Hobby/Pro** — $0-20/month
+- **Cloudflare** — $0-5/month
+- **Supabase Free Tier** — $0/month
+- **GitHub** — $0/month
+- **Domain names** — ~$10-15/year each
+
+Total infrastructure cost for 100+ projects: **under $50/month**.
+
+## Lessons Learned
+
+1. **Automate the boring stuff first.** If you do it twice, script it.
+2. **Use AI as a force multiplier, not a crutch.** It handles boilerplate; you handle decisions.
+3. **Keep costs predictable.** Free tiers are powerful but set alerts.
+4. **Document your systems.** Future-you will thank present-you.
+5. **Ship imperfectly.** A deployed MVP beats a perfect plan.
+
+---
+
+*The solopreneur's advantage isn't speed — it's focus. Build systems that protect your attention and amplify your impact.*

@@ -1,0 +1,89 @@
+---
+title: "AI Integration Patterns for Web Developers: A Practical Guide"
+excerpt: "Practical patterns for integrating AI into web applications — from prompt engineering and streaming responses to building AI-powered tools that solve real user problems."
+author: "Chaowalit Greepoke"
+publishedAt: "2026-04-22"
+tags: ["AI", "LLM", "Web Development", "TypeScript", "AI SDK"]
+featured: true
+---
+
+# AI Integration Patterns for Web Developers: A Practical Guide
+
+After building several AI-powered tools — a chat playground, sentiment analyzer, prompt library, and recommendation engine — I've identified patterns that work and pitfalls to avoid.
+
+## Pattern 1: Streaming Responses
+
+Users hate waiting. Always stream AI responses to the UI.
+
+```typescript
+const response = await fetch('/api/chat', {
+  method: 'POST',
+  body: JSON.stringify({ messages, model }),
+});
+
+const reader = response.body!.getReader();
+const decoder = new TextDecoder();
+
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  appendToUI(decoder.decode(value));
+}
+```
+
+## Pattern 2: Structured Output
+
+Don't parse raw text. Use structured output formats (JSON mode, function calling) to get reliable, typed responses.
+
+```typescript
+const result = await generateObject({
+  model: openai('gpt-4o'),
+  schema: z.object({
+    sentiment: z.enum(['positive', 'negative', 'neutral']),
+    confidence: z.number(),
+    keywords: z.array(z.string()),
+  }),
+  prompt: `Analyze: "${userInput}"`,
+});
+```
+
+## Pattern 3: Prompt Caching
+
+Cache common prompts and their responses. Many AI providers offer prompt caching that reduces latency and cost by 50-90%.
+
+## Pattern 4: Fallback Chains
+
+AI services go down. Build fallback chains:
+
+1. Primary model (GPT-4o)
+2. Secondary model (Claude)
+3. Cached response
+4. Graceful degradation message
+
+## Pattern 5: Cost Controls
+
+Set hard limits on token usage per request and per user. Nothing kills a side project faster than an unexpected AI bill.
+
+## Real-World Example: Sentiment Analyzer
+
+My sentiment analyzer combines patterns 1-5:
+- Streams analysis results as they're generated
+- Uses structured output for consistent sentiment scores
+- Caches common text analyses
+- Falls back to a local model if the API is down
+- Enforces per-user daily limits
+
+## Tools I Recommend
+
+- **Vercel AI SDK** — Best TypeScript AI integration library
+- **OpenRouter** — Access multiple models through one API
+- **LangSmith** — Debug and monitor AI pipelines
+- **Helicone** — AI-specific observability
+
+## The Golden Rule
+
+**AI should amplify user capability, not replace it.** The best AI features make users feel more powerful, not dependent.
+
+---
+
+*Start small. Pick one pattern, apply it to a real project, and iterate. The AI landscape moves fast, but solid engineering patterns endure.*

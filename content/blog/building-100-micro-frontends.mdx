@@ -1,0 +1,71 @@
+---
+title: "Building 100 Micro-Frontends: Lessons from a Solopreneur Journey"
+excerpt: "How I built and deployed 100 independently deployed micro-frontends on Vercel, the architecture decisions, trade-offs, and what I learned about scaling a one-person dev operation."
+author: "Chaowalit Greepoke"
+publishedAt: "2026-03-15"
+tags: ["Architecture", "Micro-Frontends", "Next.js", "Vercel", "Solopreneur"]
+featured: true
+---
+
+# Building 100 Micro-Frontends: Lessons from a Solopreneur Journey
+
+When I set out to build my portfolio, I didn't just want a single monolithic app. I wanted to prove a point: **one developer can ship 100 independently deployed applications** using modern tooling and a disciplined architecture.
+
+## The Architecture
+
+Each micro-frontend is a standalone Next.js application with its own:
+- Repository and deployment pipeline
+- Custom domain or subdomain
+- Independent versioning and release cycle
+- Separate analytics and error tracking
+
+## Why Micro-Frontends?
+
+### Independence
+Each app can be updated, rolled back, or rebuilt without affecting any other. When I experiment with a new framework or pattern, I can test it in one app first.
+
+### Performance
+Small bundles load fast. Most of my tools are under 100KB gzipped. No bloated mega-bundle serving unused code to every visitor.
+
+### Learning
+Building 100 apps taught me more than building one big one. Each project is a chance to explore a different pattern: MDX blogs, canvas-based tools, real-time dashboards, AI integrations.
+
+## The Tech Stack
+
+Every project shares a common foundation:
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Vercel** for deployment
+
+But each project is free to add its own dependencies based on its needs.
+
+## Key Trade-offs
+
+### The Good
+- Zero cross-app breakage
+- Deploy in seconds, not minutes
+- Easy to archive or sunset projects
+
+### The Challenging
+- Shared component libraries require discipline
+- Authentication must be solved once and reused
+- Analytics aggregation across 100 domains
+
+## What I'd Do Differently
+
+If I started over, I would:
+1. Create a shared design system package from day one
+2. Set up a monorepo with Turborepo earlier
+3. Automate more of the project scaffolding
+
+## The Numbers
+
+- **100** independently deployed apps
+- **9** categories (tools, productivity, content, creative, business, social, AI & data, misc, client work)
+- **~4.5s** total build time per app
+- **0** cross-app production incidents
+
+---
+
+*The best architecture is the one that lets you ship consistently. For a solopreneur, that means independence, speed, and the freedom to experiment without fear.*

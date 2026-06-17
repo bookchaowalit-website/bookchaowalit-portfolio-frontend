@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from "next/link";
 import { getAllBlogPosts, getFeaturedPosts } from "@/lib/blog";
 import { BlogHero, BlogSearchBar, BlogNewsletter, NotebookSection } from "@/components/blog-client-wrapper";
 import { NotebookBlogList } from "@/components/notebook-blog-list";
@@ -54,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',
       images: [{
-        url: '/og-blog.jpg',
+        url: `/${locale}/blog/opengraph-image`,
         width: 1200,
         height: 630,
         alt: 'Chaowalit Greepoke Tech Blog - Web Development & AI Insights'
@@ -65,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       creator: '@bookchaowalit',
-      images: ['/og-blog.jpg']
+      images: [`/${locale}/blog/opengraph-image`]
     }
   };
 }

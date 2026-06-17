@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
@@ -39,7 +39,7 @@ export function BlogHero() {
       >
         <div className="bg-muted border border-border p-4">
           <p className="text-foreground text-center">
-            Thoughts on web development, technology, and everything in between! 💭
+            Thoughts on web development, technology, and everything in between!
           </p>
         </div>
       </motion.div>
@@ -59,7 +59,7 @@ export function BlogSearchBar() {
       <div className="bg-muted border border-border p-2 hover:border-primary/40 transition-colors">
         <Input
           type="text"
-          placeholder="Search articles... 🔍"
+          placeholder="Search articles..."
           className="w-full border-0 focus:ring-0 font-[family-name:var(--font-doodle)] bg-transparent"
         />
       </div>
@@ -101,7 +101,7 @@ export function BlogNewsletter() {
           >
             <div className="bg-muted border border-border p-3">
               <p className="text-foreground text-center text-sm">
-                Get the latest articles and updates delivered straight to your inbox! 📨
+                Get the latest articles and updates delivered straight to your inbox!
               </p>
             </div>
           </motion.div>
@@ -114,7 +114,7 @@ export function BlogNewsletter() {
           >
             <Input
               type="email"
-              placeholder="Enter your email ✨"
+              placeholder="Enter your email"
               className="flex-1 font-[family-name:var(--font-doodle)]"
             />
             <Button className="font-[family-name:var(--font-comic)]">Subscribe</Button>
