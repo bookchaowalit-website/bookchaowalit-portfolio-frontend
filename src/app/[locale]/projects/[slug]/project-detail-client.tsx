@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   allProjects,
   categoryMeta,
@@ -59,11 +60,12 @@ export function ProjectDetailClient({ project }: { project: AppProject }) {
       {/* Screenshot hero — full bleed */}
       <div className="relative w-full aspect-[21/9] bg-secondary overflow-hidden">
         {!screenshotError ? (
-          <img
+          <Image
             src={screenshotUrl}
             alt={`${project.name} live preview`}
+            fill
             className="w-full h-full object-cover object-top"
-            loading="eager"
+            priority
             onError={() => setScreenshotError(true)}
           />
         ) : (

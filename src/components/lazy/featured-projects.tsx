@@ -1,17 +1,128 @@
 "use client";
 
-import { allProjects, categoryMeta } from "@/data/app-projects";
+import { useState } from "react";
+import { allProjects, categoryMeta, type AppProject } from "@/data/app-projects";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Github, X, Globe } from "lucide-react";
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 
 const stickyColors = ["yellow", "pink", "green", "blue"] as const;
 const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
 
+function StatusBadge({ status }: { status: AppProject["status"] }) {
+  if (status === "live") {
+    return (
+      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-green-700 bg-green-100 px-1.5 py-0.5">
+        <span className="size-1.5 rounded-full bg-green-500 animate-pulse" />
+        Live
+      </span>
+    );
+  }
+  if (status === "wip") {
+    return (
+      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-amber-700 bg-amber-100 px-1.5 py-0.5">
+        <span className="size-1.5 rounded-full bg-amber-500" />
+        WIP
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5">
+      Archived
+    </span>
+  );
+}
+
+function ProjectPreviewModal({
+  project,
+  onClose,
+}: {
+  project: AppProject;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-foreground/40 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.name} preview`}
+    >
+      <div
+        className="bg-background border border-border max-w-lg w-full p-6 relative shadow-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 size-8 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Close preview"
+        >
+          <X className="size-4" />
+        </button>
+
+        <div className="space-y-4">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-lg font-bold">{project.name}</h3>
+            <StatusBadge status={project.status} />
+          </div>
+
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {project.description}
+          </p>
+
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+              Tech Stack
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="text-xs px-2 py-0.5 bg-muted text-foreground border border-border"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span className="uppercase tracking-wider font-medium">Category:</span>
+            <span>{categoryMeta[project.category].label}</span>
+          </div>
+
+          <div className="flex gap-3 pt-2 border-t border-border">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              <Globe className="size-3.5" />
+              Live Demo
+              <ExternalLink className="size-3" />
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-border text-foreground hover:bg-muted transition-colors"
+            >
+              <Github className="size-3.5" />
+              Source Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function FeaturedProjects() {
   const t = useTranslations("home");
+  const [preview, setPreview] = useState<AppProject | null>(null);
 
   const featured = allProjects.filter((p) => p.featured).slice(0, 6);
 
@@ -28,34 +139,61 @@ export function FeaturedProjects() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featured.map((project, index) => (
-            <StickyNote
-              key={project.slug}
-              color={stickyColors[index % 4]}
-              rotation={rotations[index % rotations.length]}
-              className="h-full"
-            >
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block h-full"
-              >
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <h3 className="text-sm font-bold leading-tight group-hover:underline">
-                    {project.name}
-                  </h3>
-                  <ArrowUpRight className="size-3.5 shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" />
-                </div>
-                <p className="text-xs text-foreground/70 leading-relaxed mb-3">
-                  {project.description}
-                </p>
-                <span className="text-xs uppercase tracking-wider text-foreground/50">
+        {featured.map((project, index) => (
+          <StickyNote
+            key={project.slug}
+            color={stickyColors[index % 4]}
+            rotation={rotations[index % rotations.length]}
+            className="h-full flex flex-col"
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <h3 className="text-sm font-bold leading-tight">
+                  {project.name}
+                </h3>
+                <StatusBadge status={project.status} />
+              </div>
+
+              <p className="text-xs text-foreground/70 leading-relaxed mb-3 flex-1">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-1 mb-3">
+                {project.tech.slice(0, 3).map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[10px] px-1.5 py-0.5 bg-foreground/5 text-foreground/60 border border-foreground/10"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-foreground/10">
+                <span className="text-[10px] uppercase tracking-wider text-foreground/50">
                   {categoryMeta[project.category].label}
                 </span>
-              </a>
-            </StickyNote>
-          ))}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setPreview(project)}
+                    className="text-[10px] uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors underline underline-offset-2"
+                    aria-label={`Preview ${project.name}`}
+                  >
+                    Preview
+                  </button>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project.name} live demo`}
+                  >
+                    <ArrowUpRight className="size-3.5 text-foreground/50 hover:text-foreground transition-colors" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </StickyNote>
+        ))}
       </div>
 
       <div className="text-center">
@@ -66,6 +204,13 @@ export function FeaturedProjects() {
           {t("viewAllProjects")}
         </Link>
       </div>
+
+      {preview && (
+        <ProjectPreviewModal
+          project={preview}
+          onClose={() => setPreview(null)}
+        />
+      )}
     </section>
   );
 }
