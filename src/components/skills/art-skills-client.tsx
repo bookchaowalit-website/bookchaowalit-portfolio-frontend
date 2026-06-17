@@ -214,7 +214,7 @@ export function ArtSkillsClient() {
       </div>
 
       {/* Design Principles */}
-      <NotebookPaper className="py-8 mb-8" color="yellow">
+      <NotebookPaper className="py-8 mb-8">
         <NotebookSectionHeader
           title="Design Principles I Live By"
           subtitle="Core values that guide my creative process"
@@ -246,7 +246,7 @@ export function ArtSkillsClient() {
       </NotebookPaper>
 
       {/* Portfolio Highlights */}
-      <NotebookPaper className="py-8 mb-8" color="blue">
+      <NotebookPaper className="py-8 mb-8">
         <NotebookSectionHeader
           title="Design Portfolio Highlights"
           subtitle="Selected projects showcasing my design expertise"

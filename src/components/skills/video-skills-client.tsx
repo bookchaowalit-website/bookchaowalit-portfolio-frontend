@@ -206,7 +206,7 @@ export function VideoSkillsClient() {
       </div>
 
       {/* Video Techniques */}
-      <NotebookPaper className="py-8 mb-8" color="yellow">
+      <NotebookPaper className="py-8 mb-8">
         <NotebookSectionHeader
           title="Video Production Techniques"
           subtitle="Advanced skills and techniques I use in video production"
@@ -238,7 +238,7 @@ export function VideoSkillsClient() {
       </NotebookPaper>
 
       {/* Portfolio Highlights */}
-      <NotebookPaper className="py-8 mb-8" color="blue">
+      <NotebookPaper className="py-8 mb-8">
         <NotebookSectionHeader
           title="Video Portfolio Highlights"
           subtitle="Featured video projects showcasing my production expertise"

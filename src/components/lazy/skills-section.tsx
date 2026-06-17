@@ -77,7 +77,7 @@ export function SkillsSection() {
 
   return (
     <ScrollReveal>
-      <NotebookPaper className="py-8" color="green">
+      <NotebookPaper className="py-8">
         <NotebookSectionHeader
           title={t('skillsTitle')}
           subtitle={t('skillsSubtitle')}

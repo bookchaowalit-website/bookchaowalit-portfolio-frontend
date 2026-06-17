@@ -223,7 +223,7 @@ export function TechSkillsClient() {
       </div>
 
       {/* Notable Projects */}
-      <NotebookPaper className="py-8 mb-8" color="green">
+      <NotebookPaper className="py-8 mb-8">
         <NotebookSectionHeader
           title="Notable Technical Projects"
           subtitle="Real-world applications showcasing my technical skills"
