@@ -42,8 +42,8 @@ export function MixedTypographyTitle({
         <motion.span
           key={index}
           className={getTextStyle(word.style, word.size)}
-          initial={reducedMotion ? false : { opacity: 0, y: 20, rotate: -5 }}
-          animate={{ opacity: 1, y: 0, rotate: (index % 2 === 0 ? 2 : -2) }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20, rotate: -5 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0, rotate: (index % 2 === 0 ? 2 : -2) }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: index * 0.1, ease: "backOut" }}
           whileHover={reducedMotion ? undefined : {
             scale: 1.1,
@@ -78,8 +78,8 @@ export function NotebookSectionHeader({
       <div className="relative">
         <motion.h2
           className="text-4xl font-[family-name:var(--font-script)] text-foreground mb-2"
-          initial={reducedMotion ? false : { opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={reducedMotion ? undefined : { opacity: 0, x: -20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
         >
           {title}
@@ -91,8 +91,8 @@ export function NotebookSectionHeader({
           width="200"
           height="8"
           viewBox="0 0 200 8"
-          initial={reducedMotion ? false : { pathLength: 0 }}
-          animate={{ pathLength: 1 }}
+          initial={reducedMotion ? undefined : { pathLength: 0 }}
+          animate={reducedMotion ? undefined : { pathLength: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 1, delay: 0.8, ease: "easeInOut" }}
         >
           <motion.path
@@ -108,8 +108,8 @@ export function NotebookSectionHeader({
       {subtitle && (
         <motion.p
           className="text-lg font-[family-name:var(--font-doodle)] text-muted-foreground ml-4 italic"
-          initial={reducedMotion ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
         >
           {subtitle}
@@ -163,10 +163,10 @@ export function StudyGuideBox({
 
   return (
     <motion.div
-      className={`${styles[type]} border-2 ${borderStyles[type]} p-4 ${className}`}
+      className={`${styles[type]} border ${borderStyles[type]} p-4 ${className}`}
       style={{ transform: `rotate(${rotations[type]}deg)` }}
-      initial={reducedMotion ? false : { opacity: 0, scale: 0.9, rotate: rotations[type] - 4 }}
-      animate={{ opacity: 1, scale: 1, rotate: rotations[type] }}
+      initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: rotations[type] - 4 }}
+      animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: rotations[type] }}
       transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
     >
       <div className="flex items-start gap-3">

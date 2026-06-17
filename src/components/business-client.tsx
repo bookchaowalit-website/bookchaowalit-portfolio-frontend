@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
 import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 // Business data - you can move this to a separate data file later
 const businesses = [
@@ -26,20 +26,21 @@ const businesses = [
 ];
 
 export function BusinessClient() {
+  const reducedMotion = useReducedMotion();
 
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
             words={[
@@ -54,9 +55,9 @@ export function BusinessClient() {
 
         <motion.div
           className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
-          animate={{ opacity: 1, scale: 1, rotate: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <SketchyFrame variant="dashed">
             <NotebookPaper className="p-8">
@@ -103,9 +104,9 @@ export function BusinessClient() {
 
       {/* Business Cards */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
         className="mb-16"
       >
         <NotebookSectionHeader
@@ -118,9 +119,9 @@ export function BusinessClient() {
           {businesses.map((business, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8, rotate: -2 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 0 }}
+              transition={reducedMotion ? { duration: 0 } : {
                 duration: 0.6,
                 delay: 1 + index * 0.2,
                 ease: "backOut"
@@ -170,28 +171,28 @@ export function BusinessClient() {
                         <div className="flex flex-wrap gap-2">
                           {business.socialMedia.website && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.website} target="_blank">
+                              <Link href={business.socialMedia.website} target="_blank" rel="noopener noreferrer">
                                 🌐 Website
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.linkedin && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.linkedin} target="_blank">
+                              <Link href={business.socialMedia.linkedin} target="_blank" rel="noopener noreferrer">
                                 💼 LinkedIn
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.github && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.github} target="_blank">
+                              <Link href={business.socialMedia.github} target="_blank" rel="noopener noreferrer">
                                 🐙 GitHub
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.twitter && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.twitter} target="_blank">
+                              <Link href={business.socialMedia.twitter} target="_blank" rel="noopener noreferrer">
                                 🐦 Twitter
                               </Link>
                             </Button>
@@ -216,9 +217,9 @@ export function BusinessClient() {
 
       {/* Future Ventures */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.5 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 1.5 }}
         className="mt-16"
       >
         <NotebookPaper className="p-8">
@@ -325,9 +326,9 @@ export function BusinessClient() {
 
       {/* Call to Action */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 2 }}
+        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+        animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 2 }}
         className="text-center space-y-6"
       >
         <NotebookPaper className="p-8 max-w-3xl mx-auto">
@@ -339,17 +340,17 @@ export function BusinessClient() {
             Ionomad is here to help your business grow. Let's discuss how we can leverage technology and data to achieve your goals!
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button size="lg" asChild>
                 <Link href="/contact">Get In Touch</Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button variant="outline" size="lg" asChild>
                 <Link href="/projects">View My Projects</Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button variant="outline" size="lg" asChild>
                 <Link href="/about">Learn More About Me</Link>
               </Button>

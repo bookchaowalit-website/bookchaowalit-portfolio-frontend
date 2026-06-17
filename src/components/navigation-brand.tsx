@@ -2,10 +2,11 @@
 
 import { Link } from "@/i18n/routing";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export function NavigationBrand() {
   const [isMounted, setIsMounted] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     setIsMounted(true);
@@ -21,8 +22,8 @@ export function NavigationBrand() {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={reducedMotion ? undefined : { scale: 1.05 }}
+      whileTap={reducedMotion ? undefined : { scale: 0.95 }}
     >
       <Link href="/" className="text-xl font-bold text-foreground hover:text-foreground/80 transition-all duration-300">
         Chaowalit Greepoke

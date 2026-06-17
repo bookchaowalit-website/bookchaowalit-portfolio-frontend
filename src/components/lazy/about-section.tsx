@@ -3,19 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from 'next-intl';
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
 
 export function AboutSection() {
   const t = useTranslations('home');
+  const reducedMotion = useReducedMotion();
   
   return (
     <motion.section 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       viewport={{ once: true }}
       className="space-y-8"
     >
@@ -31,9 +32,9 @@ export function AboutSection() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
-        whileInView={{ opacity: 1, scale: 1, rotate: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: -1 }}
+        whileInView={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: 1 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
       >
         <SketchyFrame variant="dashed">
@@ -75,7 +76,7 @@ export function AboutSection() {
               </div>
               
               <div className="text-center pt-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button size="lg" asChild>
                     <Link href="/about">{t('learnMore')}</Link>
                   </Button>

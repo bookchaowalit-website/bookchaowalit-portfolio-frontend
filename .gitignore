@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .npm-cache/
+
+# vercel deploy temp files
+.vercel-tmp/
+
+# impeccable critique artifacts
+.impeccable/

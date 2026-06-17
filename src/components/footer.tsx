@@ -23,11 +23,11 @@ function BackToTop() {
   return (
     <motion.button
       onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" })}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
-      transition={{ duration: 0.2 }}
-      className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+      animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      exit={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
+      className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label="Back to top"
     >
       <ArrowUp className="size-4" />
@@ -49,9 +49,9 @@ export function Footer() {
           <div className="text-center space-y-6">
             {/* Hand-drawn title */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
               className="relative"
             >
               <h2 className="text-3xl font-[family-name:var(--font-script)] text-foreground mb-4">
@@ -62,9 +62,9 @@ export function Footer() {
             {/* Navigation with doodle style */}
             <motion.nav
               className="flex flex-wrap justify-center gap-6 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
             >
               <motion.div whileHover={hoverSecondary}>
                 <Link
@@ -125,9 +125,9 @@ export function Footer() {
             {/* Social Media Links */}
             <motion.div
               className="flex flex-wrap justify-center gap-4 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
             >
               <motion.a
                 href="https://github.com/bookchaowalit"
@@ -212,9 +212,9 @@ export function Footer() {
             {/* Hand-drawn doodle symbols */}
             <motion.div
               className="flex justify-center items-center gap-8 mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
             >
               {/* Star doodle */}
               <svg
@@ -269,9 +269,9 @@ export function Footer() {
 
             {/* Simple copyright */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              initial={reducedMotion ? undefined : { opacity: 0 }}
+              animate={reducedMotion ? undefined : { opacity: 1 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
               className="text-center"
             >
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)]">

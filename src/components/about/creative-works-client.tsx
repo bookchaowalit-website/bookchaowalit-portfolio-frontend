@@ -4,23 +4,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Palette, Lightbulb, Camera, Brush, Code, Sparkles } from "lucide-react";
 
 export function CreativeWorksClient() {
+  const reducedMotion = useReducedMotion();
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
       <motion.div 
         className="text-center space-y-8 py-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle 
             words={[
@@ -34,9 +35,9 @@ export function CreativeWorksClient() {
         
         <motion.div
           className="max-w-lg mx-auto"
-          initial={{ opacity: 0, scale: 0.9, rotate: 1 }}
-          animate={{ opacity: 1, scale: 1, rotate: -1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: 1 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: -1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <StickyNote rotation={1} className="text-center">
             <p className="text-sm text-foreground">
@@ -94,9 +95,9 @@ export function CreativeWorksClient() {
                   {["Figma", "Adobe XD", "Canva", "Framer", "Photoshop", "Illustrator"].map((tool, index) => (
                     <motion.div
                       key={tool}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : { delay: index * 0.1 }}
                     >
                       <Badge variant="secondary">
                         {tool}
@@ -115,9 +116,9 @@ export function CreativeWorksClient() {
                   {["CSS Animation", "SVG Graphics", "Canvas API", "Three.js", "Framer Motion", "Lottie"].map((skill, index) => (
                     <motion.div
                       key={skill}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : { delay: 0.3 + index * 0.1 }}
                     >
                       <Badge variant="secondary">
                         {skill}

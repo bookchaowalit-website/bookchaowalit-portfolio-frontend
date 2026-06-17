@@ -33,8 +33,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       {isLoading ? (
         <motion.div 
           key="loading"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={reducedMotion ? undefined : { opacity: 0 }}
+          animate={reducedMotion ? undefined : { opacity: 1 }}
           exit={reducedMotion ? undefined : { opacity: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.15, ease: "easeOut" }}
           className="flex items-center justify-center min-h-[40vh]"
@@ -54,8 +54,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       ) : (
         <motion.div
           key={pathname}
-          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
           exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
           transition={reducedMotion ? { duration: 0 } : { 
             duration: 0.4,

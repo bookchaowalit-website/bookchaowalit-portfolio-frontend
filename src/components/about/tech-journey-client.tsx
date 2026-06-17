@@ -4,23 +4,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Code, Zap, Rocket, Database, Brain } from "lucide-react";
 
 export function TechJourneyClient() {
+  const reducedMotion = useReducedMotion();
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
             words={[
@@ -34,9 +35,9 @@ export function TechJourneyClient() {
 
         <motion.div
           className="max-w-lg mx-auto"
-          initial={{ opacity: 0, scale: 0.9, rotate: 1 }}
-          animate={{ opacity: 1, scale: 1, rotate: -1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "backOut" }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: 1 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: -1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <StickyNote rotation={1} className="text-center">
             <p className="text-sm text-foreground">
@@ -214,9 +215,9 @@ export function TechJourneyClient() {
                   {["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"].map((tech, index) => (
                     <motion.div
                       key={tech}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : { delay: index * 0.1 }}
                     >
                       <Badge variant="secondary">
                         {tech}
@@ -232,9 +233,9 @@ export function TechJourneyClient() {
                   {["Python", "FastAPI", "LangChain", "LlamaIndex", "PostgreSQL", "Redis"].map((tech, index) => (
                     <motion.div
                       key={tech}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : { delay: 0.3 + index * 0.1 }}
                     >
                       <Badge variant="secondary">
                         {tech}
@@ -250,9 +251,9 @@ export function TechJourneyClient() {
                   {["Google Analytics", "Facebook API", "Docker", "Git", "Vercel", "AWS"].map((tech, index) => (
                     <motion.div
                       key={tech}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : { delay: 0.6 + index * 0.1 }}
                     >
                       <Badge variant="secondary">
                         {tech}

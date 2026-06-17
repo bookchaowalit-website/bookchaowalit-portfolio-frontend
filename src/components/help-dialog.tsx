@@ -69,10 +69,10 @@ export function HelpDialog() {
         {open && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.15 }}
+            initial={reducedMotion ? undefined : { opacity: 0 }}
+            animate={reducedMotion ? undefined : { opacity: 1 }}
+            exit={reducedMotion ? undefined : { opacity: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
           >
             {/* Backdrop */}
             <div
@@ -86,14 +86,14 @@ export function HelpDialog() {
               role="dialog"
               aria-modal="true"
               aria-label="Keyboard shortcuts and help"
-              className="relative w-full max-w-md bg-background border border-border shadow-lg"
+              className="relative w-full max-w-md bg-background border border-border"
               style={{
                 clipPath: "polygon(0% 0%, 96% 0%, 100% 4%, 100% 100%, 4% 100%, 0% 96%)"
               }}
               initial={reducedMotion ? undefined : { opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 25 }}
             >
               {/* Notebook margin line */}
               <div className="absolute left-10 top-0 bottom-0 w-px bg-border/60" />

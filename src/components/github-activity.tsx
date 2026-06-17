@@ -54,7 +54,7 @@ export default function GitHubActivity() {
 
   if (error) {
     return (
-      <section className="rounded-lg border p-4 bg-background dark:bg-card">
+      <section className="border p-4 bg-background dark:bg-card">
         <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
         <p className="text-sm text-destructive">{error}</p>
       </section>
@@ -63,7 +63,7 @@ export default function GitHubActivity() {
 
   if (!data) {
     return (
-      <section className="rounded-lg border p-4 bg-background dark:bg-card">
+      <section className="border p-4 bg-background dark:bg-card">
         <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
         <p className="text-sm text-muted-foreground">Loading…</p>
       </section>
@@ -71,7 +71,7 @@ export default function GitHubActivity() {
   }
 
   return (
-    <section className="rounded-lg border p-4 bg-background dark:bg-card">
+    <section className="border p-4 bg-background dark:bg-card">
       <div className="flex items-baseline justify-between">
         <h3 className="text-lg font-semibold text-foreground">Latest GitHub activity</h3>
         <small className="text-sm text-muted-foreground">Updated {new Date(data.fetchedAt).toLocaleString()}</small>
@@ -79,7 +79,7 @@ export default function GitHubActivity() {
       <ul className="mt-3 space-y-3">
         {data.repos.map((r) => (
           <li key={r.url} className="flex flex-col">
-            <a className="text-sm font-medium text-foreground hover:underline" href={r.url} target="_blank" rel="noreferrer">
+            <a className="text-sm font-medium text-foreground hover:underline" href={r.url} target="_blank" rel="noopener noreferrer">
               {r.name}
             </a>
             <div className="text-xs text-muted-foreground">

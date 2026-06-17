@@ -62,10 +62,10 @@ export function SectionNav() {
     <>
       {/* Desktop: side dots */}
       <motion.nav
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ duration: 0.2 }}
+        initial={reducedMotion ? undefined : { opacity: 0, x: -20 }}
+        animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+        exit={reducedMotion ? undefined : { opacity: 0, x: -20 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
         className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2"
         aria-label="Section navigation"
       >
@@ -86,7 +86,7 @@ export function SectionNav() {
                   isActive ? "w-3 h-3 bg-foreground" : "w-2 h-2 bg-muted-foreground/50 group-hover:bg-foreground/70"
                 }`}
               />
-              <span className="absolute left-8 whitespace-nowrap text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-background border border-border px-2 py-1 rounded shadow-sm">
+              <span className="absolute left-8 whitespace-nowrap text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-background border border-border px-2 py-1 rounded">
                 {section.label}
               </span>
             </button>
@@ -99,11 +99,11 @@ export function SectionNav() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 10 }}
-              transition={{ duration: 0.15 }}
-              className="absolute bottom-12 right-0 bg-background border border-border rounded shadow-lg p-2 grid grid-cols-2 gap-1 min-w-[200px]"
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8, y: 10 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+              exit={reducedMotion ? undefined : { opacity: 0, scale: 0.8, y: 10 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
+              className="absolute bottom-12 right-0 bg-background border border-border rounded p-2 grid grid-cols-2 gap-1 min-w-[200px]"
               role="dialog"
               aria-label="Section navigation"
             >
@@ -129,7 +129,7 @@ export function SectionNav() {
         </AnimatePresence>
         <button
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex items-center gap-1.5 bg-background border border-border rounded-full px-3 py-2 shadow-md text-xs font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex items-center gap-1.5 bg-background border border-border rounded-full px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label={`Section navigation — currently ${activeLabel}`}
           aria-expanded={mobileOpen}
         >

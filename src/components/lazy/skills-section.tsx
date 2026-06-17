@@ -7,10 +7,12 @@ import { NotebookPaper } from "@/components/ui/notebook-elements";
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 export function SkillsSection() {
   const t = useTranslations('home');
   const [isVisible, setIsVisible] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     // Trigger animations after component mounts
@@ -90,7 +92,7 @@ export function SkillsSection() {
             <motion.div
               key={category.title}
               variants={itemVariants}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
             >
               <StudyGuideBox
                 title={category.title}
@@ -102,9 +104,9 @@ export function SkillsSection() {
                     <motion.div
                       key={skill}
                       className={`group relative transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 ${category.rotationClass}`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
+                      initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
+                      animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      transition={reducedMotion ? { duration: 0 } : {
                         duration: 0.15,
                         delay: categoryIndex * 0.06 + skillIndex * 0.01,
                         ease: "easeOut"
@@ -112,7 +114,7 @@ export function SkillsSection() {
                     >
                       <Badge
                         variant="secondary"
-                        className={`text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-border transition-all duration-200 group-hover:shadow-sm group-hover:border-opacity-80`}
+                        className={`text-xs py-1 px-2 font-[family-name:var(--font-doodle)] border border-border transition-all duration-200 group-hover:border-opacity-80`}
                       >
                         {skill}
                       </Badge>

@@ -7,7 +7,7 @@ import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mix
 import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
-import { Code, Palette, Video } from "lucide-react";
+import { Code, Palette, Database, Cloud, Server } from "lucide-react";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 export function SkillsClient() {
@@ -15,7 +15,7 @@ export function SkillsClient() {
   const skillCategories = [
     {
       id: 'tech',
-      title: 'Computer Language',
+      title: 'Programming Languages',
       description: 'Programming languages and core technologies',
       icon: <Code className="w-8 h-8 text-background" />,
       skills: ['Python', 'C#', 'Java', 'HTML', 'CSS', 'Javascript', 'PHP', 'Liquid', 'SQL', 'Dart', 'Go'],
@@ -33,7 +33,7 @@ export function SkillsClient() {
       id: 'framework',
       title: 'Framework',
       description: 'Development frameworks and platforms',
-      icon: <Video className="w-8 h-8 text-background" />,
+      icon: <Server className="w-8 h-8 text-background" />,
       skills: ['Express.js', 'FastAPI', 'Next.js', 'Angular', 'Vue', '.Net', 'Spring Boot', 'Laravel', 'Llamaindex', 'Langchain', 'Pytorch', 'Apache Airflow', 'Flutter'],
       href: '/skills/tech'
     },
@@ -41,7 +41,7 @@ export function SkillsClient() {
       id: 'database',
       title: 'Database',
       description: 'Database systems and technologies',
-      icon: <Code className="w-8 h-8 text-background" />,
+      icon: <Database className="w-8 h-8 text-background" />,
       skills: ['SQLite', 'Postgresql', 'SQL Server', 'MongoDB', 'Neon', 'Supabase'],
       href: '/skills/tech'
     },
@@ -49,7 +49,7 @@ export function SkillsClient() {
       id: 'cloud',
       title: 'Cloud',
       description: 'Cloud platforms and containerization',
-      icon: <Palette className="w-8 h-8 text-background" />,
+      icon: <Cloud className="w-8 h-8 text-background" />,
       skills: ['DigitalOcean', 'GCP', 'Docker', 'AWS', 'K8s', 'Lens'],
       href: '/skills/tech'
     },
@@ -57,7 +57,7 @@ export function SkillsClient() {
       id: 'runtime',
       title: 'Runtime',
       description: 'Runtime environments and platforms',
-      icon: <Video className="w-8 h-8 text-background" />,
+      icon: <Server className="w-8 h-8 text-background" />,
       skills: ['Nodejs'],
       href: '/skills/tech'
     }
@@ -83,13 +83,13 @@ export function SkillsClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
@@ -106,8 +106,8 @@ export function SkillsClient() {
 
         <motion.div
           className="max-w-3xl mx-auto"
-          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
@@ -120,23 +120,23 @@ export function SkillsClient() {
       {/* Skill Categories Grid */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-        initial={reducedMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={reducedMotion ? undefined : { opacity: 0 }}
+        animate={reducedMotion ? undefined : { opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
       >
         {skillCategories.map((category, index) => (
           <motion.div
             key={category.id}
-            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 * index }}
             whileHover={reducedMotion ? undefined : { y: -5 }}
           >
             <a href={category.href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
-              <Card className="h-full hover:bg-secondary transition-colors cursor-pointer group border-2 hover:border-primary/20">
+              <Card className="h-full hover:bg-secondary transition-colors cursor-pointer group border hover:border-primary/20">
                 <CardHeader className="text-center pb-4">
                   <motion.div
-                    className="w-16 h-16 mx-auto rounded-full bg-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-16 h-16 mx-auto bg-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                     whileHover={reducedMotion ? undefined : { rotate: 5 }}
                   >
                     {category.icon}
@@ -185,8 +185,8 @@ export function SkillsClient() {
           {quickSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <StickyNote
@@ -209,7 +209,7 @@ export function SkillsClient() {
       {/* Learning & Growth */}
       <motion.div
         className="text-center py-8"
-        initial={reducedMotion ? false : { opacity: 0 }}
+        initial={reducedMotion ? undefined : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}

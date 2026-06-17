@@ -3,13 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
 import { useTranslations } from 'next-intl';
 
 export function BusinessSection() {
   const t = useTranslations('business');
+  const reducedMotion = useReducedMotion();
 
   const highlightedBusinesses = [
     {
@@ -22,9 +23,9 @@ export function BusinessSection() {
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       viewport={{ once: true }}
       className="space-y-8"
     >
@@ -39,9 +40,9 @@ export function BusinessSection() {
         />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+          whileInView={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
           <div className="bg-muted border border-border p-4 max-w-2xl mx-auto">
@@ -56,11 +57,11 @@ export function BusinessSection() {
         {highlightedBusinesses.map((business, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20, rotate: -2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            initial={reducedMotion ? undefined : { opacity: 0, y: 20, rotate: -2 }}
+            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, rotate: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.3 + index * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ y: -5, scale: 1.02 }}
+            whileHover={reducedMotion ? undefined : { y: -5, scale: 1.02 }}
             className="h-full"
           >
             <SketchyFrame variant="dashed">
@@ -97,12 +98,12 @@ export function BusinessSection() {
 
       <motion.div
         className="text-center pt-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0 }}
+        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
         viewport={{ once: true }}
       >
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
           <Button size="lg" asChild>
             <Link href="/business">
               Explore All My Ventures

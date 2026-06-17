@@ -176,7 +176,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <Separator className="my-12" />
 
       {/* Author bio */}
-      <section className="bg-muted/50 rounded-lg p-8">
+      <section className="bg-muted/50 p-8">
         <div className="flex items-start space-x-4">
           <Avatar className="w-16 h-16">
             <AvatarImage src="/profile.webp" alt={post.author} />

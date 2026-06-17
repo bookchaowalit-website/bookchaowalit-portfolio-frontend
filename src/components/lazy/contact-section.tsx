@@ -3,16 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
 
 export function ContactSection() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       viewport={{ once: true }}
       className="space-y-8"
     >
@@ -28,9 +30,9 @@ export function ContactSection() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9, rotate: 1 }}
-        whileInView={{ opacity: 1, scale: 1, rotate: -0.5 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9, rotate: 1 }}
+        whileInView={reducedMotion ? undefined : { opacity: 1, scale: 1, rotate: -0.5 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
       >
         <SketchyFrame variant="double">
@@ -61,8 +63,8 @@ export function ContactSection() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-muted border border-border">
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
+                  <div className="p-4 bg-muted border border-border">
                     <div className="text-2xl mb-2">💻</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Development Projects
@@ -70,8 +72,8 @@ export function ContactSection() {
                   </div>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-muted border border-border">
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
+                  <div className="p-4 bg-muted border border-border">
                     <div className="text-2xl mb-2">🤖</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       AI Consultation
@@ -79,8 +81,8 @@ export function ContactSection() {
                   </div>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }}>
-                  <div className="p-4 rounded-lg bg-muted border border-border">
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
+                  <div className="p-4 bg-muted border border-border">
                     <div className="text-2xl mb-2">📈</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Business Growth
@@ -90,12 +92,12 @@ export function ContactSection() {
               </div>
 
               <div className="flex gap-4 justify-center flex-wrap pt-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button size="lg" asChild>
                     <Link href="/contact">Get In Touch</Link>
                   </Button>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button variant="outline" size="lg" asChild>
                     <a href="mailto:bookchaowalit@gmail.com">
                       📧 Email Me
@@ -108,7 +110,8 @@ export function ContactSection() {
                 <motion.a
                   href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
                   target="_blank"
-                  whileHover={{ scale: 1.2, y: -2 }}
+                  rel="noopener noreferrer"
+                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
                 >
                   💼
@@ -116,7 +119,8 @@ export function ContactSection() {
                 <motion.a
                   href="https://github.com/bookchaowalit"
                   target="_blank"
-                  whileHover={{ scale: 1.2, y: -2 }}
+                  rel="noopener noreferrer"
+                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
                 >
                   🐙
@@ -124,7 +128,8 @@ export function ContactSection() {
                 <motion.a
                   href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
                   target="_blank"
-                  whileHover={{ scale: 1.2, y: -2 }}
+                  rel="noopener noreferrer"
+                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
                 >
                   🔧
@@ -132,7 +137,8 @@ export function ContactSection() {
                 <motion.a
                   href="https://fastwork.co/user/bookchao"
                   target="_blank"
-                  whileHover={{ scale: 1.2, y: -2 }}
+                  rel="noopener noreferrer"
+                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
                 >
                   ⚡

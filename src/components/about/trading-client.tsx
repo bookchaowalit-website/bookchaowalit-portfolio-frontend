@@ -6,24 +6,25 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { NotebookPaper } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { TrendingUp, Brain, Target, Shield, BarChart3, Zap } from "lucide-react";
 
 export function TradingClient() {
+  const reducedMotion = useReducedMotion();
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
             words={[
@@ -38,9 +39,9 @@ export function TradingClient() {
 
         <motion.div
           className="max-w-2xl mx-auto"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
             My journey from traditional trading to building AI-powered investment systems.
@@ -246,7 +247,7 @@ export function TradingClient() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 border rounded-lg">
+            <div className="p-4 border">
               <h4 className="font-semibold text-foreground mb-2">Crypto Prediction Model</h4>
               <p className="text-sm text-muted-foreground">
                 Machine learning model for predicting cryptocurrency price movements
@@ -254,7 +255,7 @@ export function TradingClient() {
               </p>
             </div>
 
-            <div className="p-4 border rounded-lg">
+            <div className="p-4 border">
               <h4 className="font-semibold text-foreground mb-2">Automated Trading Bot</h4>
               <p className="text-sm text-muted-foreground">
                 AI-powered trading bot for executing trades across multiple exchanges
@@ -262,7 +263,7 @@ export function TradingClient() {
               </p>
             </div>
 
-            <div className="p-4 border rounded-lg">
+            <div className="p-4 border">
               <h4 className="font-semibold text-foreground mb-2">Portfolio Optimizer</h4>
               <p className="text-sm text-muted-foreground">
                 Advanced portfolio optimization tool using modern portfolio theory
@@ -270,7 +271,7 @@ export function TradingClient() {
               </p>
             </div>
 
-            <div className="p-4 border rounded-lg">
+            <div className="p-4 border">
               <h4 className="font-semibold text-foreground mb-2">Market Sentiment Analyzer</h4>
               <p className="text-sm text-muted-foreground">
                 NLP-powered tool for analyzing market sentiment from news,
@@ -284,9 +285,9 @@ export function TradingClient() {
       {/* Call to Action */}
       <motion.div
         className="text-center py-8"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        initial={reducedMotion ? undefined : { opacity: 0 }}
+        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >
         <p className="text-muted-foreground mb-4">

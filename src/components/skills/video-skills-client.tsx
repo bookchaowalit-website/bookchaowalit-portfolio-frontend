@@ -5,11 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
 import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Camera, Scissors, Mic, Palette, Zap, Play, Edit, Film } from "lucide-react";
 
 export function VideoSkillsClient() {
+  const reducedMotion = useReducedMotion();
+
   const videoCategories = [
     {
       title: 'Video Editing',
@@ -106,14 +108,14 @@ export function VideoSkillsClient() {
       {/* Hero Section */}
       <motion.div
         className="text-center space-y-8 py-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+        animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
           <MixedTypographyTitle
             words={[
@@ -129,9 +131,9 @@ export function VideoSkillsClient() {
 
         <motion.div
           className="max-w-3xl mx-auto"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+          animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.4 }}
         >
           <p className="text-lg text-muted-foreground">
             From concept to final cut, explore my video production expertise including
@@ -145,13 +147,13 @@ export function VideoSkillsClient() {
         {videoCategories.map((category, categoryIndex) => (
           <motion.div
             key={category.title}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+            initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: categoryIndex * 0.2 }}
           >
             <NotebookPaper className="py-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className={`${category.color} bg-muted p-3 rounded-lg`}>
+                <div className={`${category.color} bg-muted p-3`}>
                   {category.icon}
                 </div>
                 <div>
@@ -164,9 +166,9 @@ export function VideoSkillsClient() {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
+                    initial={reducedMotion ? undefined : { opacity: 0, x: -20 }}
+                    animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+                    transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: skillIndex * 0.1 }}
                   >
                     <Card>
                       <CardHeader className="pb-3">
@@ -177,12 +179,12 @@ export function VideoSkillsClient() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3">
-                          <div className="w-full bg-muted rounded-full h-2">
+                          <div className="w-full bg-muted h-2">
                             <motion.div
-                              className="bg-foreground h-2 rounded-full"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                              className="bg-foreground h-2"
+                              initial={reducedMotion ? undefined : { width: 0 }}
+                              animate={reducedMotion ? undefined : { width: `${skill.level}%` }}
+                              transition={reducedMotion ? { duration: 0 } : { duration: 1, delay: skillIndex * 0.1 }}
                             />
                           </div>
                           <div className="flex justify-between text-sm text-muted-foreground">
@@ -212,13 +214,13 @@ export function VideoSkillsClient() {
           {videoTechniques.map((technique, index) => (
             <motion.div
               key={technique.title}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="text-center h-full">
                 <CardHeader>
-                  <div className="mx-auto w-12 h-12 bg-foreground rounded-full flex items-center justify-center mb-4">
+                  <div className="mx-auto w-12 h-12 bg-foreground flex items-center justify-center mb-4">
                     {technique.icon}
                   </div>
                   <CardTitle className="text-lg">{technique.title}</CardTitle>
@@ -244,9 +246,9 @@ export function VideoSkillsClient() {
           {portfolioItems.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={reducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+              animate={reducedMotion ? undefined : { opacity: 1, scale: 1 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="h-full">
                 <CardHeader>
@@ -274,9 +276,9 @@ export function VideoSkillsClient() {
       {/* Production Process */}
       <motion.div
         className="text-center py-8"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        initial={reducedMotion ? undefined : { opacity: 0 }}
+        whileInView={reducedMotion ? undefined : { opacity: 1 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >
         <NotebookPaper className="p-8 max-w-4xl mx-auto">
@@ -305,12 +307,12 @@ export function VideoSkillsClient() {
           </div>
 
           <div className="flex gap-4 justify-center flex-wrap">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button asChild>
                 <Link href="/projects">View Video Projects</Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
               <Button variant="outline" asChild>
                 <Link href="/skills">← Back to Skills</Link>
               </Button>

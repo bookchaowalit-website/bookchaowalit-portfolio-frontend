@@ -20,8 +20,8 @@ export function HandDrawnHighlight({
           transform: "rotate(-1deg) skew(-2deg)",
           clipPath: "polygon(2% 10%, 98% 5%, 96% 90%, 4% 95%)"
         }}
-        initial={reducedMotion ? false : { scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
+        initial={reducedMotion ? undefined : { scaleX: 0, opacity: 0 }}
+        animate={reducedMotion ? undefined : { scaleX: 1, opacity: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, ease: "easeInOut" }}
       />
       <span className="relative z-10">{children}</span>
@@ -84,8 +84,8 @@ export function StickyNote({
         transform: `rotate(${rotation}deg)`,
         clipPath: "polygon(0% 0%, 95% 0%, 100% 8%, 100% 100%, 5% 100%, 0% 92%)"
       }}
-      initial={reducedMotion ? false : { scale: 0, rotate: rotation - 45 }}
-      animate={{ scale: 1, rotate: rotation }}
+      initial={reducedMotion ? undefined : { scale: 0, rotate: rotation - 45 }}
+      animate={reducedMotion ? undefined : { scale: 1, rotate: rotation }}
       transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
       whileHover={reducedMotion ? undefined : { scale: 1.05, rotate: rotation + 2 }}
     >
@@ -130,8 +130,8 @@ export function SketchArrow({
           strokeWidth="2.5"
           fill="none"
           strokeLinecap="round"
-          initial={reducedMotion ? false : { pathLength: 0 }}
-          animate={{ pathLength: 1 }}
+          initial={reducedMotion ? undefined : { pathLength: 0 }}
+          animate={reducedMotion ? undefined : { pathLength: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 1.5, ease: "easeInOut" }}
         />
         <motion.path
@@ -140,16 +140,16 @@ export function SketchArrow({
           strokeWidth="2.5"
           fill="none"
           strokeLinecap="round"
-          initial={reducedMotion ? false : { pathLength: 0 }}
-          animate={{ pathLength: 1 }}
+          initial={reducedMotion ? undefined : { pathLength: 0 }}
+          animate={reducedMotion ? undefined : { pathLength: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.5, ease: "easeInOut" }}
         />
       </motion.svg>
       {label && (
         <motion.span
           className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs font-[family-name:var(--font-doodle)] text-muted-foreground whitespace-nowrap"
-          initial={reducedMotion ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? undefined : { opacity: 0, y: 10 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 2 }}
         >
           {label}
@@ -176,8 +176,8 @@ export function SketchyFrame({
       <motion.svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         fill="none"
-        initial={reducedMotion ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
+        initial={reducedMotion ? undefined : { pathLength: 0 }}
+        animate={reducedMotion ? undefined : { pathLength: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 2, ease: "easeInOut" }}
       >
         {variant === "dashed" && (
@@ -241,8 +241,8 @@ export function HandDrawnBracket({
         strokeWidth="3"
         fill="none"
         strokeLinecap="round"
-        initial={reducedMotion ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
+        initial={reducedMotion ? undefined : { pathLength: 0 }}
+        animate={reducedMotion ? undefined : { pathLength: 1 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 1, ease: "easeInOut" }}
       />
     </motion.svg>
