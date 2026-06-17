@@ -93,33 +93,52 @@ export default async function LocaleLayout({
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Chaowalit Greepoke",
-    "alternateName": "Book",
-    "description": "Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end",
-    "jobTitle": "Tech Generalist & Solopreneur",
-    "url": "https://bookchaowalit.com",
-    "image": "https://bookchaowalit.com/profile.webp",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bangkok",
-      "addressCountry": "Thailand"
-    },
-    "worksFor": {
-      "@type": "Organization",
-      "name": "BookChaowa Tech Solutions"
-    },
-    "knowsAbout": [
-      "Software Engineering",
-      "Data Analytics",
-      "Artificial Intelligence",
-      "Digital Growth",
-      "Web Development",
-      "Problem Solving"
-    ],
-    "sameAs": [
-      "https://github.com/bookchaowalit",
-      "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Chaowalit Greepoke",
+        "alternateName": "Book",
+        "description": "Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end",
+        "jobTitle": "Tech Generalist & Solopreneur",
+        "url": "https://bookchaowalit.com",
+        "image": "https://bookchaowalit.com/profile.webp",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bangkok",
+          "addressCountry": "Thailand"
+        },
+        "worksFor": {
+          "@type": "Organization",
+          "name": "BookChaowa Tech Solutions"
+        },
+        "knowsAbout": [
+          "Software Engineering",
+          "Data Analytics",
+          "Artificial Intelligence",
+          "Digital Growth",
+          "Web Development",
+          "Problem Solving"
+        ],
+        "sameAs": [
+          "https://github.com/bookchaowalit",
+          "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Chaowalit Greepoke - Portfolio",
+        "url": "https://bookchaowalit.com",
+        "description": "Tech Generalist and Solopreneur from Bangkok, Thailand",
+        "inLanguage": ["en", "th"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://bookchaowalit.com/projects?search={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
     ]
   };
 

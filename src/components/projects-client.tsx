@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   allProjects,
   categoryMeta,
@@ -10,7 +11,6 @@ import {
   type ProjectStatus,
 } from "@/data/app-projects";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { NotebookPaper } from "@/components/ui/notebook-elements";
 import {
   ExternalLink,
   Search,
@@ -91,7 +91,7 @@ function ProjectCard({
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-2 min-w-0">
           {favicon && !imgError ? (
-            <img
+            <Image
               src={favicon}
               alt=""
               width={16}
@@ -99,6 +99,7 @@ function ProjectCard({
               className="shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"
               onError={() => setImgError(true)}
               loading="lazy"
+              unoptimized
             />
           ) : null}
           <h3 className="text-sm font-semibold leading-tight group-hover:underline truncate">
@@ -141,6 +142,7 @@ function ProjectCard({
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="text-muted-foreground/40 hover:text-foreground transition-colors"
+              aria-label={`${project.name} GitHub repository`}
             >
               <Github className="size-3" />
             </a>
@@ -335,6 +337,7 @@ export function ProjectsClient() {
             <input
               ref={searchRef}
               type="text"
+              aria-label="Search projects"
               placeholder="Search projects... (press / to focus)"
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -344,7 +347,7 @@ export function ProjectsClient() {
         </div>
 
         {/* Status filters */}
-        <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto">
+        <div className="flex flex-wrap justify-center border border-border mb-4 max-w-md mx-auto" role="group" aria-label="Filter by status">
           {(["all", "live", "wip", "archived"] as const).map((status, i) => {
             const isActive = activeStatus === status;
             const label = status === "all" ? "All" : statusConfig[status].label;
@@ -369,7 +372,7 @@ export function ProjectsClient() {
         </div>
 
         {/* Category filters — progressive disclosure: show top 4, expand on demand */}
-        <div className="flex flex-wrap justify-center border border-border max-w-2xl mx-auto">
+        <div className="flex flex-wrap justify-center border border-border max-w-2xl mx-auto" role="group" aria-label="Filter by category">
           {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat, i) => {
             const isActive = activeCategory === cat;
             const label = cat === "all" ? "All" : categoryMeta[cat].label;
@@ -427,7 +430,7 @@ export function ProjectsClient() {
       <div className="py-8">
         {/* Results count */}
         <div className="mb-6">
-          <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+          <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
             {filtered.length} project{filtered.length !== 1 ? "s" : ""}
             {activeCategory !== "all" && ` in ${categoryMeta[activeCategory].label}`}
             {activeStatus !== "all" && ` · ${statusConfig[activeStatus].label}`}

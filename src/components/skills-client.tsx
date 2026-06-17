@@ -1,10 +1,9 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote } from '@/components/ui/notebook-elements';
+import { StickyNote } from '@/components/ui/notebook-elements';
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Code, Palette, Database, Cloud, Server } from "lucide-react";
@@ -138,7 +137,7 @@ export function SkillsClient() {
                 <StickyNote color={colors[index]} rotation={rotations[index]} className="h-full p-6 cursor-pointer group">
                   <div className="text-center space-y-4">
                     <motion.div
-                      className="w-16 h-16 mx-auto bg-foreground/10 rounded-full flex items-center justify-center"
+                      className="w-16 h-16 mx-auto bg-primary/10 flex items-center justify-center"
                       whileHover={reducedMotion ? undefined : { rotate: 5, scale: 1.1 }}
                     >
                       {category.icon}
@@ -218,7 +217,7 @@ export function SkillsClient() {
       >
         <div className="p-8 max-w-4xl mx-auto space-y-6">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-            🚀 Continuous Learning & Growth
+            Continuous Learning & Growth
           </h2>
           <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Technology and creative fields evolve rapidly. I'm committed to staying current with the latest

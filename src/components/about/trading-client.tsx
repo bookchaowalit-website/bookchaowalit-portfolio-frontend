@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { TrendingUp, Brain, Target, Shield, BarChart3, Zap } from "lucide-react";

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Mail } from "lucide-react";
 
 const SCROLL_THRESHOLD = 400;
 
@@ -62,6 +62,7 @@ export function Footer() {
             {/* Navigation with doodle style */}
             <motion.nav
               className="flex flex-wrap justify-center gap-6 mb-8"
+              aria-label="Footer navigation"
               initial={reducedMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
@@ -137,7 +138,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="GitHub"
               >
-                <span role="img" aria-hidden="true">🐙</span>
+                <Github className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
@@ -147,7 +148,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="LinkedIn"
               >
-                <span role="img" aria-hidden="true">💼</span>
+                <Linkedin className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://twitter.com/bookchaowalit"
@@ -157,7 +158,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Twitter"
               >
-                <span role="img" aria-hidden="true">🐦</span>
+                <Twitter className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://dev.to/bookchaowalit"
@@ -167,7 +168,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Dev.to"
               >
-                <span role="img" aria-hidden="true">✍️</span>
+                <PenTool className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://medium.com/@bookchaowalit"
@@ -177,7 +178,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Medium"
               >
-                <span role="img" aria-hidden="true">📖</span>
+                <BookOpen className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
@@ -187,7 +188,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Upwork"
               >
-                <span role="img" aria-hidden="true">🔧</span>
+                <Briefcase className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="https://fastwork.co/user/bookchao"
@@ -197,7 +198,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Fastwork"
               >
-                <span role="img" aria-hidden="true">⚡</span>
+                <Zap className="w-5 h-5" />
               </motion.a>
               <motion.a
                 href="mailto:bookchaowalit@gmail.com"
@@ -205,7 +206,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Email"
               >
-                <span role="img" aria-hidden="true">📧</span>
+                <Mail className="w-5 h-5" />
               </motion.a>
             </motion.div>
 
@@ -277,8 +278,8 @@ export function Footer() {
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)]">
                 © {currentYear} Book (เชาวลิต กรีโภค)
               </p>
-              <p className="text-xs text-foreground mt-1">
-                Made with <span aria-hidden="true">❤️</span> in Bangkok, Thailand <span aria-hidden="true">🇹🇭</span>
+              <p className="text-xs text-foreground mt-1 flex items-center justify-center gap-1">
+                Made with <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 20" className="inline text-red-500/70"><path d="M12 18s-8-4-8-10c0-3 2-5 5-5 2 0 3 1 3 1s1-1 3-1c3 0 5 2 5 5 0 6-8 10-8 10z" fill="currentColor" stroke="none" /></svg></span><span className="sr-only">love</span> in Bangkok, Thailand
               </p>
               <p className="text-xs text-foreground mt-1">
                 Solopreneur • Full-Stack Developer • AI Specialist

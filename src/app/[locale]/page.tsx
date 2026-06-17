@@ -1,32 +1,47 @@
 import { Metadata } from 'next';
-          import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/lazy/hero-section';
-import GitHubActivity from '@/components/github-activity';
 import { SectionNav } from '@/components/section-nav';
+import { ErrorBoundary } from '@/components/error-boundary';
+
+// Loading skeleton with notebook theme
+const SectionSkeleton = ({ height = 'h-64' }: { height?: string }) => (
+  <div className={`${height} animate-pulse bg-muted border border-border relative overflow-hidden`}>
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-background/50 to-transparent animate-shimmer" />
+  </div>
+);
 
 // Lazy load below-the-fold components
 const SkillsSection = dynamic(() => import('@/components/lazy/skills-section').then(mod => ({ default: mod.SkillsSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-96" />
 });
 
 const AboutSection = dynamic(() => import('@/components/lazy/about-section').then(mod => ({ default: mod.AboutSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-80" />
 });
 
 const FeaturedProjects = dynamic(() => import('@/components/lazy/featured-projects').then(mod => ({ default: mod.FeaturedProjects })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-[500px]" />
 });
 
 const BusinessSection = dynamic(() => import('@/components/lazy/business-section').then(mod => ({ default: mod.BusinessSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-72" />
 });
 
 const BlogSection = dynamic(() => import('@/components/lazy/blog-section').then(mod => ({ default: mod.BlogSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-64" />
+});
+
+const NewsletterCTA = dynamic(() => import('@/components/lazy/newsletter-cta').then(mod => ({ default: mod.NewsletterCTA })), {
+  loading: () => <SectionSkeleton height="h-48" />
 });
 
 const ContactSection = dynamic(() => import('@/components/lazy/contact-section').then(mod => ({ default: mod.ContactSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-muted" />
+  loading: () => <SectionSkeleton height="h-96" />
+});
+
+const GitHubActivity = dynamic(() => import('@/components/github-activity'), {
+  loading: () => <SectionSkeleton height="h-80" />
 });
 
 type Props = {
@@ -101,31 +116,50 @@ export default function Home() {
   return (
     <>
       <SectionNav />
-      <div className="container mx-auto px-4 py-8 space-y-16 md:space-y-20 lg:space-y-24">
+      <div className="container mx-auto px-4 space-y-16 md:space-y-20 lg:space-y-24">
       <div id="hero">
         <HeroSection />
       </div>
-      <div id="skills">
-        <SkillsSection />
-      </div>
-      <div id="about">
-        <AboutSection />
-      </div>
-      <div id="projects">
-        <FeaturedProjects />
-      </div>
-      <div id="activity">
-        <GitHubActivity />
-      </div>
-      <div id="business">
-        <BusinessSection />
-      </div>
-      <div id="blog">
-        <BlogSection />
-      </div>
-      <div id="contact">
-        <ContactSection />
-      </div>
+      <ErrorBoundary>
+        <div id="skills">
+          <SkillsSection />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="about">
+          <AboutSection />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="projects">
+          <FeaturedProjects />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="activity">
+          <GitHubActivity />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="business">
+          <BusinessSection />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="blog">
+          <BlogSection />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="newsletter">
+          <NewsletterCTA />
+        </div>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <div id="contact">
+          <ContactSection />
+        </div>
+      </ErrorBoundary>
       </div>
     </>
   );

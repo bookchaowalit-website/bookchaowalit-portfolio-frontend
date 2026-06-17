@@ -226,14 +226,14 @@ export function SketchyFrame({
             strokeWidth="2"
             fill="none"
             strokeDasharray="8 4"
-            rx="4"
+            rx="0"
             className="text-primary/40"
           />
         )}
         {variant === "double" && (
           <>
-            <motion.rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" stroke="currentColor" strokeWidth="1" fill="none" rx="6" className="text-primary/60" />
-            <motion.rect x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke="currentColor" strokeWidth="1" fill="none" rx="2" className="text-secondary/60" />
+            <motion.rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" stroke="currentColor" strokeWidth="1" fill="none" rx="0" className="text-primary/60" />
+            <motion.rect x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke="currentColor" strokeWidth="1" fill="none" rx="0" className="text-secondary/60" />
           </>
         )}
         {variant === "wavy" && (

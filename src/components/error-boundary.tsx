@@ -3,6 +3,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { Pencil } from "lucide-react";
 
 interface Props {
   children: ReactNode;
@@ -38,7 +39,7 @@ function AnimatedErrorFallback({ error, onReset }: { error: Error | null; onRese
             oops!
           </p>
           <h2 className="text-lg font-[family-name:var(--font-comic)] font-bold text-foreground">
-            Something went wrong ✏️
+            Something went wrong <Pencil className="inline w-4 h-4" />
           </h2>
           <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mt-2">
             {error?.message || "An unexpected error occurred."}

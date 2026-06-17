@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale}/business`,
       siteName: 'Chaowalit Greepoke Portfolio',
       images: [{
-        url: '/og-business.jpg',
+        url: `/${locale}/business/opengraph-image`,
         width: 1200,
         height: 630,
         alt: 'Ionomad - Deeptech & Marketing Agency'
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       creator: '@bookchaowalit',
-      images: ['/og-business.jpg']
+      images: [`/${locale}/business/opengraph-image`]
     }
   };
 }

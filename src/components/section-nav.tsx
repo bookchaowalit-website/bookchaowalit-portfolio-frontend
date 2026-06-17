@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { usePathname } from "@/i18n/routing";
 
 const sections = [
   { id: "hero", label: "Home" },
@@ -20,8 +21,27 @@ export function SectionNav() {
   const [isVisible, setIsVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const reducedMotion = useReducedMotion();
+  const pathname = usePathname();
+  const mobileRef = useRef<HTMLDivElement>(null);
+
+  // Close mobile menu on outside click
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileOpen]);
+
+  // Only show on homepage (usePathname returns path without locale prefix)
+  const isHomepage = pathname === '/';
 
   useEffect(() => {
+    if (!isHomepage) return;
+
     const handleScroll = () => {
       setIsVisible(window.scrollY > 200);
 
@@ -44,7 +64,7 @@ export function SectionNav() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomepage]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -54,7 +74,7 @@ export function SectionNav() {
     }
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || !isHomepage) return null;
 
   const activeLabel = sections.find((s) => s.id === activeSection)?.label ?? "";
 
@@ -75,7 +95,7 @@ export function SectionNav() {
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`group relative flex items-center justify-start p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm ${
+              className={`group relative flex items-center justify-start p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
               aria-label={`Go to ${section.label}`}
@@ -86,7 +106,7 @@ export function SectionNav() {
                   isActive ? "w-3 h-3 bg-foreground" : "w-2 h-2 bg-muted-foreground/50 group-hover:bg-foreground/70"
                 }`}
               />
-              <span className="absolute left-8 whitespace-nowrap text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-background border border-border px-2 py-1 rounded">
+              <span className="absolute left-8 whitespace-nowrap text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-background border border-border px-2 py-1">
                 {section.label}
               </span>
             </button>
@@ -95,7 +115,7 @@ export function SectionNav() {
       </motion.nav>
 
       {/* Mobile: floating pill button + expandable picker */}
-      <div className="fixed bottom-4 right-4 z-40 lg:hidden">
+      <div className="fixed bottom-4 right-4 z-40 lg:hidden" ref={mobileRef}>
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -104,7 +124,7 @@ export function SectionNav() {
               exit={reducedMotion ? undefined : { opacity: 0, scale: 0.8, y: 10 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
               className="absolute bottom-12 right-0 bg-background border border-border rounded p-2 grid grid-cols-2 gap-1 min-w-[200px]"
-              role="dialog"
+              role="menu"
               aria-label="Section navigation"
             >
               {sections.map((section) => {
@@ -118,6 +138,7 @@ export function SectionNav() {
                         ? "bg-foreground text-background font-medium"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
+                    role="menuitem"
                     aria-current={isActive ? "true" : undefined}
                   >
                     {section.label}

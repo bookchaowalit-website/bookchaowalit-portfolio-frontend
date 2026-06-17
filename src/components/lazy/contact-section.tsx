@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 
 export function ContactSection() {
   const reducedMotion = useReducedMotion();
@@ -41,13 +41,13 @@ export function ContactSection() {
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
                   <Badge variant="secondary" className="bg-muted text-foreground">
-                    📧 Quick Response
+                    <span aria-hidden="true">📧</span> Quick Response
                   </Badge>
                   <Badge variant="secondary" className="bg-muted text-foreground">
-                    🌏 Available Globally
+                    <span aria-hidden="true">🌏</span> Available Globally
                   </Badge>
                   <Badge variant="secondary" className="bg-muted text-foreground">
-                    💬 Multiple Channels
+                    <span aria-hidden="true">💬</span> Multiple Channels
                   </Badge>
                 </div>
 
@@ -65,7 +65,7 @@ export function ContactSection() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2">💻</div>
+                    <div className="text-2xl mb-2" aria-hidden="true">💻</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Development Projects
                     </p>
@@ -74,7 +74,7 @@ export function ContactSection() {
 
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2">🤖</div>
+                    <div className="text-2xl mb-2" aria-hidden="true">🤖</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       AI Consultation
                     </p>
@@ -83,7 +83,7 @@ export function ContactSection() {
 
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2">📈</div>
+                    <div className="text-2xl mb-2" aria-hidden="true">📈</div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Business Growth
                     </p>
@@ -100,21 +100,23 @@ export function ContactSection() {
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button variant="outline" size="lg" asChild>
                     <a href="mailto:bookchaowalit@gmail.com">
-                      📧 Email Me
+                      <span aria-hidden="true">📧</span> Email Me
                     </a>
                   </Button>
                 </motion.div>
               </div>
 
-              <div className="flex justify-center gap-4 text-2xl">
+              <div className="flex justify-center gap-4 text-2xl" role="list" aria-label="Social links">
                 <motion.a
                   href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
+                  aria-label="LinkedIn"
+                  role="listitem"
                 >
-                  💼
+                  <span aria-hidden="true">💼</span>
                 </motion.a>
                 <motion.a
                   href="https://github.com/bookchaowalit"
@@ -122,8 +124,10 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
+                  aria-label="GitHub"
+                  role="listitem"
                 >
-                  🐙
+                  <span aria-hidden="true">🐙</span>
                 </motion.a>
                 <motion.a
                   href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
@@ -131,8 +135,10 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
+                  aria-label="Upwork"
+                  role="listitem"
                 >
-                  🔧
+                  <span aria-hidden="true">🔧</span>
                 </motion.a>
                 <motion.a
                   href="https://fastwork.co/user/bookchao"
@@ -140,8 +146,10 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
                   className="hover:text-primary transition-colors"
+                  aria-label="Fastwork"
+                  role="listitem"
                 >
-                  ⚡
+                  <span aria-hidden="true">⚡</span>
                 </motion.a>
               </div>
             </div>

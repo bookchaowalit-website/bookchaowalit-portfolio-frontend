@@ -133,13 +133,13 @@
   body {
     @apply text-foreground;
     /* Clean, warm background */
-    background: oklch(0.995 0.003 90);
+    background: var(--background);
     min-height: 100vh;
     overflow-x: hidden;
   }
   .dark body {
     /* Dark mode: warm very dark gray */
-    background: oklch(0.16 0.005 60);
+    background: var(--background);
   }
 }
 
@@ -152,6 +152,14 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Ensure minimum touch targets for mobile (44x44px WCAG 2.5.5) */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 
@@ -257,7 +265,7 @@
 .prose code {
   background: var(--muted);
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 0;
   font-size: 0.875rem;
   font-family: var(--font-mono);
 }
@@ -265,7 +273,7 @@
 .prose pre {
   background: var(--muted);
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0;
   overflow-x: auto;
   margin: 2rem 0;
 }
@@ -316,4 +324,18 @@
 .prose th {
   background: var(--muted);
   font-weight: 600;
+}
+
+/* Shimmer animation for loading skeletons */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }

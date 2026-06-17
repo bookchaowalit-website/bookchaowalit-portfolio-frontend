@@ -1,9 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { getAllBlogPosts } from '@/lib/blog';
 import { getTranslations } from 'next-intl/server';
-import { NotebookPaper, StickyNote } from '@/components/ui/notebook-elements';
+import { StickyNote } from '@/components/ui/notebook-elements';
+import { MixedTypographyTitle } from '@/components/ui/mixed-typography';
 
 export async function BlogSection() {
   const t = await getTranslations('home');
@@ -13,7 +13,13 @@ export async function BlogSection() {
 
   return (
     <section className="space-y-8">
-      <h2 className="text-3xl font-bold text-center text-balance">{t('latestBlogTitle')}</h2>
+      <MixedTypographyTitle
+        words={[
+          { text: "Latest", style: "cursive", size: "lg" },
+          { text: "Blog", style: "bubble", size: "lg" },
+          { text: "Posts", style: "filled", size: "lg" }
+        ]}
+      />
       <div className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => {

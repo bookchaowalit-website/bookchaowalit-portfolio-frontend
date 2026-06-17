@@ -12,6 +12,11 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
     '/about': '/about',
+    '/about/fitness': '/about/fitness',
+    '/about/creative': '/about/creative',
+    '/about/growth': '/about/growth',
+    '/about/journey': '/about/journey',
+    '/about/trading': '/about/trading',
     '/projects': '/projects',
     '/blog': '/blog',
     '/blog/[slug]': '/blog/[slug]',

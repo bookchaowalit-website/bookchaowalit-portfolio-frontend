@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import {
@@ -153,7 +153,6 @@ export function ArtSkillsClient() {
       {/* Design Categories */}
       <div className="space-y-8 mb-12">
         {designCategories.map((category, categoryIndex) => {
-          const paperColors = ["default", "yellow", "green", "blue"] as const;
           return (
           <motion.div
             key={category.title}
@@ -234,7 +233,7 @@ export function ArtSkillsClient() {
             >
               <StickyNote color={colors[index]} rotation={rotations[index]} className="text-center h-full p-5">
                 <div className="space-y-3">
-                  <div className="mx-auto w-12 h-12 bg-foreground/10 rounded-full flex items-center justify-center">
+                  <div className="mx-auto w-12 h-12 bg-primary/10 flex items-center justify-center">
                     {principle.icon}
                   </div>
                   <h3 className="text-lg font-bold">{principle.title}</h3>
@@ -298,7 +297,7 @@ export function ArtSkillsClient() {
       >
         <div className="p-8 max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-            🎨 My Creative Process
+            My Creative Process
           </h2>
           <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Every design project starts with understanding the problem, researching the users,

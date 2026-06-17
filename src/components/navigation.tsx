@@ -21,8 +21,7 @@ import { CommandPalette } from './command-palette';
 import { HelpDialog } from './help-dialog';
 
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RouteHref = any;
+type RouteHref = Parameters<typeof Link>[0]['href'];
 
 export function Navigation() {
   const pathname = usePathname();
@@ -30,26 +29,26 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 
-  const navItems: { name: string; href: RouteHref }[] = [
-    { name: t('home'), href: "/" },
-    { name: t('projects'), href: "/projects" },
-    { name: t('business'), href: "/business" },
-    { name: t('skills'), href: "/skills" },
-    { name: t('blog'), href: "/blog" },
-    { name: t('contact'), href: "/contact" },
+  const navItems: { name: string; href: RouteHref; key: string }[] = [
+    { name: t('home'), href: "/", key: "home" },
+    { name: t('projects'), href: "/projects", key: "projects" },
+    { name: t('business'), href: "/business", key: "business" },
+    { name: t('skills'), href: "/skills", key: "skills" },
+    { name: t('blog'), href: "/blog", key: "blog" },
+    { name: t('contact'), href: "/contact", key: "contact" },
   ];
 
-  const aboutSubpages: { name: string; href: RouteHref; description: string }[] = [
-    { name: t('aboutOverview'), href: "/about", description: t('aboutOverviewDesc') },
-    { name: t('fitnessJourney'), href: "/about/fitness", description: t('fitnessJourneyDesc') },
-    { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc') },
-    { name: t('personalGrowth'), href: "/about/growth", description: t('personalGrowthDesc') },
-    { name: t('techJourney'), href: "/about/journey", description: t('techJourneyDesc') },
-    { name: t('tradingJourney'), href: "/about/trading", description: t('tradingJourneyDesc') },
+  const aboutSubpages: { name: string; href: RouteHref; description: string; key: string }[] = [
+    { name: t('aboutOverview'), href: "/about", description: t('aboutOverviewDesc'), key: "about" },
+    { name: t('fitnessJourney'), href: "/about/fitness", description: t('fitnessJourneyDesc'), key: "fitness" },
+    { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc'), key: "creative" },
+    { name: t('personalGrowth'), href: "/about/growth", description: t('personalGrowthDesc'), key: "growth" },
+    { name: t('techJourney'), href: "/about/journey", description: t('techJourneyDesc'), key: "journey" },
+    { name: t('tradingJourney'), href: "/about/trading", description: t('tradingJourneyDesc'), key: "trading" },
   ];
 
   return (
-    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 sticky top-0 z-50">
+    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 sticky top-0 z-50" aria-label="Main navigation">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <NavigationBrand />
@@ -57,7 +56,7 @@ export function Navigation() {
           <NavigationMenu className="hidden md:flex" viewport={false}>
             <NavigationMenuList className="flex space-x-4">
               {navItems.map((item) => (
-                <NavigationMenuItem key={item.href}>
+                <NavigationMenuItem key={item.key}>
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
@@ -91,12 +90,12 @@ export function Navigation() {
                   <div className="w-[400px] p-4">
                     <div className="grid gap-3">
                       {aboutSubpages.map((subpage) => (
-                        <NavigationMenuLink asChild key={subpage.href}>
+                        <NavigationMenuLink asChild key={subpage.key}>
                           <Link
                             href={subpage.href}
                             prefetch={true}
                             className={cn(
-                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                              "block select-none space-y-1 p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                               pathname === subpage.href && "bg-accent"
                             )}
                           >
@@ -139,11 +138,11 @@ export function Navigation() {
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <Link
-                  key={item.href}
+                  key={item.key}
                   href={item.href}
                   prefetch={true}
                   className={cn(
-                    "block px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "block px-3 py-2 text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     pathname === item.href
                       ? "text-primary bg-primary/10"
                       : "text-muted-foreground hover:bg-muted"
@@ -161,11 +160,11 @@ export function Navigation() {
                 </div>
                 {aboutSubpages.map((subpage) => (
                   <Link
-                    key={subpage.href}
+                    key={subpage.key}
                     href={subpage.href}
                     prefetch={true}
                     className={cn(
-                      "block px-6 py-2 text-sm transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                      "block px-6 py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       pathname === subpage.href
                         ? "text-primary bg-primary/10"
                         : "text-muted-foreground hover:bg-muted"

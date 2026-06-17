@@ -14,7 +14,6 @@ import {
   BookOpen,
   Mail,
   Sun,
-  Moon,
   Globe,
   User,
   TrendingUp,

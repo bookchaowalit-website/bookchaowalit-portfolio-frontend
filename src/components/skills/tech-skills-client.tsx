@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Globe, Cpu, Server, Settings } from "lucide-react";
@@ -278,7 +278,7 @@ export function TechSkillsClient() {
       >
         <div className="p-8 max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-            🎓 Continuous Learning & Certifications
+            Continuous Learning & Certifications
           </h2>
           <p className="text-muted-foreground font-[family-name:var(--font-doodle)] mb-6 leading-relaxed">
             Technology evolves rapidly, and I'm committed to staying current. I regularly

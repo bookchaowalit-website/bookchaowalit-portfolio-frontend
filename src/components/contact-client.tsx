@@ -7,9 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame, StickyNote } from "@/components/ui/notebook-elements";
+import { SketchyFrame, StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState, useMemo } from "react";
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Bot, BarChart3, Code, ShoppingBag, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
 
 export function ContactClient() {
   const reducedMotion = useReducedMotion();
@@ -130,7 +131,7 @@ export function ContactClient() {
         >
           <div className="bg-muted border border-border p-4">
             <p className="text-foreground text-center leading-relaxed">
-              Always interested in <strong>new opportunities</strong>, <strong>AI projects</strong>, and innovative collaborations from <strong>Bangkok, Thailand</strong>! 🇹🇭
+              Always interested in <strong>new opportunities</strong>, <strong>AI projects</strong>, and innovative collaborations from <strong>Bangkok, Thailand</strong>!
             </p>
           </div>
         </motion.div>
@@ -146,7 +147,7 @@ export function ContactClient() {
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
-                Send Me a Message! ✍️
+                Send Me a Message!
               </h3>
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
                 Fill out the form below and I'll get back to you ASAP!
@@ -155,13 +156,13 @@ export function ContactClient() {
             <div>
             {/* Status Message */}
             {submitStatus.type && (
-              <div className={`mb-6 p-4 ${
+              <div role="alert" aria-live="assertive" className={`mb-6 p-4 ${
                 submitStatus.type === 'success'
                   ? 'bg-muted border border-border text-foreground'
                   : 'bg-muted border border-border text-foreground'
               }`}>
                 <p className="text-sm font-medium">
-                  {submitStatus.type === 'success' ? '✅ ' : '❌ '}
+                  {submitStatus.type === 'success' ? <CheckCircle2 className="w-4 h-4 inline mr-1" aria-hidden="true" /> : <XCircle className="w-4 h-4 inline mr-1" aria-hidden="true" />}
                   {submitStatus.message}
                 </p>
               </div>
@@ -181,8 +182,9 @@ export function ContactClient() {
                   required
                   disabled={isSubmitting}
                   aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                 />
-                {errors.name && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.name}</p>}
+                {errors.name && <p id="name-error" className="text-xs text-destructive font-[family-name:var(--font-doodle)]" role="alert">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
@@ -198,8 +200,9 @@ export function ContactClient() {
                   required
                   disabled={isSubmitting}
                   aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                 />
-                {errors.email && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.email}</p>}
+                {errors.email && <p id="email-error" className="text-xs text-destructive font-[family-name:var(--font-doodle)]" role="alert">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
@@ -215,8 +218,9 @@ export function ContactClient() {
                   required
                   disabled={isSubmitting}
                   aria-invalid={!!errors.subject}
+                  aria-describedby={errors.subject ? 'subject-error' : undefined}
                 />
-                {errors.subject && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.subject}</p>}
+                {errors.subject && <p id="subject-error" className="text-xs text-destructive font-[family-name:var(--font-doodle)]" role="alert">{errors.subject}</p>}
               </div>
 
               <div className="space-y-2">
@@ -232,8 +236,9 @@ export function ContactClient() {
                   required
                   disabled={isSubmitting}
                   aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? 'message-error' : undefined}
                 />
-                {errors.message && <p className="text-xs text-destructive font-[family-name:var(--font-doodle)]">{errors.message}</p>}
+                {errors.message && <p id="message-error" className="text-xs text-destructive font-[family-name:var(--font-doodle)]" role="alert">{errors.message}</p>}
               </div>
 
               <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -258,7 +263,7 @@ export function ContactClient() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 flex items-center justify-center">
-                  📧
+                  <Mail className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-medium">Email</p>
@@ -268,7 +273,7 @@ export function ContactClient() {
 
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 flex items-center justify-center">
-                  📱
+                  <Phone className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-medium">Phone</p>
@@ -278,7 +283,7 @@ export function ContactClient() {
 
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-primary/10 flex items-center justify-center">
-                  📍
+                  <MapPin className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="font-medium">Location</p>
@@ -293,49 +298,49 @@ export function ContactClient() {
             <div className="grid grid-cols-2 gap-4">
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://github.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">🐙</span>
+                  <Github className="w-4 h-4 mr-2" />
                   GitHub
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">💼</span>
+                  <Linkedin className="w-4 h-4 mr-2" />
                   LinkedIn
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://twitter.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">🐦</span>
+                  <Twitter className="w-4 h-4 mr-2" />
                   Twitter
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://dev.to/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">✍️</span>
+                  <PenTool className="w-4 h-4 mr-2" />
                   Dev.to
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://medium.com/@bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">📖</span>
+                  <BookOpen className="w-4 h-4 mr-2" />
                   Medium
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">🔧</span>
+                  <Briefcase className="w-4 h-4 mr-2" />
                   Upwork
                 </a>
               </Button>
 
               <Button variant="outline" className="justify-start" asChild>
                 <a href="https://fastwork.co/user/bookchao" target="_blank" rel="noopener noreferrer">
-                  <span className="mr-2">⚡</span>
+                  <Zap className="w-4 h-4 mr-2" />
                   Fastwork
                 </a>
               </Button>
@@ -343,26 +348,26 @@ export function ContactClient() {
           </div>
 
           <StickyNote rotation={-1}>
-            <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">What I Can Help With ✨</h3>
+            <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">What I Can Help With</h3>
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <Badge variant="secondary">🤖</Badge>
+                <Badge variant="secondary"><Bot className="w-3 h-3" /></Badge>
                 <span className="text-sm">AI integration & RAG systems</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Badge variant="secondary">📊</Badge>
+                <Badge variant="secondary"><BarChart3 className="w-3 h-3" /></Badge>
                 <span className="text-sm">SEO optimization & analytics</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Badge variant="secondary">💻</Badge>
+                <Badge variant="secondary"><Code className="w-3 h-3" /></Badge>
                 <span className="text-sm">Full-stack development</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Badge variant="secondary">🛍️</Badge>
+                <Badge variant="secondary"><ShoppingBag className="w-3 h-3" /></Badge>
                 <span className="text-sm">Shopify e-commerce solutions</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Badge variant="secondary">📈</Badge>
+                <Badge variant="secondary"><TrendingUp className="w-3 h-3" /></Badge>
                 <span className="text-sm">Data analysis & social media insights</span>
               </div>
             </div>

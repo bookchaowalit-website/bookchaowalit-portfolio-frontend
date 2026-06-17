@@ -3,9 +3,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
+import { StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
-import { Cpu, Code, Zap, Rocket, Database, Brain } from "lucide-react";
+import { Zap, Rocket } from "lucide-react";
 
 export function TechJourneyClient() {
   const reducedMotion = useReducedMotion();

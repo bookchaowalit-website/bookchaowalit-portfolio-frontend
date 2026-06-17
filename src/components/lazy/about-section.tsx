@@ -6,7 +6,7 @@ import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from 'next-intl';
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 
 export function AboutSection() {
   const t = useTranslations('home');

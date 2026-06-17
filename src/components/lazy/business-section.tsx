@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { useTranslations } from 'next-intl';
 
 export function BusinessSection() {
@@ -53,7 +53,7 @@ export function BusinessSection() {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 max-w-lg mx-auto gap-6">
         {highlightedBusinesses.map((business, index) => (
           <motion.div
             key={index}

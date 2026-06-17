@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { NotebookPaper, SketchyFrame } from "@/components/ui/notebook-elements";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 
 // Business data - you can move this to a separate data file later

@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/routing';
+import { Pencil } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -24,7 +25,7 @@ export default function NotFound() {
               404
             </p>
             <h1 className="text-2xl font-[family-name:var(--font-comic)] font-bold text-foreground mb-3">
-              page not found ✏️
+              page not found <Pencil className="inline w-5 h-5" />
             </h1>
             <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
               this page seems to have been torn out...

@@ -4,8 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
-import { NotebookPaper, StickyNote } from "@/components/ui/notebook-elements";
+import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
+import { Bot, BarChart3, Globe, Wrench, Lightbulb } from "lucide-react";
 
 export function AboutClient() {
   const reducedMotion = useReducedMotion();
@@ -238,14 +239,13 @@ export function AboutClient() {
 
         {/* Fun Facts */}
         <StickyNote rotation={-1}>
-          <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">Fun Facts 📝</h3>
+          <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">Fun Facts</h3>
           <ul className="space-y-2 text-muted-foreground text-sm">
-            <li>🤖 Passionate about AI research and implementing cutting-edge AI models</li>
-            <li>📊 Love analyzing data patterns and extracting meaningful insights</li>
-            <li>🌐 Always exploring new web technologies and development frameworks</li>
-            <li>🛠️ Enjoy building automated systems and data pipelines</li>
-            <li>🇹🇭 Based in Bangkok, Thailand - embracing the vibrant tech scene</li>
-            <li>💡 Born August 22, 2000 - Gen Z perspective on technology and innovation</li>
+            <li className="flex items-start gap-2"><Bot className="w-4 h-4 mt-0.5 shrink-0" /> Passionate about AI research and implementing cutting-edge AI models</li>
+            <li className="flex items-start gap-2"><BarChart3 className="w-4 h-4 mt-0.5 shrink-0" /> Love analyzing data patterns and extracting meaningful insights</li>
+            <li className="flex items-start gap-2"><Globe className="w-4 h-4 mt-0.5 shrink-0" /> Always exploring new web technologies and development frameworks</li>
+            <li className="flex items-start gap-2"><Wrench className="w-4 h-4 mt-0.5 shrink-0" /> Enjoy building automated systems and data pipelines</li>
+            <li className="flex items-start gap-2"><Lightbulb className="w-4 h-4 mt-0.5 shrink-0" /> Born August 22, 2000 - Gen Z perspective on technology and innovation</li>
           </ul>
         </StickyNote>
       </div>
