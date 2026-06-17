@@ -292,15 +292,15 @@ export function VideoSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote rotation={-2}>
+            <StickyNote rotation={-2} color="yellow">
               <div className="font-semibold text-sm">Pre-Production</div>
               <div className="text-xs text-muted-foreground mt-1">Planning & storyboarding</div>
             </StickyNote>
-            <StickyNote rotation={1}>
+            <StickyNote rotation={1} color="pink">
               <div className="font-semibold text-sm">Production</div>
               <div className="text-xs text-muted-foreground mt-1">Shooting & recording</div>
             </StickyNote>
-            <StickyNote rotation={-1}>
+            <StickyNote rotation={-1} color="blue">
               <div className="font-semibold text-sm">Post-Production</div>
               <div className="text-xs text-muted-foreground mt-1">Editing & finishing</div>
             </StickyNote>

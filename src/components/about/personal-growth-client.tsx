@@ -39,11 +39,11 @@ export function PersonalGrowthClient() {
           animate={{ opacity: 1, scale: 1, rotate: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <StickyNote rotation={-1} className="text-center">
+          <StickyNote rotation={-1} className="text-center" color="green">
             <p className="text-sm text-foreground">
-              <HandDrawnHighlight>Continuous learning</HandDrawnHighlight> and{" "}
-              <HandDrawnHighlight>self-reflection</HandDrawnHighlight> that shapes my approach to{" "}
-              <HandDrawnHighlight>technology and life</HandDrawnHighlight>
+              <HandDrawnHighlight color="yellow">Continuous learning</HandDrawnHighlight> and{" "}
+              <HandDrawnHighlight color="pink">self-reflection</HandDrawnHighlight> that shapes my approach to{" "}
+              <HandDrawnHighlight color="green">technology and life</HandDrawnHighlight>
             </p>
           </StickyNote>
         </motion.div>
@@ -62,14 +62,14 @@ export function PersonalGrowthClient() {
               <p className="text-foreground leading-relaxed">
                 Every challenge is an opportunity to grow. Whether it's learning a new programming language, 
                 understanding a complex business domain, or developing leadership skills, I approach each with 
-                <HandDrawnHighlight>curiosity over fear</HandDrawnHighlight>. The discomfort of not knowing 
+                <HandDrawnHighlight color="blue">curiosity over fear</HandDrawnHighlight>. The discomfort of not knowing 
                 is temporary—the growth is permanent.
               </p>
             </StudyGuideBox>
             
             <StudyGuideBox title="Fail Fast, Learn Faster" type="note">
               <p className="text-foreground leading-relaxed">
-                I've learned to <HandDrawnHighlight>reframe failure as data</HandDrawnHighlight>. 
+                I've learned to <HandDrawnHighlight color="yellow">reframe failure as data</HandDrawnHighlight>. 
                 Each mistake provides insights that accelerate learning. In both personal projects and client work, 
                 I prefer rapid prototyping and iteration over perfectionism that delays feedback.
               </p>
@@ -77,7 +77,7 @@ export function PersonalGrowthClient() {
             
             <StudyGuideBox title="Systems Over Goals" type="important">
               <p className="text-foreground leading-relaxed">
-                While goals provide direction, <HandDrawnHighlight>systems create lasting change</HandDrawnHighlight>. 
+                While goals provide direction, <HandDrawnHighlight color="pink">systems create lasting change</HandDrawnHighlight>. 
                 Instead of "I want to be an AI expert," I focus on "I will spend 1 hour daily learning AI concepts." 
                 This shift from outcomes to processes has been transformative.
               </p>
@@ -200,7 +200,7 @@ export function PersonalGrowthClient() {
               <StudyGuideBox title="Weekly Reviews" type="note">
                 <p className="text-foreground leading-relaxed text-sm">
                   Every Friday, I review the week: What went well? What could improve? What did I learn? 
-                  <HandDrawnHighlight>This practice prevents me from just reacting</HandDrawnHighlight>
+                  <HandDrawnHighlight color="green">This practice prevents me from just reacting</HandDrawnHighlight>
                   to daily demands and helps maintain strategic focus.
                 </p>
               </StudyGuideBox>
@@ -208,7 +208,7 @@ export function PersonalGrowthClient() {
               <StudyGuideBox title="Monthly Deep Dives" type="tip">
                 <p className="text-foreground leading-relaxed text-sm">
                   Once monthly, I step back for bigger picture reflection: Are my projects aligned with my values? 
-                  What patterns am I noticing? <HandDrawnHighlight>This helps course-correct</HandDrawnHighlight> 
+                  What patterns am I noticing? <HandDrawnHighlight color="blue">This helps course-correct</HandDrawnHighlight> 
                   before small issues become big problems.
                 </p>
               </StudyGuideBox>
@@ -216,14 +216,14 @@ export function PersonalGrowthClient() {
               <StudyGuideBox title="Decision Journaling" type="important">
                 <p className="text-foreground leading-relaxed text-sm">
                   I document important decisions with my reasoning at the time. Months later, I review: 
-                  What worked? What didn't? <HandDrawnHighlight>This improves my decision-making process</HandDrawnHighlight> 
+                  What worked? What didn't? <HandDrawnHighlight color="yellow">This improves my decision-making process</HandDrawnHighlight> 
                   over time by learning from both successes and mistakes.
                 </p>
               </StudyGuideBox>
               
               <StudyGuideBox title="Mindfulness Practice" type="note">
                 <p className="text-foreground leading-relaxed text-sm">
-                  Daily meditation isn't just relaxation—it's <HandDrawnHighlight>training for awareness</HandDrawnHighlight>. 
+                  Daily meditation isn't just relaxation—it's <HandDrawnHighlight color="pink">training for awareness</HandDrawnHighlight>. 
                   It helps me notice thought patterns, emotional reactions, and biases that might otherwise operate unconsciously.
                 </p>
               </StudyGuideBox>
@@ -287,21 +287,21 @@ export function PersonalGrowthClient() {
           <div className="space-y-6">
             <StudyGuideBox title="Leadership & Team Building" type="tip">
               <p className="text-foreground leading-relaxed">
-                As I grow my consulting practice, I want to develop skills in <HandDrawnHighlight>building and leading distributed teams</HandDrawnHighlight>. 
+                As I grow my consulting practice, I want to develop skills in <HandDrawnHighlight color="green">building and leading distributed teams</HandDrawnHighlight>. 
                 This includes remote team management, cross-cultural communication, and creating systems that help others do their best work.
               </p>
             </StudyGuideBox>
             
             <StudyGuideBox title="Strategic Thinking & Business Acumen" type="note">
               <p className="text-foreground leading-relaxed">
-                Technical skills got me here, but <HandDrawnHighlight>business strategy will determine impact</HandDrawnHighlight>. 
+                Technical skills got me here, but <HandDrawnHighlight color="blue">business strategy will determine impact</HandDrawnHighlight>. 
                 I'm focusing on understanding market dynamics, competitive positioning, and how to identify and capitalize on emerging opportunities.
               </p>
             </StudyGuideBox>
             
             <StudyGuideBox title="Content Creation & Thought Leadership" type="important">
               <p className="text-foreground leading-relaxed">
-                I want to contribute more to the tech community through <HandDrawnHighlight>writing, speaking, and teaching</HandDrawnHighlight>. 
+                I want to contribute more to the tech community through <HandDrawnHighlight color="yellow">writing, speaking, and teaching</HandDrawnHighlight>. 
                 Sharing knowledge not only helps others but also forces deeper understanding and creates valuable connections.
               </p>
             </StudyGuideBox>

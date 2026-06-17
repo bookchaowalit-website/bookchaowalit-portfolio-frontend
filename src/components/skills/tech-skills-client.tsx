@@ -284,15 +284,15 @@ export function TechSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote rotation={-2}>
+            <StickyNote rotation={-2} color="yellow">
               <div className="font-semibold text-sm">Google Cloud</div>
               <div className="text-xs text-muted-foreground mt-1">Secure BigLake Data</div>
             </StickyNote>
-            <StickyNote rotation={1}>
+            <StickyNote rotation={1} color="pink">
               <div className="font-semibold text-sm">Meta</div>
               <div className="text-xs text-muted-foreground mt-1">Graph API Integration</div>
             </StickyNote>
-            <StickyNote rotation={-1}>
+            <StickyNote rotation={-1} color="green">
               <div className="font-semibold text-sm">Ongoing</div>
               <div className="text-xs text-muted-foreground mt-1">AI & ML Courses</div>
             </StickyNote>

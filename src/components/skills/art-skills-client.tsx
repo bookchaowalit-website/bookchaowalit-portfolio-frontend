@@ -300,15 +300,15 @@ export function ArtSkillsClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <StickyNote rotation={-2}>
+            <StickyNote rotation={-2} color="yellow">
               <div className="font-semibold text-sm">Research First</div>
               <div className="text-xs text-muted-foreground mt-1">Understand users & problems</div>
             </StickyNote>
-            <StickyNote rotation={1}>
+            <StickyNote rotation={1} color="green">
               <div className="font-semibold text-sm">Iterate Often</div>
               <div className="text-xs text-muted-foreground mt-1">Test & refine designs</div>
             </StickyNote>
-            <StickyNote rotation={-1}>
+            <StickyNote rotation={-1} color="blue">
               <div className="font-semibold text-sm">User Focus</div>
               <div className="text-xs text-muted-foreground mt-1">Design for real people</div>
             </StickyNote>

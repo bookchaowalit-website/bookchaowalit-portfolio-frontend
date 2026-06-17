@@ -39,10 +39,10 @@ export function CreativeWorksClient() {
           animate={{ opacity: 1, scale: 1, rotate: -1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
-          <StickyNote rotation={1} className="text-center">
+          <StickyNote rotation={1} className="text-center" color="yellow">
             <p className="text-sm text-foreground">
-              Where <HandDrawnHighlight>technology meets artistry</HandDrawnHighlight> and{" "}
-              <HandDrawnHighlight>innovation blends with expression</HandDrawnHighlight>
+              Where <HandDrawnHighlight color="yellow">technology meets artistry</HandDrawnHighlight> and{" "}
+              <HandDrawnHighlight color="pink">innovation blends with expression</HandDrawnHighlight>
             </p>
           </StickyNote>
         </motion.div>
@@ -59,7 +59,7 @@ export function CreativeWorksClient() {
           <div className="space-y-6">
             <StudyGuideBox title="Form Follows Function, Beauty Enhances Both" type="note">
               <p className="text-foreground leading-relaxed">
-                I believe that <HandDrawnHighlight>beautiful design isn't just decoration</HandDrawnHighlight>—it's functional. 
+                I believe that <HandDrawnHighlight color="green">beautiful design isn't just decoration</HandDrawnHighlight>—it's functional. 
                 Good design reduces cognitive load, improves user experience, and makes complex systems more approachable. 
                 Every color choice, spacing decision, and interaction pattern serves a purpose.
               </p>
@@ -68,7 +68,7 @@ export function CreativeWorksClient() {
             <StudyGuideBox title="Constraints Fuel Creativity" type="tip">
               <p className="text-foreground leading-relaxed">
                 Working within technical constraints or business requirements often leads to my most creative solutions. 
-                <HandDrawnHighlight>Limitations force innovation</HandDrawnHighlight>—whether it's designing a responsive layout 
+                <HandDrawnHighlight color="blue">Limitations force innovation</HandDrawnHighlight>—whether it's designing a responsive layout 
                 that works across all devices or creating an intuitive interface for complex data.
               </p>
             </StudyGuideBox>
@@ -181,7 +181,7 @@ export function CreativeWorksClient() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <StudyGuideBox title="1. Research & Inspiration" type="tip">
                 <p className="text-foreground leading-relaxed text-sm">
-                  I gather inspiration from <HandDrawnHighlight>diverse sources</HandDrawnHighlight>: 
+                  I gather inspiration from <HandDrawnHighlight color="yellow">diverse sources</HandDrawnHighlight>
                   architecture, nature, minimalist art, and even street photography. I maintain a collection 
                   of design patterns and color combinations that catch my eye.
                 </p>
@@ -189,7 +189,7 @@ export function CreativeWorksClient() {
               
               <StudyGuideBox title="2. Sketch & Wireframe" type="note">
                 <p className="text-foreground leading-relaxed text-sm">
-                  Before touching any digital tools, I <HandDrawnHighlight>sketch ideas on paper</HandDrawnHighlight>. 
+                  Before touching any digital tools, I <HandDrawnHighlight color="pink">sketch ideas on paper</HandDrawnHighlight>. 
                   This helps me think through user flows and information hierarchy without getting distracted 
                   by colors or fancy effects.
                 </p>
@@ -197,7 +197,7 @@ export function CreativeWorksClient() {
               
               <StudyGuideBox title="3. Prototype & Test" type="important">
                 <p className="text-foreground leading-relaxed text-sm">
-                  I create <HandDrawnHighlight>interactive prototypes</HandDrawnHighlight> to test ideas 
+                  I create <HandDrawnHighlight color="green">interactive prototypes</HandDrawnHighlight> to test ideas 
                   with real users. This reveals usability issues early and validates design decisions 
                   before development begins.
                 </p>
@@ -205,7 +205,7 @@ export function CreativeWorksClient() {
               
               <StudyGuideBox title="4. Iterate & Refine" type="tip">
                 <p className="text-foreground leading-relaxed text-sm">
-                  Design is never finished on the first try. I <HandDrawnHighlight>embrace feedback</HandDrawnHighlight> 
+                  Design is never finished on the first try. I <HandDrawnHighlight color="blue">embrace feedback</HandDrawnHighlight> 
                   and continuously refine based on user behavior data and stakeholder input.
                 </p>
               </StudyGuideBox>
@@ -261,7 +261,7 @@ export function CreativeWorksClient() {
           <div className="space-y-6">
             <StudyGuideBox title="User-Centered Development" type="important">
               <p className="text-foreground leading-relaxed">
-                My design background means I always <HandDrawnHighlight>start with the user experience</HandDrawnHighlight> 
+                My design background means I always <HandDrawnHighlight color="yellow">start with the user experience</HandDrawnHighlight> 
                 when architecting systems. I think about information architecture, user flows, and edge cases before 
                 writing the first line of code.
               </p>
@@ -270,14 +270,14 @@ export function CreativeWorksClient() {
             <StudyGuideBox title="Creative Problem Solving" type="tip">
               <p className="text-foreground leading-relaxed">
                 Creative exercises train lateral thinking. When stuck on a technical problem, I often 
-                <HandDrawnHighlight>apply design thinking methods</HandDrawnHighlight>—brainstorming wildly, 
+                <HandDrawnHighlight color="pink">apply design thinking methods</HandDrawnHighlight>—brainstorming wildly, 
                 then constraining solutions, or approaching from completely different angles.
               </p>
             </StudyGuideBox>
             
             <StudyGuideBox title="Aesthetic Code" type="note">
               <p className="text-foreground leading-relaxed">
-                I believe code can be beautiful. <HandDrawnHighlight>Clean architecture, consistent naming, 
+                I believe code can be beautiful. <HandDrawnHighlight color="green">Clean architecture, consistent naming, 
                 and elegant solutions</HandDrawnHighlight> have an aesthetic quality that makes codebases more 
                 maintainable and enjoyable to work with.
               </p>

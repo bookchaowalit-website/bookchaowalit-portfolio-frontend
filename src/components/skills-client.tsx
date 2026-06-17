@@ -192,6 +192,7 @@ export function SkillsClient() {
               <StickyNote
                 rotation={(index % 2 === 0 ? 1 : -1) * 2}
                 className="text-center"
+                color={(["yellow", "pink", "green", "blue"] as const)[index % 4]}
               >
                 <div className="font-semibold text-sm">{skill.name}</div>
                 <Badge
