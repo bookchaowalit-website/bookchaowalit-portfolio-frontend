@@ -77,7 +77,7 @@ export function SkillsSection() {
 
   return (
     <ScrollReveal>
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         <NotebookSectionHeader
           title={t('skillsTitle')}
           subtitle={t('skillsSubtitle')}
@@ -125,7 +125,7 @@ export function SkillsSection() {
             </motion.div>
           ))}
         </motion.div>
-      </NotebookPaper>
+      </div>
     </ScrollReveal>
   );
 }

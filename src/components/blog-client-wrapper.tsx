@@ -77,7 +77,7 @@ export function BlogNewsletter() {
       transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8 }}
     >
       <SketchyFrame variant="double">
-        <NotebookPaper className="p-8 text-center">
+        <div className="p-8 text-center">
           <motion.div
             initial={reducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export function BlogNewsletter() {
             />
             <Button className="font-[family-name:var(--font-comic)]">Subscribe</Button>
           </motion.div>
-        </NotebookPaper>
+        </div>
       </SketchyFrame>
     </motion.section>
   );
@@ -137,13 +137,13 @@ export function NotebookSection({
   className?: string;
 }) {
   return (
-    <NotebookPaper className={`py-8 ${className}`}>
+    <div className={`py-8 ${className}`}>
       <NotebookSectionHeader
         title={title}
         subtitle={subtitle}
         className="mb-8"
       />
       {children}
-    </NotebookPaper>
+    </div>
   );
 }

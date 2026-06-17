@@ -275,7 +275,7 @@ export function ProjectsClient() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl space-y-12">
       {/* Header */}
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         <div className="text-center space-y-4">
           <MixedTypographyTitle
             words={[
@@ -324,10 +324,10 @@ export function ProjectsClient() {
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Stars</span>
           </div>
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Search & Filters */}
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         {/* Search */}
         <div className="max-w-md mx-auto mb-6">
           <div className="relative">
@@ -400,11 +400,11 @@ export function ProjectsClient() {
           </button>
         )}
       </div>
-      </NotebookPaper>
+      </div>
 
       {/* Featured Projects */}
       {showFeatured && (
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <h2 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
             <Star className="size-3.5 text-foreground" />
             Featured
@@ -420,11 +420,11 @@ export function ProjectsClient() {
               />
             ))}
           </div>
-        </NotebookPaper>
+        </div>
       )}
 
       {/* Project Grid Section */}
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         {/* Results count */}
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
@@ -477,10 +477,10 @@ export function ProjectsClient() {
             </button>
           </div>
         )}
-      </NotebookPaper>
+      </div>
 
       {/* Footer CTA */}
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         <div className="text-center space-y-4">
           <p className="text-sm text-muted-foreground">
             Every project is a standalone Next.js app deployed independently on Vercel.
@@ -503,7 +503,7 @@ export function ProjectsClient() {
             </a>
           </div>
         </div>
-      </NotebookPaper>
+      </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@ export function AboutSection() {
         viewport={{ once: true }}
       >
         <SketchyFrame variant="dashed">
-          <NotebookPaper className="p-8">
+          <div className="p-8">
             <div className="space-y-6">
               <div className="flex flex-wrap justify-center gap-3 mb-6">
                 <Badge variant="secondary" className="bg-muted text-foreground">
@@ -83,7 +83,7 @@ export function AboutSection() {
                 </motion.div>
               </div>
             </div>
-          </NotebookPaper>
+          </div>
         </SketchyFrame>
       </motion.div>
     </motion.section>

@@ -81,8 +81,7 @@ export function SkillsClient() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl space-y-12">
       {/* Hero Section */}
-      <NotebookPaper className="py-8">
-        <motion.div
+      <motion.div
           className="text-center space-y-8"
           initial={reducedMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,11 +116,9 @@ export function SkillsClient() {
             </p>
           </motion.div>
         </motion.div>
-      </NotebookPaper>
 
       {/* Skill Categories Grid */}
-      <NotebookPaper className="py-8">
-        <motion.div
+      <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -176,7 +173,6 @@ export function SkillsClient() {
             );
           })}
         </motion.div>
-      </NotebookPaper>
 
       {/* Quick Skills Overview */}
       <div className="mb-8">
@@ -220,7 +216,7 @@ export function SkillsClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <NotebookPaper className="p-8 max-w-4xl mx-auto">
+        <div className="p-8 max-w-4xl mx-auto space-y-6">
           <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             🚀 Continuous Learning & Growth
           </h2>
@@ -240,7 +236,7 @@ export function SkillsClient() {
               </Button>
             </motion.div>
           </div>
-        </NotebookPaper>
+        </div>
       </motion.div>
     </div>
   );

@@ -51,7 +51,7 @@ export function TradingClient() {
       </motion.div>
 
       {/* Trading Philosophy */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="py-8 mb-8">
         <NotebookSectionHeader
           title="Trading Philosophy"
           subtitle="My approach to markets and risk management"
@@ -107,7 +107,7 @@ export function TradingClient() {
             </div>
           </StudyGuideBox>
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Trading Experience */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -201,7 +201,7 @@ export function TradingClient() {
       </div>
 
       {/* AI Trading Vision */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="py-8 mb-8">
         <NotebookSectionHeader
           title="AI-Powered Trading Vision"
           subtitle="Building the future of algorithmic trading"
@@ -237,7 +237,7 @@ export function TradingClient() {
             </p>
           </StudyGuideBox>
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Future Projects */}
       <Card>

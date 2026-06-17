@@ -36,7 +36,7 @@ export function ContactSection() {
         viewport={{ once: true }}
       >
         <SketchyFrame variant="double">
-          <NotebookPaper className="p-8">
+          <div className="p-8">
             <div className="space-y-6 text-center">
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
@@ -145,7 +145,7 @@ export function ContactSection() {
                 </motion.a>
               </div>
             </div>
-          </NotebookPaper>
+          </div>
         </SketchyFrame>
       </motion.div>
     </motion.section>

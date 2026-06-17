@@ -171,7 +171,7 @@ export function TechSkillsClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: categoryIndex * 0.2 }}
           >
-            <NotebookPaper className="py-6">
+            <div className="py-6">
               <div className="flex items-center gap-3 mb-6">
                 <div className={`${category.color} bg-muted p-3`}>
                   {category.icon}
@@ -217,13 +217,13 @@ export function TechSkillsClient() {
                   </motion.div>
                 ))}
               </div>
-            </NotebookPaper>
+            </div>
           </motion.div>
         ))}
       </div>
 
       {/* Notable Projects */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="py-8 mb-8">
         <NotebookSectionHeader
           title="Notable Technical Projects"
           subtitle="Real-world applications showcasing my technical skills"
@@ -266,7 +266,7 @@ export function TechSkillsClient() {
             );
           })}
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Learning & Certifications */}
       <motion.div

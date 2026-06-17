@@ -139,7 +139,7 @@ export function ContactClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Contact Form */}
         <SketchyFrame variant="dashed" className="min-h-[600px]">
-          <NotebookPaper className="p-6 h-full">
+          <div className="p-6 h-full">
             <motion.div
               initial={reducedMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -248,12 +248,12 @@ export function ContactClient() {
               </Button>
             </form>
             </div>
-          </NotebookPaper>
+          </div>
         </SketchyFrame>
 
         {/* Contact Info */}
         <div className="space-y-6">
-          <NotebookPaper className="py-8">
+          <div className="py-8">
             <NotebookSectionHeader title="Contact Information" subtitle="How to reach me" className="mb-4" />
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
@@ -286,9 +286,9 @@ export function ContactClient() {
                 </div>
               </div>
             </div>
-          </NotebookPaper>
+          </div>
 
-          <NotebookPaper className="py-8">
+          <div className="py-8">
             <NotebookSectionHeader title="Social Media & Freelance Platforms" subtitle="Connect with me or hire me" className="mb-4" />
             <div className="grid grid-cols-2 gap-4">
               <Button variant="outline" className="justify-start" asChild>
@@ -340,7 +340,7 @@ export function ContactClient() {
                 </a>
               </Button>
             </div>
-          </NotebookPaper>
+          </div>
 
           <StickyNote rotation={-1}>
             <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">What I Can Help With ✨</h3>
@@ -368,7 +368,7 @@ export function ContactClient() {
             </div>
           </StickyNote>
 
-          <NotebookPaper className="py-8">
+          <div className="py-8">
             <NotebookSectionHeader title="Response Time" subtitle="When to expect a reply" className="mb-4" />
             <p className="text-sm text-muted-foreground">
               I typically respond to messages within 24-48 hours (Bangkok timezone UTC+7).
@@ -391,7 +391,7 @@ export function ContactClient() {
                 <Badge variant="outline">2-4 hours</Badge>
               </div>
             </div>
-          </NotebookPaper>
+          </div>
         </div>
       </div>
     </div>

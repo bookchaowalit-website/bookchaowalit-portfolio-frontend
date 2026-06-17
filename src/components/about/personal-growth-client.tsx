@@ -51,7 +51,7 @@ export function PersonalGrowthClient() {
 
       <div className="space-y-12">
         {/* Core Philosophy */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Growth Mindset" 
             subtitle="Principles that guide my personal development"
@@ -83,7 +83,7 @@ export function PersonalGrowthClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Current Learning Areas */}
         <Card>
@@ -189,7 +189,7 @@ export function PersonalGrowthClient() {
         </Card>
 
         {/* Reflection Practices */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Reflection & Self-Awareness" 
             subtitle="How I maintain clarity and direction"
@@ -229,7 +229,7 @@ export function PersonalGrowthClient() {
               </StudyGuideBox>
             </div>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Key Insights & Lessons */}
         <Card>
@@ -278,7 +278,7 @@ export function PersonalGrowthClient() {
         </Card>
 
         {/* Future Growth Areas */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Future Growth Vision" 
             subtitle="Where I'm heading in the next 3-5 years"
@@ -306,7 +306,7 @@ export function PersonalGrowthClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
       </div>
     </div>
   );

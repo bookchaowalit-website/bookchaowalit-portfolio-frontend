@@ -153,7 +153,7 @@ export function VideoSkillsClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: categoryIndex * 0.2 }}
           >
-            <NotebookPaper className="py-6" color={paperColors[categoryIndex % 4]}>
+            <div className="py-6">
               <div className="flex items-center gap-3 mb-6">
                 <div className={`${category.color} bg-muted p-3`}>
                   {category.icon}
@@ -199,14 +199,14 @@ export function VideoSkillsClient() {
                   </motion.div>
                 ))}
               </div>
-            </NotebookPaper>
+            </div>
           </motion.div>
         );
         })}
       </div>
 
       {/* Video Techniques */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="py-8 mb-8">
         <NotebookSectionHeader
           title="Video Production Techniques"
           subtitle="Advanced skills and techniques I use in video production"
@@ -237,10 +237,10 @@ export function VideoSkillsClient() {
             );
           })}
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Portfolio Highlights */}
-      <NotebookPaper className="py-8 mb-8">
+      <div className="py-8 mb-8">
         <NotebookSectionHeader
           title="Video Portfolio Highlights"
           subtitle="Featured video projects showcasing my production expertise"
@@ -278,7 +278,7 @@ export function VideoSkillsClient() {
             );
           })}
         </div>
-      </NotebookPaper>
+      </div>
 
       {/* Production Process */}
       <motion.div

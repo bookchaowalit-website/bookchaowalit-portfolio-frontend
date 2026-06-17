@@ -65,7 +65,7 @@ export function BusinessSection() {
             className="h-full"
           >
             <SketchyFrame variant="dashed">
-              <NotebookPaper className="p-5 h-full">
+              <div className="p-5 h-full">
                 <div className="flex flex-col h-full space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-2xl">{business.icon}</span>
@@ -90,7 +90,7 @@ export function BusinessSection() {
                     </p>
                   </div>
                 </div>
-              </NotebookPaper>
+              </div>
             </SketchyFrame>
           </motion.div>
         ))}

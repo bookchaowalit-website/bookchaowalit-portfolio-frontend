@@ -51,7 +51,7 @@ export function FitnessJourneyClient() {
 
       <div className="space-y-12">
         {/* Philosophy Section */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Mind-Body Connection" 
             subtitle="How fitness shapes my tech mindset"
@@ -74,7 +74,7 @@ export function FitnessJourneyClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Current Routine Section */}
         <Card>
@@ -169,7 +169,7 @@ export function FitnessJourneyClient() {
         </Card>
 
         {/* Lessons Applied to Tech */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Fitness → Tech Lessons" 
             subtitle="Principles I apply from gym to code"
@@ -199,7 +199,7 @@ export function FitnessJourneyClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Connection to Solopreneur Journey */}
         <Card>

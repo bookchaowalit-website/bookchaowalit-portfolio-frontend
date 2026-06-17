@@ -62,7 +62,7 @@ export function AboutClient() {
 
       <div className="space-y-12">
         {/* Bio Section */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader
             title="My Story"
             subtitle="How I became a tech generalist"
@@ -87,10 +87,10 @@ export function AboutClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Skills Section */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader
             title="Technical Skills"
             subtitle="Technologies and tools I work with regularly"
@@ -169,10 +169,10 @@ export function AboutClient() {
               </div>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Experience Section */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader title="Professional Experience" subtitle="My career journey" className="mb-6" />
           <div className="space-y-6">
             <div>
@@ -213,10 +213,10 @@ export function AboutClient() {
               </p>
             </div>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Education Section */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader title="Education & Certifications" subtitle="My academic background" className="mb-6" />
           <div className="space-y-4">
             <div>
@@ -234,7 +234,7 @@ export function AboutClient() {
               </ul>
             </div>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Fun Facts */}
         <StickyNote rotation={-1}>

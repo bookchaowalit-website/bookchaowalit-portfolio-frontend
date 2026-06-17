@@ -60,7 +60,7 @@ export function BusinessClient() {
           transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4, ease: "backOut" }}
         >
           <SketchyFrame variant="dashed">
-            <NotebookPaper className="p-8">
+            <div className="p-8">
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <Badge variant="secondary" className="text-lg px-4 py-2">
@@ -97,7 +97,7 @@ export function BusinessClient() {
                   </Badge>
                 </div>
               </div>
-            </NotebookPaper>
+            </div>
           </SketchyFrame>
         </motion.div>
       </motion.div>
@@ -128,7 +128,7 @@ export function BusinessClient() {
               }}
             >
               <SketchyFrame variant="double" className="h-full">
-                <NotebookPaper className="p-6 h-full">
+                <div className="p-6 h-full">
                   <div className="flex flex-col h-full">
                     <div className="space-y-4 flex-1">
                       <div className="flex items-center justify-between">
@@ -208,7 +208,7 @@ export function BusinessClient() {
                       </div>
                     </div>
                   </div>
-                </NotebookPaper>
+                </div>
               </SketchyFrame>
             </motion.div>
           ))}
@@ -222,7 +222,7 @@ export function BusinessClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: 1.5 }}
         className="mt-16"
       >
-        <NotebookPaper className="p-8">
+        <div className="p-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
               🚀 Future Ventures & Services
@@ -321,7 +321,7 @@ export function BusinessClient() {
               </div>
             </SketchyFrame>
           </div>
-        </NotebookPaper>
+        </div>
       </motion.div>
 
       {/* Call to Action */}
@@ -331,7 +331,7 @@ export function BusinessClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 2 }}
         className="text-center space-y-6"
       >
-        <NotebookPaper className="p-8 max-w-3xl mx-auto">
+        <div className="p-8 max-w-3xl mx-auto">
           <h2 className="text-3xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
             Ready to Work Together?
           </h2>
@@ -356,7 +356,7 @@ export function BusinessClient() {
               </Button>
             </motion.div>
           </div>
-        </NotebookPaper>
+        </div>
       </motion.div>
     </div>
   );

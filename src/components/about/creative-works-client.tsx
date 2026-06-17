@@ -50,7 +50,7 @@ export function CreativeWorksClient() {
 
       <div className="space-y-12">
         {/* Creative Philosophy */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Design Philosophy" 
             subtitle="How creativity enhances technical solutions"
@@ -73,7 +73,7 @@ export function CreativeWorksClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Design Skills & Tools */}
         <Card>
@@ -171,7 +171,7 @@ export function CreativeWorksClient() {
         </Card>
 
         {/* Creative Process */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="My Creative Process" 
             subtitle="From inspiration to implementation"
@@ -211,7 +211,7 @@ export function CreativeWorksClient() {
               </StudyGuideBox>
             </div>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Creative Inspiration */}
         <Card>
@@ -252,7 +252,7 @@ export function CreativeWorksClient() {
         </Card>
 
         {/* Connection to Tech Work */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader 
             title="Creativity → Better Tech" 
             subtitle="How creative thinking improves my development"
@@ -283,7 +283,7 @@ export function CreativeWorksClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ export async function BlogSection() {
   return (
     <section className="space-y-8">
       <h2 className="text-3xl font-bold text-center text-balance">{t('latestBlogTitle')}</h2>
-      <NotebookPaper className="py-8">
+      <div className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => {
             const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["yellow", "pink", "green"];
@@ -35,7 +35,7 @@ export async function BlogSection() {
             );
           })}
         </div>
-      </NotebookPaper>
+      </div>
       <div className="text-center">
         <Button variant="outline" asChild>
           <Link href="/blog">{t('readAllPosts')}</Link>

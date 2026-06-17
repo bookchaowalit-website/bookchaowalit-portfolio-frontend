@@ -51,7 +51,7 @@ export function TechJourneyClient() {
 
       <div className="space-y-12">
         {/* Timeline */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader
             title="The Journey So Far"
             subtitle="Key milestones in my technical evolution"
@@ -114,7 +114,7 @@ export function TechJourneyClient() {
                 </StudyGuideBox>
               </div>
             </div>
-        </NotebookPaper>
+        </div>
 
         {/* Key Turning Points */}
         <Card>
@@ -165,7 +165,7 @@ export function TechJourneyClient() {
         </Card>
 
         {/* Technical Philosophy */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader
             title="Technical Philosophy"
             subtitle="How my journey shaped my approach to technology"
@@ -196,7 +196,7 @@ export function TechJourneyClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
 
         {/* Current Tech Stack */}
         <Card>
@@ -267,7 +267,7 @@ export function TechJourneyClient() {
         </Card>
 
         {/* What's Next */}
-        <NotebookPaper className="py-8">
+        <div className="py-8">
           <NotebookSectionHeader
             title="The Road Ahead"
             subtitle="Where technology is taking me next"
@@ -298,7 +298,7 @@ export function TechJourneyClient() {
               </p>
             </StudyGuideBox>
           </div>
-        </NotebookPaper>
+        </div>
       </div>
     </div>
   );
