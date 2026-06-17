@@ -44,7 +44,7 @@ async function fetchWithAuth(url: string, attempts = 2) {
 }
 
 export async function GET() {
-  const username = process.env.GITHUB_USERNAME;
+  const username = process.env.GITHUB_USERNAME || 'bookchaowalit';
   if (!username) {
     return NextResponse.json({ error: 'GITHUB_USERNAME not set' }, { status: 400 });
   }

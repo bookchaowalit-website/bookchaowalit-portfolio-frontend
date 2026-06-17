@@ -135,6 +135,7 @@
     /* Clean, warm background */
     background: oklch(0.995 0.003 90);
     min-height: 100vh;
+    overflow-x: hidden;
   }
   .dark body {
     /* Dark mode: warm very dark gray */

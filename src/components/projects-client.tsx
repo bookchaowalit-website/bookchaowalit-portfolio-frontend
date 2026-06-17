@@ -46,7 +46,7 @@ const statusConfig: Record<
 function getFaviconUrl(projectUrl: string): string {
   try {
     const url = new URL(projectUrl);
-    return `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=32`;
+    return `https://icon.horse/icon/${url.hostname}`;
   } catch {
     return "";
   }
@@ -64,10 +64,11 @@ function ProjectCard({
   showScreenshot?: boolean;
 }) {
   const [imgError, setImgError] = useState(false);
-  const [screenshotError, setScreenshotError] = useState(false);
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
-  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
+
+  // Generate a unique hue from the project name for the placeholder
+  const hue = project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 360;
 
   return (
     <a
@@ -77,20 +78,13 @@ function ProjectCard({
       className="group block bg-background p-6 transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       {showScreenshot && (
-        <div className="mb-4 aspect-video bg-secondary overflow-hidden">
-          {!screenshotError ? (
-            <img
-              src={screenshotUrl}
-              alt={`${project.name} screenshot`}
-              className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity"
-              onError={() => setScreenshotError(true)}
-              loading="lazy"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
-              Screenshot unavailable
-            </div>
-          )}
+        <div
+          className="mb-4 aspect-video overflow-hidden flex items-center justify-center"
+          style={{ background: `oklch(0.85 0.04 ${hue})` }}
+        >
+          <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/30">
+            {project.name}
+          </span>
         </div>
       )}
       <div className="flex items-start justify-between gap-3 mb-3">

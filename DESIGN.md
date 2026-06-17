@@ -1,53 +1,54 @@
 # Design System — BookChaowalit Portfolio
 
-> Pure achromatic, timeless, minimal. Black and white only — zero chroma.
+> Warm, joyful, notebook-inspired. Cream-tinted neutrals with colored accents in notebook elements.
 
 ## Design Philosophy
 
-- **Achromatic only**: Every color token uses OKLCH with `chroma: 0`. No hue, no saturation.
+- **Warm, not sterile**: Every color token has subtle warm chroma. No pure achromatic grays.
+- **Notebook aesthetic**: Cream paper, blue ruled lines, red margins, colored sticky notes and highlighters.
 - **Sharp corners**: `--radius: 0rem` — no rounded UI. Borders define structure, not curves.
 - **Grid language**: `gap-px bg-border` creates hairline grid separators between cards/sections.
-- **Hand-drawn accents**: Kalam font + notebook SVG elements add personality without color.
+- **Hand-drawn accents**: Kalam font + notebook SVG elements add personality with real color.
 - **Motion with purpose**: Framer Motion for page transitions, stagger reveals, and micro-interactions.
 
 ---
 
 ## Color Tokens
 
-All tokens are OKLCH with `chroma: 0` (pure achromatic). Light and dark mode supported.
+All tokens use OKLCH with subtle warm chroma. Light and dark mode supported.
 
 ### Light Mode (`:root`)
 
 | Token | OKLCH | Usage |
 |---|---|---|
-| `--background` | `oklch(1 0 0)` | Pure white page background |
-| `--foreground` | `oklch(0.22 0 0)` | Almost-black body text |
-| `--primary` | `oklch(0.22 0 0)` | Black primary actions |
-| `--primary-foreground` | `oklch(1 0 0)` | White text on black |
-| `--secondary` | `oklch(0.96 0 0)` | Very light gray |
-| `--muted` | `oklch(0.97 0 0)` | Muted backgrounds |
-| `--muted-foreground` | `oklch(0.50 0 0)` | Medium gray text |
-| `--accent` | `oklch(0.96 0 0)` | Light gray accent |
-| `--border` | `oklch(0.90 0 0)` | Hairline grid borders |
-| `--ring` | `oklch(0.22 0 0)` | Black focus ring |
-| `--destructive` | `oklch(0.55 0.22 25)` | Red (functional only) |
+| `--background` | `oklch(0.995 0.003 90)` | Warm white page background |
+| `--foreground` | `oklch(0.20 0.005 60)` | Warm near-black body text |
+| `--primary` | `oklch(0.20 0.005 60)` | Warm black primary actions |
+| `--primary-foreground` | `oklch(0.995 0.003 90)` | Warm white text on black |
+| `--secondary` | `oklch(0.96 0.005 90)` | Very light warm gray |
+| `--muted` | `oklch(0.965 0.005 90)` | Light warm gray background |
+| `--muted-foreground` | `oklch(0.50 0.005 60)` | Medium warm gray text |
+| `--accent` | `oklch(0.96 0.005 90)` | Light warm gray accent |
+| `--border` | `oklch(0.90 0.005 90)` | Subtle warm grid borders |
+| `--ring` | `oklch(0.20 0.005 60)` | Warm black focus ring |
+| `--destructive` | `oklch(0.55 0.22 25)` | Red for destructive actions |
 
 ### Dark Mode (`.dark`)
 
 | Token | OKLCH | Usage |
 |---|---|---|
-| `--background` | `oklch(0.15 0 0)` | Very dark gray (not pure black) |
-| `--foreground` | `oklch(0.95 0 0)` | Off-white text |
-| `--primary` | `oklch(0.95 0 0)` | White/light primary |
-| `--card` | `oklch(0.18 0 0)` | Slightly lighter dark cards |
-| `--muted` | `oklch(0.22 0 0)` | Muted dark backgrounds |
-| `--muted-foreground` | `oklch(0.70 0 0)` | Medium gray text (4.95:1 contrast) |
-| `--border` | `oklch(0.30 0 0)` | Subtle dark grid borders |
+| `--background` | `oklch(0.16 0.005 60)` | Very dark warm gray |
+| `--foreground` | `oklch(0.94 0.005 90)` | Warm off-white text |
+| `--primary` | `oklch(0.94 0.005 90)` | Warm white/light primary |
+| `--card` | `oklch(0.19 0.005 60)` | Slightly lighter warm dark cards |
+| `--muted` | `oklch(0.23 0.005 60)` | Warm muted dark background |
+| `--muted-foreground` | `oklch(0.70 0.005 60)` | Medium warm gray text (4.95:1 contrast) |
+| `--border` | `oklch(0.31 0.005 60)` | Subtle warm dark grid borders |
 
-### Chart Scale (5-step achromatic)
+### Chart Scale (5-step warm achromatic)
 
-Light: `0.30 → 0.45 → 0.60 → 0.75 → 0.85`
-Dark: `0.85 → 0.75 → 0.60 → 0.45 → 0.30`
+Light: `0.30 → 0.45 → 0.60 → 0.75 → 0.85` (chroma: 0.01, hue: 60)
+Dark: `0.85 → 0.75 → 0.60 → 0.45 → 0.30` (chroma: 0.01, hue: 60)
 
 ---
 
@@ -147,10 +148,20 @@ All font aliases remap to `--font-sarabun` for Thai locale. Applied via `classNa
 
 ### Notebook Elements
 
-SVG-based hand-drawn decorations using `--font-doodle` (Kalam):
-- `NotebookPaper` — Lined paper background for text blocks
-- `StickyNote` — Tilted note with fold corner
-- `HandDrawnHighlight` — Underline highlight effect
+Real colored components using OKLCH, not pure achromatic:
+
+- `NotebookPaper` — Warm cream paper (`oklch(0.985 0.005 90)`), blue ruled lines (`oklch(0.85 0.01 250 / 0.5)`), red margin line (`oklch(0.70 0.15 25 / 0.6)`)
+- `StickyNote` — 4 color variants: `yellow`, `pink`, `green`, `blue` (default: yellow)
+  - Yellow: `oklch(0.95 0.06 95)` bg, `oklch(0.80 0.08 95)` border
+  - Pink: `oklch(0.93 0.05 350)` bg, `oklch(0.78 0.06 350)` border
+  - Green: `oklch(0.93 0.05 150)` bg, `oklch(0.78 0.06 150)` border
+  - Blue: `oklch(0.93 0.04 230)` bg, `oklch(0.78 0.05 230)` border
+- `HandDrawnHighlight` — 4 color variants: `yellow`, `pink`, `green`, `blue` (default: yellow)
+  - Yellow: `oklch(0.92 0.08 95 / 0.6)`
+  - Pink: `oklch(0.88 0.10 350 / 0.5)`
+  - Green: `oklch(0.88 0.08 150 / 0.5)`
+  - Blue: `oklch(0.88 0.06 230 / 0.5)`
+- `SketchArrow`, `SketchyFrame`, `HandDrawnBracket` — Use `text-primary` opacity variants
 - `StudyGuideBox` — Bordered note box with type variants (tip/note/important)
 
 ### Mixed Typography
@@ -178,7 +189,7 @@ Small tilted labels with hand-drawn feel. Used in skills/about sections.
 - **Skip to content**: Hidden link, visible on focus (`focus:not-sr-only`)
 - **Focus visible**: `outline-ring/50` on all interactive elements via `@layer base`
 - **Minimum text size**: `text-xs` (12px) — no sub-10px text
-- **Contrast**: `muted-foreground` at `oklch(0.50 0 0)` = 4.68:1 on white (AA pass)
+- **Contrast**: `muted-foreground` at `oklch(0.50 0.005 60)` = ~4.68:1 on warm white (AA pass)
 - **Semantic HTML**: `<main>`, `<nav>`, `<footer>`, `<article>` via prose
 - **Error boundary**: `<ErrorBoundary>` wraps all page content
 - **Reduced motion**: CSS media query kills all animations/transitions
