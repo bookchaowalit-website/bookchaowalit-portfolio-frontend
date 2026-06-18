@@ -15,16 +15,16 @@ function StatusBadge({ status }: { status: AppProject["status"] }) {
   const t = useTranslations("projects");
   if (status === "live") {
     return (
-      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-green-700 bg-green-100 px-1.5 py-0.5">
-        <span className="size-1.5 rounded-full bg-green-500 animate-pulse" />
+      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-white bg-foreground px-1.5 py-0.5">
+        <span className="size-1.5 rounded-full bg-white animate-pulse" />
         {t("statusLive")}
       </span>
     );
   }
   if (status === "wip") {
     return (
-      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-amber-700 bg-amber-100 px-1.5 py-0.5">
-        <span className="size-1.5 rounded-full bg-amber-500" />
+      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-foreground bg-muted px-1.5 py-0.5">
+        <span className="size-1.5 rounded-full bg-foreground/50" />
         {t("statusWip")}
       </span>
     );

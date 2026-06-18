@@ -69,8 +69,8 @@ function ProjectCard({
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
 
-  // Generate a unique hue from the project name for the placeholder
-  const hue = project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 360;
+  // Generate a unique gray tone from the project name for the placeholder
+  const lightness = 0.80 + (project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 10) * 0.015;
 
   return (
     <a
@@ -82,7 +82,7 @@ function ProjectCard({
       {showScreenshot && (
         <div
           className="mb-4 aspect-video overflow-hidden flex items-center justify-center"
-          style={{ background: `oklch(0.85 0.04 ${hue})` }}
+          style={{ background: `oklch(${lightness} 0 0)` }}
         >
           <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/30">
             {project.name}
