@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 const shortcuts = [
   { keys: "⌘K / Ctrl+K", description: "Open command palette" },
@@ -24,7 +25,9 @@ const features = [
 
 export function HelpDialog() {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  useFocusTrap(dialogRef, open);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     // Don't trigger if user is typing in an input
@@ -84,6 +87,7 @@ export function HelpDialog() {
 
             {/* Dialog */}
             <motion.div
+              ref={dialogRef}
               role="dialog"
               aria-modal="true"
               aria-label="Keyboard shortcuts and help"

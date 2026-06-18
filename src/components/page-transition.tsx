@@ -40,6 +40,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           className="flex items-center justify-center min-h-[40vh]"
         >
           <motion.div
+            role="status"
+            aria-label="Loading"
             animate={{ 
               rotate: 360,
               scale: [1, 1.1, 1],

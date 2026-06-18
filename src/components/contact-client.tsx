@@ -241,10 +241,10 @@ export function ContactClient() {
                 {errors.message && <p id="message-error" className="text-xs text-destructive font-[family-name:var(--font-doodle)]" role="alert">{errors.message}</p>}
               </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
+              <Button type="submit" className="w-full" disabled={isSubmitting} aria-busy={isSubmitting}>
                 {isSubmitting ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" aria-hidden="true"></div>
                     {t("sending")}
                   </>
                 ) : (

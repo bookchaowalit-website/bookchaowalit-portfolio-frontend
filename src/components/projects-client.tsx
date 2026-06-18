@@ -114,7 +114,7 @@ function ProjectCard({
       </p>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/90">
             {t("cat_" + project.category)}
           </span>
           <span className="flex items-center gap-1">
@@ -126,13 +126,13 @@ function ProjectCard({
         </div>
         <div className="flex items-center gap-2">
           {stars > 0 && (
-            <span className="flex items-center gap-0.5 text-xs font-mono text-muted-foreground/60">
+            <span className="flex items-center gap-0.5 text-xs font-mono text-muted-foreground/80">
               <Star className="size-2.5" />
               {stars}
             </span>
           )}
           {starsError && stars === 0 && project.githubUrl && (
-            <span className="text-xs font-mono text-muted-foreground/40" title="Stars unavailable">
+            <span className="text-xs font-mono text-muted-foreground/60" title="Stars unavailable">
               —
             </span>
           )}
@@ -142,7 +142,7 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="text-muted-foreground/40 hover:text-foreground transition-colors"
+              className="text-muted-foreground/60 hover:text-foreground transition-colors"
               aria-label={`${project.name} GitHub repository`}
             >
               <Github className="size-3" />

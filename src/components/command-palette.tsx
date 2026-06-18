@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import {
   Search,
   Home,
@@ -38,9 +39,12 @@ export function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(dialogRef, open);
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
+  const t = useTranslations("command");
   const reducedMotion = useReducedMotion();
 
   // Toggle palette with Cmd+K / Ctrl+K
@@ -96,117 +100,117 @@ export function CommandPalette() {
     () => [
       {
         id: "home",
-        label: "Home",
-        description: "Go to homepage",
+        label: t("navHome"),
+        description: t("navHomeDesc"),
         icon: <Home className="size-4" />,
         action: () => navigateTo("/"),
         keywords: ["home", "main", "landing"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "projects",
-        label: "Projects",
-        description: "View all projects",
+        label: t("navProjects"),
+        description: t("navProjectsDesc"),
         icon: <FolderKanban className="size-4" />,
         action: () => navigateTo("/projects"),
         keywords: ["projects", "work", "portfolio", "code"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "business",
-        label: "Business",
-        description: "My ventures and services",
+        label: t("navBusiness"),
+        description: t("navBusinessDesc"),
         icon: <Briefcase className="size-4" />,
         action: () => navigateTo("/business"),
         keywords: ["business", "ventures", "services", "company"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "skills",
-        label: "Skills",
-        description: "Technologies and tools",
+        label: t("navSkills"),
+        description: t("navSkillsDesc"),
         icon: <GraduationCap className="size-4" />,
         action: () => navigateTo("/skills"),
         keywords: ["skills", "technologies", "tools", "stack"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "blog",
-        label: "Blog",
-        description: "Read articles and posts",
+        label: t("navBlog"),
+        description: t("navBlogDesc"),
         icon: <BookOpen className="size-4" />,
         action: () => navigateTo("/blog"),
         keywords: ["blog", "articles", "posts", "writing"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "contact",
-        label: "Contact",
-        description: "Get in touch",
+        label: t("navContact"),
+        description: t("navContactDesc"),
         icon: <Mail className="size-4" />,
         action: () => navigateTo("/contact"),
         keywords: ["contact", "email", "message", "reach"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "about",
-        label: "About",
-        description: "My story and background",
+        label: t("navAbout"),
+        description: t("navAboutDesc"),
         icon: <User className="size-4" />,
         action: () => navigateTo("/about"),
         keywords: ["about", "story", "background", "bio"],
-        group: "Navigation",
+        group: t("groupNav"),
       },
       {
         id: "fitness",
-        label: "Fitness Journey",
-        description: "How fitness shapes my problem-solving",
+        label: t("aboutFitness"),
+        description: t("aboutFitnessDesc"),
         icon: <TrendingUp className="size-4" />,
         action: () => navigateTo("/about/fitness"),
         keywords: ["fitness", "health", "exercise", "gym"],
-        group: "About",
+        group: t("groupAbout"),
       },
       {
         id: "creative",
-        label: "Creative Works",
-        description: "Where technology meets artistry",
+        label: t("aboutCreative"),
+        description: t("aboutCreativeDesc"),
         icon: <FileText className="size-4" />,
         action: () => navigateTo("/about/creative"),
         keywords: ["creative", "art", "design", "works"],
-        group: "About",
+        group: t("groupAbout"),
       },
       {
         id: "theme",
-        label: "Toggle Theme",
-        description: "Switch between light and dark mode",
+        label: t("actionTheme"),
+        description: t("actionThemeDesc"),
         icon: <Sun className="size-4" />,
         action: toggleTheme,
         keywords: ["theme", "dark", "light", "mode", "toggle"],
-        group: "Actions",
+        group: t("groupActions"),
       },
       {
         id: "language",
-        label: "Switch Language",
-        description: `Change to ${locale === "en" ? "Thai" : "English"}`,
+        label: t("actionLanguage"),
+        description: locale === "en" ? t("actionLanguageDescTo") : t("actionLanguageDescToEn"),
         icon: <Globe className="size-4" />,
         action: switchLanguage,
         keywords: ["language", "locale", "thai", "english", "switch"],
-        group: "Actions",
+        group: t("groupActions"),
       },
       {
         id: "help",
-        label: "Show Help",
-        description: "Keyboard shortcuts and site features",
+        label: t("actionHelp"),
+        description: t("actionHelpDesc"),
         icon: <HelpCircle className="size-4" />,
         action: () => {
           document.dispatchEvent(new CustomEvent("open-help"));
           setOpen(false);
         },
         keywords: ["help", "shortcuts", "keyboard", "guide", "features"],
-        group: "Actions",
+        group: t("groupActions"),
       },
     ],
-    [navigateTo, toggleTheme, switchLanguage, locale]
+    [navigateTo, toggleTheme, switchLanguage, locale, t]
   );
 
   const filtered = useMemo(() => {
@@ -269,7 +273,7 @@ export function CommandPalette() {
       <button
         onClick={() => setOpen(true)}
         className="hidden md:inline-flex items-center gap-1.5 text-xs text-muted-foreground border border-border px-2 py-1 hover:border-primary/40 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        aria-label="Open command palette (Cmd+K)"
+        aria-label={t("openPalette")}
       >
         <Search className="size-3" />
         <kbd className="font-mono">⌘K</kbd>
@@ -291,8 +295,9 @@ export function CommandPalette() {
 
             {/* Dialog */}
             <motion.div
+              ref={dialogRef}
               role="dialog"
-              aria-label="Command palette"
+              aria-label={t("paletteLabel")}
               aria-modal="true"
               className="fixed left-1/2 top-[20%] z-[70] w-full max-w-lg -translate-x-1/2 border border-border bg-background"
               initial={reducedMotion ? false : { opacity: 0, scale: 0.96, y: -10 }}
@@ -309,9 +314,9 @@ export function CommandPalette() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Type a command or search pages..."
+                  placeholder={t("searchPlaceholder")}
                   className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
-                  aria-label="Search commands"
+                  aria-label={t("searchLabel")}
                 />
                 <kbd className="hidden sm:inline text-[10px] font-mono text-muted-foreground border border-border px-1.5 py-0.5">
                   ESC
@@ -322,7 +327,7 @@ export function CommandPalette() {
               <div ref={listRef} className="max-h-72 overflow-y-auto py-2" role="listbox">
                 {flatList.length === 0 && (
                   <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-                    No results found for &ldquo;{query}&rdquo;
+                    {t("noResults")} &ldquo;{query}&rdquo;
                   </div>
                 )}
                 {Object.entries(grouped).map(([group, groupItems]) => (
@@ -374,16 +379,16 @@ export function CommandPalette() {
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
                     <kbd className="font-mono border border-border px-1 py-0.5">↑↓</kbd>
-                    navigate
+                    {t("footerNavigate")}
                   </span>
                   <span className="flex items-center gap-1">
                     <kbd className="font-mono border border-border px-1 py-0.5">↵</kbd>
-                    select
+                    {t("footerSelect")}
                   </span>
                 </div>
                 <span className="flex items-center gap-1">
                   <kbd className="font-mono border border-border px-1 py-0.5">esc</kbd>
-                  close
+                  {t("footerClose")}
                 </span>
               </div>
             </motion.div>
