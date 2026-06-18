@@ -26,30 +26,33 @@ const nextConfig = {
         fs: false,
         path: false,
       };
-    }
-    
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          default: false,
-          vendors: false,
-          vendor: {
-            chunks: 'all',
-            name: 'vendor',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 20,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            priority: 10,
-            reuseExistingChunk: true,
+      
+      // Only apply custom splitChunks to client bundle.
+      // Applying it to the server bundle causes browser-only code
+      // (e.g. `self` references) to leak into SSR and crash all pages.
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            vendor: {
+              chunks: 'all',
+              name: 'vendor',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 20,
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              priority: 10,
+              reuseExistingChunk: true,
+            },
           },
         },
-      },
-    };
+      };
+    }
     
     return config;
   },
