@@ -6,6 +6,7 @@ import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { PenLine, Mail } from "lucide-react";
 
 export function BlogHero() {
   const reducedMotion = useReducedMotion();
@@ -25,7 +26,7 @@ export function BlogHero() {
           words={[
             { text: "My", style: "cursive", size: "xl" },
             { text: "Blog", style: "bubble", size: "xl" },
-            { text: "✍️", style: "block", size: "lg" }
+            { text: <PenLine className="inline-block" />, style: "block", size: "lg" }
           ]}
           className="mb-6"
         />
@@ -87,7 +88,7 @@ export function BlogNewsletter() {
               words={[
                 { text: "Stay", style: "cursive", size: "lg" },
                 { text: "Updated!", style: "bubble", size: "lg" },
-                { text: "✉️", style: "block", size: "md" }
+                { text: <Mail className="inline-block" />, style: "block", size: "md" }
               ]}
               className="mb-6"
             />

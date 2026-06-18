@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const shortcuts = [
@@ -107,7 +108,7 @@ export function HelpDialog() {
                 {/* Header */}
                 <div className="mb-6">
                   <h2 className="text-xl font-[family-name:var(--font-comic)] font-bold text-foreground">
-                    keyboard shortcuts ✨
+                    keyboard shortcuts <Sparkles className="inline-block h-4 w-4" />
                   </h2>
                   <p className="text-xs text-muted-foreground font-[family-name:var(--font-doodle)] mt-1">
                     navigate faster with these shortcuts

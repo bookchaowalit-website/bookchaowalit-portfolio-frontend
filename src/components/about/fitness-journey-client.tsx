@@ -30,7 +30,7 @@ export function FitnessJourneyClient() {
             words={[
               { text: t("titleWord1"), style: "block", size: "xl" },
               { text: t("titleWord2"), style: "cursive", size: "xl" },
-              { text: "💪", style: "block", size: "lg" }
+              { text: <Dumbbell className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { StickyNote } from '@/components/ui/notebook-elements';
 import { MixedTypographyTitle } from '@/components/ui/mixed-typography';
+import { Star } from 'lucide-react';
 
 type Repo = {
   name: string;
@@ -121,7 +122,7 @@ export default function GitHubActivity() {
                   <div className="flex items-center justify-between text-xs text-muted-foreground pt-2">
                     <span>{r.language ?? ''}</span>
                     <span className="flex items-center gap-2">
-                      {r.stars ? <span>★ {r.stars}</span> : null}
+                      {r.stars ? <span className="flex items-center gap-1"><Star className="h-3 w-3" /> {r.stars}</span> : null}
                       <span>· {new Date(r.updatedAt).toLocaleDateString()}</span>
                     </span>
                   </div>

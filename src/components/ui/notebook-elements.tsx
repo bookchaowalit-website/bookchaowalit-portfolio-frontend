@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useDarkMode } from '@/hooks/use-dark-mode';
 
 // Hand-drawn highlight marker effect
 export function HandDrawnHighlight({
@@ -14,13 +15,21 @@ export function HandDrawnHighlight({
   color?: "yellow" | "pink" | "green" | "blue";
 }) {
   const reducedMotion = useReducedMotion();
-  // Monochromatic highlight tones — 4 shades of gray
-  const colorMap = {
-    yellow: "oklch(0.92 0 0 / 0.4)",   // lightest gray highlight
-    pink: "oklch(0.88 0 0 / 0.45)",     // medium-light gray
-    green: "oklch(0.84 0 0 / 0.5)",     // medium gray
-    blue: "oklch(0.80 0 0 / 0.55)"      // medium-dark gray
+  const isDark = useDarkMode();
+  // Monochromatic highlight tones — 4 shades of gray (light & dark mode)
+  const lightMap = {
+    yellow: "oklch(0.92 0 0 / 0.4)",
+    pink: "oklch(0.88 0 0 / 0.45)",
+    green: "oklch(0.84 0 0 / 0.5)",
+    blue: "oklch(0.80 0 0 / 0.55)"
   };
+  const darkMap = {
+    yellow: "oklch(0.35 0 0 / 0.4)",
+    pink: "oklch(0.32 0 0 / 0.45)",
+    green: "oklch(0.30 0 0 / 0.5)",
+    blue: "oklch(0.28 0 0 / 0.55)"
+  };
+  const colorMap = isDark ? darkMap : lightMap;
   return (
     <span className={`relative ${className}`}>
       <motion.span
@@ -49,15 +58,25 @@ export function NotebookPaper({
   className?: string;
   color?: "default" | "yellow" | "pink" | "green" | "blue";
 }) {
+  const isDark = useDarkMode();
   // Subtle paper tints — enough to distinguish sections, light enough to read on
-  // Monochromatic paper tints — 4 subtle gray shades for section variety
-  const bgMap = {
+  const lightBg = {
     default: "oklch(0.985 0 0)",
     yellow: "oklch(0.975 0 0)",
     pink: "oklch(0.965 0 0)",
     green: "oklch(0.955 0 0)",
     blue: "oklch(0.945 0 0)"
   };
+  const darkBg = {
+    default: "oklch(0.20 0 0)",
+    yellow: "oklch(0.21 0 0)",
+    pink: "oklch(0.22 0 0)",
+    green: "oklch(0.23 0 0)",
+    blue: "oklch(0.24 0 0)"
+  };
+  const bgMap = isDark ? darkBg : lightBg;
+  const ruleColor = isDark ? "oklch(0.30 0 0 / 0.4)" : "oklch(0.88 0 0 / 0.4)";
+  const marginColor = isDark ? "oklch(0.40 0 0 / 0.5)" : "oklch(0.75 0 0 / 0.5)";
   return (
     <div className={`relative ${className}`}>
       {/* Warm paper texture background */}
@@ -72,7 +91,7 @@ export function NotebookPaper({
             style={{
               top: `${(i + 1) * 5}%`,
               transform: `rotate(${((i % 3) - 1) * 0.2}deg)`,
-              background: "oklch(0.88 0 0 / 0.4)"
+              background: ruleColor
             }}
           />
         ))}
@@ -81,7 +100,7 @@ export function NotebookPaper({
       {/* Red margin line */}
       <div
         className="absolute left-12 top-0 bottom-0 w-px"
-        style={{ background: "oklch(0.75 0 0 / 0.5)", transform: "rotate(0.2deg)" }}
+        style={{ background: marginColor, transform: "rotate(0.2deg)" }}
       />
 
       {/* Three-ring holes */}
@@ -107,13 +126,21 @@ export function StickyNote({
   color?: "yellow" | "pink" | "green" | "blue";
 }) {
   const reducedMotion = useReducedMotion();
-  // Monochromatic sticky notes — 4 distinct gray tones
-  const colorMap = {
-    yellow: { bg: "oklch(0.96 0 0)", border: "oklch(0.86 0 0)" },   // lightest
-    pink: { bg: "oklch(0.93 0 0)", border: "oklch(0.83 0 0)" },     // medium-light
-    green: { bg: "oklch(0.90 0 0)", border: "oklch(0.80 0 0)" },    // medium
-    blue: { bg: "oklch(0.87 0 0)", border: "oklch(0.77 0 0)" }      // medium-dark
+  const isDark = useDarkMode();
+  // Monochromatic sticky notes — 4 distinct gray tones (light & dark mode)
+  const lightColorMap = {
+    yellow: { bg: "oklch(0.96 0 0)", border: "oklch(0.86 0 0)" },
+    pink: { bg: "oklch(0.93 0 0)", border: "oklch(0.83 0 0)" },
+    green: { bg: "oklch(0.90 0 0)", border: "oklch(0.80 0 0)" },
+    blue: { bg: "oklch(0.87 0 0)", border: "oklch(0.77 0 0)" }
   };
+  const darkColorMap = {
+    yellow: { bg: "oklch(0.28 0 0)", border: "oklch(0.38 0 0)" },
+    pink: { bg: "oklch(0.26 0 0)", border: "oklch(0.36 0 0)" },
+    green: { bg: "oklch(0.24 0 0)", border: "oklch(0.34 0 0)" },
+    blue: { bg: "oklch(0.22 0 0)", border: "oklch(0.32 0 0)" }
+  };
+  const colorMap = isDark ? darkColorMap : lightColorMap;
   const c = colorMap[color];
   return (
     <motion.div

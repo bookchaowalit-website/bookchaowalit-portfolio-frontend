@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Pencil, Star } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 type BlogPost = {
@@ -61,8 +62,8 @@ function NotebookPostEntry({
           {/* Top row: date + read time in margin style */}
           <div className="flex items-center gap-3 mb-2">
             {featured && (
-              <span className="font-[family-name:var(--font-doodle)] text-xs text-primary border border-primary/30 px-2 py-0.5 rotate-[-1deg]">
-                ★ featured
+              <span className="font-[family-name:var(--font-doodle)] text-xs text-primary border border-primary/30 px-2 py-0.5 rotate-[-1deg] inline-flex items-center gap-1">
+                <Star className="h-3 w-3" /> featured
               </span>
             )}
             <time
@@ -182,7 +183,7 @@ export function NotebookBlogList({
       {featuredPosts.length === 0 && recentPosts.length === 0 && (
         <div className="text-center py-16">
           <p className="font-[family-name:var(--font-doodle)] text-lg text-muted-foreground">
-            No articles yet — the notebook is empty ✏️
+            No articles yet — the notebook is empty <Pencil className="inline-block h-4 w-4" />
           </p>
         </div>
       )}

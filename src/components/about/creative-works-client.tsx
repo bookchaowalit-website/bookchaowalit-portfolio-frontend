@@ -30,7 +30,7 @@ export function CreativeWorksClient() {
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "block", size: "xl" },
-              { text: "🎨", style: "block", size: "lg" }
+              { text: <Palette className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

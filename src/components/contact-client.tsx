@@ -296,51 +296,51 @@ export function ContactClient() {
           <div className="py-8">
             <NotebookSectionHeader title={t("socialMediaFreelancePlatforms")} subtitle={t("connectHireDescription")} className="mb-4" />
             <div className="grid grid-cols-2 gap-4">
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://github.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <Github className="w-4 h-4 mr-2" />
+                  <Github className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   GitHub
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-4 h-4 mr-2" />
+                  <Linkedin className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   LinkedIn
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://twitter.com/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <Twitter className="w-4 h-4 mr-2" />
+                  <Twitter className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   Twitter
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://dev.to/bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <PenTool className="w-4 h-4 mr-2" />
+                  <PenTool className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   Dev.to
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://medium.com/@bookchaowalit" target="_blank" rel="noopener noreferrer">
-                  <BookOpen className="w-4 h-4 mr-2" />
+                  <BookOpen className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   Medium
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc" target="_blank" rel="noopener noreferrer">
-                  <Briefcase className="w-4 h-4 mr-2" />
+                  <Briefcase className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   Upwork
                 </a>
               </Button>
 
-              <Button variant="outline" className="justify-start" asChild>
+              <Button variant="outline" className="justify-start group" asChild>
                 <a href="https://fastwork.co/user/bookchao" target="_blank" rel="noopener noreferrer">
-                  <Zap className="w-4 h-4 mr-2" />
+                  <Zap className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" />
                   Fastwork
                 </a>
               </Button>

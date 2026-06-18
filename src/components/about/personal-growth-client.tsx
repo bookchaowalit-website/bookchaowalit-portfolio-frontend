@@ -6,7 +6,7 @@ import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/co
 import { StickyNote, HandDrawnHighlight } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { BookOpen, Target, Compass, Lightbulb, Brain } from "lucide-react";
+import { BookOpen, Target, Compass, Lightbulb, Brain, Sprout } from "lucide-react";
 
 export function PersonalGrowthClient() {
   const t = useTranslations("about_growth");
@@ -30,7 +30,7 @@ export function PersonalGrowthClient() {
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "block", size: "xl" },
-              { text: "🌱", style: "block", size: "lg" }
+              { text: <Sprout className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

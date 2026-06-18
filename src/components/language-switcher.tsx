@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe } from 'lucide-react';
+import { Globe, Check } from 'lucide-react';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -57,7 +57,7 @@ export function LanguageSwitcher() {
             <span className="mono-emoji">{language.flag}</span>
             <span>{language.name}</span>
             {locale === language.code && (
-              <span className="ml-auto text-xs text-muted-foreground">✓</span>
+              <Check className="ml-auto h-3 w-3 text-muted-foreground" />
             )}
           </DropdownMenuItem>
         ))}

@@ -7,7 +7,7 @@ import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mix
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
-import { Globe, Cpu, Server, Settings } from "lucide-react";
+import { Globe, Cpu, Server, Settings, Zap } from "lucide-react";
 
 export function TechSkillsClient() {
   const reducedMotion = useReducedMotion();
@@ -143,7 +143,7 @@ export function TechSkillsClient() {
               { text: "Skills", style: "bubble", size: "xl" },
               { text: "&", style: "filled", size: "lg" },
               { text: "Expertise", style: "block", size: "xl" },
-              { text: "⚡", style: "block", size: "lg" }
+              { text: <Zap className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

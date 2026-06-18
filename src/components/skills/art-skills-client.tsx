@@ -131,7 +131,7 @@ export function ArtSkillsClient() {
               { text: "&", style: "bubble", size: "lg" },
               { text: "Design", style: "filled", size: "xl" },
               { text: "Skills", style: "block", size: "xl" },
-              { text: "🎨", style: "block", size: "lg" }
+              { text: <Palette className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

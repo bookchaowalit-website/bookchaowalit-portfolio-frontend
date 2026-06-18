@@ -77,7 +77,7 @@ function ProjectCard({
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block bg-background p-6 transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group block bg-background p-6 transition-colors hover:bg-secondary border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring card-hover-lift"
     >
       {showScreenshot && (
         <div
@@ -107,7 +107,7 @@ function ProjectCard({
             {project.name}
           </h3>
         </div>
-        <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
+        <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
       </div>
       <p className="text-xs text-muted-foreground leading-relaxed mb-4">
         {project.description}
