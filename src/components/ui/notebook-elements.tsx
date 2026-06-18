@@ -117,7 +117,7 @@ export function StickyNote({
   const c = colorMap[color];
   return (
     <motion.div
-      className={`border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] ${className}`}
+      className={`border-2 border-dashed p-4 shadow-md font-[family-name:var(--font-doodle)] sticky-note ${className}`}
       style={{
         background: c.bg,
         borderColor: c.border,
@@ -127,7 +127,17 @@ export function StickyNote({
       initial={reducedMotion ? false : { scale: 0, rotate: rotation - 45 }}
       animate={{ scale: 1, rotate: rotation }}
       transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
-      whileHover={reducedMotion ? undefined : { scale: 1.05, rotate: rotation + 2 }}
+      whileHover={reducedMotion ? undefined : {
+        scale: 1.04,
+        rotate: rotation + 1.5,
+        y: -4,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+      whileTap={reducedMotion ? undefined : {
+        scale: 0.98,
+        rotate: rotation - 1,
+        transition: { duration: 0.1 }
+      }}
     >
       {children}
     </motion.div>

@@ -52,7 +52,7 @@ export function HeroSection() {
         </motion.div>
 
         <div className="relative py-4 overflow-visible">
-          <h1 className={`text-4xl md:text-6xl font-bold ${headingTracking} font-[family-name:var(--font-script)] leading-loose md:leading-loose pb-2`}>
+          <h1 className={`text-4xl md:text-6xl font-bold ${headingTracking} font-[family-name:var(--font-script)] leading-loose md:leading-loose pb-2 heading-depth-lg`}>
             <HeroTypingText
               greeting={t('greeting')}
               name={t('name')}

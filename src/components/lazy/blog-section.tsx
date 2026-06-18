@@ -27,7 +27,7 @@ export async function BlogSection() {
             const rotations = [-2, 1, -1];
             return (
             <Link key={index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
-              <StickyNote color={colors[index]} rotation={rotations[index]} className="cursor-pointer h-full p-5 hover:scale-105 transition-transform">
+              <StickyNote color={colors[index]} rotation={rotations[index]} className="cursor-pointer h-full p-5">
                 <div className="space-y-3">
                   <h3 className="text-lg font-bold line-clamp-2">{post.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>

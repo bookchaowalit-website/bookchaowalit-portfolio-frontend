@@ -39,7 +39,7 @@ export function MixedTypographyTitle({
   };
 
   return (
-    <div className={`flex flex-wrap items-center justify-center gap-2 ${className}`}>
+    <div className={`flex flex-wrap items-center justify-center gap-2 heading-depth-lg ${className}`}>
       {words.map((word, index) => (
         <motion.span
           key={index}
@@ -75,7 +75,7 @@ export function NotebookSectionHeader({
 }) {
   const reducedMotion = useReducedMotion();
   return (
-    <div className={`relative mb-8 ${className}`}>
+    <div className={`relative mb-8 section-rule ${className}`}>
       {/* Main title with mixed styles */}
       <div className="relative">
         <motion.h2
