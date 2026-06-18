@@ -50,7 +50,7 @@ export function NotebookPaper({
 }) {
   // Subtle paper tints — enough to distinguish sections, light enough to read on
   const bgMap = {
-    default: "oklch(0.985 0.005 90)",
+    default: "oklch(0.985 0 0)",
     yellow: "oklch(0.975 0.015 95)",
     pink: "oklch(0.975 0.012 350)",
     green: "oklch(0.975 0.012 150)",
