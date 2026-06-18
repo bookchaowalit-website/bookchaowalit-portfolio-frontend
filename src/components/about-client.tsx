@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
-import { Bot, BarChart3, Globe, Wrench, Lightbulb } from "lucide-react";
+import { Bot, BarChart3, Globe, Wrench, Lightbulb, Code } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function AboutClient() {
@@ -42,7 +42,7 @@ export function AboutClient() {
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "bubble", size: "xl" },
-              { text: "👨‍💻", style: "block", size: "lg" }
+              { text: <Code className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
+import { Handshake, Mail, Globe, MessageCircle, Monitor, Bot, TrendingUp, Briefcase, Github, Wrench, Zap } from "lucide-react";
 
 export function ContactSection() {
   const reducedMotion = useReducedMotion();
@@ -23,7 +24,7 @@ export function ContactSection() {
           words={[
             { text: "Let's", style: "cursive", size: "lg" },
             { text: "Connect!", style: "bubble", size: "lg" },
-            { text: "🤝", style: "block", size: "md" }
+            { text: <Handshake className="inline-block" />, style: "block", size: "md" }
           ]}
           className="mb-6"
         />
@@ -40,14 +41,14 @@ export function ContactSection() {
             <div className="space-y-6 text-center">
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
-                  <Badge variant="secondary" className="bg-muted text-foreground">
-                    <span aria-hidden="true">📧</span> Quick Response
+                  <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
+                    <Mail className="w-3.5 h-3.5" /> Quick Response
                   </Badge>
-                  <Badge variant="secondary" className="bg-muted text-foreground">
-                    <span aria-hidden="true">🌏</span> Available Globally
+                  <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
+                    <Globe className="w-3.5 h-3.5" /> Available Globally
                   </Badge>
-                  <Badge variant="secondary" className="bg-muted text-foreground">
-                    <span aria-hidden="true">💬</span> Multiple Channels
+                  <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
+                    <MessageCircle className="w-3.5 h-3.5" /> Multiple Channels
                   </Badge>
                 </div>
 
@@ -58,14 +59,14 @@ export function ContactSection() {
                 <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto text-pretty">
                   Whether you need <strong>AI integration</strong>, <strong>full-stack development</strong>,
                   or <strong>strategic consulting</strong> - I'm here to help your business grow.
-                  Based in <strong>Bangkok</strong> but working with clients worldwide! 🇹🇭
+                  Based in <strong>Bangkok</strong> but working with clients worldwide! <span className="mono-emoji">🇹🇭</span>
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2" aria-hidden="true">💻</div>
+                    <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><Monitor className="w-8 h-8" /></div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Development Projects
                     </p>
@@ -74,7 +75,7 @@ export function ContactSection() {
 
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2" aria-hidden="true">🤖</div>
+                    <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><Bot className="w-8 h-8" /></div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       AI Consultation
                     </p>
@@ -83,7 +84,7 @@ export function ContactSection() {
 
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
                   <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2" aria-hidden="true">📈</div>
+                    <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><TrendingUp className="w-8 h-8" /></div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
                       Business Growth
                     </p>
@@ -100,7 +101,7 @@ export function ContactSection() {
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button variant="outline" size="lg" asChild>
                     <a href="mailto:bookchaowalit@gmail.com">
-                      <span aria-hidden="true">📧</span> Email Me
+                      <Mail className="w-4 h-4 mr-2" /> Email Me
                     </a>
                   </Button>
                 </motion.div>
@@ -116,7 +117,7 @@ export function ContactSection() {
                   aria-label="LinkedIn"
                   role="listitem"
                 >
-                  <span aria-hidden="true">💼</span>
+                  <Briefcase className="w-6 h-6" />
                 </motion.a>
                 <motion.a
                   href="https://github.com/bookchaowalit"
@@ -127,7 +128,7 @@ export function ContactSection() {
                   aria-label="GitHub"
                   role="listitem"
                 >
-                  <span aria-hidden="true">🐙</span>
+                  <Github className="w-6 h-6" />
                 </motion.a>
                 <motion.a
                   href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
@@ -138,7 +139,7 @@ export function ContactSection() {
                   aria-label="Upwork"
                   role="listitem"
                 >
-                  <span aria-hidden="true">🔧</span>
+                  <Wrench className="w-6 h-6" />
                 </motion.a>
                 <motion.a
                   href="https://fastwork.co/user/bookchao"
@@ -149,7 +150,7 @@ export function ContactSection() {
                   aria-label="Fastwork"
                   role="listitem"
                 >
-                  <span aria-hidden="true">⚡</span>
+                  <Zap className="w-6 h-6" />
                 </motion.a>
               </div>
             </div>

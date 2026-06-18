@@ -1,7 +1,9 @@
 "use client";
 
+import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { Lightbulb, StickyNote, AlertTriangle, AlertCircle } from "lucide-react";
 
 // Mixed typography component with different styles in one composition
 export function MixedTypographyTitle({
@@ -9,7 +11,7 @@ export function MixedTypographyTitle({
   className = ""
 }: {
   words: Array<{
-    text: string;
+    text: ReactNode;
     style: "block" | "cursive" | "outlined" | "filled" | "shaded" | "bubble";
     size?: "sm" | "md" | "lg" | "xl";
   }>;
@@ -140,11 +142,11 @@ export function StudyGuideBox({
     important: "bg-muted/90 border-foreground/30 text-foreground"
   };
 
-  const icons = {
-    tip: "💡",
-    note: "📝",
-    warning: "⚠️",
-    important: "❗"
+  const icons: Record<string, ReactNode> = {
+    tip: <Lightbulb className="w-6 h-6 text-foreground" />,
+    note: <StickyNote className="w-6 h-6 text-foreground" style={{ strokeWidth: 1.5 }} />,
+    warning: <AlertTriangle className="w-6 h-6 text-foreground" />,
+    important: <AlertCircle className="w-6 h-6 text-foreground" />
   };
 
   const rotations = {
@@ -170,7 +172,7 @@ export function StudyGuideBox({
       transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 15 }}
     >
       <div className="flex items-start gap-3">
-        <span className="text-2xl">{icons[type]}</span>
+        <span className="text-2xl flex-shrink-0">{icons[type]}</span>
         <div>
           <div className="font-[family-name:var(--font-comic)] font-bold text-lg mb-2 uppercase tracking-wide" role="heading" aria-level={3}>
             {title}

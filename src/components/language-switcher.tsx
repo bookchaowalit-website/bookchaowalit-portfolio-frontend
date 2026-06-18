@@ -42,7 +42,7 @@ export function LanguageSwitcher() {
         >
           <Globe className="h-4 w-4" />
           <span className="hidden sm:inline">{currentLanguage.name}</span>
-          <span className="sm:hidden">{currentLanguage.flag}</span>
+          <span className="sm:hidden mono-emoji">{currentLanguage.flag}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -54,7 +54,7 @@ export function LanguageSwitcher() {
               locale === language.code ? 'bg-muted' : ''
             }`}
           >
-            <span>{language.flag}</span>
+            <span className="mono-emoji">{language.flag}</span>
             <span>{language.name}</span>
             {locale === language.code && (
               <span className="ml-auto text-xs text-muted-foreground">✓</span>

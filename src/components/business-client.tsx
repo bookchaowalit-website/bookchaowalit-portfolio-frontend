@@ -7,6 +7,7 @@ import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mix
 import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { TrendingUp, DollarSign, BarChart3, Target, Rocket, Briefcase, Globe, Github, Twitter, Mail, Bot } from "lucide-react";
 
 export function BusinessClient() {
   const reducedMotion = useReducedMotion();
@@ -33,28 +34,28 @@ export function BusinessClient() {
 
   const futureVentures = [
     {
-      icon: "📈",
+      icon: <TrendingUp className="w-6 h-6 text-foreground" />,
       title: t("future1Title"),
       badge: t("comingSoon"),
       desc: t("future1Desc"),
       tags: [t("tagPython"), t("tagML"), t("tagAlgo"), t("tagRisk")]
     },
     {
-      icon: "💰",
+      icon: <DollarSign className="w-6 h-6 text-foreground" />,
       title: t("future2Title"),
       badge: t("serviceOffering"),
       desc: t("future2Desc"),
       tags: [t("tagFinTech"), t("tagBlockchain"), t("tagAI"), t("tagDigital")]
     },
     {
-      icon: "📊",
+      icon: <BarChart3 className="w-6 h-6 text-foreground" />,
       title: t("future3Title"),
       badge: t("inDev"),
       desc: t("future3Desc"),
       tags: [t("tagDataViz"), t("tagPortfolio"), t("tagRealTime"), t("tagRiskAnalytics")]
     },
     {
-      icon: "🎯",
+      icon: <Target className="w-6 h-6 text-foreground" />,
       title: t("future4Title"),
       badge: t("serviceOffering"),
       desc: t("future4Desc"),
@@ -81,7 +82,7 @@ export function BusinessClient() {
               { text: t("journeyWord1"), style: "cursive", size: "xl" },
               { text: t("journeyWord2"), style: "bubble", size: "xl" },
               { text: t("journeyWord3"), style: "filled", size: "xl" },
-              { text: "🚀", style: "block", size: "lg" }
+              { text: <Rocket className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />
@@ -97,11 +98,11 @@ export function BusinessClient() {
             <div className="p-8">
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <Badge variant="secondary" className="text-lg px-4 py-2">
-                    💼 {t("solopreneurBadge")}
+                  <Badge variant="secondary" className="text-lg px-4 py-2 flex items-center gap-1">
+                    <Briefcase className="w-4 h-4" /> {t("solopreneurBadge")}
                   </Badge>
-                  <Badge variant="secondary" className="text-lg px-4 py-2">
-                    🇹🇭 {t("bangkokBasedBadge")}
+                  <Badge variant="secondary" className="text-lg px-4 py-2 flex items-center gap-1">
+                    <span className="mono-emoji">🇹🇭</span> {t("bangkokBasedBadge")}
                   </Badge>
                 </div>
 
@@ -112,17 +113,17 @@ export function BusinessClient() {
                 <p className="text-lg text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('heroDescription') }} />
 
                 <div className="flex flex-wrap gap-3 justify-center">
-                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    🤖 {t("badgeAI")}
+                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm flex items-center gap-1">
+                    <Bot className="w-3.5 h-3.5" /> {t("badgeAI")}
                   </Badge>
-                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    📊 {t("badgeData")}
+                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm flex items-center gap-1">
+                    <BarChart3 className="w-3.5 h-3.5" /> {t("badgeData")}
                   </Badge>
-                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    🚀 {t("badgeDeeptech")}
+                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm flex items-center gap-1">
+                    <Rocket className="w-3.5 h-3.5" /> {t("badgeDeeptech")}
                   </Badge>
-                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm">
-                    📈 {t("badgeGrowth")}
+                  <Badge variant="outline" className="font-[family-name:var(--font-comic)] text-sm flex items-center gap-1">
+                    <TrendingUp className="w-3.5 h-3.5" /> {t("badgeGrowth")}
                   </Badge>
                 </div>
               </div>
@@ -201,35 +202,35 @@ export function BusinessClient() {
                           {business.socialMedia.website && (
                             <Button size="sm" variant="outline" asChild>
                               <Link href={business.socialMedia.website} target="_blank" rel="noopener noreferrer">
-                                🌐 {t("socialWebsite")}
+                                <Globe className="w-4 h-4 mr-1" /> {t("socialWebsite")}
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.linkedin && (
                             <Button size="sm" variant="outline" asChild>
                               <Link href={business.socialMedia.linkedin} target="_blank" rel="noopener noreferrer">
-                                💼 {t("socialLinkedin")}
+                                <Briefcase className="w-4 h-4 mr-1" /> {t("socialLinkedin")}
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.github && (
                             <Button size="sm" variant="outline" asChild>
                               <Link href={business.socialMedia.github} target="_blank" rel="noopener noreferrer">
-                                🐙 {t("socialGithub")}
+                                <Github className="w-4 h-4 mr-1" /> {t("socialGithub")}
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.twitter && (
                             <Button size="sm" variant="outline" asChild>
                               <Link href={business.socialMedia.twitter} target="_blank" rel="noopener noreferrer">
-                                🐦 {t("socialTwitter")}
+                                <Twitter className="w-4 h-4 mr-1" /> {t("socialTwitter")}
                               </Link>
                             </Button>
                           )}
                           {business.socialMedia.email && (
                             <Button size="sm" variant="outline" asChild>
                               <Link href={`mailto:${business.socialMedia.email}`}>
-                                📧 {t("socialEmail")}
+                                <Mail className="w-4 h-4 mr-1" /> {t("socialEmail")}
                               </Link>
                             </Button>
                           )}
@@ -253,8 +254,8 @@ export function BusinessClient() {
       >
         <div className="p-8">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-              🚀 {t("futureVenturesTitle")}
+            <h2 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4 flex items-center justify-center gap-2">
+              <Rocket className="w-6 h-6" /> {t("futureVenturesTitle")}
             </h2>
             <p className="text-muted-foreground font-[family-name:var(--font-doodle)]">
               {t("futureVenturesSubtitle")}
@@ -266,7 +267,7 @@ export function BusinessClient() {
               <SketchyFrame key={index} variant="dashed">
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="text-2xl">{venture.icon}</div>
+                    <div className="text-2xl text-foreground">{venture.icon}</div>
                     <div>
                       <h3 className="font-semibold text-lg">{venture.title}</h3>
                       <Badge variant="outline" className="text-xs mt-1">{venture.badge}</Badge>

@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from 'next-intl';
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
+import { Bot, BarChart3, Globe, TrendingUp, Code } from "lucide-react";
 
 export function AboutSection() {
   const t = useTranslations('home');
@@ -25,7 +26,7 @@ export function AboutSection() {
           words={[
             { text: t('aboutWord1'), style: "cursive", size: "lg" },
             { text: t('aboutWord2'), style: "bubble", size: "lg" },
-            { text: "👨‍💻", style: "block", size: "md" }
+            { text: <Code className="inline-block" />, style: "block", size: "md" }
           ]}
           className="mb-6"
         />
@@ -58,19 +59,19 @@ export function AboutSection() {
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div className="space-y-1">
-                  <div className="text-2xl">🤖</div>
+                  <div className="text-2xl text-foreground flex justify-center"><Bot className="w-8 h-8" /></div>
                   <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('aiIntegration')}</p>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-2xl">📊</div>
+                  <div className="text-2xl text-foreground flex justify-center"><BarChart3 className="w-8 h-8" /></div>
                   <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('dataAnalytics')}</p>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-2xl">🌐</div>
+                  <div className="text-2xl text-foreground flex justify-center"><Globe className="w-8 h-8" /></div>
                   <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('fullStackDev')}</p>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-2xl">📈</div>
+                  <div className="text-2xl text-foreground flex justify-center"><TrendingUp className="w-8 h-8" /></div>
                   <p className="text-sm font-[family-name:var(--font-comic)] font-bold text-muted-foreground">{t('seoGrowth')}</p>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { useTranslations } from 'next-intl';
+import { Rocket } from "lucide-react";
 
 export function BusinessSection() {
   const t = useTranslations('business');
@@ -16,7 +17,7 @@ export function BusinessSection() {
     {
       title: t('ionomadTitle'),
       description: t('ionomadDesc'),
-      icon: "🚀",
+      icon: <Rocket className="w-8 h-8 text-foreground" />,
       status: t('activeStatus')
     }
   ];
@@ -68,7 +69,7 @@ export function BusinessSection() {
               <div className="p-5 h-full">
                 <div className="flex flex-col h-full space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl">{business.icon}</span>
+                    <span className="text-2xl text-foreground">{business.icon}</span>
                     <Badge
                       variant="secondary"
                       className="bg-muted text-foreground text-xs"

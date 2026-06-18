@@ -11,7 +11,7 @@ import { SketchyFrame, StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Bot, BarChart3, Code, ShoppingBag, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Bot, BarChart3, Code, ShoppingBag, TrendingUp, CheckCircle2, XCircle, Rocket } from "lucide-react";
 
 export function ContactClient() {
   const t = useTranslations("contact");
@@ -119,7 +119,7 @@ export function ContactClient() {
             words={[
               { text: t("connectWord1"), style: "cursive", size: "xl" },
               { text: t("connectWord2"), style: "bubble", size: "xl" },
-              { text: "🚀", style: "block", size: "lg" }
+              { text: <Rocket className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />

@@ -8,7 +8,7 @@ import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/co
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { TrendingUp, Brain, Target, Shield, BarChart3, Zap } from "lucide-react";
+import { TrendingUp, Brain, Target, Shield, BarChart3, Zap, Rocket } from "lucide-react";
 
 export function TradingClient() {
   const t = useTranslations("about_trading");
@@ -33,7 +33,7 @@ export function TradingClient() {
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "bubble", size: "lg" },
               { text: t("titleWord3"), style: "filled", size: "xl" },
-              { text: "📈", style: "block", size: "lg" }
+              { text: <TrendingUp className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />
@@ -232,7 +232,9 @@ export function TradingClient() {
       {/* Future Projects */}
       <Card>
         <CardHeader>
-          <CardTitle>🚀 {t("futureTitle")}</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Rocket className="w-5 h-5" /> {t("futureTitle")}
+          </CardTitle>
           <CardDescription>{t("futureSubtitle")}</CardDescription>
         </CardHeader>
         <CardContent>
