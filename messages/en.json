@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "projects": "Projects",
+    "projects": "Portfolio",
     "business": "Business",
     "skills": "Skills",
     "blog": "Blog",
@@ -172,7 +172,7 @@
     "funFactsTitle": "Fun Facts",
     "funFactsDescription": "A few things about me outside of coding",
     "funFact1": "I can debug code faster than I can cook instant noodles",
-    "funFact2": "I've built 50+ micro-frontends deployed on Vercel",
+    "funFact2": "I've built 100+ projects deployed on Vercel",
     "funFact3": "I speak Thai, English, and can read code in any language",
     "funFact4": "My first computer was a hand-assembled kit from electronics class",
     "funFact5": "I believe every problem is just a solution waiting to be coded"
