@@ -75,7 +75,7 @@ export const categoryMeta: Record<
 };
 
 const gh = (slug: string) =>
-  `https://github.com/bookchaowalit/bookchaowalit-${slug}-frontend`;
+  `https://github.com/bookchaowalit-website/bookchaowalit-${slug}-frontend`;
 const sub = (slug: string) => `https://${slug}.bookchaowalit.com`;
 
 export const allProjects: AppProject[] = [
