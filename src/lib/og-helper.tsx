@@ -7,11 +7,15 @@ export function renderOgImage({
   subtitle,
   tags,
   url,
+  author,
+  date,
 }: {
   title: string;
   subtitle: string;
   tags?: string[];
   url: string;
+  author?: string;
+  date?: string;
 }) {
   return new ImageResponse(
     (
@@ -85,11 +89,24 @@ export function renderOgImage({
               ))}
             </div>
           )}
+          {(author || date) && (
+            <div
+              style={{
+                fontSize: "16px",
+                color: "#666",
+                marginTop: "12px",
+              }}
+            >
+              {author && <span>{author}</span>}
+              {author && date && <span> · </span>}
+              {date && <span>{date}</span>}
+            </div>
+          )}
           <div
             style={{
               fontSize: "16px",
               color: "#555",
-              marginTop: "20px",
+              marginTop: "8px",
             }}
           >
             {url}

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Pencil, Star } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useTranslations } from "next-intl";
 
 type BlogPost = {
   slug: string;
@@ -26,6 +27,7 @@ function NotebookPostEntry({
   featured?: boolean;
 }) {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('blog');
   const date = new Date(post.publishedAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "short",
@@ -63,7 +65,7 @@ function NotebookPostEntry({
           <div className="flex items-center gap-3 mb-2">
             {featured && (
               <span className="font-[family-name:var(--font-doodle)] text-xs text-primary border border-primary/30 px-2 py-0.5 rotate-[-1deg] inline-flex items-center gap-1">
-                <Star className="h-3 w-3" /> featured
+                <Star className="h-3 w-3" /> {t('featuredBadge')}
               </span>
             )}
             <time
@@ -80,7 +82,7 @@ function NotebookPostEntry({
 
           {/* Title — handwritten style */}
           <h3 className="text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors text-balance font-[family-name:var(--font-sarabun)]">
-            <Link href={`/blog/${post.slug}`} className="after:content-[''] after:block after:h-px after:bg-primary/0 group-hover:after:bg-primary/40 after:transition-colors">
+            <Link href={{pathname: '/blog/[slug]', params: {slug: post.slug}}} className="after:content-[''] after:block after:h-px after:bg-primary/0 group-hover:after:bg-primary/40 after:transition-colors">
               {post.title}
             </Link>
           </h3>
@@ -109,10 +111,10 @@ function NotebookPostEntry({
             </div>
 
             <Link
-              href={`/blog/${post.slug}`}
+              href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}
               className="font-[family-name:var(--font-doodle)] text-sm text-primary hover:underline underline-offset-4 decoration-primary/40 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              read →
+              {t('readArrow')}
             </Link>
           </div>
         </div>
@@ -129,6 +131,7 @@ export function NotebookBlogList({
   recentPosts: BlogPost[];
 }) {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('blog');
 
   return (
     <div className="space-y-12">
@@ -142,9 +145,9 @@ export function NotebookBlogList({
             transition={reducedMotion ? { duration: 0 } : { duration: 0.4 }}
           >
             <h2 className="font-[family-name:var(--font-script)] text-2xl md:text-3xl text-foreground">
-              Featured{" "}
+              {t('featuredTitle')}{" "}
               <span className="font-[family-name:var(--font-doodle)] text-muted-foreground text-lg">
-                — picked by hand ✦
+                {t('featuredSubtitle')}
               </span>
             </h2>
           </motion.div>
@@ -166,9 +169,9 @@ export function NotebookBlogList({
             transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: 0.1 }}
           >
             <h2 className="font-[family-name:var(--font-script)] text-2xl md:text-3xl text-foreground">
-              Recent{" "}
+              {t('recentTitle')}{" "}
               <span className="font-[family-name:var(--font-doodle)] text-muted-foreground text-lg">
-                — fresh ink ✎
+                {t('recentSubtitle')}
               </span>
             </h2>
           </motion.div>
@@ -183,7 +186,7 @@ export function NotebookBlogList({
       {featuredPosts.length === 0 && recentPosts.length === 0 && (
         <div className="text-center py-16">
           <p className="font-[family-name:var(--font-doodle)] text-lg text-muted-foreground">
-            No articles yet — the notebook is empty <Pencil className="inline-block h-4 w-4" />
+            {t('emptyNotebook')} <Pencil className="inline-block h-4 w-4" />
           </p>
         </div>
       )}

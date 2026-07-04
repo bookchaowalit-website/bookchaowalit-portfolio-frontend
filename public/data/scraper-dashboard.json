@@ -1,0 +1,1051 @@
+{
+  "generated_at": "2026-07-01 10:04:02",
+  "sources": {
+    "crypto": {
+      "name": "Crypto Prices",
+      "icon": "\ud83d\udcc8",
+      "rows": 28,
+      "last_updated": "1d ago",
+      "status": "active",
+      "new_items": 28
+    },
+    "exchange_rates": {
+      "name": "Exchange Rates",
+      "icon": "\ud83d\udcb1",
+      "rows": 10,
+      "last_updated": "1d ago",
+      "status": "active",
+      "new_items": 10
+    },
+    "github_trending": {
+      "name": "GitHub Trending",
+      "icon": "\ud83d\udc19",
+      "rows": 860,
+      "last_updated": "1d ago",
+      "status": "active",
+      "new_items": 419
+    },
+    "property": {
+      "name": "Property Listings",
+      "icon": "\ud83c\udfe0",
+      "rows": 2,
+      "last_updated": "23h ago",
+      "status": "active",
+      "new_items": 2
+    },
+    "seo": {
+      "name": "SEO Rankings",
+      "icon": "\ud83d\udd0d",
+      "rows": 10,
+      "last_updated": "11m ago",
+      "status": "active",
+      "new_items": 10
+    },
+    "jobs": {
+      "name": "Job Postings",
+      "icon": "\ud83d\udcbc",
+      "rows": 0,
+      "last_updated": "1h ago",
+      "status": "no_data",
+      "new_items": 0
+    },
+    "stocks": {
+      "name": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "rows": 15,
+      "last_updated": "1d ago",
+      "status": "active",
+      "new_items": 15
+    },
+    "ai_tools": {
+      "name": "AI Tools",
+      "icon": "\ud83e\udd16",
+      "rows": 0,
+      "last_updated": "21h ago",
+      "status": "no_data",
+      "new_items": 0
+    },
+    "defi": {
+      "name": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "rows": 1496,
+      "last_updated": "1d ago",
+      "status": "active",
+      "new_items": 0
+    },
+    "flights": {
+      "name": "Flight Prices",
+      "icon": "\u2708\ufe0f",
+      "rows": 0,
+      "last_updated": "never",
+      "status": "no_data",
+      "new_items": 0
+    },
+    "money_opportunities": {
+      "name": "Money Opportunities",
+      "icon": "\ud83d\udcb0",
+      "rows": 0,
+      "last_updated": "7h ago",
+      "status": "no_data",
+      "new_items": 0
+    },
+    "opportunities": {
+      "name": "Money Opportunities",
+      "icon": "\ud83d\udcb0",
+      "rows": 21,
+      "new_items": 9,
+      "last_updated": "just now",
+      "status": "active",
+      "health": {
+        "ok": 12,
+        "failed": 0,
+        "total_sources": 12,
+        "sources": {
+          "hn": {
+            "status": "ok",
+            "items": 2,
+            "duration": 18.05
+          },
+          "github": {
+            "status": "ok",
+            "items": 11,
+            "duration": 0.97
+          },
+          "firecrawl-search": {
+            "status": "ok",
+            "items": 10,
+            "duration": 39.12
+          },
+          "etsy": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.52
+          },
+          "ebay": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.51
+          },
+          "tiktok": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.47
+          },
+          "amazon": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.7
+          },
+          "tcg-prices": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.56
+          },
+          "etsy-sold": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.6
+          },
+          "amazon-bsr": {
+            "status": "ok",
+            "items": 0,
+            "duration": 24.57
+          },
+          "reddit": {
+            "status": "ok",
+            "items": 0,
+            "duration": 9.58
+          },
+          "producthunt": {
+            "status": "ok",
+            "items": 0,
+            "duration": 1.42
+          }
+        }
+      },
+      "top_opportunities": [
+        {
+          "title": "deepseek-ai/DeepSpec: DeepSpec: a full-stack codebase for tr",
+          "score": 100,
+          "category": "ai-content",
+          "source": "GitHub Trending",
+          "url": "https://github.com/deepseek-ai/DeepSpec",
+          "direction": "stable"
+        },
+        {
+          "title": "baairon/torlink: A sleek, zero-setup torrent finder and down",
+          "score": 100,
+          "category": "ai-content",
+          "source": "GitHub Trending",
+          "url": "https://github.com/baairon/torlink",
+          "direction": "stable"
+        },
+        {
+          "title": "winsznx/theeleven: Eleven autonomous AI agents open live foo",
+          "score": 100,
+          "category": "ai-content",
+          "source": "GitHub Trending",
+          "url": "https://github.com/winsznx/theeleven",
+          "direction": "stable"
+        },
+        {
+          "title": "TianhangZhuzth/Fundamental-Ava: Build digital human beings \u2014",
+          "score": 100,
+          "category": "ai-content",
+          "source": "GitHub Trending",
+          "url": "https://github.com/TianhangZhuzth/Fundamental-Ava",
+          "direction": "stable"
+        },
+        {
+          "title": "Pluviobyte/video-production-skills: Reusable AI video produc",
+          "score": 100,
+          "category": "ai-content",
+          "source": "GitHub Trending",
+          "url": "https://github.com/Pluviobyte/video-production-skills",
+          "direction": "stable"
+        }
+      ]
+    }
+  },
+  "alerts": [
+    {
+      "source": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "direction": "\ud83d\udd3b",
+      "value": -5.14,
+      "label": "AAPL: -5.14% ($281.74)"
+    },
+    {
+      "source": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "direction": "\ud83d\udd3a",
+      "value": 3.16,
+      "label": "AMZN: +3.16% ($240.14)"
+    },
+    {
+      "source": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "direction": "\ud83d\udd3b",
+      "value": -6.56,
+      "label": "NVDA: -6.56% ($194.97)"
+    },
+    {
+      "source": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "direction": "\ud83d\udd3a",
+      "value": 5.2,
+      "label": "CRM: +5.20% ($157.93)"
+    },
+    {
+      "source": "Stock Prices",
+      "icon": "\ud83d\udcca",
+      "direction": "\ud83d\udd3b",
+      "value": -3.18,
+      "label": "PLTR: -3.18% ($115.7)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 164.70281,
+      "label": "uniswap-v3/WETH-USDC: APY 164.7% (TVL $96,568,757)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 55.63208,
+      "label": "uniswap-v3/WETH-USDT: APY 55.6% (TVL $77,039,129)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 29.50344,
+      "label": "uniswap-v3/WETH-USDC: APY 29.5% (TVL $32,620,465)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 26.02083,
+      "label": "uniswap-v4/ETH-USDC: APY 26.0% (TVL $28,136,709)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 24.81669,
+      "label": "uniswap-v3/WBTC-USDT: APY 24.8% (TVL $25,834,446)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 37.5427,
+      "label": "aerodrome-v1/USDC-AERO: APY 37.5% (TVL $25,614,471)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 25.23215,
+      "label": "morpho-blue/ALPHAUSDCDELTAV2: APY 25.2% (TVL $22,228,703)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 34.08328,
+      "label": "uniswap-v3/USDC-WETH: APY 34.1% (TVL $18,761,408)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.97,
+      "label": "curve-dex/CRVUSD-WETH: APY 21.0% (TVL $16,507,179)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 48.38682,
+      "label": "uniswap-v3/WETH-USDT: APY 48.4% (TVL $12,284,153)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 26.56659,
+      "label": "uniswap-v3/WBTC-USDT: APY 26.6% (TVL $11,897,847)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 65.24297,
+      "label": "uniswap-v4/WBTC-USDT: APY 65.2% (TVL $10,946,350)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 55.39166,
+      "label": "uniswap-v4/USDC-CBBTC: APY 55.4% (TVL $10,719,606)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 27.5361,
+      "label": "uniswap-v3/WETH-CBBTC: APY 27.5% (TVL $9,490,904)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 45.02269,
+      "label": "extra-finance-leverage-farming/USDC-AERO: APY 45.0% (TVL $9,286,226)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 54.61819,
+      "label": "uniswap-v4/DORY-USDC: APY 54.6% (TVL $9,075,850)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 45.60309,
+      "label": "fluid-dex/USDC-ETH: APY 45.6% (TVL $8,876,735)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 36.95121,
+      "label": "uniswap-v3/WBTC-USDT: APY 37.0% (TVL $8,854,169)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 69.04989,
+      "label": "aerodrome-slipstream/WETH-USDC: APY 69.0% (TVL $8,766,939)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 62.74128,
+      "label": "uniswap-v3/WETH-USDC: APY 62.7% (TVL $8,683,835)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 55.77785,
+      "label": "aerodrome-v1/WETH-VVV: APY 55.8% (TVL $8,065,243)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 139.31462,
+      "label": "aerodrome-slipstream/USDC-CBBTC: APY 139.3% (TVL $7,911,437)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 24.72787,
+      "label": "morpho-blue/API3-DCOMP-USDC: APY 24.7% (TVL $7,698,226)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 22.75,
+      "label": "curve-dex/CRVUSD-TBTC: APY 22.8% (TVL $7,527,458)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 50.91158,
+      "label": "uniswap-v3/USDC-CBBTC: APY 50.9% (TVL $7,479,359)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 44.90755,
+      "label": "uniswap-v3/WBTC-USDC: APY 44.9% (TVL $7,414,048)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 25.03522,
+      "label": "sushiswap-v3/DAI-WETH: APY 25.0% (TVL $7,254,181)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 60.07759,
+      "label": "brix/WITRY: APY 60.1% (TVL $7,121,702)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 42.57603,
+      "label": "usual-usd0/USUALX: APY 42.6% (TVL $6,246,392)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 424.07784,
+      "label": "aerodrome-slipstream/USDC-CBBTC: APY 424.1% (TVL $5,390,437)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 25.60807,
+      "label": "yearn-finance/YCRV: APY 25.6% (TVL $5,368,191)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 37.90256,
+      "label": "uniswap-v3/WETH-USDC: APY 37.9% (TVL $5,292,145)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 136.45427,
+      "label": "uniswap-v4/ETH-POD: APY 136.5% (TVL $4,670,767)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.32595,
+      "label": "aerodrome-v1/WETH-KTA: APY 20.3% (TVL $4,602,933)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 78.53814,
+      "label": "aerodrome-slipstream/USDC-CBBTC: APY 78.5% (TVL $4,450,695)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 41.93153,
+      "label": "uniswap-v3/USDC-CBBTC: APY 41.9% (TVL $4,425,230)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 23.22956,
+      "label": "aerodrome-v1/VIRTUAL-WETH: APY 23.2% (TVL $4,131,436)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.67547,
+      "label": "accountable/USDC: APY 20.7% (TVL $4,083,524)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 77.03909,
+      "label": "aerodrome-slipstream/WETH-USDC: APY 77.0% (TVL $4,052,539)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 43.7148,
+      "label": "pancakeswap-amm-v3/WETH-CBBTC: APY 43.7% (TVL $3,920,645)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 47.17143,
+      "label": "uniswap-v4/USDC-CBBTC: APY 47.2% (TVL $3,749,431)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 26.12603,
+      "label": "stake-dao/SDPENDLE: APY 26.1% (TVL $3,722,888)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 23.50934,
+      "label": "uniswap-v3/ETH-WBNB: APY 23.5% (TVL $3,684,462)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.76475,
+      "label": "pendle/APYUSD: APY 20.8% (TVL $3,666,061)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 32.42153,
+      "label": "uniswap-v3/USDC-WETH: APY 32.4% (TVL $3,662,439)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.58044,
+      "label": "aerodrome-slipstream/VVV-DIEM: APY 20.6% (TVL $3,537,147)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 165.22018,
+      "label": "aerodrome-slipstream/WETH-CBBTC: APY 165.2% (TVL $3,476,095)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 43.0368,
+      "label": "uniswap-v3/AAVE-WETH: APY 43.0% (TVL $3,320,278)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 20.38672,
+      "label": "pendle/SUSDAT: APY 20.4% (TVL $3,266,496)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 51.06377,
+      "label": "uniswap-v3/USDT-WBNB: APY 51.1% (TVL $3,137,613)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 36.71751,
+      "label": "pancakeswap-amm-v3/WETH-USDC: APY 36.7% (TVL $3,099,390)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 46.25974,
+      "label": "uniswap-v4/ETH-USDC: APY 46.3% (TVL $3,071,781)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 27.0,
+      "label": "upshift/UPSSYLVA: APY 27.0% (TVL $2,974,096)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 33.39881,
+      "label": "aerodrome-v1/WETH-AERO: APY 33.4% (TVL $2,898,347)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 52.83182,
+      "label": "uniswap-v3/WETH-CBBTC: APY 52.8% (TVL $2,766,258)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 136.62425,
+      "label": "uniswap-v4/QUQ-USDT: APY 136.6% (TVL $2,434,832)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 29.03196,
+      "label": "uniswap-v3/WTAO-WETH: APY 29.0% (TVL $2,402,794)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 25.79434,
+      "label": "gmx-v2-perps/ETH-USDC: APY 25.8% (TVL $2,376,630)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 39.65619,
+      "label": "uniswap-v4/SKY-USDC: APY 39.7% (TVL $2,332,402)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 127.45544,
+      "label": "aerodrome-slipstream/USDC-AERO: APY 127.5% (TVL $2,247,806)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 58.99847,
+      "label": "uniswap-v4/AAVE-USDC: APY 59.0% (TVL $2,129,926)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 35.40934,
+      "label": "uniswap-v3/USDT-BTCB: APY 35.4% (TVL $2,129,219)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 41.47191,
+      "label": "aerodrome-v1/WETH-FAI: APY 41.5% (TVL $2,103,258)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 96.05616,
+      "label": "uniswap-v4/ENA-USDC: APY 96.1% (TVL $2,059,013)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 26.24,
+      "label": "concentrator/ASDCRV: APY 26.2% (TVL $2,045,270)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 51.94575,
+      "label": "aerodrome-slipstream/EURC-USDC: APY 51.9% (TVL $2,041,851)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 34.12858,
+      "label": "uniswap-v4/ETH-CBBTC: APY 34.1% (TVL $2,007,094)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 35.25556,
+      "label": "uniswap-v3/USDC-MAG7.SSI: APY 35.3% (TVL $2,006,616)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 72.7239,
+      "label": "pancakeswap-amm-v3/WETH-USDC: APY 72.7% (TVL $1,936,947)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 81.10012,
+      "label": "uniswap-v2/WETH-ASTEROID: APY 81.1% (TVL $1,916,618)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 486.04269,
+      "label": "aerodrome-slipstream/O-USDC: APY 486.0% (TVL $1,893,924)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 23.04317,
+      "label": "uniswap-v3/UNI-USDT: APY 23.0% (TVL $1,861,065)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 122.93,
+      "label": "curve-dex/IDAI-IUSDC-IUSDT: APY 122.9% (TVL $1,758,884)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 39.38855,
+      "label": "pancakeswap-amm-v3/USDC-CBBTC: APY 39.4% (TVL $1,748,515)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 68.50556,
+      "label": "uniswap-v4/UNI-USDC: APY 68.5% (TVL $1,670,782)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 79.85281,
+      "label": "uniswap-v4/ETH-SYRUP: APY 79.9% (TVL $1,581,137)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 41.81236,
+      "label": "aerodrome-slipstream/WETH-AERO: APY 41.8% (TVL $1,571,091)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 38.94967,
+      "label": "uniswap-v4/ETH-AAVE: APY 38.9% (TVL $1,566,672)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 132.13333,
+      "label": "aerodrome-v1/FBOMB-AERO: APY 132.1% (TVL $1,565,628)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 54.72463,
+      "label": "uniswap-v3/WETH-ARB: APY 54.7% (TVL $1,542,727)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 60.89229,
+      "label": "uniswap-v4/ETH-USDC: APY 60.9% (TVL $1,487,676)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 59.72283,
+      "label": "uniswap-v4/WETH-SURPLUS: APY 59.7% (TVL $1,443,488)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 23.58902,
+      "label": "uniswap-v3/ZEC-AAVE: APY 23.6% (TVL $1,264,735)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 28.97041,
+      "label": "convex-finance/PMUSD-IREET: APY 29.0% (TVL $1,246,481)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 22.44512,
+      "label": "stake-dao/PMUSD-IREET: APY 22.4% (TVL $1,189,838)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 142.02519,
+      "label": "aerodrome-v1/FBOMB-USDC: APY 142.0% (TVL $1,175,391)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 28.39055,
+      "label": "curve-dex/MSUSD-FXUSD: APY 28.4% (TVL $1,169,997)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 28.31602,
+      "label": "morpho-blue/ALPHAFOREXV2: APY 28.3% (TVL $1,169,768)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 29.79232,
+      "label": "uniswap-v4/WBTC-USDC: APY 29.8% (TVL $1,151,220)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 27.98307,
+      "label": "aerodrome-slipstream/CBBTC-ZEN: APY 28.0% (TVL $1,102,497)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 37.61428,
+      "label": "uniswap-v4/ETH-CFG: APY 37.6% (TVL $1,100,551)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 46.87574,
+      "label": "uniswap-v4/UNI-AAVE: APY 46.9% (TVL $1,009,330)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 100.47466,
+      "label": "beefy/WBTC-USDC: APY 100.5% (TVL $970,417)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 75.3153,
+      "label": "uniswap-v3/PENDLE-WETH: APY 75.3% (TVL $964,367)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 74.47725,
+      "label": "uniswap-v3/G-USDC: APY 74.5% (TVL $957,361)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 22.27273,
+      "label": "uniswap-v4/1INCH-AAVE: APY 22.3% (TVL $935,340)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 75.94004,
+      "label": "uniswap-v3/WTAO-USDC: APY 75.9% (TVL $933,421)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 26.35712,
+      "label": "uniswap-v4/ETH-WOCT: APY 26.4% (TVL $931,598)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 88.88458,
+      "label": "beefy/CBBTC-USDC: APY 88.9% (TVL $927,745)"
+    },
+    {
+      "source": "DeFi Yields",
+      "icon": "\ud83c\udfe6",
+      "direction": "\ud83d\udd3a",
+      "value": 86.88006,
+      "label": "everything/EV-USD\u20ae0: APY 86.9% (TVL $920,021)"
+    }
+  ],
+  "summary": {
+    "matched_jobs": {
+      "total": 0,
+      "hot": 0,
+      "strong": 0,
+      "top_jobs": []
+    },
+    "top_defi_pools": [
+      {
+        "pool": "uniswap-v3/WETH-USDC",
+        "chain": "Base",
+        "apy": "164.7",
+        "tvl": "$96,568,757"
+      },
+      {
+        "pool": "uniswap-v4/WBTC-USDT",
+        "chain": "Ethereum",
+        "apy": "65.2",
+        "tvl": "$10,946,350"
+      },
+      {
+        "pool": "uniswap-v3/WETH-USDT",
+        "chain": "Ethereum",
+        "apy": "55.6",
+        "tvl": "$77,039,129"
+      },
+      {
+        "pool": "uniswap-v4/USDC-CBBTC",
+        "chain": "Ethereum",
+        "apy": "55.4",
+        "tvl": "$10,719,606"
+      },
+      {
+        "pool": "uniswap-v3/WETH-USDT",
+        "chain": "Ethereum",
+        "apy": "48.4",
+        "tvl": "$12,284,153"
+      }
+    ],
+    "stock_portfolio": [
+      {
+        "symbol": "AAPL",
+        "price": "281.74",
+        "change_pct": "-5.14"
+      },
+      {
+        "symbol": "MSFT",
+        "price": "368.57",
+        "change_pct": "0.33"
+      },
+      {
+        "symbol": "GOOGL",
+        "price": "353.65",
+        "change_pct": "1.14"
+      },
+      {
+        "symbol": "AMZN",
+        "price": "240.14",
+        "change_pct": "3.16"
+      },
+      {
+        "symbol": "NVDA",
+        "price": "194.97",
+        "change_pct": "-6.56"
+      },
+      {
+        "symbol": "META",
+        "price": "562.6",
+        "change_pct": "-0.22"
+      },
+      {
+        "symbol": "TSLA",
+        "price": "411.84",
+        "change_pct": "1.68"
+      },
+      {
+        "symbol": "AMD",
+        "price": "539.49",
+        "change_pct": "-2.2"
+      },
+      {
+        "symbol": "CRM",
+        "price": "157.93",
+        "change_pct": "5.2"
+      },
+      {
+        "symbol": "PLTR",
+        "price": "115.7",
+        "change_pct": "-3.18"
+      }
+    ],
+    "money_opportunities": {
+      "total": 0,
+      "high_value": 0,
+      "by_category": {},
+      "top_opportunities": []
+    }
+  },
+  "stats": {
+    "total_sources": 11,
+    "active_sources": 7,
+    "total_alerts": 105,
+    "total_data_points": 2421
+  }
+}

@@ -1,0 +1,1280 @@
+{
+  "meta": {
+    "title": "Solo Empire — Interactive Knowledge Atlas",
+    "description": "Structured inventory of 45 knowledge domains showcasing breadth and depth of the Solo Empire personal operating system.",
+    "generated": "2026-06-27",
+    "totalDomains": 45,
+    "totalFiles": 21358,
+    "source": "domains/"
+  },
+  "categories": [
+    {
+      "id": "tech-engineering",
+      "label": "Tech & Engineering",
+      "icon": "cpu",
+      "color": "#3B82F6",
+      "domains": [
+        "dev",
+        "ai",
+        "engineering",
+        "network",
+        "science",
+        "math"
+      ]
+    },
+    {
+      "id": "business-finance",
+      "label": "Business & Finance",
+      "icon": "trending-up",
+      "color": "#10B981",
+      "domains": [
+        "finance",
+        "economics",
+        "marketing",
+        "sales",
+        "operations",
+        "strategy"
+      ]
+    },
+    {
+      "id": "creative-design",
+      "label": "Creative & Design",
+      "icon": "palette",
+      "color": "#F59E0B",
+      "domains": [
+        "design",
+        "creative",
+        "architecture",
+        "fashion",
+        "music",
+        "games"
+      ]
+    },
+    {
+      "id": "life-health",
+      "label": "Life & Health",
+      "icon": "heart",
+      "color": "#EF4444",
+      "domains": [
+        "health",
+        "medicine",
+        "cooking",
+        "agriculture",
+        "sports",
+        "life"
+      ]
+    },
+    {
+      "id": "professional",
+      "label": "Professional & Work",
+      "icon": "briefcase",
+      "color": "#8B5CF6",
+      "domains": [
+        "work",
+        "leadership",
+        "education",
+        "research",
+        "learning",
+        "communication"
+      ]
+    },
+    {
+      "id": "legal-governance",
+      "label": "Legal & Governance",
+      "icon": "scale",
+      "color": "#6366F1",
+      "domains": [
+        "law",
+        "legal"
+      ]
+    },
+    {
+      "id": "humanities",
+      "label": "Humanities & Social",
+      "icon": "book-open",
+      "color": "#EC4899",
+      "domains": [
+        "philosophy",
+        "psychology",
+        "history",
+        "religion",
+        "languages",
+        "social-science"
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "label": "Infrastructure & World",
+      "icon": "globe",
+      "color": "#14B8A6",
+      "domains": [
+        "energy",
+        "environment",
+        "transport",
+        "real-estate",
+        "military",
+        "media",
+        "travel"
+      ]
+    }
+  ],
+  "domains": [
+    {
+      "id": "dev",
+      "name": "Development",
+      "category": "tech-engineering",
+      "fileCount": 20890,
+      "depth": "expert",
+      "description": "Full-stack development hub — apps, scraping platforms, infrastructure, AI services, client work, and products.",
+      "subdirectories": [
+        {
+          "name": "book-apps",
+          "files": 10192,
+          "description": "17 app projects spanning AI, blockchain, VR/XR, games, IoT, productivity, social"
+        },
+        {
+          "name": "book-work",
+          "files": 8616,
+          "description": "Professional engagements — Nexatech, Fastwork, Cocofriday"
+        },
+        {
+          "name": "book-products",
+          "files": 1206,
+          "description": "Product lines — marketing assets, trading tools, reading apps"
+        },
+        {
+          "name": "book-infra",
+          "files": 247,
+          "description": "Infrastructure — Docker, backup systems, notification service, Postman"
+        },
+        {
+          "name": "book-docs",
+          "files": 175,
+          "description": "Technical documentation and architecture docs"
+        },
+        {
+          "name": "book-scraping",
+          "files": 159,
+          "description": "MCP-ready multi-engine web scraping platform (Python)"
+        },
+        {
+          "name": "book-client",
+          "files": 139,
+          "description": "Client deliverables and project files"
+        },
+        {
+          "name": "book-ai",
+          "files": 79,
+          "description": "AI services catalog and test suites"
+        },
+        {
+          "name": "book-other",
+          "files": 68,
+          "description": "Miscellaneous development experiments"
+        },
+        {
+          "name": "book-research",
+          "files": 4,
+          "description": "R&D research notes"
+        }
+      ],
+      "notableArtifacts": [
+        "Multi-engine scraping platform with Firecrawl + Jina adapters",
+        "Notification service (Go binary)",
+        "17 app projects across diverse verticals",
+        "Docker infrastructure and backup systems",
+        "AI service catalog with MCP integration"
+      ],
+      "integrations": [
+        "GitHub",
+        "Vercel",
+        "Cloudflare",
+        "Docker",
+        "MCP Servers"
+      ],
+      "portfolioUrl": "https://github.com/bookchaowalit"
+    },
+    {
+      "id": "ai",
+      "name": "Artificial Intelligence",
+      "category": "tech-engineering",
+      "fileCount": 13,
+      "depth": "intermediate",
+      "description": "AI strategy, agents, prompt engineering, models, and workflow automation.",
+      "subdirectories": [
+        {
+          "name": "applications",
+          "files": 6,
+          "description": "Applied AI use cases and implementations"
+        },
+        {
+          "name": "data",
+          "files": 6,
+          "description": "AI training data, benchmarks, datasets"
+        }
+      ],
+      "notableArtifacts": [
+        "AI applications portfolio",
+        "Prompt engineering frameworks"
+      ],
+      "integrations": [
+        "OpenAI",
+        "MCP Agents"
+      ],
+      "portfolioUrl": "https://github.com/bookchaowalit?tab=repositories&q=ai"
+    },
+    {
+      "id": "finance",
+      "name": "Finance",
+      "category": "business-finance",
+      "fileCount": 28,
+      "depth": "advanced",
+      "description": "Financial management — crypto/stock market data, budgets, trading, tax, and invoicing.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 18,
+          "description": "Live market data — crypto, stocks, DeFi yields, exchange rates, transactions"
+        }
+      ],
+      "notableArtifacts": [
+        "Crypto price history + trending scraper",
+        "DeFi yields tracker with historical data",
+        "Exchange rate monitor",
+        "Full transaction and tax ledger"
+      ],
+      "integrations": [
+        "Binance TH",
+        "Polymarket",
+        "Stripe"
+      ],
+      "portfolioUrl": "https://github.com/bookchaowalit/booktrading"
+    },
+    {
+      "id": "sales",
+      "name": "Sales",
+      "category": "business-finance",
+      "fileCount": 41,
+      "depth": "advanced",
+      "description": "Revenue generation — freelance gigs (Fiverr), job matching, lead pipeline, proposals.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 9,
+          "description": "Job postings, leads, matched jobs, pipeline, proposals CSVs"
+        },
+        {
+          "name": "gigs",
+          "files": 5,
+          "description": "Fiverr gig definitions — Fullstack Dev, AI Integration, Web Scraping"
+        },
+        {
+          "name": "scripts",
+          "files": 5,
+          "description": "Sales scripts and outreach templates"
+        }
+      ],
+      "notableArtifacts": [
+        "Fiverr profile with 3 gig definitions",
+        "Automated job matching pipeline",
+        "Lead tracking and proposal system"
+      ],
+      "integrations": [
+        "Landing.jobs",
+        "JobsDB",
+        "JobBKK",
+        "Firecrawl"
+      ],
+      "portfolioUrl": "https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc",
+      "portfolioUrl2": "https://fastwork.co/user/bookchao"
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "category": "professional",
+      "fileCount": 28,
+      "depth": "advanced",
+      "description": "Content creation, brand voice, LinkedIn posts, social media, newsletters, and public writing.",
+      "subdirectories": [
+        {
+          "name": "writing",
+          "files": 18,
+          "description": "LinkedIn posts, content strategies, RAG article, solo-empire series"
+        },
+        {
+          "name": "templates",
+          "files": 3,
+          "description": "Reusable communication templates"
+        },
+        {
+          "name": "data",
+          "files": 2,
+          "description": "Communication analytics and tracking"
+        }
+      ],
+      "notableArtifacts": [
+        "LinkedIn content calendar (Q3 2026)",
+        "RAG Systems 101 article",
+        "Solo Empire series plan",
+        "Facebook page strategies (AI for Thai SME, Web Dev)",
+        "LINE OA funnel design"
+      ],
+      "integrations": [
+        "LinkedIn",
+        "Facebook",
+        "LINE"
+      ],
+      "portfolioUrl": "https://twitter.com/bookchaowalit",
+      "portfolioUrl2": "https://dev.to/bookchaowalit"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "category": "business-finance",
+      "fileCount": 16,
+      "depth": "intermediate",
+      "description": "SEO tracking, content marketing, campaign management, and social media strategy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 7,
+          "description": "SEO rankings, analytics, content calendar, keyword tracking"
+        },
+        {
+          "name": "drafts",
+          "files": 5,
+          "description": "Blog posts, Facebook/LinkedIn/TikTok/Twitter content drafts"
+        }
+      ],
+      "notableArtifacts": [
+        "SEO ranking tracker with historical data",
+        "Multi-platform content drafts (blog, LinkedIn, TikTok, Twitter)",
+        "Solopreneur OS campaign concept"
+      ],
+      "integrations": [
+        "Google Analytics",
+        "Cloudflare"
+      ],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/",
+      "portfolioUrl2": "https://fastwork.co/user/bookchao"
+    },
+    {
+      "id": "strategy",
+      "name": "Strategy",
+      "category": "business-finance",
+      "fileCount": 14,
+      "depth": "intermediate",
+      "description": "Business models, competitive analysis, SWOT, roadmaps, and market opportunities.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 4,
+          "description": "Goals, markets, roadmaps, SWOT data CSVs"
+        },
+        {
+          "name": "opportunities",
+          "files": 3,
+          "description": "Identified market opportunities"
+        },
+        {
+          "name": "reviews",
+          "files": 2,
+          "description": "Strategic review documents"
+        }
+      ],
+      "notableArtifacts": [
+        "SWOT analysis framework",
+        "Business model canvas",
+        "Strategic roadmap system"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "category": "business-finance",
+      "fileCount": 13,
+      "depth": "intermediate",
+      "description": "SOPs, project management, QA processes, vendor management, and workflow automation.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Operations tracking data"
+        },
+        {
+          "name": "projects",
+          "files": 3,
+          "description": "Active project definitions"
+        },
+        {
+          "name": "sops",
+          "files": 1,
+          "description": "Standard operating procedures"
+        }
+      ],
+      "notableArtifacts": [
+        "SOP documentation",
+        "Onboarding workflows",
+        "QA processes"
+      ],
+      "integrations": [
+        "Leantime"
+      ],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "category": "creative-design",
+      "fileCount": 6,
+      "depth": "intermediate",
+      "description": "UI/UX design systems, brand identity, typography, icons, wireframes, and component libraries.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Design system data and references"
+        },
+        {
+          "name": "tools",
+          "files": 1,
+          "description": "Design tooling configurations"
+        }
+      ],
+      "notableArtifacts": [
+        "Design system framework",
+        "Brand identity guidelines",
+        "Component library structure"
+      ],
+      "integrations": [
+        "Canva"
+      ],
+      "portfolioUrl": "https://bookchaowalit.com",
+      "portfolioUrl2": "https://fastwork.co/user/bookchao"
+    },
+    {
+      "id": "creative",
+      "name": "Creative",
+      "category": "creative-design",
+      "fileCount": 6,
+      "depth": "intermediate",
+      "description": "Multi-disciplinary creative work — perfumery, photography, music, visual art, architecture, writing.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Creative project data"
+        },
+        {
+          "name": "perfumery",
+          "files": 2,
+          "description": "Perfumery formulations and content calendar"
+        }
+      ],
+      "notableArtifacts": [
+        "Perfumery content calendar",
+        "Multi-medium creative portfolio structure",
+        "12 creative discipline subfolders"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com",
+      "portfolioUrl2": "https://fastwork.co/user/bookchao"
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "category": "creative-design",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Architectural knowledge — residential, commercial, historical, landscape, and urban design.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Buildings, concepts, styles CSV databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Architectural styles database",
+        "Building catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com"
+    },
+    {
+      "id": "fashion",
+      "name": "Fashion",
+      "category": "creative-design",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Fashion industry — Thai fashion, luxury, streetwear, sustainable textiles, and design.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Brands, trends, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Thai fashion catalog",
+        "Brand tracking database"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com"
+    },
+    {
+      "id": "music",
+      "name": "Music",
+      "category": "creative-design",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Music theory, production, instruments, genres, and practice logs.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Listening logs, repertoire, concepts"
+        }
+      ],
+      "notableArtifacts": [
+        "Repertoire tracker",
+        "Listening history"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com"
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "category": "creative-design",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Game design, board games, esports, game theory, and video games.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Games catalog, design patterns, concepts"
+        }
+      ],
+      "notableArtifacts": [
+        "Game design framework",
+        "Board games catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://github.com/bookchaowalit?tab=repositories&q=games"
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "category": "life-health",
+      "fileCount": 8,
+      "depth": "intermediate",
+      "description": "Personal health OS — Ironman training, body metrics, nutrition tracking, sleep, and mental health.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 5,
+          "description": "Body metrics, workouts, nutrition, goals CSVs"
+        }
+      ],
+      "notableArtifacts": [
+        "Ironman training plan",
+        "Body metrics tracker",
+        "Weekly health reports"
+      ],
+      "integrations": [
+        "Strava"
+      ],
+      "portfolioUrl": "https://www.strava.com/athletes/bookchaowalit"
+    },
+    {
+      "id": "medicine",
+      "name": "Medicine",
+      "category": "life-health",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Medical knowledge — anatomy, diagnostics, disease, pharmacology, physiology, public health.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Diseases, systems, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Medical knowledge base"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking",
+      "category": "life-health",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Culinary arts — recipes, cuisines, nutrition, meal planning, and techniques.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Recipes, ingredients, nutrition CSVs"
+        }
+      ],
+      "notableArtifacts": [
+        "Recipe database",
+        "Ingredient catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com"
+    },
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "category": "life-health",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Agricultural knowledge — farming, aquaculture, horticulture, permaculture, food systems.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Crops, techniques, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Crop catalog",
+        "Permaculture notes"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "sports",
+      "name": "Sports",
+      "category": "life-health",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Sports science — athletics, fitness, training, individual and team sports.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Training logs, sports catalog, concepts"
+        }
+      ],
+      "notableArtifacts": [
+        "Training program database"
+      ],
+      "integrations": [
+        "Strava"
+      ],
+      "portfolioUrl": "https://www.strava.com/athletes/bookchaowalit"
+    },
+    {
+      "id": "life",
+      "name": "Life",
+      "category": "life-health",
+      "fileCount": 7,
+      "depth": "intermediate",
+      "description": "Life management — career, longevity, relationships, financial planning, legacy, and self-development.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 2,
+          "description": "Life tracking data"
+        }
+      ],
+      "notableArtifacts": [
+        "Longevity protocol",
+        "Career development framework",
+        "Legacy planning tools"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "work",
+      "name": "Work",
+      "category": "professional",
+      "fileCount": 7,
+      "depth": "intermediate",
+      "description": "Professional work hub — client management, daily logs, Jira/Leantime integration, project reports.",
+      "subdirectories": [
+        {
+          "name": "clients",
+          "files": 2,
+          "description": "Client profiles and agreements"
+        },
+        {
+          "name": "daily-logs",
+          "files": 2,
+          "description": "Daily work logs"
+        },
+        {
+          "name": "projects",
+          "files": 2,
+          "description": "Project definitions"
+        },
+        {
+          "name": "jira-export",
+          "files": 2,
+          "description": "Jira ticket exports"
+        },
+        {
+          "name": "leantime",
+          "files": 2,
+          "description": "Leantime project sync data"
+        }
+      ],
+      "notableArtifacts": [
+        "Nexatech project tracking",
+        "Jira export pipeline",
+        "Leantime MCP integration"
+      ],
+      "integrations": [
+        "Leantime",
+        "Jira",
+        "GitHub"
+      ],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "leadership",
+      "name": "Leadership",
+      "category": "professional",
+      "fileCount": 5,
+      "depth": "intermediate",
+      "description": "Leadership frameworks — decision-making, culture, hiring, feedback, management principles.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 2,
+          "description": "Feedback and decisions tracking"
+        }
+      ],
+      "notableArtifacts": [
+        "Decision frameworks document",
+        "Leadership principles"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "category": "professional",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Education theory — pedagogy, curriculum design, assessment, EdTech, learning theory.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Courses, theories, resources databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Curriculum framework",
+        "Learning resources catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://dev.to/bookchaowalit"
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "category": "professional",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Research methodology — papers, analysis, synthesis, sources, and data collection.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Papers, sources, insights databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Research methodology framework",
+        "Papers database"
+      ],
+      "integrations": [
+        "Firecrawl Research"
+      ],
+      "portfolioUrl": "https://github.com/bookchaowalit"
+    },
+    {
+      "id": "learning",
+      "name": "Learning",
+      "category": "professional",
+      "fileCount": 6,
+      "depth": "intermediate",
+      "description": "Personal learning OS — courses, certifications, book notes, study plans, and resource tracking.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 2,
+          "description": "Certifications and courses tracking CSVs"
+        }
+      ],
+      "notableArtifacts": [
+        "Advanced TypeScript notes",
+        "Course creation framework",
+        "Certification tracker"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://dev.to/bookchaowalit"
+    },
+    {
+      "id": "economics",
+      "name": "Economics",
+      "category": "business-finance",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Economic knowledge — macro/micro, behavioral economics, markets, monetary policy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Books, market analysis, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Market analysis database"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "law",
+      "name": "Law",
+      "category": "legal-governance",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Legal knowledge — business law, contracts, IP, international law, Thai law.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Contracts, cases, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Legal concepts database",
+        "Case catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "legal",
+      "name": "Legal (Operational)",
+      "category": "legal-governance",
+      "fileCount": 7,
+      "depth": "intermediate",
+      "description": "Operational legal — contracts, NDAs, service agreements, IP checklists, compliance.",
+      "subdirectories": [
+        {
+          "name": "templates",
+          "files": 3,
+          "description": "Service agreement, NDA, scope-of-work templates"
+        },
+        {
+          "name": "data",
+          "files": 2,
+          "description": "Contracts tracking CSV"
+        }
+      ],
+      "notableArtifacts": [
+        "Service agreement template",
+        "NDA template",
+        "IP checklist"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "philosophy",
+      "name": "Philosophy",
+      "category": "humanities",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Philosophical knowledge — epistemology, ethics, logic, metaphysics, political philosophy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Books, thinkers, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Thinkers database",
+        "Philosophical concepts catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "psychology",
+      "name": "Psychology",
+      "category": "humanities",
+      "fileCount": 5,
+      "depth": "intermediate",
+      "description": "Psychological frameworks — behavioral economics, cognitive biases, persuasion, habits, motivation.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 4,
+          "description": "Biases, habits, persuasion principles, triggers databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Persuasion frameworks document",
+        "Cognitive biases database",
+        "Habit tracking system"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "history",
+      "name": "History",
+      "category": "humanities",
+      "fileCount": 5,
+      "depth": "intermediate",
+      "description": "Historical knowledge — ancient to contemporary, Thai history, timelines, civilizations, patterns.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 4,
+          "description": "Books, eras, patterns, civilizations databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Civilizations database",
+        "Historical patterns catalog",
+        "Thai history section"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "religion",
+      "name": "Religion",
+      "category": "humanities",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Comparative religion — Buddhism, Christianity, Hinduism, Islam, Judaism, Eastern traditions.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Texts, traditions, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Comparative religion database"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "languages",
+      "name": "Languages",
+      "category": "humanities",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Language learning — Thai, English, Japanese, Mandarin, methods, and practice tracking.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Progress, resources, vocabulary databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Language progress tracker",
+        "Vocabulary builder"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "social-science",
+      "name": "Social Science",
+      "category": "humanities",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Social sciences — anthropology, sociology, geography, linguistics, political science.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Analysis, thinkers, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Social analysis framework"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "energy",
+      "name": "Energy",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Energy sector — renewables, fossil fuels, nuclear, storage, energy markets, policy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Sources, markets, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Energy sources catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "environment",
+      "name": "Environment",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Environmental knowledge — climate, conservation, ecology, sustainability, policy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Footprint, ecosystems, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Ecological footprint tracker"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "transport",
+      "name": "Transport",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Transportation — automotive, aviation, maritime, rail, logistics, mobility.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Industry, modes, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Transport modes catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "real-estate",
+      "name": "Real Estate",
+      "category": "infrastructure",
+      "fileCount": 7,
+      "depth": "intermediate",
+      "description": "Property — Thai property market, investment, REITs, commercial/residential, development.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 4,
+          "description": "Property history, listings, markets databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Property listings tracker",
+        "Thai property market data",
+        "REITs analysis"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "military",
+      "name": "Military",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Military knowledge — strategy, geopolitics, history, special forces, weapons, leadership.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Strategists, concepts, battles databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Military strategists database"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "media",
+      "name": "Media",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Media landscape — broadcasting, digital media, documentary, journalism, media literacy.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Outlets, concepts, stories databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Media outlets catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://medium.com/@bookchaowalit"
+    },
+    {
+      "id": "travel",
+      "name": "Travel",
+      "category": "infrastructure",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Travel — destinations, digital nomad, Thai travel, tourism, cultures, logistics.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Trips, destinations, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Trip planner database",
+        "Destination catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://bookchaowalit.com"
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering",
+      "category": "tech-engineering",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Engineering disciplines — civil, electrical, mechanical, materials, systems.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Topics, projects, formulas databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Engineering formulas catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://github.com/bookchaowalit?tab=repositories"
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "category": "tech-engineering",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Professional network — communities, contacts, events, meetups, outreach, relationships.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Contacts, events, outreach databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Contacts database",
+        "Events tracker"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+    },
+    {
+      "id": "science",
+      "name": "Science",
+      "category": "tech-engineering",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Scientific knowledge — physics, chemistry, biology, astronomy, earth science.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Topics, books, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Science topics catalog"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://github.com/bookchaowalit?tab=repositories"
+    },
+    {
+      "id": "math",
+      "name": "Mathematics",
+      "category": "tech-engineering",
+      "fileCount": 4,
+      "depth": "foundational",
+      "description": "Mathematics — algebra, calculus, statistics, logic, applied math.",
+      "subdirectories": [
+        {
+          "name": "data",
+          "files": 3,
+          "description": "Topics, problems, concepts databases"
+        }
+      ],
+      "notableArtifacts": [
+        "Math problems database"
+      ],
+      "integrations": [],
+      "portfolioUrl": "https://github.com/bookchaowalit?tab=repositories"
+    }
+  ],
+  "depthLegend": {
+    "expert": "1000+ files — active production systems, live data, deployed artifacts",
+    "advanced": "15-100 files — structured data, active tracking, operational artifacts",
+    "intermediate": "5-14 files — frameworks, templates, curated references",
+    "foundational": "4 files — knowledge scaffold with categorized CSV databases"
+  },
+  "summaryStats": {
+    "expertDomains": 1,
+    "advancedDomains": 7,
+    "intermediateDomains": 15,
+    "foundationalDomains": 22,
+    "totalSubdirectories": 310,
+    "domainsWithDataCSVs": 45,
+    "domainsWithLiveIntegrations": 12,
+    "topIntegrations": [
+      "GitHub",
+      "Vercel",
+      "Cloudflare",
+      "Binance TH",
+      "Google",
+      "Stripe",
+      "Leantime",
+      "Firecrawl",
+      "Telegram",
+      "LinkedIn",
+      "Polymarket",
+      "Strava"
+    ]
+  }
+}

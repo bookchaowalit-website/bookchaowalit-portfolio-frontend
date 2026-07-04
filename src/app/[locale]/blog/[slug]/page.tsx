@@ -8,7 +8,63 @@ import { Link } from "@/i18n/routing";
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ShareButton } from "@/components/share-button";
+import { ReadingProgressBar } from "@/components/reading-progress-bar";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { BreadcrumbJsonLd } from "@/components/breadcrumb-json-ld";
+import { TableOfContents } from "@/components/table-of-contents";
+import { extractHeadings } from "@/lib/toc";
 import { getTranslations } from 'next-intl/server';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+
+async function RelatedPosts({ currentSlug, currentTags, locale }: { currentSlug: string; currentTags: string[]; locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'blog' });
+  const allPosts = getAllBlogPosts();
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== currentSlug)
+    .map((p) => ({
+      ...p,
+      relevance: p.tags.filter((t) => currentTags.includes(t)).length,
+    }))
+    .sort((a, b) => b.relevance - a.relevance)
+    .slice(0, 3);
+
+  if (relatedPosts.length === 0) return null;
+
+  return (
+    <section className="mb-12">
+      <h2 className="text-2xl font-bold mb-6">
+        {t('relatedPosts')}
+      </h2>
+      <div className="grid gap-6 md:grid-cols-3">
+        {relatedPosts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}` as "/blog"}
+            className="group rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+          >
+            <div className="flex flex-wrap gap-1 mb-3">
+              {post.tags.slice(0, 2).map((tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            <h3 className="font-semibold mb-2 group-hover:underline line-clamp-2">
+              {post.title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+              {post.excerpt}
+            </p>
+            <div className="flex items-center gap-1 text-sm text-primary">
+              <span>{t('readNext')}</span>
+              <ArrowRight className="size-3.5" />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -109,10 +165,87 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   }
 
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+  const currentUrl = `${baseUrl}/${locale === 'en' ? '' : locale + '/'}blog/${slug}`;
+
+  // Extract headings for table of contents
+  const headings = extractHeadings(post.content);
+
+  // MDX components with heading IDs for scroll spy
+  const mdxComponents = {
+    h2: ({ children, ...props }: { children?: React.ReactNode }) => {
+      const text = String(children || '');
+      const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+      return <h2 id={id} {...props}>{children}</h2>;
+    },
+    h3: ({ children, ...props }: { children?: React.ReactNode }) => {
+      const text = String(children || '');
+      const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+      return <h3 id={id} {...props}>{children}</h3>;
+    },
+  };
+
+  // Strip MDX/markdown to plain text for articleBody (truncated to 5000 chars)
+  const plainText = post.content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[([^\]]*)\]\(.*?\)/g, '$1')
+    .replace(/#{1,6}\s*/g, '')
+    .replace(/[*_~]{1,3}/g, '')
+    .replace(/>\s*/g, '')
+    .replace(/\n{2,}/g, '\n')
+    .trim()
+    .slice(0, 5000);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    articleBody: plainText,
+    datePublished: post.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+      url: baseUrl,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Chaowalit Greepoke',
+      url: baseUrl,
+    },
+    url: currentUrl,
+    image: post.image || `${baseUrl}/og-blog-post.jpg`,
+    keywords: post.tags.join(', '),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': currentUrl,
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.prose p:first-child', 'h2'],
+    },
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <ReadingProgressBar />
+      <BreadcrumbJsonLd items={[
+        { name: 'Home', url: baseUrl },
+        { name: 'Blog', url: `${baseUrl}/${locale}/blog` },
+        { name: post.title, url: currentUrl },
+      ]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* Breadcrumb */}
+      <BreadcrumbNav items={[
+        { name: t('title'), href: '/blog' },
+        { name: post.title },
+      ]} />
+
       {/* Back button */}
       <div className="mb-8">
         <Button variant="ghost" asChild>
@@ -173,12 +306,29 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         </div>
       </header>
 
-      {/* Article content */}
-      <article className="prose prose-lg max-w-none">
-        <MDXRemote source={post.content} />
-      </article>
+      {/* Article content with TOC sidebar */}
+      <div className="flex gap-8">
+        <article className="prose prose-lg max-w-none flex-1 min-w-0">
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </article>
+        {headings.length >= 3 && (
+          <div className="hidden lg:block">
+            <TableOfContents headings={headings} />
+          </div>
+        )}
+      </div>
+
+      {/* Mobile TOC */}
+      {headings.length >= 3 && (
+        <div className="lg:hidden">
+          <TableOfContents headings={headings} />
+        </div>
+      )}
 
       <Separator className="my-12" />
+
+      {/* Related Posts */}
+      <RelatedPosts currentSlug={slug} currentTags={post.tags} locale={locale} />
 
       {/* Author bio */}
       <section className="bg-muted/50 p-8">
@@ -206,14 +356,42 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
 
       {/* Navigation to other posts */}
       <section className="mt-12">
-        <div className="flex justify-between items-center">
-          <Button variant="ghost" asChild>
-            <Link href="/blog">{t("allPosts")}</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/projects">{t("viewProjects")}</Link>
-          </Button>
-        </div>
+        {(() => {
+          const allPosts = getAllBlogPosts();
+          const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+          const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+          const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+          return (
+            <div className="flex justify-between items-center gap-4">
+              {prevPost ? (
+                <Button variant="ghost" asChild className="gap-2">
+                  <Link href={`/blog/${prevPost.slug}` as "/blog"}>
+                    <ArrowLeft className="size-4" />
+                    <span className="hidden sm:inline">{t("previousPost")}</span>
+                    <span className="sm:hidden truncate max-w-[120px]">{prevPost.title}</span>
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="ghost" asChild>
+                  <Link href="/blog">{t("allPosts")}</Link>
+                </Button>
+              )}
+              {nextPost ? (
+                <Button variant="outline" asChild className="gap-2">
+                  <Link href={`/blog/${nextPost.slug}` as "/blog"}>
+                    <span className="hidden sm:inline">{t("nextPost")}</span>
+                    <span className="sm:hidden truncate max-w-[120px]">{nextPost.title}</span>
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="outline" asChild>
+                  <Link href="/projects">{t("viewProjects")}</Link>
+                </Button>
+              )}
+            </div>
+          );
+        })()}
       </section>
     </div>
   );

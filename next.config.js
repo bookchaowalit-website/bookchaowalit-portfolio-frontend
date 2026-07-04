@@ -1,7 +1,23 @@
 import createMDX from '@next/mdx'
 import createNextIntlPlugin from 'next-intl/plugin';
+import bundleAnalyzer from '@next/bundle-analyzer';
+import { withSentryConfig } from '@sentry/nextjs';
+import withSerwistInit from '@serwist/next';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+const withSerwist = withSerwistInit({
+  swUrl: '/sw.js',
+  swDest: 'public/sw.js',
+  swSrc: 'src/app/sw.ts',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  scope: '/',
+});
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -75,6 +91,27 @@ const nextConfig = {
     ],
   },
   
+  // Redirect non-localized URLs to default locale
+  async redirects() {
+    return [
+      { source: '/about', destination: '/en/about', permanent: false },
+      { source: '/about/:path*', destination: '/en/about/:path*', permanent: false },
+      { source: '/projects', destination: '/en/projects', permanent: false },
+      { source: '/projects/:path*', destination: '/en/projects/:path*', permanent: false },
+      { source: '/blog', destination: '/en/blog', permanent: false },
+      { source: '/blog/:path*', destination: '/en/blog/:path*', permanent: false },
+      { source: '/contact', destination: '/en/contact', permanent: false },
+      { source: '/atlas', destination: '/en/atlas', permanent: false },
+      { source: '/privacy', destination: '/en/privacy', permanent: false },
+      { source: '/privacy/:path*', destination: '/en/privacy/:path*', permanent: false },
+      { source: '/testimonials', destination: '/en/testimonials', permanent: false },
+      { source: '/uses', destination: '/en/uses', permanent: false },
+      { source: '/now', destination: '/en/now', permanent: false },
+      { source: '/colophon', destination: '/en/colophon', permanent: false },
+      { source: '/live-systems', destination: '/en/live-systems', permanent: false },
+    ];
+  },
+
   // Headers for caching and performance
   async headers() {
     return [
@@ -120,6 +157,23 @@ const nextConfig = {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
         ],
       },
     ];
@@ -130,5 +184,25 @@ const withMDX = createMDX({
   // Add markdown plugins here, as desired
 })
 
-// Merge MDX config with Next.js config and next-intl
-export default withNextIntl(withMDX(nextConfig))
+// Merge MDX config with Next.js config, next-intl, bundle analyzer, and Serwist (PWA)
+const bundledConfig = withSerwist(withBundleAnalyzer(withNextIntl(withMDX(nextConfig))))
+
+// Wrap with Sentry
+export default withSentryConfig(bundledConfig, {
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options
+
+  // Suppresses source map upload logs
+  silent: !process.env.CI,
+
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+
+  // Set to false to disable source map uploads
+  sourcemaps: {
+    disable: process.env.NODE_ENV !== 'production',
+  },
+
+  // Hides source maps from generated client bundles
+  hideSourceMaps: true,
+})// redeploy 2026-07-02

@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld';
+import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'),
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     robots: 'index, follow',
@@ -33,15 +36,53 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'x-default': '/en/privacy'
       }
     },
+    openGraph: {
+      title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
+      description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+      type: 'website',
+      locale: locale,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'}/${locale}/privacy`,
+      siteName: 'Chaowalit Greepoke Portfolio',
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Privacy Policy' }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
+      description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
+      creator: '@bookchaowalit',
+      images: ['/og-image.jpg']
+    }
   };
 }
 
-export default function PrivacyPage() {
-  const t = useTranslations('privacy');
+export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'privacy' });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+  const breadcrumbItems = [
+    { name: 'Home', url: baseUrl },
+    { name: 'Privacy Policy', url: `${baseUrl}/${locale}/privacy` },
+  ];
 
   return (
     <div className="min-h-screen bg-background py-20">
       <div className="container mx-auto px-4 max-w-4xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: locale === 'th' ? 'นโยบายความเป็นส่วนตัว' : 'Privacy Policy',
+            url: `${baseUrl}/${locale}/privacy`,
+            description: locale === 'th'
+              ? 'นโยบายความเป็นส่วนตัวของเชาวลิต กรีโภค'
+              : 'Privacy policy for Chaowalit Greepoke portfolio and applications.',
+          }) }}
+        />
+        <BreadcrumbJsonLd items={breadcrumbItems} />
+        <BreadcrumbNav items={[
+          { name: locale === 'th' ? 'นโยบายความเป็นส่วนตัว' : 'Privacy Policy' },
+        ]} />
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
             {t('title')}

@@ -102,7 +102,7 @@ export function BusinessSection() {
       >
         <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
           <Button size="lg" asChild>
-            <Link href="/business">
+            <Link href="/projects">
               {t('exploreVenturesButton')}
             </Link>
           </Button>

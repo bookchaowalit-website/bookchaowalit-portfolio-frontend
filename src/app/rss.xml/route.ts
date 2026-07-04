@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/lib/blog';
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
 const BASE_URL = 'https://bookchaowalit.com';
 
 export async function GET() {

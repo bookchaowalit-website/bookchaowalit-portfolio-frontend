@@ -3,6 +3,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useTranslations } from "next-intl";
 import { Pencil } from "lucide-react";
 
 interface Props {
@@ -17,6 +18,7 @@ interface State {
 
 function AnimatedErrorFallback({ error, onReset }: { error: Error | null; onReset: () => void }) {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('common');
   return (
     <div
       role="alert"
@@ -36,19 +38,19 @@ function AnimatedErrorFallback({ error, onReset }: { error: Error | null; onRese
 
         <div className="relative">
           <p className="text-4xl font-[family-name:var(--font-doodle)] text-muted-foreground mb-2">
-            oops!
+            {t('errorTitle')}
           </p>
           <h2 className="text-lg font-[family-name:var(--font-comic)] font-bold text-foreground">
-            Something went wrong <Pencil className="inline w-4 h-4" />
+            {t('errorSubtitle')} <Pencil className="inline w-4 h-4" />
           </h2>
           <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mt-2">
-            {error?.message || "An unexpected error occurred."}
+            {error?.message || t('unexpectedError')}
           </p>
           <button
             onClick={onReset}
             className="mt-4 px-4 py-2 border border-border bg-background hover:bg-muted font-[family-name:var(--font-doodle)] text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            try again →
+            {t('tryAgain')} →
           </button>
         </div>
       </motion.div>

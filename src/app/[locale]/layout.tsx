@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Sarabun, Kalam } from "next/font/google";
 import dynamic from "next/dynamic";
 import "../globals.css";
@@ -6,10 +6,11 @@ import { Navigation } from "@/components/navigation";
 import { PageTransition } from "@/components/page-transition";
 import { Analytics } from '@vercel/analytics/react';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import { loadMessages } from '@/i18n/request';
 import { notFound } from 'next/navigation';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { BackToTop } from '@/components/back-to-top';
 
 const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
   loading: () => null
@@ -51,9 +52,19 @@ const kalam = Kalam({
   preload: false,
 });
 
+export const viewport: Viewport = {
+  themeColor: '#0a0a0a',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com'),
   title: "Chaowalit Greepoke - Portfolio",
-  description: "Tech Generalist - Full-stack Developer, AI Developer & SEO Specialist from Bangkok, specializing in Next.js, React, AI integration, and data analytics",
+  description: "Generalist - Full-stack Developer, AI Developer & SEO Specialist from Bangkok, specializing in Next.js, React, AI integration, and data analytics",
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -66,6 +77,16 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'Chaowalit Greepoke - Blog (English)' },
+        { url: '/rss-th.xml', title: 'เชาวลิต กรีโภค - บทความ (ไทย)' },
+        { url: '/projects-rss.xml', title: 'Chaowalit Greepoke - Projects (English)' },
+        { url: '/projects-rss-th.xml', title: 'เชาวลิต กรีโภค - โปรเจกต์ (ไทย)' },
+      ],
+    },
   },
 };
 
@@ -87,9 +108,8 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
+  // Load messages directly from route params to ensure correct locale
+  const messages = await loadMessages(locale);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -98,8 +118,8 @@ export default async function LocaleLayout({
         "@type": "Person",
         "name": "Chaowalit Greepoke",
         "alternateName": "Book",
-        "description": "Tech Generalist and Solopreneur who enjoys solving problems and building things end-to-end",
-        "jobTitle": "Tech Generalist & Solopreneur",
+        "description": "Generalist and Solopreneur who enjoys solving problems and building things end-to-end",
+        "jobTitle": "Generalist & Solopreneur",
         "url": "https://bookchaowalit.com",
         "image": "https://bookchaowalit.com/profile.webp",
         "address": {
@@ -121,14 +141,21 @@ export default async function LocaleLayout({
         ],
         "sameAs": [
           "https://github.com/bookchaowalit",
-          "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+          "https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/",
+          "https://twitter.com/bookchaowalit",
+          "https://dev.to/bookchaowalit",
+          "https://medium.com/@bookchaowalit",
+          "https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc",
+          "https://fastwork.co/user/bookchao",
+          "https://www.strava.com/athletes/bookchaowalit",
+          "https://bookchaowalit.com"
         ]
       },
       {
         "@type": "WebSite",
         "name": "Chaowalit Greepoke - Portfolio",
         "url": "https://bookchaowalit.com",
-        "description": "Tech Generalist and Solopreneur from Bangkok, Thailand",
+        "description": "Generalist and Solopreneur from Bangkok, Thailand",
         "inLanguage": ["en", "th"],
         "potentialAction": {
           "@type": "SearchAction",
@@ -145,6 +172,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://icon.horse" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -153,12 +184,12 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${sarabun.variable} ${kalam.variable} antialiased ${isThai ? 'font-thai' : ''}`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
           >
-            Skip to content
+            {locale === 'th' ? 'ข้ามไปที่เนื้อหา' : 'Skip to content'}
           </a>
           <Navigation />
           <main id="main-content" className="min-h-screen relative z-10">
@@ -169,6 +200,7 @@ export default async function LocaleLayout({
             </ErrorBoundary>
           </main>
           <Footer />
+          <BackToTop />
           <Analytics mode="production" />
           {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />

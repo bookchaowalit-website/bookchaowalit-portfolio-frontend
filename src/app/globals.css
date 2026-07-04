@@ -419,3 +419,70 @@
 .link-underline-grow:hover::after {
   width: 100%;
 }
+
+/* Print styles */
+@media print {
+  /* Hide navigation elements */
+  nav,
+  header nav,
+  footer,
+  [role="navigation"],
+  .fixed,
+  [aria-label="Section navigation"],
+  [aria-label="Toggle table of contents"],
+  [role="dialog"],
+  [aria-label="Command palette"] {
+    display: none !important;
+  }
+
+  /* Reset layout for content */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  article {
+    max-width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  /* Show links as underlined */
+  a {
+    text-decoration: underline !important;
+    color: #000 !important;
+  }
+
+  /* Page breaks */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  pre, blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Hide interactive/non-essential elements */
+  button,
+  [role="button"],
+  .share-button,
+  .reading-progress-bar,
+  aside {
+    display: none !important;
+  }
+
+  /* Ensure images print */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

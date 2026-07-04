@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   allProjects,
+  categoryMeta,
   type ProjectCategory,
   type AppProject,
   type ProjectStatus,
@@ -22,15 +24,15 @@ import {
 
 const categories: ("all" | ProjectCategory)[] = [
   "all",
-  "tools",
-  "productivity",
-  "content",
-  "creative",
   "business",
+  "marketing",
+  "content",
+  "design",
+  "health",
+  "education",
   "social",
-  "ai-data",
-  "misc",
-  "client-work",
+  "tech",
+  "client",
 ];
 
 const PAGE_SIZE = 24;
@@ -154,9 +156,13 @@ function ProjectCard({
   );
 }
 
-export function ProjectsClient() {
+export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectCategory } = {}) {
   const t = useTranslations("projects");
-  const [activeCategory, setActiveCategory] = useState<"all" | ProjectCategory>("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlCategory = searchParams.get("category") as ProjectCategory | null;
+  const startCategory = initialCategory ?? (urlCategory && Object.keys(categoryMeta).includes(urlCategory) ? urlCategory : "all");
+  const [activeCategory, setActiveCategory] = useState<"all" | ProjectCategory>(startCategory);
   const [activeStatus, setActiveStatus] = useState<"all" | ProjectStatus>("all");
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -262,7 +268,13 @@ export function ProjectsClient() {
   const handleCategoryChange = useCallback((cat: "all" | ProjectCategory) => {
     setActiveCategory(cat);
     setVisibleCount(PAGE_SIZE);
-  }, []);
+    const params = new URLSearchParams();
+    if (cat !== "all") {
+      params.set("category", cat);
+    }
+    const query = params.toString();
+    router.replace((query ? `/projects?${query}` : "/projects") as any);
+  }, [router]);
 
   const handleStatusChange = useCallback((status: "all" | ProjectStatus) => {
     setActiveStatus(status);
@@ -501,6 +513,12 @@ export function ProjectsClient() {
             {t("footerDescription")}
           </p>
           <div className="flex gap-4 justify-center">
+            <Link
+              href="/atlas"
+              className="inline-flex items-center px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
+            >
+              {t("exploreAtlas")}
+            </Link>
             <Link
               href="/contact"
               className="inline-flex items-center px-6 py-2.5 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"

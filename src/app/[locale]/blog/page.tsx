@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
-import { getAllBlogPosts, getFeaturedPosts } from "@/lib/blog";
-import { BlogHero, BlogSearchBar, BlogNewsletter, NotebookSection } from "@/components/blog-client-wrapper";
-import { NotebookBlogList } from "@/components/notebook-blog-list";
+import { getAllBlogPosts } from "@/lib/blog";
+import { BlogHero, BlogNewsletter } from "@/components/blog-client-wrapper";
+import { BlogSearchAndList } from "@/components/blog-search-and-list";
+import { getTranslations } from 'next-intl/server';
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld';
+import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -69,28 +72,58 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Blog() {
+export default async function Blog({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'blog' });
   const allPosts = getAllBlogPosts();
-  const featuredPosts = getFeaturedPosts();
-  const recentPosts = allPosts.filter(post => !post.featured);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Chaowalit Greepoke Tech Blog',
+    url: `${baseUrl}/${locale}/blog`,
+    description: 'Tech insights on web development, AI integration, SEO optimization, and modern web technologies.',
+    inLanguage: locale === 'th' ? 'th' : 'en',
+    author: {
+      '@type': 'Person',
+      name: 'Chaowalit Greepoke',
+      url: baseUrl
+    },
+    blogPost: allPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      url: `${baseUrl}/${locale}/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+      inLanguage: locale === 'th' ? 'th' : 'en',
+      author: {
+        '@type': 'Person',
+        name: post.author
+      },
+      description: post.excerpt,
+      keywords: post.tags.join(', ')
+    }))
+  };
+
+  const breadcrumbItems = [
+    { name: 'Home', url: baseUrl },
+    { name: 'Blog', url: `${baseUrl}/${locale}/blog` },
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <BreadcrumbJsonLd items={breadcrumbItems} />
+      <BreadcrumbNav items={[
+        { name: t('title'), href: '/blog' },
+      ]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <BlogHero />
 
-      {/* Search Bar */}
-      <BlogSearchBar />
-
-      {/* Blog Posts — notebook-styled entries */}
-      <NotebookSection
-        title="Articles"
-        subtitle="All posts and writings"
-      >
-        <NotebookBlogList
-          featuredPosts={featuredPosts}
-          recentPosts={recentPosts}
-        />
-      </NotebookSection>
+      {/* Search + Tag Filter + Blog Posts */}
+      <BlogSearchAndList allPosts={allPosts} />
 
       {/* Newsletter Signup */}
       <BlogNewsletter />

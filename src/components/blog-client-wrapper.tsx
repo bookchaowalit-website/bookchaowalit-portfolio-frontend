@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
-import { PenLine, Mail } from "lucide-react";
+import { PenLine, Mail, Check, Loader2, AlertCircle } from "lucide-react";
 
 export function BlogHero() {
+  const t = useTranslations("blog");
   const reducedMotion = useReducedMotion();
   return (
     <motion.div
@@ -24,8 +27,7 @@ export function BlogHero() {
       >
         <MixedTypographyTitle
           words={[
-            { text: "My", style: "cursive", size: "xl" },
-            { text: "Blog", style: "bubble", size: "xl" },
+            { text: t("title"), style: "cursive", size: "xl" },
             { text: <PenLine className="inline-block" />, style: "block", size: "lg" }
           ]}
           className="mb-6"
@@ -40,7 +42,7 @@ export function BlogHero() {
       >
         <div className="bg-muted border border-border p-4">
           <p className="text-foreground text-center">
-            Thoughts on web development, technology, and everything in between!
+            {t("subtitle")}
           </p>
         </div>
       </motion.div>
@@ -49,6 +51,7 @@ export function BlogHero() {
 }
 
 export function BlogSearchBar() {
+  const t = useTranslations("blog");
   const reducedMotion = useReducedMotion();
   return (
     <motion.div
@@ -60,7 +63,7 @@ export function BlogSearchBar() {
       <div className="bg-muted border border-border p-2 hover:border-primary/40 transition-colors">
         <Input
           type="text"
-          placeholder="Search articles..."
+          placeholder={t("searchPlaceholder")}
           className="w-full border-0 focus:ring-0 font-[family-name:var(--font-doodle)] bg-transparent"
         />
       </div>
@@ -69,7 +72,38 @@ export function BlogSearchBar() {
 }
 
 export function BlogNewsletter() {
+  const t = useTranslations("blog");
   const reducedMotion = useReducedMotion();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      setSubscribed(true);
+      setEmail("");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.section
       className="mt-16"
@@ -86,8 +120,7 @@ export function BlogNewsletter() {
           >
             <MixedTypographyTitle
               words={[
-                { text: "Stay", style: "cursive", size: "lg" },
-                { text: "Updated!", style: "bubble", size: "lg" },
+                { text: t("stayUpdated"), style: "cursive", size: "lg" },
                 { text: <Mail className="inline-block" />, style: "block", size: "md" }
               ]}
               className="mb-6"
@@ -102,24 +135,65 @@ export function BlogNewsletter() {
           >
             <div className="bg-muted border border-border p-3">
               <p className="text-foreground text-center text-sm">
-                Get the latest articles and updates delivered straight to your inbox!
+                {t("newsletterDescription")}
               </p>
             </div>
           </motion.div>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 1.4 }}
-          >
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 font-[family-name:var(--font-doodle)]"
-            />
-            <Button className="font-[family-name:var(--font-comic)]">Subscribe</Button>
-          </motion.div>
+          {subscribed ? (
+            <motion.div
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex items-center justify-center gap-2 text-primary"
+            >
+              <Check className="w-5 h-5" />
+              <span className="font-[family-name:var(--font-doodle)]">
+                {t("subscribed") || "Thanks for subscribing!"}
+              </span>
+            </motion.div>
+          ) : (
+            <>
+              <motion.form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+                initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 1.4 }}
+              >
+                <Input
+                  type="email"
+                  placeholder={t("emailPlaceholder")}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={loading}
+                  className="flex-1 font-[family-name:var(--font-doodle)]"
+                />
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="font-[family-name:var(--font-comic)] gap-2"
+                >
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Mail className="w-4 h-4" />
+                  )}
+                  {t("subscribe")}
+                </Button>
+              </motion.form>
+              {error && (
+                <motion.p
+                  initial={reducedMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-sm text-destructive mt-2 font-[family-name:var(--font-doodle)] flex items-center justify-center gap-1"
+                >
+                  <AlertCircle className="w-4 h-4" />
+                  {error}
+                </motion.p>
+              )}
+            </>
+          )}
         </div>
       </SketchyFrame>
     </motion.section>

@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader, StudyGuideBox } from "@/components/ui/mixed-typography";
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
-import { Bot, BarChart3, Globe, Wrench, Lightbulb, Code } from "lucide-react";
+import { Bot, BarChart3, Globe, Wrench, Lightbulb, Compass } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function AboutClient() {
@@ -42,7 +42,7 @@ export function AboutClient() {
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "bubble", size: "xl" },
-              { text: <Code className="inline-block" />, style: "block", size: "lg" }
+              { text: <Compass className="inline-block" />, style: "block", size: "lg" }
             ]}
             className="mb-6"
           />
@@ -81,19 +81,19 @@ export function AboutClient() {
           </div>
         </div>
 
-        {/* Skills Section */}
+        {/* Capabilities Section */}
         <div className="py-8">
           <NotebookSectionHeader
-            title={t('technicalSkillsTitle')}
-            subtitle={t('technicalSkillsDescription')}
+            title={t('capabilitiesTitle')}
+            subtitle={t('capabilitiesDescription')}
             className="mb-6"
           />
           <div className="space-y-6">
-            <StudyGuideBox title={t('frontendTitle')} type="tip">
+            <StudyGuideBox title={t('capabilitiesCard1Title')} type="tip">
               <div className="flex flex-wrap gap-2">
                 {[
-                  "React", "Next.js", "TypeScript", "JavaScript",
-                  "Tailwind CSS", "HTML5", "CSS3", "Shopify Liquid"
+                  "Full-Stack Development", "AI & Automation", "Data Architecture",
+                  "Cloud Infrastructure", "Mobile Apps", "API Design", "DevOps", "System Design"
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}
@@ -113,11 +113,11 @@ export function AboutClient() {
               </div>
             </StudyGuideBox>
 
-            <StudyGuideBox title={t('backendTitle')} type="note">
+            <StudyGuideBox title={t('capabilitiesCard2Title')} type="note">
               <div className="flex flex-wrap gap-2">
                 {[
-                  "FastAPI", "Python", "PostgreSQL", "LlamaIndex",
-                  "LangChain", "RAG", "Multi-agent Systems", "REST APIs", "AI Integration"
+                  "Business Strategy", "Financial Analysis", "Marketing & SEO",
+                  "Operations", "Project Management", "Sales & CRM", "Market Research", "Leadership"
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}
@@ -137,11 +137,11 @@ export function AboutClient() {
               </div>
             </StudyGuideBox>
 
-            <StudyGuideBox title={t('toolsTitle')} type="important">
+            <StudyGuideBox title={t('capabilitiesCard3Title')} type="important">
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Google Analytics", "Facebook API", "SEO", "Git",
-                  "Data Analysis", "Social Media Analytics", "A/B Testing", "ETL"
+                  "Content Strategy", "Visual Design", "Writing & Publishing",
+                  "Education", "Health & Wellness", "Legal & Compliance", "Multilingual", "Research"
                 ].map((skill, index) => (
                   <motion.div
                     key={skill}

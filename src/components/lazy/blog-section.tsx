@@ -1,23 +1,29 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { getAllBlogPosts } from '@/lib/blog';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { StickyNote } from '@/components/ui/notebook-elements';
 import { MixedTypographyTitle } from '@/components/ui/mixed-typography';
 
-export async function BlogSection() {
-  const t = await getTranslations('home');
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  readTime: string;
+}
 
-  // Get the latest 3 blog posts
-  const blogPosts = getAllBlogPosts().slice(0, 3);
+export function BlogSection({ blogPosts = [] }: { blogPosts?: BlogPost[] }) {
+  const t = useTranslations('home');
 
   return (
     <section className="space-y-8">
       <MixedTypographyTitle
         words={[
-          { text: "Latest", style: "cursive", size: "lg" },
-          { text: "Blog", style: "bubble", size: "lg" },
-          { text: "Posts", style: "filled", size: "lg" }
+          { text: t('blogTitleWord1'), style: "cursive", size: "lg" },
+          { text: t('blogTitleWord2'), style: "bubble", size: "lg" },
+          { text: t('blogTitleWord3'), style: "filled", size: "lg" }
         ]}
       />
       <div className="py-8">
@@ -26,8 +32,8 @@ export async function BlogSection() {
             const colors: Array<"yellow" | "pink" | "green" | "blue"> = ["yellow", "pink", "green"];
             const rotations = [-2, 1, -1];
             return (
-            <Link key={index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
-              <StickyNote color={colors[index]} rotation={rotations[index]} className="cursor-pointer h-full p-5">
+            <Link key={post.slug || index} href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}>
+              <StickyNote color={colors[index % 3]} rotation={rotations[index % 3]} className="cursor-pointer h-full p-5">
                 <div className="space-y-3">
                   <h3 className="text-lg font-bold line-clamp-2">{post.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>

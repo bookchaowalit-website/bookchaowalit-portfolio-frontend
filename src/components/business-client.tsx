@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
@@ -201,37 +201,37 @@ export function BusinessClient() {
                         <div className="flex flex-wrap gap-2">
                           {business.socialMedia.website && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.website} target="_blank" rel="noopener noreferrer">
+                              <a href={business.socialMedia.website} target="_blank" rel="noopener noreferrer">
                                 <Globe className="w-4 h-4 mr-1" /> {t("socialWebsite")}
-                              </Link>
+                              </a>
                             </Button>
                           )}
                           {business.socialMedia.linkedin && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.linkedin} target="_blank" rel="noopener noreferrer">
+                              <a href={business.socialMedia.linkedin} target="_blank" rel="noopener noreferrer">
                                 <Briefcase className="w-4 h-4 mr-1" /> {t("socialLinkedin")}
-                              </Link>
+                              </a>
                             </Button>
                           )}
                           {business.socialMedia.github && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.github} target="_blank" rel="noopener noreferrer">
+                              <a href={business.socialMedia.github} target="_blank" rel="noopener noreferrer">
                                 <Github className="w-4 h-4 mr-1" /> {t("socialGithub")}
-                              </Link>
+                              </a>
                             </Button>
                           )}
                           {business.socialMedia.twitter && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={business.socialMedia.twitter} target="_blank" rel="noopener noreferrer">
+                              <a href={business.socialMedia.twitter} target="_blank" rel="noopener noreferrer">
                                 <Twitter className="w-4 h-4 mr-1" /> {t("socialTwitter")}
-                              </Link>
+                              </a>
                             </Button>
                           )}
                           {business.socialMedia.email && (
                             <Button size="sm" variant="outline" asChild>
-                              <Link href={`mailto:${business.socialMedia.email}`}>
+                              <a href={`mailto:${business.socialMedia.email}`}>
                                 <Mail className="w-4 h-4 mr-1" /> {t("socialEmail")}
-                              </Link>
+                              </a>
                             </Button>
                           )}
                         </div>

@@ -4,12 +4,14 @@ import { usePathname } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useTranslations } from 'next-intl';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('common');
 
   useEffect(() => {
     setIsMounted(true);
@@ -41,7 +43,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         >
           <motion.div
             role="status"
-            aria-label="Loading"
+            aria-label={t('loadingPage')}
             animate={{ 
               rotate: 360,
               scale: [1, 1.1, 1],

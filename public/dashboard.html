@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Pipeline Dashboard — Book</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { color: #888; margin-bottom: 2rem; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-2px); border-color: #667eea; }
+        .stat-label { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: #fff; margin: 0.5rem 0; }
+        .stat-detail { font-size: 0.9rem; color: #666; }
+        .stat-value.green { color: #4ade80; }
+        .stat-value.blue { color: #60a5fa; }
+        .stat-value.purple { color: #a78bfa; }
+        .stat-value.orange { color: #fb923c; }
+        .section { margin-bottom: 2rem; }
+        .section h2 { font-size: 1.3rem; margin-bottom: 1rem; color: #ccc; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        .skill-tag.hot { border-color: #f97316; color: #fb923c; }
+        .pipeline-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+        .step {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .step .dot.green { background: #4ade80; }
+        .step .dot.yellow { background: #fbbf24; }
+        .step .dot.gray { background: #666; }
+        .footer { text-align: center; color: #555; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .updated { color: #666; font-size: 0.85rem; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Pipeline Dashboard</h1>
+        <p class="subtitle">Automated job discovery & matching pipeline — Live Stats</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Jobs Scraped</div>
+                <div class="stat-value blue">1,605</div>
+                <div class="stat-detail">From 14+ job boards</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Matched Jobs</div>
+                <div class="stat-value green">715</div>
+                <div class="stat-detail">Score ≥ 2 (44.5% match rate)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unique Companies</div>
+                <div class="stat-value purple">594</div>
+                <div class="stat-detail">Across all sources</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pipeline Steps</div>
+                <div class="stat-value orange">27</div>
+                <div class="stat-detail">8 groups, fully automated</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Top In-Demand Skills</h2>
+            <div class="skills-list">
+                <span class="skill-tag hot">React/Next.js (78%)</span>
+                <span class="skill-tag hot">TypeScript (72%)</span>
+                <span class="skill-tag hot">Node.js (65%)</span>
+                <span class="skill-tag hot">Python (58%)</span>
+                <span class="skill-tag">AWS (52%)</span>
+                <span class="skill-tag">PostgreSQL (48%)</span>
+                <span class="skill-tag">Docker (45%)</span>
+                <span class="skill-tag">GraphQL (38%)</span>
+                <span class="skill-tag">Redis (35%)</span>
+                <span class="skill-tag">Kubernetes (28%)</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Pipeline Steps (27 total)</h2>
+            <div class="pipeline-steps">
+                <div class="step"><span class="dot green"></span> Scrape Postings</div>
+                <div class="step"><span class="dot green"></span> Deduplicate Jobs</div>
+                <div class="step"><span class="dot green"></span> Board Health</div>
+                <div class="step"><span class="dot green"></span> Match & Score</div>
+                <div class="step"><span class="dot green"></span> Scrape Descriptions</div>
+                <div class="step"><span class="dot green"></span> Deep JD Scrape</div>
+                <div class="step"><span class="dot green"></span> Re-Match</div>
+                <div class="step"><span class="dot green"></span> Auto-Promote</div>
+                <div class="step"><span class="dot green"></span> Auto-Seed Tracker</div>
+                <div class="step"><span class="dot green"></span> Resume Select</div>
+                <div class="step"><span class="dot green"></span> Job Notifications</div>
+                <div class="step"><span class="dot green"></span> Auto-Tailor Resumes</div>
+                <div class="step"><span class="dot green"></span> Auto-Apply</div>
+                <div class="step"><span class="dot green"></span> Daily Digest</div>
+                <div class="step"><span class="dot green"></span> Job Digest v2</span></div>
+                <div class="step"><span class="dot green"></span> Portfolio Sync</div>
+                <div class="step"><span class="dot green"></span> Weekly Report</div>
+                <div class="step"><span class="dot green"></span> Keyword Rotation</div>
+                <div class="step"><span class="dot green"></span> Pipeline Backup</div>
+                <div class="step"><span class="dot green"></span> Follow-up Tracker</div>
+                <div class="step"><span class="dot green"></span> Skills Gap</div>
+                <div class="step"><span class="dot green"></span> Scam Detection</div>
+                <div class="step"><span class="dot green"></span> Salary Benchmark</div>
+                <div class="step"><span class="dot green"></span> Health Monitor</div>
+                <div class="step"><span class="dot green"></span> Company Intel</div>
+                <div class="step"><span class="dot green"></span> Freelance Proposal</div>
+                <div class="step"><span class="dot green"></span> Cron Scheduler</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Automation Tools Built</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Scripts</div>
+                    <div class="stat-value">75+</div>
+                    <div class="stat-detail">Python automation scripts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Resume Variants</div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-detail">Auto-selected per job</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Cron Tasks</div>
+                    <div class="stat-value">15</div>
+                    <div class="stat-detail">Daily + weekly schedule</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Blog Articles</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-detail">Auto-generated content</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="updated">Last updated: June 23, 2026 — Data refreshes daily at 6:00 AM (ICT)</p>
+
+        <div class="footer">
+            <p>Built by <a href="https://bookchaowalit.com">Chaowalit "Book" Greepoke</a></p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Senior Full-Stack Developer — Bangkok, Thailand</p>
+        </div>
+    </div>
+</body>
+</html>

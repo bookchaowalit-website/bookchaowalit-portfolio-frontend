@@ -85,3 +85,19 @@ export function getPostsByTag(tag: string): BlogPost[] {
     )
   )
 }
+
+/** Convert a tag name to a URL-safe slug */
+export function tagToSlug(tag: string): string {
+  return tag.toLowerCase().replace(/[\/\s]+/g, '-');
+}
+
+/** Find the original tag string from a slug by comparing slugified versions */
+export function findOriginalTagFromSlug(slug: string): string {
+  const tagSet = new Set<string>();
+  getAllBlogPosts().forEach(p => p.tags.forEach(t => tagSet.add(t)));
+  for (const t of tagSet) {
+    if (tagToSlug(t) === slug) return t;
+  }
+  // Fallback: reverse the slug
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}

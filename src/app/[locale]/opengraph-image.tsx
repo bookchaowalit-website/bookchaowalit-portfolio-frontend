@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Chaowalit Greepoke - Portfolio";
+export const alt = "Chaowalit Greepoke - Generalist & Solopreneur";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -47,7 +47,7 @@ export default async function Image() {
               letterSpacing: "-0.01em",
             }}
           >
-            Tech Generalist · Full-Stack Developer · AI Developer
+            Generalist & Solopreneur · 45 Knowledge Domains
           </div>
           <div
             style={{
@@ -56,7 +56,7 @@ export default async function Image() {
               marginTop: "16px",
             }}
           >
-            {["Next.js", "TypeScript", "React", "AI", "SEO"].map((tag) => (
+            {["Business", "Technology", "Design", "Research", "Health"].map((tag) => (
               <span
                 key={tag}
                 style={{

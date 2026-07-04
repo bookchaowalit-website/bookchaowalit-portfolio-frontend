@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Share2, Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ShareButtonProps {
   title: string;
@@ -11,6 +12,7 @@ interface ShareButtonProps {
 
 export function ShareButton({ title, url }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations('common');
 
   const handleShare = async () => {
     const shareUrl = typeof window !== 'undefined' ? window.location.href : url;
@@ -53,18 +55,18 @@ export function ShareButton({ title, url }: ShareButtonProps) {
       size="sm"
       onClick={handleShare}
       className="gap-2"
-      aria-label={copied ? "Link copied to clipboard" : `Share ${title}`}
+      aria-label={copied ? t('linkCopied') : t('shareWith', { title })}
       aria-live="polite"
     >
       {copied ? (
         <>
           <Check className="h-4 w-4 text-foreground" />
-          Copied!
+          {t('copied')}
         </>
       ) : (
         <>
           <Share2 className="h-4 w-4" />
-          Share
+          {t('share')}
         </>
       )}
     </Button>

@@ -1,41 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useTranslations } from "next-intl";
-import { ArrowUp, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Mail } from "lucide-react";
-
-const SCROLL_THRESHOLD = 400;
-
-function BackToTop() {
-  const t = useTranslations("footer");
-  const [visible, setVisible] = useState(false);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > SCROLL_THRESHOLD);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  if (!visible) return null;
-
-  return (
-    <motion.button
-      onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" })}
-      initial={reducedMotion ? false : { opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={reducedMotion ? undefined : { opacity: 0, y: 10 }}
-      transition={reducedMotion ? { duration: 0 } : { duration: 0.2 }}
-      className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label={t("backToTop")}
-    >
-      <ArrowUp className="size-4" />
-    </motion.button>
-  );
-}
+import { Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Mail, Rss } from "lucide-react";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -47,8 +16,7 @@ export function Footer() {
   const hoverSecondary = reducedMotion ? {} : { y: -2, scale: 1.05 };
 
   return (
-    <>
-      <footer className="mt-16 py-12">
+    <footer className="mt-16 py-12">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6">
             {/* Hand-drawn title */}
@@ -96,15 +64,6 @@ export function Footer() {
                   style={{ transform: `rotate(0.5deg)` }}
                 >
                   {tNav("projects")}
-                </Link>
-              </motion.div>
-              <motion.div whileHover={hoverSecondary}>
-                <Link
-                  href="/business"
-                  className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
-                  style={{ transform: `rotate(-0.8deg)` }}
-                >
-                  {tNav("business")}
                 </Link>
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
@@ -212,6 +171,14 @@ export function Footer() {
               >
                 <Mail className="w-5 h-5" />
               </motion.a>
+              <motion.a
+                href="/rss.xml"
+                whileHover={hoverPrimary}
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                aria-label={t("rssFeed")}
+              >
+                <Rss className="w-5 h-5" />
+              </motion.a>
             </motion.div>
 
             {/* Hand-drawn doodle symbols */}
@@ -290,7 +257,5 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      <BackToTop />
-    </>
   );
 }

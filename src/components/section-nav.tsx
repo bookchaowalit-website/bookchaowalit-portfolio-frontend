@@ -4,17 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { usePathname } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
-const sections = [
-  { id: "hero", label: "Home" },
-  { id: "skills", label: "Skills" },
-  { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "activity", label: "Activity" },
-  { id: "business", label: "Business" },
-  { id: "blog", label: "Blog" },
-  { id: "contact", label: "Contact" },
-];
+const sectionKeys = [
+  { id: "hero", translationKey: "home" },
+  { id: "atlas", translationKey: "knowledgeAtlas" },
+  { id: "about", translationKey: "about" },
+  { id: "projects", translationKey: "portfolio" },
+  { id: "business", translationKey: "business" },
+  { id: "blog", translationKey: "blog" },
+  { id: "newsletter", translationKey: "newsletter" },
+  { id: "contact", translationKey: "contact" },
+] as const;
 
 export function SectionNav() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -23,6 +24,12 @@ export function SectionNav() {
   const reducedMotion = useReducedMotion();
   const pathname = usePathname();
   const mobileRef = useRef<HTMLDivElement>(null);
+  const tNav = useTranslations("nav");
+
+  const sections = sectionKeys.map((s) => ({
+    id: s.id,
+    label: tNav(s.translationKey as any),
+  }));
 
   // Close mobile menu on outside click
   useEffect(() => {
@@ -64,6 +71,7 @@ export function SectionNav() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sections is derived from static translations
   }, [isHomepage]);
 
   const scrollToSection = (id: string) => {

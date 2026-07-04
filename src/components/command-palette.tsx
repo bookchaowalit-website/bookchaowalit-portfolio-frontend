@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useRouter, usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,8 +11,6 @@ import {
   Search,
   Home,
   FolderKanban,
-  Briefcase,
-  GraduationCap,
   BookOpen,
   Mail,
   Sun,
@@ -21,6 +20,7 @@ import {
   FileText,
   ArrowRight,
   HelpCircle,
+  Newspaper,
 } from "lucide-react";
 
 type CommandItem = {
@@ -33,8 +33,17 @@ type CommandItem = {
   group: string;
 };
 
+type BlogPostMeta = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tags: string[];
+};
+
 export function CommandPalette() {
+  const [blogPosts, setBlogPosts] = useState<BlogPostMeta[]>([]);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -46,6 +55,18 @@ export function CommandPalette() {
   const locale = useLocale();
   const t = useTranslations("command");
   const reducedMotion = useReducedMotion();
+
+  // Fetch blog posts when palette opens
+  useEffect(() => {
+    if (open && blogPosts.length === 0) {
+      fetch("/api/search")
+        .then((res) => res.json())
+        .then((data) => setBlogPosts(data))
+        .catch(() => {});
+    }
+  }, [open, blogPosts.length]);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // Toggle palette with Cmd+K / Ctrl+K
   useEffect(() => {
@@ -97,7 +118,8 @@ export function CommandPalette() {
   );
 
   const items: CommandItem[] = useMemo(
-    () => [
+    () => {
+      const navItems: CommandItem[] = [
       {
         id: "home",
         label: t("navHome"),
@@ -114,24 +136,6 @@ export function CommandPalette() {
         icon: <FolderKanban className="size-4" />,
         action: () => navigateTo("/projects"),
         keywords: ["projects", "work", "portfolio", "code"],
-        group: t("groupNav"),
-      },
-      {
-        id: "business",
-        label: t("navBusiness"),
-        description: t("navBusinessDesc"),
-        icon: <Briefcase className="size-4" />,
-        action: () => navigateTo("/business"),
-        keywords: ["business", "ventures", "services", "company"],
-        group: t("groupNav"),
-      },
-      {
-        id: "skills",
-        label: t("navSkills"),
-        description: t("navSkillsDesc"),
-        icon: <GraduationCap className="size-4" />,
-        action: () => navigateTo("/skills"),
-        keywords: ["skills", "technologies", "tools", "stack"],
         group: t("groupNav"),
       },
       {
@@ -209,8 +213,22 @@ export function CommandPalette() {
         keywords: ["help", "shortcuts", "keyboard", "guide", "features"],
         group: t("groupActions"),
       },
-    ],
-    [navigateTo, toggleTheme, switchLanguage, locale, t]
+      ];
+
+      // Add blog posts as searchable items
+      const blogItems: CommandItem[] = blogPosts.map((post) => ({
+        id: `blog-${post.slug}`,
+        label: post.title,
+        description: post.excerpt,
+        icon: <Newspaper className="size-4" />,
+        action: () => navigateTo(`/blog/${post.slug}`),
+        keywords: [post.slug, ...post.tags, "article", "post", "blog"],
+        group: t("groupArticles"),
+      }));
+
+      return [...navItems, ...blogItems];
+    },
+    [navigateTo, toggleTheme, switchLanguage, locale, t, blogPosts]
   );
 
   const filtered = useMemo(() => {
@@ -279,6 +297,7 @@ export function CommandPalette() {
         <kbd className="font-mono">⌘K</kbd>
       </button>
 
+      {mounted && createPortal(
       <AnimatePresence>
         {open && (
           <>
@@ -395,6 +414,7 @@ export function CommandPalette() {
           </>
         )}
       </AnimatePresence>
+      , document.body)}
     </>
   );
 }

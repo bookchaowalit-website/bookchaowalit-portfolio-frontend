@@ -18,7 +18,7 @@ export async function handleGetContactInfo(): Promise<McpToolResult> {
   try {
     const contactInfo = {
       name: 'Chaowalit Greepoke (Book)',
-      title: 'Tech Generalist & Solopreneur',
+      title: 'Generalist & Solopreneur',
       location: 'Bangkok, Thailand',
       languages: ['Thai', 'English'],
       email: process.env.CONTACT_EMAIL || 'bookchaowalit@gmail.com',

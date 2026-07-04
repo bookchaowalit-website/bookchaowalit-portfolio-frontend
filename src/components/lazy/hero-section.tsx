@@ -69,8 +69,7 @@ export function HeroSection() {
                 { text: t('heroWord1'), style: "block", size: "lg" },
                 { text: t('heroWord2'), style: "cursive", size: "lg" },
                 { text: t('heroWord3'), style: "outlined", size: "md" },
-                { text: t('heroWord4'), style: "block", size: "lg" },
-                { text: t('heroWord5'), style: "shaded", size: "lg" }
+                { text: t('heroWord4'), style: "shaded", size: "lg" }
               ]}
               className="mb-4"
             />

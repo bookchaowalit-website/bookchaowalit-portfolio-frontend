@@ -18,17 +18,20 @@ export const routing = defineRouting({
     '/about/journey': '/about/journey',
     '/about/trading': '/about/trading',
     '/projects': '/projects',
+    '/projects/[slug]': '/projects/[slug]',
     '/blog': '/blog',
     '/blog/[slug]': '/blog/[slug]',
+    '/blog/tags/[tag]': '/blog/tags/[tag]',
     '/contact': '/contact',
-    '/business': '/business',
-    '/skills': '/skills',
-    '/skills/tech': '/skills/tech',
-    '/skills/art': '/skills/art',
-    '/skills/video': '/skills/video',
+    '/atlas': '/atlas',
     '/privacy': '/privacy',
     '/privacy/messenger-bot': '/privacy/messenger-bot',
-    '/privacy/web-apps': '/privacy/web-apps'
+    '/privacy/web-apps': '/privacy/web-apps',
+    '/testimonials': '/testimonials',
+    '/uses': '/uses',
+    '/now': '/now',
+    '/colophon': '/colophon',
+    '/live-systems': '/live-systems'
   }
 });
 

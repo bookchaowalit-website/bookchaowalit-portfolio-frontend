@@ -1,7 +1,11 @@
+'use client';
+
 import { Link } from '@/i18n/routing';
-import { Pencil } from 'lucide-react';
+import { Pencil, Map, BookOpen, FolderOpen } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function NotFound() {
+  const t = useTranslations('notFound');
   return (
     <div className="container mx-auto px-4 py-16 flex items-center justify-center min-h-[60vh]">
       <div className="max-w-md w-full relative">
@@ -25,17 +29,47 @@ export default function NotFound() {
               404
             </p>
             <h1 className="text-2xl font-[family-name:var(--font-comic)] font-bold text-foreground mb-3">
-              page not found <Pencil className="inline w-5 h-5" />
+              {t('title')} <Pencil className="inline w-5 h-5" />
             </h1>
             <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
-              this page seems to have been torn out...
+              {t('description')}
             </p>
             <Link
               href="/"
               className="inline-block px-5 py-2 border border-border bg-background hover:bg-muted font-[family-name:var(--font-doodle)] text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              go home →
+              {t('goHome')}
             </Link>
+
+            {/* Helpful links */}
+            <div className="mt-8 pt-6 border-t border-border/40">
+              <p className="text-xs text-muted-foreground font-[family-name:var(--font-doodle)] mb-3">
+                {t('helpfulLinks')}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-[family-name:var(--font-doodle)] text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/40 transition-colors"
+                >
+                  <BookOpen className="h-3.5 w-3.5" />
+                  {t('readBlog')}
+                </Link>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-[family-name:var(--font-doodle)] text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/40 transition-colors"
+                >
+                  <FolderOpen className="h-3.5 w-3.5" />
+                  {t('viewProjects')}
+                </Link>
+                <a
+                  href="/sitemap.xml"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-[family-name:var(--font-doodle)] text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/40 transition-colors"
+                >
+                  <Map className="h-3.5 w-3.5" />
+                  {t('exploreSitemap')}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

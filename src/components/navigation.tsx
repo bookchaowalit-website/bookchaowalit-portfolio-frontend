@@ -7,8 +7,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuContent,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useTranslations } from 'next-intl';
@@ -31,20 +29,12 @@ export function Navigation() {
 
   const navItems: { name: string; href: RouteHref; key: string }[] = [
     { name: t('home'), href: "/", key: "home" },
-    { name: t('projects'), href: "/projects", key: "projects" },
-    { name: t('business'), href: "/business", key: "business" },
-    { name: t('skills'), href: "/skills", key: "skills" },
+    { name: t('portfolio'), href: "/projects", key: "portfolio" },
+    { name: t('knowledgeAtlas'), href: "/atlas", key: "knowledgeAtlas" },
+    { name: t('about'), href: "/about", key: "about" },
     { name: t('blog'), href: "/blog", key: "blog" },
+    { name: t('liveSystems'), href: "/live-systems", key: "liveSystems" },
     { name: t('contact'), href: "/contact", key: "contact" },
-  ];
-
-  const aboutSubpages: { name: string; href: RouteHref; description: string; key: string }[] = [
-    { name: t('aboutOverview'), href: "/about", description: t('aboutOverviewDesc'), key: "about" },
-    { name: t('fitnessJourney'), href: "/about/fitness", description: t('fitnessJourneyDesc'), key: "fitness" },
-    { name: t('creativeWorks'), href: "/about/creative", description: t('creativeWorksDesc'), key: "creative" },
-    { name: t('personalGrowth'), href: "/about/growth", description: t('personalGrowthDesc'), key: "growth" },
-    { name: t('techJourney'), href: "/about/journey", description: t('techJourneyDesc'), key: "journey" },
-    { name: t('tradingJourney'), href: "/about/trading", description: t('tradingJourneyDesc'), key: "trading" },
   ];
 
   return (
@@ -73,43 +63,6 @@ export function Navigation() {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
-
-              {/* About Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium transition-colors hover:text-primary bg-transparent",
-                    pathname.startsWith('/about')
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  {t('about')}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="left-0">
-                  <div className="w-[400px] p-4">
-                    <div className="grid gap-3">
-                      {aboutSubpages.map((subpage) => (
-                        <NavigationMenuLink asChild key={subpage.key}>
-                          <Link
-                            href={subpage.href}
-                            prefetch={true}
-                            className={cn(
-                              "block select-none space-y-1 p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                              pathname === subpage.href && "bg-accent"
-                            )}
-                          >
-                            <div className="text-sm font-medium leading-none">{subpage.name}</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                              {subpage.description}
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -152,29 +105,6 @@ export function Navigation() {
                   {item.name}
                 </Link>
               ))}
-
-              {/* About Section */}
-              <div className="space-y-1">
-                <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
-                  {t('about')}
-                </div>
-                {aboutSubpages.map((subpage) => (
-                  <Link
-                    key={subpage.key}
-                    href={subpage.href}
-                    prefetch={true}
-                    className={cn(
-                      "block px-6 py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                      pathname === subpage.href
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:bg-muted"
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {subpage.name}
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
         )}

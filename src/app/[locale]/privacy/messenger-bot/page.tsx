@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld';
+import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -37,12 +39,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function MessengerBotPrivacyPage() {
-  const t = useTranslations('privacy.messenger_bot');
+export default async function MessengerBotPrivacyPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'privacy.messenger_bot' });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+  const breadcrumbItems = [
+    { name: 'Home', url: baseUrl },
+    { name: 'Privacy Policy', url: `${baseUrl}/${locale}/privacy` },
+    { name: 'Messenger Bot', url: `${baseUrl}/${locale}/privacy/messenger-bot` },
+  ];
 
   return (
     <div className="min-h-screen bg-background py-20">
       <div className="container mx-auto px-4 max-w-4xl">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'PrivacyPolicy',
+              name: 'Messenger Bot Privacy Policy',
+              description: t('subtitle'),
+              url: `${baseUrl}/${locale}/privacy/messenger-bot`,
+              publisher: {
+                '@type': 'Person',
+                name: 'Chaowalit Greepoke',
+                url: 'https://bookchaowalit.com'
+              }
+            })
+          }}
+        />
+        <BreadcrumbNav items={[
+          { name: locale === 'th' ? 'นโยบาย Messenger Bot' : 'Messenger Bot Privacy' },
+        ]} />
         <div className="mb-8">
           <Link href="/privacy">
             <Button variant="ghost" className="mb-4">

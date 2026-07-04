@@ -6,10 +6,12 @@ import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
-import { Handshake, Mail, Globe, MessageCircle, Monitor, Bot, TrendingUp, Briefcase, Github, Wrench, Zap } from "lucide-react";
+import { Handshake, Mail, Globe, MessageCircle, Monitor, TrendingUp, Briefcase, Github, Wrench, Zap, Palette } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function ContactSection() {
   const reducedMotion = useReducedMotion();
+  const t = useTranslations('contact');
 
   return (
     <motion.section
@@ -22,8 +24,8 @@ export function ContactSection() {
       <div className="text-center">
         <MixedTypographyTitle
           words={[
-            { text: "Let's", style: "cursive", size: "lg" },
-            { text: "Connect!", style: "bubble", size: "lg" },
+            { text: t('letsConnectWord1'), style: "cursive", size: "lg" },
+            { text: t('letsConnectWord2'), style: "bubble", size: "lg" },
             { text: <Handshake className="inline-block" />, style: "block", size: "md" }
           ]}
           className="mb-6"
@@ -42,24 +44,24 @@ export function ContactSection() {
               <div className="space-y-4">
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
                   <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
-                    <Mail className="w-3.5 h-3.5" /> Quick Response
+                    <Mail className="w-3.5 h-3.5" /> {t('quickResponse')}
                   </Badge>
                   <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
-                    <Globe className="w-3.5 h-3.5" /> Available Globally
+                    <Globe className="w-3.5 h-3.5" /> {t('availableGlobally')}
                   </Badge>
                   <Badge variant="secondary" className="bg-muted text-foreground flex items-center gap-1">
-                    <MessageCircle className="w-3.5 h-3.5" /> Multiple Channels
+                    <MessageCircle className="w-3.5 h-3.5" /> {t('multipleChannels')}
                   </Badge>
                 </div>
 
                 <h3 className="text-2xl font-[family-name:var(--font-script)] font-bold text-foreground mb-4">
-                  Ready to Work Together?
+                  {t('readyToWork')}
                 </h3>
 
                 <p className="text-muted-foreground font-[family-name:var(--font-doodle)] leading-relaxed max-w-2xl mx-auto text-pretty">
-                  Whether you need <strong>AI integration</strong>, <strong>full-stack development</strong>,
-                  or <strong>strategic consulting</strong> - I'm here to help your business grow.
-                  Based in <strong>Bangkok</strong> but working with clients worldwide! <span className="mono-emoji">🇹🇭</span>
+                  {t.rich('contactDescription', {
+                    strong: (chunks) => <strong>{chunks}</strong>
+                  })}
                 </p>
               </div>
 
@@ -68,16 +70,7 @@ export function ContactSection() {
                   <div className="p-4 bg-muted border border-border">
                     <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><Monitor className="w-8 h-8" /></div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
-                      Development Projects
-                    </p>
-                  </div>
-                </motion.div>
-
-                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
-                  <div className="p-4 bg-muted border border-border">
-                    <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><Bot className="w-8 h-8" /></div>
-                    <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
-                      AI Consultation
+                      {t('digitalProducts')}
                     </p>
                   </div>
                 </motion.div>
@@ -86,7 +79,16 @@ export function ContactSection() {
                   <div className="p-4 bg-muted border border-border">
                     <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><TrendingUp className="w-8 h-8" /></div>
                     <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
-                      Business Growth
+                      {t('businessStrategy')}
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }}>
+                  <div className="p-4 bg-muted border border-border">
+                    <div className="text-2xl mb-2 flex justify-center text-foreground" aria-hidden="true"><Palette className="w-8 h-8" /></div>
+                    <p className="font-[family-name:var(--font-comic)] font-bold text-muted-foreground text-sm">
+                      {t('creativeSolutions')}
                     </p>
                   </div>
                 </motion.div>
@@ -95,13 +97,13 @@ export function ContactSection() {
               <div className="flex gap-4 justify-center flex-wrap pt-4">
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button size="lg" asChild>
-                    <Link href="/contact">Get In Touch</Link>
+                    <Link href="/contact">{t('getInTouchButton')}</Link>
                   </Button>
                 </motion.div>
                 <motion.div whileHover={reducedMotion ? undefined : { scale: 1.05 }} whileTap={reducedMotion ? undefined : { scale: 0.95 }}>
                   <Button variant="outline" size="lg" asChild>
                     <a href="mailto:bookchaowalit@gmail.com">
-                      <Mail className="w-4 h-4 mr-2" /> Email Me
+                      <Mail className="w-4 h-4 mr-2" /> {t('emailMe')}
                     </a>
                   </Button>
                 </motion.div>

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { TradingClient } from '@/components/about/trading-client';
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld';
+import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -67,6 +69,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function TradingPage() {
-  return <TradingClient />;
+export default async function TradingPage({ params }: Props) {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+
+  const breadcrumbItems = [
+    { name: locale === 'th' ? 'เกี่ยวกับ' : 'About', href: `/${locale}/about` },
+    { name: locale === 'th' ? 'เทรด' : 'Trading' },
+  ];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: locale === 'th' ? 'เส้นทางเทรดและลงทุน' : 'Trading & Investing Journey',
+    url: `${baseUrl}/${locale}/about/trading`,
+    description: locale === 'th'
+      ? 'การเดินทางในการเทรดและลงทุน จากตลาดแบบดั้งเดิมไปจนถึงกลยุทธ์ที่ขับเคลื่อนด้วย AI'
+      : 'Journey in trading and investing, from traditional markets to AI-powered strategies.',
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Chaowalit Greepoke',
+      url: baseUrl,
+    },
+  };
+
+  return (
+    <>
+      <div className="container mx-auto px-4 pt-4">
+        <BreadcrumbNav items={breadcrumbItems} />
+      </div>
+      <BreadcrumbJsonLd items={breadcrumbItems.map(item => ({ name: item.name, url: item.href ? `${baseUrl}${item.href}` : `${baseUrl}/${locale}/about/trading` }))} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <TradingClient />
+    </>
+  );
 }
