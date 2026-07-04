@@ -72,6 +72,20 @@ export default async function AtlasPage({ params }: Props) {
     { name: locale === 'th' ? 'แผนที่ความรู้' : 'Knowledge Atlas' },
   ];
 
+  // Category statistics
+  const categoryStats = inventory.categories.map((cat: any) => ({
+    id: cat.id,
+    label: cat.label,
+    icon: cat.icon,
+    color: cat.color,
+    domainCount: cat.domains.length,
+    domains: cat.domains,
+  }));
+
+  const totalFiles = inventory.meta?.totalFiles || 21000;
+  const totalDomains = inventory.meta?.totalDomains || inventory.domains.length;
+  const totalCategories = inventory.categories.length;
+
   const domainList = inventory.domains.map((d, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -104,7 +118,7 @@ export default async function AtlasPage({ params }: Props) {
         '@type': 'WebPage',
         '@id': `${baseUrl}/${locale}/atlas`,
         name: 'Interactive Knowledge Atlas - Chaowalit Greepoke',
-        description: 'Explore 45 knowledge domains with interactive visualizations and cross-domain connections.',
+        description: `Explore ${totalDomains} knowledge domains across ${totalCategories} categories with interactive visualizations and cross-domain connections.`,
         url: `${baseUrl}/${locale}/atlas`,
         mainEntity: {
           '@type': 'Person',
@@ -116,9 +130,21 @@ export default async function AtlasPage({ params }: Props) {
       {
         '@type': 'ItemList',
         name: 'Knowledge Domains',
-        description: '45 knowledge domains across 8 categories',
-        numberOfItems: inventory.domains.length,
+        description: `${totalDomains} knowledge domains across ${totalCategories} categories`,
+        numberOfItems: totalDomains,
         itemListElement: domainList,
+      },
+      {
+        '@type': 'ItemList',
+        name: 'Domain Categories',
+        description: `${totalCategories} high-level categories organizing knowledge domains`,
+        numberOfItems: totalCategories,
+        itemListElement: categoryStats.map((cat: any, i: number) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: cat.label,
+          description: `${cat.domainCount} domains in ${cat.label}`,
+        })),
       },
       {
         '@type': 'HowTo',
@@ -147,6 +173,62 @@ export default async function AtlasPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Stats Hero Section */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            {locale === 'th' ? 'แผนที่ความรู้แบบโต้ตอบ' : 'Interactive Knowledge Atlas'}
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {locale === 'th'
+              ? `การสำรวจ ${totalDomains} สาขาความรู้ใน ${totalCategories} หมวดหมู่ พร้อม visualization, ความเชื่อมโยงข้ามสาขา และรายละเอียดของแต่ละสาขา`
+              : `Explore ${totalDomains} knowledge domains across ${totalCategories} categories with live visualizations, cross-domain connections, and detailed breakdowns.`}
+          </p>
+        </div>
+
+        {/* Key Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="text-center p-4 rounded-lg border bg-card">
+            <div className="text-3xl font-bold text-primary">{totalDomains}</div>
+            <div className="text-sm text-muted-foreground">{locale === 'th' ? 'สาขาความรู้' : 'Knowledge Domains'}</div>
+          </div>
+          <div className="text-center p-4 rounded-lg border bg-card">
+            <div className="text-3xl font-bold text-primary">{totalCategories}</div>
+            <div className="text-sm text-muted-foreground">{locale === 'th' ? 'หมวดหมู่' : 'Categories'}</div>
+          </div>
+          <div className="text-center p-4 rounded-lg border bg-card">
+            <div className="text-3xl font-bold text-primary">{(totalFiles / 1000).toFixed(1)}K+</div>
+            <div className="text-sm text-muted-foreground">{locale === 'th' ? 'ไฟล์ความรู้' : 'Knowledge Files'}</div>
+          </div>
+          <div className="text-center p-4 rounded-lg border bg-card">
+            <div className="text-3xl font-bold text-primary">100+</div>
+            <div className="text-sm text-muted-foreground">{locale === 'th' ? 'โปรเจกต์' : 'Portfolio Projects'}</div>
+          </div>
+        </div>
+
+        {/* Category Breakdown */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            {locale === 'th' ? 'หมวดหมู่ความรู้' : 'Knowledge Categories'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {categoryStats.map((cat: any) => (
+              <div key={cat.id} className="p-4 rounded-lg border bg-card hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: cat.color }} />
+                  <h3 className="font-semibold text-sm">{cat.label}</h3>
+                </div>
+                <div className="text-2xl font-bold mb-1">{cat.domainCount}</div>
+                <div className="text-xs text-muted-foreground">
+                  {locale === 'th' ? 'สาขาในหมวดนี้' : 'domains in this category'}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <AtlasClient />
     </>
   );
