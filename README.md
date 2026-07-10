@@ -665,3 +665,9 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 Made with Next.js 15, TypeScript, and Tailwind CSS by [Chaowalit Greepoke](https://bookchaowalit.com).
+
+## Related
+
+- **Mobile App:** [bookchaowalit-portfolio-mobile](https://github.com/bookchaowalit-mobile/bookchaowalit-portfolio-mobile)
+- **Portfolio:** [bookchaowalit.com](https://bookchaowalit.com)
+
