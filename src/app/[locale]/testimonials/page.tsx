@@ -69,42 +69,60 @@ export default async function TestimonialsPage({ params }: Props) {
   const { locale } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
 
+  // Google Review snippets only allow review/aggregateRating on supported types
+  // (e.g. LocalBusiness / ProfessionalService, Product, SoftwareApplication).
+  // Nesting them under WebPage triggers:
+  // "Invalid object type for field <parent_node>"
+  const reviewedEntity = {
+    '@type': 'ProfessionalService',
+    '@id': `${baseUrl}/#professional-service`,
+    name: 'Chaowalit Greepoke',
+    url: baseUrl,
+    image: `${baseUrl}/profile.webp`,
+    description:
+      'Freelance software engineering, data, and AI services by Chaowalit Greepoke based in Bangkok, Thailand.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bangkok',
+      addressCountry: 'TH',
+    },
+  };
+
   const reviews = testimonials.map((t) => ({
     '@type': 'Review',
+    itemReviewed: {
+      '@id': reviewedEntity['@id'],
+    },
     author: {
       '@type': 'Person',
-      name: t.name
+      name: t.name,
     },
     reviewBody: t.quote,
     reviewRating: {
       '@type': 'Rating',
-      ratingValue: 5
-    }
+      ratingValue: 5,
+      bestRating: 5,
+      worstRating: 1,
+    },
   }));
 
-  const avgRating = testimonials.length > 0
-    ? (testimonials.reduce((sum) => sum + 5, 0) / testimonials.length).toFixed(1)
-    : '5.0';
+  const avgRating =
+    testimonials.length > 0
+      ? (testimonials.reduce((sum) => sum + 5, 0) / testimonials.length).toFixed(1)
+      : '5.0';
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Testimonials - Chaowalit Greepoke',
-    url: `${baseUrl}/${locale}/testimonials`,
-    description: 'What clients, colleagues, and partners say about working with Chaowalit Greepoke',
-    author: {
-      '@type': 'Person',
-      name: 'Chaowalit Greepoke',
-      url: baseUrl
-    },
+    ...reviewedEntity,
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: avgRating,
       bestRating: 5,
+      worstRating: 1,
       ratingCount: testimonials.length,
-      reviewCount: testimonials.length
+      reviewCount: testimonials.length,
     },
-    review: reviews
+    review: reviews,
   };
 
   const breadcrumbItems = [
