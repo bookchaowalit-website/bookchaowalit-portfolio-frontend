@@ -137,14 +137,18 @@ should be trusted versus interrogated.
 1. Study `build:analyze` output and split the 534 kB vendor chunk more
    granularly — MDX/animation/i18n libraries are likely bundled together
    even on routes that don't need all of them.
-2. Verify Resend domain (`bookchaowalit.com`) so contact-form email stops
-   sending from the sandbox address.
-3. Site-wide audit of which of the 129 linked subdomains are actually
-   live vs. still Tier C scaffolds (per the Phase 1 audit) — could
-   surface broken outbound links from this site's own Projects gallery.
-4. The pre-existing uncommitted "Live Systems" work in this working tree
-   (data-products integration, ports 8101–8108) is unrelated to this
-   pass — left untouched, not reviewed here.
+2. **Resend domain (ops):** verify `bookchaowalit.com` in the Resend
+   dashboard, then set Vercel env `RESEND_FROM` (code now reads it;
+   sandbox remains the fallback). See `RESEND-DOMAIN-SETUP.md`.
+3. **Live-link honesty (done 2026-08-11):** probed all 129 project demo
+   URLs. 99 reachable; 29 declared-`live` reclassified to `wip` (3 public
+   404s + 26 Vercel CNAME hosts with TLS EOF / no public HTTPS). Machine
+   report lives in solo-empire
+   `repository-catalog/PORTFOLIO-LIVE-LINK-AUDIT-2026-08-11.md`. Next:
+   fix Vercel domain/SSL for flagships you still want public, then flip
+   those slugs back to `live`.
+4. Optional Lighthouse numbers for interview evidence (still Planned in
+   the Tier A evidence matrix).
 
 ## Status
 

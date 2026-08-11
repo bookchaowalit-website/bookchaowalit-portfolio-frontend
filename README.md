@@ -125,6 +125,10 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 
 # Resend API key for contact form email delivery
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+
+# From-address after verifying bookchaowalit.com in Resend (recommended)
+# RESEND_FROM="Contact Form <contact@bookchaowalit.com>"
+# Without RESEND_FROM the API falls back to Resend's sandbox sender.
 ```
 
 | Variable | Required | Default | Notes |
@@ -134,6 +138,7 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 | `CONTACT_EMAIL` | Yes (for contact form) | — | Recipient of contact form submissions |
 | `GITHUB_TOKEN` | No | — | Without token: 60 req/hr limit |
 | `RESEND_API_KEY` | No | — | Without key: form logs to console instead of sending |
+| `RESEND_FROM` | No | `Contact Form <onboarding@resend.dev>` | Set after domain verification; see `RESEND-DOMAIN-SETUP.md` |
 
 ---
 

@@ -37,9 +37,16 @@ export async function POST(request: NextRequest) {
             });
         }
 
+        // Prefer a verified domain (RESEND_FROM). Sandbox is a last-resort fallback.
+        // Dashboard steps: verify bookchaowalit.com in Resend, then set
+        // RESEND_FROM="Contact Form <contact@bookchaowalit.com>" on Vercel.
+        const fromAddress =
+            process.env.RESEND_FROM ||
+            'Contact Form <onboarding@resend.dev>';
+
         // Send email using Resend
         const { data, error } = await resend.emails.send({
-            from: 'Contact Form <onboarding@resend.dev>', // Use your verified domain
+            from: fromAddress,
             to: process.env.CONTACT_EMAIL || 'contact@bookchaowalit.com',
             subject: `New Contact: ${subject}`,
             html: `
