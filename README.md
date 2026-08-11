@@ -1,5 +1,7 @@
 # bookchaowalit-portfolio-frontend
 
+[![CI](https://github.com/bookchaowalit-website/bookchaowalit-portfolio-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/bookchaowalit-website/bookchaowalit-portfolio-frontend/actions/workflows/ci.yml)
+
 Personal portfolio website of **Chaowalit Greepoke** — Tech Generalist & Solopreneur from Bangkok, Thailand.
 
 Built with **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **shadcn/ui**. Features bilingual support (EN/TH), MDX blog, a built-in MCP server, live GitHub activity, and a Resend-powered contact form.
