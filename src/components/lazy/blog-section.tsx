@@ -36,8 +36,8 @@ export function BlogSection({ blogPosts = [] }: { blogPosts?: BlogPost[] }) {
               <StickyNote color={colors[index % 3]} rotation={rotations[index % 3]} className="cursor-pointer h-full p-5">
                 <div className="space-y-3">
                   <h3 className="text-lg font-bold line-clamp-2">{post.title}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <p className="text-sm text-foreground/70 line-clamp-2">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-xs text-foreground/70">
                     <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
                     <span>{post.readTime}</span>
                   </div>

@@ -157,8 +157,10 @@
 
 /* Ensure minimum touch targets for mobile (44x44px WCAG 2.5.5).
    Limit to interactive chrome — not every inline prose link — so body text
-   links do not become 44×44 blocks that break reading layout. */
-@media (pointer: coarse) {
+   links do not become 44×44 blocks that break reading layout.
+   Also apply under small viewports: Playwright/headless often lacks
+   pointer:coarse even when emulating a phone width. */
+@media (pointer: coarse), (max-width: 768px) {
   button,
   [role="button"],
   a.inline-flex,

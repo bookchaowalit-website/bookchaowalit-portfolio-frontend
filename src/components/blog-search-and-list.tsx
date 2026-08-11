@@ -88,8 +88,9 @@ export function BlogSearchAndList({
             />
             {query && (
               <button
+                type="button"
                 onClick={() => setQuery("")}
-                className="p-1 hover:bg-muted-foreground/10 rounded transition-colors shrink-0"
+                className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] hover:bg-muted-foreground/10 rounded transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Clear search"
               >
                 <X className="h-3.5 w-3.5 text-muted-foreground" />

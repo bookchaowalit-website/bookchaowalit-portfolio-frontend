@@ -86,7 +86,7 @@ function ProjectCard({
           className="mb-4 aspect-video overflow-hidden flex items-center justify-center"
           style={{ background: `oklch(${lightness} 0 0)` }}
         >
-          <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/30">
+          <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
             {project.name}
           </span>
         </div>
@@ -144,7 +144,7 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center justify-center min-h-11 min-w-11 text-muted-foreground/60 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] text-muted-foreground/60 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`${project.name} GitHub repository`}
             >
               <Github className="size-4" />
@@ -371,7 +371,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={status}
                 onClick={() => handleStatusChange(status)}
-                className={`inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                className={`inline-flex items-center gap-1.5 min-h-[44px] px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -381,7 +381,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
                   <span className={`size-1.5 shrink-0 rounded-full ${dotClass} ${isActive ? "opacity-60" : ""}`} />
                 )}
                 {label}
-                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-40"}`}>{count}</span>
+                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-100"}`}>{count}</span>
               </button>
             );
           })}
@@ -397,21 +397,22 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                className={`inline-flex items-center gap-1 min-h-[44px] px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
                 {label}
-                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-40"}`}>{count}</span>
+                <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-100"}`}>{count}</span>
               </button>
             );
           })}
           {categories.length > 4 && !categoriesExpanded && (
             <button
+              type="button"
               onClick={() => setCategoriesExpanded(true)}
-              className="inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1 min-h-[44px] px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3" />
               {t("moreCategories", { count: categories.length - 4 })}
@@ -419,8 +420,9 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           )}
           {categoriesExpanded && categories.length > 4 && (
             <button
+              type="button"
               onClick={() => setCategoriesExpanded(false)}
-              className="inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1 min-h-[44px] px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3 rotate-180" />
               {t("lessCategories")}

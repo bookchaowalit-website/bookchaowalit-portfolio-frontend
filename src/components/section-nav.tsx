@@ -103,7 +103,7 @@ export function SectionNav() {
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`group relative flex items-center justify-start p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              className={`group relative flex items-center justify-center min-h-[44px] min-w-[44px] p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
               aria-label={`Go to ${section.label}`}
@@ -158,7 +158,7 @@ export function SectionNav() {
         </AnimatePresence>
         <button
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex items-center gap-1.5 bg-background border border-border rounded-full px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex items-center gap-1.5 min-h-[44px] bg-background border border-border rounded-full px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label={`Section navigation — currently ${activeLabel}`}
           aria-expanded={mobileOpen}
         >

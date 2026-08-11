@@ -272,7 +272,8 @@ export function AtlasClient() {
         animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
-        <MixedTypographyTitle as="h1"
+        {/* Page-level h1 lives in atlas/page.tsx — keep this as visual section title only */}
+        <MixedTypographyTitle as="h2"
           words={[
             { text: t("heroWord1"), style: "cursive", size: "xl" },
             { text: t("heroWord2"), style: "bubble", size: "xl" },

@@ -168,7 +168,7 @@ export function AboutClient() {
           <NotebookSectionHeader title={t('experienceTitle')} subtitle={t('experienceSubtitle')} className="mb-6" />
           <div className="space-y-6">
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp1Role')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp1Role')}</h3>
               <p className="text-sm text-muted-foreground">{t('exp1Company')} • {t('exp1Period')}</p>
               <p className="text-sm mt-2">
                 {t('exp1Desc')}
@@ -176,7 +176,7 @@ export function AboutClient() {
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp2Role')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp2Role')}</h3>
               <p className="text-sm text-muted-foreground">{t('exp2Company')} • {t('exp2Period')}</p>
               <p className="text-sm mt-2">
                 {t('exp2Desc')}
@@ -184,7 +184,7 @@ export function AboutClient() {
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp3Role')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp3Role')}</h3>
               <p className="text-sm text-muted-foreground">{t('exp3Company')} • {t('exp3Period')}</p>
               <p className="text-sm mt-2">
                 {t('exp3Desc')}
@@ -192,7 +192,7 @@ export function AboutClient() {
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp4Role')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('exp4Role')}</h3>
               <p className="text-sm text-muted-foreground">{t('exp4Company')} • {t('exp4Period')}</p>
               <p className="text-sm mt-2">
                 {t('exp4Desc')}
@@ -206,12 +206,12 @@ export function AboutClient() {
           <NotebookSectionHeader title={t('educationTitle')} subtitle={t('educationSubtitle')} className="mb-6" />
           <div className="space-y-4">
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('edu1Title')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('edu1Title')}</h3>
               <p className="text-sm text-muted-foreground">{t('edu1School')}</p>
             </div>
             <Separator />
             <div>
-              <h4 className="font-semibold font-[family-name:var(--font-doodle)]">{t('certTitle')}</h4>
+              <h3 className="font-semibold font-[family-name:var(--font-doodle)]">{t('certTitle')}</h3>
               <ul className="text-sm text-muted-foreground mt-2 space-y-1">
                 <li>• {t('cert1')}</li>
                 <li>• {t('cert2')}</li>

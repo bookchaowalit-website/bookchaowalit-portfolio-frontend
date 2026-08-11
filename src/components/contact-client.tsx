@@ -146,9 +146,9 @@ export function ContactClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.6 }}
             >
-              <h3 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
+              <h2 className="text-xl font-[family-name:var(--font-script)] font-bold text-foreground mb-2">
                 {t("sendMessage")}
-              </h3>
+              </h2>
               <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)] mb-6">
                 {t("formDescription")}
               </p>

@@ -20,7 +20,7 @@ const MotionSpan = dynamic(() => import("framer-motion").then(mod => ({ default:
 });
 
 const MotionH1 = dynamic(() => import("framer-motion").then(mod => ({ default: mod.motion.h1 })), {
-  loading: () => <h1 />,
+  loading: () => <span className="inline-block min-h-[1em]" aria-hidden="true" />,
   ssr: false
 });
 

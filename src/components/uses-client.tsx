@@ -24,7 +24,7 @@ function UseCard({ item, index }: { item: UseItem; index: number }) {
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h4 className="text-sm font-semibold">{item.name}</h4>
+          <h3 className="text-sm font-semibold">{item.name}</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.description}</p>
         </div>
         {item.url && (
@@ -32,9 +32,10 @@ function UseCard({ item, index }: { item: UseItem; index: number }) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex min-h-[44px] min-w-[44px] h-[44px] w-[44px] shrink-0 items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label={item.name}
           >
-            <ExternalLink className="size-3" />
+            <ExternalLink className="size-4" />
           </a>
         )}
       </div>
@@ -47,7 +48,7 @@ function UseSection({ title, icon: Icon, items }: { title: string; icon: React.E
     <div className="py-8">
       <div className="flex items-center gap-2 mb-4">
         <Icon className="size-4 text-muted-foreground" />
-        <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+        <h2 className="text-sm font-medium text-muted-foreground">{title}</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 border border-border">
         {items.map((item, i) => (

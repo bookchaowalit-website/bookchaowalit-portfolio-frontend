@@ -22,13 +22,12 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        // h-11 / size-11 = 44px — matches the README's documented WCAG
-        // touch-target claim. Previously h-10 (40px) / size-9 (36px), which
-        // meant the claim didn't match the actual component. See PRODUCT.md.
-        default: "h-11 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-11 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 min-w-[44px]",
-        lg: "h-11 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-11",
+        // Explicit 44px (WCAG 2.5.5 target size) via arbitrary values so the
+        // hit area does not depend only on the spacing scale token.
+        default: "min-h-[44px] h-11 px-4 py-2 has-[>svg]:px-3",
+        sm: "min-h-[44px] h-11 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 min-w-[44px]",
+        lg: "min-h-[44px] h-11 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-11 min-h-[44px] min-w-[44px] h-[44px] w-[44px]",
       },
     },
     defaultVariants: {

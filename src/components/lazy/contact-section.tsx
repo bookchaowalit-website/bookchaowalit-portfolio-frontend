@@ -110,50 +110,54 @@ export function ContactSection() {
               </div>
 
               <div className="flex justify-center gap-4 text-2xl" role="list" aria-label="Social links">
-                <motion.a
-                  href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
-                  className="hover:text-primary transition-colors"
-                  aria-label="LinkedIn"
-                  role="listitem"
-                >
-                  <Briefcase className="w-6 h-6" />
-                </motion.a>
-                <motion.a
-                  href="https://github.com/bookchaowalit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
-                  className="hover:text-primary transition-colors"
-                  aria-label="GitHub"
-                  role="listitem"
-                >
-                  <Github className="w-6 h-6" />
-                </motion.a>
-                <motion.a
-                  href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
-                  className="hover:text-primary transition-colors"
-                  aria-label="Upwork"
-                  role="listitem"
-                >
-                  <Wrench className="w-6 h-6" />
-                </motion.a>
-                <motion.a
-                  href="https://fastwork.co/user/bookchao"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
-                  className="hover:text-primary transition-colors"
-                  aria-label="Fastwork"
-                  role="listitem"
-                >
-                  <Zap className="w-6 h-6" />
-                </motion.a>
+                <div role="listitem">
+                  <motion.a
+                    href="https://www.linkedin.com/in/chaowalit-greepoke-b687351a0/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
+                    className="inline-flex min-h-[44px] min-w-[44px] h-[44px] w-[44px] items-center justify-center hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label="LinkedIn"
+                  >
+                    <Briefcase className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <div role="listitem">
+                  <motion.a
+                    href="https://github.com/bookchaowalit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
+                    className="inline-flex min-h-[44px] min-w-[44px] h-[44px] w-[44px] items-center justify-center hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label="GitHub"
+                  >
+                    <Github className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <div role="listitem">
+                  <motion.a
+                    href="https://www.upwork.com/freelancers/~01bb8b7612ad1fd8bc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
+                    className="inline-flex min-h-[44px] min-w-[44px] h-[44px] w-[44px] items-center justify-center hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label="Upwork"
+                  >
+                    <Wrench className="w-6 h-6" />
+                  </motion.a>
+                </div>
+                <div role="listitem">
+                  <motion.a
+                    href="https://fastwork.co/user/bookchao"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={reducedMotion ? undefined : { scale: 1.2, y: -2 }}
+                    className="inline-flex min-h-[44px] min-w-[44px] h-[44px] w-[44px] items-center justify-center hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label="Fastwork"
+                  >
+                    <Zap className="w-6 h-6" />
+                  </motion.a>
+                </div>
               </div>
             </div>
           </div>

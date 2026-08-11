@@ -62,6 +62,20 @@ export function HelpDialog() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  // Move focus into the dialog when it opens so Escape/Tab behave predictably.
+  useEffect(() => {
+    if (!open) return;
+    const id = window.requestAnimationFrame(() => {
+      const root = dialogRef.current;
+      if (!root) return;
+      const focusable = root.querySelector<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      (focusable ?? root).focus();
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [open]);
+
   return (
     <>
       {/* Trigger button — visible in nav toolbar (44px touch target) */}
@@ -100,7 +114,8 @@ export function HelpDialog() {
               role="dialog"
               aria-modal="true"
               aria-label="Keyboard shortcuts and help"
-              className="relative w-full max-w-md bg-background border border-border"
+              tabIndex={-1}
+              className="relative w-full max-w-md bg-background border border-border outline-none"
               style={{
                 clipPath: "polygon(0% 0%, 96% 0%, 100% 4%, 100% 100%, 4% 100%, 0% 96%)"
               }}
@@ -175,8 +190,9 @@ export function HelpDialog() {
                     press <kbd className="px-1.5 py-0.5 font-mono bg-muted border border-border text-foreground">?</kbd> anytime
                   </p>
                   <button
+                    type="button"
                     onClick={() => setOpen(false)}
-                    className="px-3 py-1.5 text-xs font-[family-name:var(--font-doodle)] border border-border bg-muted hover:bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex items-center justify-center min-h-[44px] px-3 py-2 text-xs font-[family-name:var(--font-doodle)] border border-border bg-muted hover:bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label="Close help dialog"
                   >
                     close ✕

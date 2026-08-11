@@ -148,7 +148,7 @@ function PivotalCard({ moment, index }: { moment: PivotalMoment; index: number }
       viewport={{ once: true, margin: "-50px" }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.1 }}
     >
-      <h4 className="text-sm font-semibold mb-1">{moment.title}</h4>
+      <h3 className="text-sm font-semibold mb-1">{moment.title}</h3>
       <p className="text-xs text-muted-foreground leading-relaxed">{moment.desc}</p>
     </motion.div>
   );
@@ -164,7 +164,7 @@ function PhilosophyCard({ philosophy, index }: { philosophy: Philosophy; index: 
       viewport={{ once: true, margin: "-50px" }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.15 }}
     >
-      <h4 className="text-sm font-semibold mb-2">{philosophy.title}</h4>
+      <h3 className="text-sm font-semibold mb-2">{philosophy.title}</h3>
       <p className="text-sm text-foreground leading-relaxed">{philosophy.content}</p>
     </motion.div>
   );

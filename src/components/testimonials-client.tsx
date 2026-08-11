@@ -146,9 +146,9 @@ export function TestimonialsClient({ testimonials }: TestimonialsClientProps) {
         <SketchyFrame variant="double" className="p-8 text-center">
           <div className="space-y-4 max-w-2xl mx-auto">
             <MessageSquarePlus className="w-10 h-10 text-primary/60 mx-auto" />
-            <h3 className="text-xl font-[family-name:var(--font-comic)] font-bold">
+            <h2 className="text-xl font-[family-name:var(--font-comic)] font-bold">
               {t("collectionTitle")}
-            </h3>
+            </h2>
             <p className="text-sm text-muted-foreground font-[family-name:var(--font-doodle)]">
               {t("collectionDesc")}
             </p>
