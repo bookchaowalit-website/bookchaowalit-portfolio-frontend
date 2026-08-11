@@ -272,7 +272,7 @@ export function AtlasClient() {
         animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h1"
           words={[
             { text: t("heroWord1"), style: "cursive", size: "xl" },
             { text: t("heroWord2"), style: "bubble", size: "xl" },

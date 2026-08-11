@@ -28,7 +28,7 @@ export function TradingClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
-          <MixedTypographyTitle
+          <MixedTypographyTitle as="h1"
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "bubble", size: "lg" },

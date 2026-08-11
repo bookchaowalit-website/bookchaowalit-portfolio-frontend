@@ -144,10 +144,10 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="text-muted-foreground/60 hover:text-foreground transition-colors"
+              className="inline-flex items-center justify-center min-h-11 min-w-11 text-muted-foreground/60 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`${project.name} GitHub repository`}
             >
-              <Github className="size-3" />
+              <Github className="size-4" />
             </a>
           )}
         </div>
@@ -293,7 +293,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
       {/* Header */}
       <div className="py-8">
         <div className="text-center space-y-4">
-          <MixedTypographyTitle
+          <MixedTypographyTitle as="h1"
             words={[
               { text: t("titleWord1"), style: "cursive", size: "xl" },
               { text: t("titleWord2"), style: "filled", size: "xl" },
@@ -306,7 +306,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         </div>
 
         {/* Stats Banner — uses the same gap-px grid language */}
-        <div className="grid grid-cols-5 max-w-lg mx-auto mt-8 gap-px bg-border">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 max-w-lg mx-auto mt-8 gap-px bg-border">
           <div className="bg-background flex flex-col items-center py-3 px-2">
             <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statTotal")}</span>
@@ -332,7 +332,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statArchived")}</span>
           </div>
-          <div className="bg-background flex flex-col items-center py-3 px-2">
+          <div className="bg-background flex flex-col items-center py-3 px-2 col-span-2 sm:col-span-1">
             <span className="flex items-center gap-1.5">
               <Star className="size-3.5 text-muted-foreground" />
               <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
@@ -371,7 +371,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={status}
                 onClick={() => handleStatusChange(status)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                className={`inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -397,7 +397,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                className={`inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -411,7 +411,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           {categories.length > 4 && !categoriesExpanded && (
             <button
               onClick={() => setCategoriesExpanded(true)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3" />
               {t("moreCategories", { count: categories.length - 4 })}
@@ -420,7 +420,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           {categoriesExpanded && categories.length > 4 && (
             <button
               onClick={() => setCategoriesExpanded(false)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1 min-h-11 px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3 rotate-180" />
               {t("lessCategories")}

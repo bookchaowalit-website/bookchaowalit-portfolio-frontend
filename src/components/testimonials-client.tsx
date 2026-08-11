@@ -45,7 +45,7 @@ export function TestimonialsClient({ testimonials }: TestimonialsClientProps) {
     <div className="space-y-8">
       {/* Page Header */}
       <div className="text-center space-y-4">
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h1"
           words={[
             { text: t("pageTitle"), style: "cursive", size: "lg" },
             { text: "★", style: "bubble", size: "lg" },

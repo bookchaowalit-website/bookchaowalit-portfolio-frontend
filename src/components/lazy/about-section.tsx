@@ -22,7 +22,7 @@ export function AboutSection() {
       className="space-y-8"
     >
       <div className="text-center">
-        <MixedTypographyTitle 
+        <MixedTypographyTitle as="h2" 
           words={[
             { text: t('aboutWord1'), style: "cursive", size: "lg" },
             { text: t('aboutWord2'), style: "bubble", size: "lg" },

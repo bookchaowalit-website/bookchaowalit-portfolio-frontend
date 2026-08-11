@@ -19,7 +19,7 @@ export function BlogSection({ blogPosts = [] }: { blogPosts?: BlogPost[] }) {
 
   return (
     <section className="space-y-8">
-      <MixedTypographyTitle
+      <MixedTypographyTitle as="h2"
         words={[
           { text: t('blogTitleWord1'), style: "cursive", size: "lg" },
           { text: t('blogTitleWord2'), style: "bubble", size: "lg" },

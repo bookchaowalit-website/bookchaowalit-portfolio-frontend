@@ -57,8 +57,9 @@ function ProjectPreviewModal({
         onClick={(e) => e.stopPropagation()}
       >
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-3 right-3 size-8 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          className="absolute top-3 right-3 size-11 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label={t("closePreview")}
         >
           <X className="size-4" />
@@ -132,7 +133,7 @@ export function FeaturedProjects() {
   return (
     <section className="space-y-8">
       <div className="text-center">
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h2"
           words={[
             { text: tProjects("featuredWord1"), style: "cursive", size: "lg" },
             { text: tProjects("featuredWord2"), style: "filled", size: "lg" },

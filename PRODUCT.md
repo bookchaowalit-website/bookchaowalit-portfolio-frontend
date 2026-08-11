@@ -137,18 +137,15 @@ should be trusted versus interrogated.
 1. Study `build:analyze` output and split the 534 kB vendor chunk more
    granularly — MDX/animation/i18n libraries are likely bundled together
    even on routes that don't need all of them.
-2. **Resend domain (ops):** verify `bookchaowalit.com` in the Resend
-   dashboard, then set Vercel env `RESEND_FROM` (code now reads it;
-   sandbox remains the fallback). See `RESEND-DOMAIN-SETUP.md`.
-3. **Live-link honesty (done 2026-08-11):** probed all 129 project demo
-   URLs. 99 reachable; 29 declared-`live` reclassified to `wip` (3 public
-   404s + 26 Vercel CNAME hosts with TLS EOF / no public HTTPS). Machine
-   report lives in solo-empire
-   `repository-catalog/PORTFOLIO-LIVE-LINK-AUDIT-2026-08-11.md`. Next:
-   fix Vercel domain/SSL for flagships you still want public, then flip
-   those slugs back to `live`.
-4. Optional Lighthouse numbers for interview evidence (still Planned in
-   the Tier A evidence matrix).
+2. **Resend domain (ops):** deferred by owner 2026-08-11. Code supports
+   `RESEND_FROM`; sandbox remains the fallback. See `RESEND-DOMAIN-SETUP.md`.
+3. **Live-link honesty (done 2026-08-11):** 29 declared-`live` → `wip`
+   where demos were unreachable; booknbook URL fixed to consulting host.
+4. **UI/UX a11y pass (done 2026-08-11):** page titles use semantic
+   `MixedTypographyTitle as="h1"`; homepage sections `as="h2"`; theme/help
+   use 44px `Button size="icon"`; project filters/GitHub/stats banner
+   mobile layout tightened. Still Planned: measured Lighthouse run.
+5. Optional Lighthouse numbers for interview evidence (still Planned).
 
 ## Status
 

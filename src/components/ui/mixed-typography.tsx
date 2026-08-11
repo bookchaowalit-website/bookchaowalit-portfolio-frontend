@@ -5,10 +5,15 @@ import { motion } from "framer-motion";
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { Lightbulb, StickyNote, AlertTriangle, AlertCircle } from "lucide-react";
 
-// Mixed typography component with different styles in one composition
+type MixedTitleLevel = "h1" | "h2" | "h3" | "div";
+
+// Mixed typography component with different styles in one composition.
+// Use `as="h1"` for page titles and `as="h2"` for homepage/section titles so
+// the visual design stays intact while the document outline is accessible.
 export function MixedTypographyTitle({
   words,
-  className = ""
+  className = "",
+  as = "div",
 }: {
   words: Array<{
     text: ReactNode;
@@ -16,8 +21,11 @@ export function MixedTypographyTitle({
     size?: "sm" | "md" | "lg" | "xl";
   }>;
   className?: string;
+  /** Semantic wrapper. Page titles should be h1; in-page sections h2. */
+  as?: MixedTitleLevel;
 }) {
   const reducedMotion = useReducedMotion();
+  const Comp = as;
   const getTextStyle = (style: "block" | "cursive" | "outlined" | "filled" | "shaded" | "bubble", size?: "sm" | "md" | "lg" | "xl") => {
     const sizeClasses: Record<"sm" | "md" | "lg" | "xl", string> = {
       sm: "text-2xl",
@@ -39,7 +47,7 @@ export function MixedTypographyTitle({
   };
 
   return (
-    <div className={`flex flex-wrap items-center justify-center gap-2 heading-depth-lg ${className}`}>
+    <Comp className={`flex flex-wrap items-center justify-center gap-2 heading-depth-lg font-normal ${className}`}>
       {words.map((word, index) => (
         <motion.span
           key={index}
@@ -59,7 +67,7 @@ export function MixedTypographyTitle({
           {word.text}
         </motion.span>
       ))}
-    </div>
+    </Comp>
   );
 }
 

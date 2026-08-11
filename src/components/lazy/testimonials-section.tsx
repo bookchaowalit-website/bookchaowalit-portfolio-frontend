@@ -34,7 +34,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
       className="space-y-8"
     >
       <div className="text-center space-y-4">
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h2"
           words={[
             { text: t("featuredTitle"), style: "cursive", size: "lg" },
             { text: "★", style: "bubble", size: "lg" },

@@ -57,7 +57,7 @@ export function NewsletterCTA() {
     >
       <SketchyFrame variant="double">
         <div className="p-8 text-center">
-          <MixedTypographyTitle
+          <MixedTypographyTitle as="h2"
             words={[
               { text: t('titleWord1'), style: "cursive", size: "lg" },
               { text: t('titleWord2'), style: "bubble", size: "lg" },

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
@@ -23,15 +24,17 @@ export function ThemeToggle() {
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  if (!mounted) return <div className="size-8" />;
+  if (!mounted) return <div className="size-11" aria-hidden="true" />;
 
   return (
-    <button
+    <Button
+      type="button"
+      variant="ghost"
+      size="icon"
       onClick={toggle}
-      className="size-8 inline-flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-    </button>
+    </Button>
   );
 }

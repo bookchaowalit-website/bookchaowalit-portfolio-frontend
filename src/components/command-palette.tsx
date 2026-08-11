@@ -289,11 +289,12 @@ export function CommandPalette() {
     <>
       {/* Keyboard shortcut hint — rendered in navigation area */}
       <button
+        type="button"
         onClick={() => setOpen(true)}
-        className="hidden md:inline-flex items-center gap-1.5 text-xs text-muted-foreground border border-border px-2 py-1 hover:border-primary/40 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="hidden md:inline-flex items-center gap-1.5 min-h-11 min-w-[44px] text-xs text-muted-foreground border border-border px-3 py-2 hover:border-primary/40 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         aria-label={t("openPalette")}
       >
-        <Search className="size-3" />
+        <Search className="size-3.5" />
         <kbd className="font-mono">⌘K</kbd>
       </button>
 

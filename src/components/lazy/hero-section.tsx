@@ -64,7 +64,7 @@ export function HeroSection() {
 
         <div className="relative space-y-6">
           <div>
-            <MixedTypographyTitle
+            <MixedTypographyTitle as="h2"
               words={[
                 { text: t('heroWord1'), style: "block", size: "lg" },
                 { text: t('heroWord2'), style: "cursive", size: "lg" },

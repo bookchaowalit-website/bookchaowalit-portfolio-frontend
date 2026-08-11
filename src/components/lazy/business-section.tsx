@@ -31,7 +31,7 @@ export function BusinessSection() {
       className="space-y-8"
     >
       <div className="text-center space-y-4">
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h2"
           words={[
             { text: t('myVenturesTitle'), style: "cursive", size: "lg" },
             { text: t('myVenturesSubtitle'), style: "bubble", size: "lg" },

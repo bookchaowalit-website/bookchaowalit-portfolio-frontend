@@ -22,7 +22,7 @@ export function ContactSection() {
       className="space-y-8"
     >
       <div className="text-center">
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h2"
           words={[
             { text: t('letsConnectWord1'), style: "cursive", size: "lg" },
             { text: t('letsConnectWord2'), style: "bubble", size: "lg" },

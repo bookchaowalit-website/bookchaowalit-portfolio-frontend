@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
+import { Button } from "@/components/ui/button";
 
 const shortcuts = [
   { keys: "⌘K / Ctrl+K", description: "Open command palette" },
@@ -63,15 +64,18 @@ export function HelpDialog() {
 
   return (
     <>
-      {/* Trigger button — visible in nav toolbar */}
-      <button
+      {/* Trigger button — visible in nav toolbar (44px touch target) */}
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon"
         onClick={() => setOpen(true)}
-        className="hidden md:inline-flex items-center justify-center w-8 h-8 text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm text-sm font-mono"
+        className="hidden md:inline-flex font-mono text-sm"
         aria-label="Keyboard shortcuts help"
         title="Keyboard shortcuts (?)"
       >
         ?
-      </button>
+      </Button>
 
       {mounted && createPortal(
       <AnimatePresence>

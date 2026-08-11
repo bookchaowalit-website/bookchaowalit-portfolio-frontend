@@ -74,7 +74,7 @@ export function ColophonClient() {
         animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
-        <MixedTypographyTitle
+        <MixedTypographyTitle as="h1"
           words={[
             { text: t("titleWord1"), style: "cursive", size: "xl" },
             { text: t("titleWord2"), style: "bubble", size: "xl" },
