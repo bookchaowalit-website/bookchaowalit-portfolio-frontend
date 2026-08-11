@@ -663,9 +663,29 @@ Add all variables from `.env.example` in the Vercel dashboard. Mark `GITHUB_TOKE
 | `npm run build` | Production build |
 | `npm start` | Start production server |
 | `npm run lint` | Run ESLint |
+| `npm run typecheck` | TypeScript `tsc --noEmit` |
+| `npm run e2e` | Full Playwright suite |
+| `npm run e2e:a11y` | Focused a11y/keyboard Playwright suite (CI) |
+| `npm run e2e:data-products` | Data-products walkthrough e2e |
+| `npm run ci:local` | typecheck + lint + unit + build (no browser) |
 | `npm run check:github` | Test GitHub API integration |
 | `npm run mcp:test` | Test MCP server endpoint |
 | `npm run mcp:dev` | Test MCP in development mode |
+
+### CI
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
+
+1. **quality** — `typecheck`, `lint`, data-product unit tests  
+2. **a11y-e2e** — production build + `npm run e2e:a11y` (help dialog Escape, skip link, nav, locale/theme)
+
+Local equivalent for the keyboard suite against a running server:
+
+```bash
+npm run build && npm run start -- -p 3000
+# other terminal:
+BASE_URL=http://127.0.0.1:3000 npm run e2e:a11y
+```
 
 ---
 

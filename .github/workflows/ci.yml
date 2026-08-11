@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Typecheck, lint, unit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Data-product unit tests
+        run: npm run test:data-products
+
+  a11y-e2e:
+    name: A11y / keyboard e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Production build
+        run: npm run build
+        env:
+          # Build must not require live secrets; contact/newsletter fail closed at runtime.
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Start production server
+        run: |
+          npm run start -- -p 3000 &
+          echo $! > /tmp/portfolio-server.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:3000/en" >/dev/null; then
+              echo "server ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "server failed to become ready"
+          exit 1
+
+      - name: Keyboard / a11y Playwright suite
+        run: npm run e2e:a11y
+        env:
+          BASE_URL: http://127.0.0.1:3000
+          CI: "true"
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-a11y
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Stop production server
+        if: always()
+        run: |
+          if [ -f /tmp/portfolio-server.pid ]; then
+            kill "$(cat /tmp/portfolio-server.pid)" 2>/dev/null || true
+          fi

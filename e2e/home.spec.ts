@@ -10,7 +10,8 @@ test.describe('Homepage', () => {
 
   test('has all major sections', async ({ page }) => {
     await page.goto('/en');
-    const sections = ['#hero', '#skills', '#about', '#projects', '#contact'];
+    // Section ids match lazy home sections in the current homepage composition.
+    const sections = ['#hero', '#about', '#projects', '#blog', '#contact'];
     for (const id of sections) {
       await expect(page.locator(id)).toBeVisible();
     }

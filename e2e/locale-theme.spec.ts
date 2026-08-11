@@ -19,24 +19,33 @@ test.describe('Locale Switching', () => {
   test('JSON-LD structured data is present', async ({ page }) => {
     await page.goto('/en');
     const jsonLd = page.locator('script[type="application/ld+json"]');
-    await expect(jsonLd).toBeAttached();
-    const content = await jsonLd.textContent();
-    expect(content).toContain('"Person"');
-    expect(content).toContain('Chaowalit Greepoke');
+    await expect(jsonLd.first()).toBeAttached();
+    // Multiple JSON-LD blocks may exist; assert any graph mentions Person.
+    const contents = await jsonLd.allTextContents();
+    const joined = contents.join('\n');
+    expect(joined).toMatch(/"@type"\s*:\s*"Person"/);
+    expect(joined).toContain('Chaowalit Greepoke');
   });
 });
+
 
 test.describe('Theme Toggle', () => {
   test('theme toggle button exists', async ({ page }) => {
     await page.goto('/en');
-    const toggle = page.locator('button[aria-label*="dark mode" i], button[aria-label*="light mode" i]');
+    const toggle = page.getByRole('button', { name: /switch to (dark|light) mode/i });
     await expect(toggle).toBeVisible();
   });
 
   test('toggling theme adds dark class', async ({ page }) => {
     await page.goto('/en');
-    const toggle = page.locator('button[aria-label*="dark mode" i]');
-    await toggle.click();
+    // Ensure we start from light if possible, then switch to dark.
+    const toDark = page.getByRole('button', { name: /switch to dark mode/i });
+    const toLight = page.getByRole('button', { name: /switch to light mode/i });
+    if (await toLight.isVisible().catch(() => false)) {
+      await toLight.click();
+    }
+    await expect(toDark).toBeVisible();
+    await toDark.click();
     await expect(page.locator('html')).toHaveClass(/dark/);
   });
 });
