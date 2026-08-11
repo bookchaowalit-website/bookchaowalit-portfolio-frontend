@@ -681,6 +681,10 @@ GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
 1. **quality** — `typecheck`, `lint`, data-product unit tests  
 2. **a11y-e2e** — production build + `npm run e2e:a11y` (help dialog Escape, skip link, nav, locale/theme)
 
+**Branch protection on `main`:** required status checks  
+`Typecheck, lint, unit` and `A11y / keyboard e2e` (strict, up-to-date branch).  
+Force-push and branch deletion are disabled. Direct push to `main` still works for admins; PR merges must be green.
+
 Local equivalent for the keyboard suite against a running server:
 
 ```bash
