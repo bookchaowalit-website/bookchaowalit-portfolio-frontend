@@ -22,7 +22,8 @@
     "lhci:ci": "lhci autorun --config=lighthouserc.ci.json",
     "test:data-products": "node --experimental-strip-types --test src/lib/data-products/__tests__/**/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "ci:local": "npm run typecheck && npm run lint && npm run test:data-products && npm run build"
+    "ci:local": "npm run typecheck && npm run lint && npm run test:data-products && npm run build",
+    "test:a11y": "playwright test e2e/a11y-axe.spec.ts --project=chromium"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -59,6 +60,7 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/eslintrc": "^3",
     "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^16.2.9",

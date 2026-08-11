@@ -1,6 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.BASE_URL || 'http://localhost:3000';
+// Prefer a dedicated port so local services on :3000 do not collide.
+const port = process.env.PORT || process.env.PLAYWRIGHT_PORT || '4318';
+const baseURL = process.env.BASE_URL || `http://127.0.0.1:${port}`;
+const managedServer = !process.env.BASE_URL;
 
 export default defineConfig({
   testDir: './e2e',
@@ -24,14 +27,14 @@ export default defineConfig({
     },
   ],
   // Skip auto webServer when BASE_URL points at an already-running host.
-  ...(process.env.BASE_URL
-    ? {}
-    : {
+  ...(managedServer
+    ? {
         webServer: {
-          command: 'npm run dev',
+          command: `npx next dev -H 127.0.0.1 -p ${port}`,
           url: baseURL,
           reuseExistingServer: !process.env.CI,
-          timeout: 120_000,
+          timeout: 180_000,
         },
-      }),
+      }
+    : {}),
 });
