@@ -29,38 +29,61 @@ export function HelpDialog() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  // Keep a ref in sync so document key handlers never close over a stale `open`.
+  const openRef = useRef(false);
   const reducedMotion = useReducedMotion();
   useFocusTrap(dialogRef, open);
 
+  const close = useCallback(() => {
+    openRef.current = false;
+    setOpen(false);
+    // Return focus to the trigger when possible (keyboard / screen-reader UX).
+    window.requestAnimationFrame(() => triggerRef.current?.focus());
+  }, []);
+
+  const openDialog = useCallback(() => {
+    openRef.current = true;
+    setOpen(true);
+  }, []);
+
   useEffect(() => { setMounted(true); }, []);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    // Don't trigger if user is typing in an input
-    const target = e.target as HTMLElement;
-    if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
-      return;
-    }
-
-    if (e.key === "?" && !open) {
-      e.preventDefault();
-      setOpen(true);
-    }
-    if (e.key === "Escape" && open) {
-      setOpen(false);
-    }
+  useEffect(() => {
+    openRef.current = open;
   }, [open]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
+        return;
+      }
+
+      if (e.key === "?" && !openRef.current) {
+        e.preventDefault();
+        openDialog();
+        return;
+      }
+
+      if (e.key === "Escape" && openRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        close();
+      }
+    };
+
+    // Capture phase so Escape closes help even if a child stops bubble.
+    document.addEventListener("keydown", handleKeyDown, true);
+    return () => document.removeEventListener("keydown", handleKeyDown, true);
+  }, [close, openDialog]);
 
   // Listen for open-help event from command palette
   useEffect(() => {
-    const handleOpenHelp = () => setOpen(true);
+    const handleOpenHelp = () => openDialog();
     document.addEventListener("open-help", handleOpenHelp);
     return () => document.removeEventListener("open-help", handleOpenHelp);
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+  }, [openDialog]);
 
   // Move focus into the dialog when it opens so Escape/Tab behave predictably.
   useEffect(() => {
@@ -76,16 +99,29 @@ export function HelpDialog() {
     return () => window.cancelAnimationFrame(id);
   }, [open]);
 
+  // Lock body scroll while open (prevents background tab traps feeling).
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <>
       {/* Trigger button — visible in nav toolbar (44px touch target) */}
       <Button
+        ref={triggerRef}
         type="button"
         variant="ghost"
         size="icon"
-        onClick={() => setOpen(true)}
+        onClick={openDialog}
         className="hidden md:inline-flex font-mono text-sm"
         aria-label="Keyboard shortcuts help"
+        aria-haspopup="dialog"
+        aria-expanded={open}
         title="Keyboard shortcuts (?)"
       >
         ?
@@ -96,15 +132,16 @@ export function HelpDialog() {
         {open && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            data-state="open"
             initial={reducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reducedMotion ? undefined : { opacity: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.15 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.12 }}
           >
             {/* Backdrop */}
             <div
               className="absolute inset-0 bg-background/80 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
+              onClick={close}
               aria-hidden="true"
             />
 
@@ -115,6 +152,14 @@ export function HelpDialog() {
               aria-modal="true"
               aria-label="Keyboard shortcuts and help"
               tabIndex={-1}
+              data-help-dialog="true"
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  close();
+                }
+              }}
               className="relative w-full max-w-md bg-background border border-border outline-none"
               style={{
                 clipPath: "polygon(0% 0%, 96% 0%, 100% 4%, 100% 100%, 4% 100%, 0% 96%)"
@@ -191,7 +236,7 @@ export function HelpDialog() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setOpen(false)}
+                    onClick={close}
                     className="inline-flex items-center justify-center min-h-[44px] px-3 py-2 text-xs font-[family-name:var(--font-doodle)] border border-border bg-muted hover:bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label="Close help dialog"
                   >
