@@ -220,7 +220,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkJsonLd) }}
         />
       )}
-      <ProjectDetailClient project={project} locale={locale} relatedBlogPosts={relatedBlogPosts} />
+      <ProjectDetailClient project={project} relatedBlogPosts={relatedBlogPosts} />
     </>
   );
 }

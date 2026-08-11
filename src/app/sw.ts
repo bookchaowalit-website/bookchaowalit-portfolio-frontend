@@ -11,6 +11,28 @@ declare global {
 
 declare const self: WorkerGlobalScope & typeof globalThis;
 
+/** Legacy path deprecated in favor of /data/data-products/*.json envelopes. */
+const LEGACY_SCRAPER_DASHBOARD = /scraper-dashboard\.json/i;
+
+/**
+ * Drop any cached copy of the deprecated scraper-dashboard JSON so offline
+ * clients cannot treat it as a live data source.
+ */
+async function purgeLegacyScraperDashboardCaches(): Promise<void> {
+  const names = await caches.keys();
+  await Promise.all(
+    names.map(async (name) => {
+      const cache = await caches.open(name);
+      const keys = await cache.keys();
+      await Promise.all(
+        keys
+          .filter((request) => LEGACY_SCRAPER_DASHBOARD.test(request.url))
+          .map((request) => cache.delete(request)),
+      );
+    }),
+  );
+}
+
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
@@ -21,3 +43,8 @@ const serwist = new Serwist({
 });
 
 serwist.addEventListeners();
+
+self.addEventListener("activate", (event) => {
+  const extendable = event as Event & { waitUntil?: (promise: Promise<unknown>) => void };
+  extendable.waitUntil?.(purgeLegacyScraperDashboardCaches());
+});

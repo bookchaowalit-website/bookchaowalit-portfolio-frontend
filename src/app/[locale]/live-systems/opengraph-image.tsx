@@ -7,11 +7,11 @@ export const contentType = 'image/png';
 const content: Record<string, { title: string; subtitle: string }> = {
   en: {
     title: "Live Automation Ecosystem",
-    subtitle: "11 data sources · Daily scraping · Firecrawl fallback · Telegram digest",
+    subtitle: "8 free-only data APIs · Local fixtures · No external writes",
   },
   th: {
     title: "ระบบอัตโนมัติที่ทำงานอยู่",
-    subtitle: "11 แหล่งข้อมูล · Scrape รายวัน · Firecrawl fallback · Telegram digest",
+    subtitle: "Data API แบบ free-only 8 ตัว · Local fixtures · ไม่มี external writes",
   },
 };
 

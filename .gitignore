@@ -46,3 +46,7 @@ next-env.d.ts
 
 # impeccable critique artifacts
 .impeccable/
+
+# playwright artifacts
+playwright-report/
+test-results/

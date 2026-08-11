@@ -11,13 +11,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const seoTitles = {
-    en: "Live Systems - Automation Ecosystem | Chaowalit Greepoke",
-    th: "ระบบอัตโนมัติ - ระบบนิเวศอัตโนมัติ | เชาวลิต กรีโภค"
+    en: "Live Systems - Data Product APIs | Chaowalit Greepoke",
+    th: "ระบบสด - Data Product APIs | เชาวลิต กรีโภค"
   };
 
   const seoDescriptions = {
-    en: "A self-maintaining data pipeline scraping 11 sources daily, tracking opportunities, and delivering actionable intelligence via Telegram and Todoist.",
-    th: "ระบบข้อมูลอัตโนมัติที่ scrape 11 แหล่งทุกวัน ติดตามโอกาส และส่งข้อมูลเชิงปฏิบัติผ่าน Telegram และ Todoist"
+    en: "Portfolio consumer for eight free-only local data-product APIs (ports 8101–8108) with fixture fallback, envelope contracts, and no external writes.",
+    th: "หน้า consumer สำหรับ data-product API แบบ free-only ทั้ง 8 ตัว (พอร์ต 8101–8108) พร้อม fixture fallback และไม่มีการ write ภายนอก"
   };
 
   return {
@@ -25,12 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
-      'Automation',
-      'Web Scraping',
-      'Data Pipeline',
-      'Cron Jobs',
-      'Python',
-      'Firecrawl',
+      'Data Products',
+      'Local API',
+      'Free-only',
+      'Portfolio',
+      'TypeScript',
       'Chaowalit Greepoke',
       'Solo Empire'
     ].join(', '),
@@ -69,11 +68,11 @@ export default async function LiveSystemsPage({ params }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: locale === 'th' ? 'ระบบอัตโนมัติ - ระบบนิเวศอัตโนมัติ' : 'Live Systems - Automation Ecosystem',
+    name: locale === 'th' ? 'ระบบสด - Data Product APIs' : 'Live Systems - Data Product APIs',
     url: `${baseUrl}/${locale}/live-systems`,
     description: locale === 'th'
-      ? 'ระบบข้อมูลอัตโนมัติที่ scrape 11 แหล่งทุกวัน ติดตามโอกาส และส่งข้อมูลเชิงปฏิบัติ'
-      : 'A self-maintaining data pipeline scraping 11 sources daily, tracking opportunities, and delivering actionable intelligence.',
+      ? 'Consumer สำหรับ data-product API แบบ free-only พร้อม fixture fallback'
+      : 'Consumer for free-only data-product APIs with sanitized fixture fallback.',
     inLanguage: locale === 'th' ? 'th' : 'en',
     author: {
       '@type': 'Person',
@@ -90,8 +89,8 @@ export default async function LiveSystemsPage({ params }: Props) {
       applicationCategory: 'DataPipeline',
       operatingSystem: 'Linux VPS',
       description: locale === 'th'
-        ? 'ระบบ scrape ข้อมูลอัตโนมัติ 11 แหล่ง พร้อม Firecrawl fallback, cron scheduling, Telegram digest'
-        : 'Automated data scraping system with 11 sources, Firecrawl fallback, cron scheduling, and Telegram digest delivery',
+        ? 'ระบบ consumer สำหรับ data-product API แบบ free-only พร้อม fixture fallback และไม่มี external writes'
+        : 'Free-only data-product API consumer with sanitized fixture fallback and no external writes',
       offers: {
         '@type': 'Offer',
         price: '0',

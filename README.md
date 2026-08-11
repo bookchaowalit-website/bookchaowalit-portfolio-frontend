@@ -4,6 +4,12 @@ Personal portfolio website of **Chaowalit Greepoke** — Tech Generalist & Solop
 
 Built with **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **shadcn/ui**. Features bilingual support (EN/TH), MDX blog, a built-in MCP server, live GitHub activity, and a Resend-powered contact form.
 
+See [`PRODUCT.md`](./PRODUCT.md) for the interview case study — a claims
+audit of this README's own accessibility/SEO/performance tables, plus the
+real finding of that pass: `npm run lint` was reporting 10,867 problems
+because of a broken ESLint config that was linting generated files; the
+real number was 1.
+
 ---
 
 ## Table of Contents

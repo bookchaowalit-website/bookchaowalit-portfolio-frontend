@@ -16,7 +16,10 @@
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
     "e2e:report": "playwright show-report",
-    "lhci": "lhci autorun"
+    "e2e:data-products": "playwright test e2e/data-products-walkthrough.spec.ts --project=chromium",
+    "lhci": "lhci autorun",
+    "test:data-products": "node --experimental-strip-types --test src/lib/data-products/__tests__/**/*.test.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -40,7 +43,7 @@
     "framer-motion": "^12.23.12",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.542.0",
-    "next": "15.5.9",
+    "next": "^15.5.22",
     "next-intl": "^4.3.5",
     "next-mdx-remote": "^6.0.0",
     "react": "19.1.0",

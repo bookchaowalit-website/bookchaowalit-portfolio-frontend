@@ -8,7 +8,7 @@ import { allProjects, categoryMeta, type ProjectCategory } from '../../../data/a
 
 export const getProjectsTool: McpTool = {
   name: 'get_projects',
-  description: 'Get information about Chaowalit Greepoke\'s projects including name, description, technologies used, demo URLs, and GitHub repositories. Returns all 100 projects or filtered by category or featured status.',
+  description: `Get information about Chaowalit Greepoke's projects including name, description, technologies used, demo URLs, and GitHub repositories. Returns all ${allProjects.length} projects or filtered by category or featured status.`,
   inputSchema: {
     type: 'object',
     properties: {

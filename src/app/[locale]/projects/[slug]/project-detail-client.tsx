@@ -26,7 +26,7 @@ import {
 
 type RelatedBlogPost = { slug: string; title: string; excerpt: string };
 
-export function ProjectDetailClient({ project, locale, relatedBlogPosts = [] }: { project: AppProject; locale: string; relatedBlogPosts?: RelatedBlogPost[] }) {
+export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { project: AppProject; relatedBlogPosts?: RelatedBlogPost[] }) {
   const t = useTranslations("projectDetail");
   const [stars, setStars] = useState(0);
   const [starsError, setStarsError] = useState(false);

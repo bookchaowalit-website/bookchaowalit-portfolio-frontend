@@ -13,6 +13,17 @@ const withSerwist = withSerwistInit({
   disable: process.env.NODE_ENV === 'development',
   register: true,
   scope: '/',
+  // Never precache the deprecated scraper-dashboard JSON. Consumers use
+  // /data/data-products/*.json envelopes or local APIs on ports 8101–8108.
+  exclude: [/scraper-dashboard\.json$/i],
+  manifestTransforms: [
+    async (manifestEntries) => ({
+      manifest: manifestEntries.filter(
+        (entry) => !String(entry.url || '').includes('scraper-dashboard'),
+      ),
+      warnings: [],
+    }),
+  ],
 });
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -115,6 +126,22 @@ const nextConfig = {
   // Headers for caching and performance
   async headers() {
     return [
+      {
+        // DevHub's Playground (bookchaowalit-devhub-frontend) calls this
+        // endpoint directly from the browser. The route's own OPTIONS
+        // handler only covered the CORS preflight — the actual POST
+        // response never carried Access-Control-Allow-Origin, so the
+        // browser blocked reading the response even after a successful
+        // preflight. Config-level headers apply to every response
+        // (GET/POST/OPTIONS) for this path, fixing it without touching
+        // route.ts. See devhub's PRODUCT.md for the full diagnosis.
+        source: '/api/mcp',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+        ],
+      },
       {
         source: '/profile.webp',
         headers: [

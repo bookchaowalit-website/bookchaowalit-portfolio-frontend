@@ -1,134 +1,335 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
-  Server, Activity, AlertTriangle, Database, Clock, ArrowRight,
-  Zap, Shield, RefreshCw, GitBranch, Bell, CheckCircle2,
-  XCircle, Loader2, ExternalLink, Cpu, Workflow, Send
+  Server,
+  Activity,
+  Database,
+  Clock,
+  ArrowRight,
+  Zap,
+  Shield,
+  RefreshCw,
+  GitBranch,
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  ExternalLink,
+  Cpu,
+  Workflow,
+  AlertTriangle,
 } from "lucide-react";
-
-interface SourceHealth {
-  name: string;
-  icon: string;
-  rows: number;
-  last_updated: string;
-  status: string;
-  new_items: number;
-}
-
-interface DashboardData {
-  generated_at: string;
-  sources: Record<string, SourceHealth>;
-  alerts: Array<{ source: string; icon: string; direction: string; value: number; label: string }>;
-  stats: { total_sources: number; active_sources: number; total_alerts: number; total_data_points: number };
-  summary: Record<string, unknown>;
-}
+import {
+  DATA_PRODUCT_CATALOG,
+  FREE_ONLY_DEFAULTS,
+  fetchAllProducts,
+  toHealthSummaries,
+  type ConsumerLoadState,
+  type ProductHealthSummary,
+  type ProductLoadResult,
+} from "@/lib/data-products";
 
 const architectureSteps = [
-  { icon: Globe, label: "24 Scheduler Jobs", desc: "Async Python scrapers with Firecrawl fallback", color: "text-blue-500" },
-  { icon: Clock, label: "24/7 Async Scheduler", desc: "Continuous loop with cron-based scheduling", color: "text-green-500" },
-  { icon: Database, label: "SQLite + CSV", desc: "12 data categories, 2,400+ data points", color: "text-yellow-500" },
-  { icon: Workflow, label: "Dashboard Engine", desc: "Health tracking + 105+ alert generation", color: "text-purple-500" },
-  { icon: Send, label: "Telegram + Todoist", desc: "Morning digest + task push", color: "text-pink-500" },
+  {
+    icon: Database,
+    label: "8 Data Products",
+    desc: "Independent domain APIs with normalized envelopes",
+    color: "text-blue-500",
+  },
+  {
+    icon: Shield,
+    label: "Free-only policy",
+    desc: "No paid providers or automatic paid fallbacks",
+    color: "text-green-500",
+  },
+  {
+    icon: Workflow,
+    label: "Local loopback APIs",
+    desc: "Development binds on 127.0.0.1:8101–8108",
+    color: "text-yellow-500",
+  },
+  {
+    icon: Cpu,
+    label: "Typed consumers",
+    desc: "Apps read GET /v1/records only — never scrape",
+    color: "text-purple-500",
+  },
+  {
+    icon: Zap,
+    label: "Fixture fallback",
+    desc: "Sanitized offline envelopes for demos without network",
+    color: "text-pink-500",
+  },
 ];
 
-const cronSchedule = [
-  { time: "07:00", task: "DeFi Yields + Flight Prices (Mon)", status: "active" },
-  { time: "08:00", task: "Stock Prices (10 symbols)", status: "active" },
-  { time: "08:15", task: "Dashboard Refresh (1/3)", status: "active" },
-  { time: "08:45", task: "Morning Digest → Telegram", status: "active" },
-  { time: "09:00", task: "HackerNews + Property Listings", status: "active" },
-  { time: "10:00", task: "Money Opportunities (13 sources)", status: "active" },
-  { time: "10:05", task: "Job Match Filter", status: "active" },
-  { time: "11:00", task: "AI Tools + ProductHunt + Dev.to", status: "active" },
-  { time: "11:15", task: "Dashboard Refresh (2/3)", status: "active" },
-  { time: "every 2h", task: "Tech News (Notebookspec + Matichon)", status: "active" },
-  { time: "every 4h", task: "Crypto Prices (10 coins)", status: "active" },
-  { time: "every 6h", task: "Jobs (19 boards) + Exchange Rates + Classifieds", status: "active" },
-  { time: "20:15", task: "Dashboard Refresh (3/3)", status: "active" },
-  { time: "20:45", task: "Evening Digest → Telegram", status: "active" },
+const apiSchedule = [
+  { port: "8101", product: "Crypto Markets", endpoint: "GET /v1/records" },
+  { port: "8102", product: "Stock Portfolio", endpoint: "GET /v1/records" },
+  { port: "8103", product: "Exchange Rates", endpoint: "GET /v1/records" },
+  { port: "8104", product: "DeFi Yields", endpoint: "GET /v1/records" },
+  { port: "8105", product: "Flight Prices", endpoint: "GET /v1/records" },
+  { port: "8106", product: "SEO Rankings", endpoint: "GET /v1/records" },
+  { port: "8107", product: "AI Tools", endpoint: "GET /v1/records" },
+  { port: "8108", product: "Opportunities", endpoint: "GET /v1/records" },
 ];
 
-function Globe({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" />
-    </svg>
-  );
-}
-
-function StatCard({ icon: Icon, value, label, color }: { icon: React.ElementType; value: string | number; label: string; color: string }) {
+function StatCard({
+  icon: Icon,
+  value,
+  label,
+  color,
+}: {
+  icon: React.ElementType;
+  value: string | number;
+  label: string;
+  color: string;
+}) {
   return (
     <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
       <div className={`p-2.5 rounded-lg ${color}`}>
         <Icon className="w-5 h-5 text-white" />
       </div>
       <div>
-        <div className="text-2xl font-bold">{typeof value === 'number' ? value.toLocaleString() : value}</div>
+        <div className="text-2xl font-bold">
+          {typeof value === "number" ? value.toLocaleString() : value}
+        </div>
         <div className="text-xs text-muted-foreground">{label}</div>
       </div>
     </div>
   );
 }
 
-function SourceCard({ source, keyName, index }: { source: SourceHealth; keyName: string; index: number }) {
+function stateTone(state: ConsumerLoadState): string {
+  if (state === "ready") return "text-green-500";
+  if (state === "stale" || state === "timeout" || state === "empty") return "text-yellow-500";
+  if (state === "loading") return "text-muted-foreground";
+  return "text-red-500";
+}
+
+function stateIcon(state: ConsumerLoadState) {
+  if (state === "ready") return CheckCircle2;
+  if (state === "loading") return Loader2;
+  if (state === "empty" || state === "stale" || state === "timeout") return AlertTriangle;
+  return XCircle;
+}
+
+function stateLabel(state: ConsumerLoadState): string {
+  switch (state) {
+    case "loading":
+      return "Loading";
+    case "ready":
+      return "Ready";
+    case "empty":
+      return "Empty";
+    case "stale":
+      return "Stale data";
+    case "timeout":
+      return "Timeout (fixture)";
+    case "unavailable":
+      return "API unavailable";
+    case "error":
+      return "Error";
+    default:
+      return state;
+  }
+}
+
+function sourceLabel(source: ProductHealthSummary["source"]): string {
+  if (source === "api") return "local API";
+  if (source === "fixture") return "offline fixture";
+  return "no source";
+}
+
+function SourceCard({
+  summary,
+  index,
+}: {
+  summary: ProductHealthSummary;
+  index: number;
+}) {
   const reducedMotion = useReducedMotion();
-  const isActive = source.status === "active";
-  const StatusIcon = isActive ? CheckCircle2 : source.status === "no_data" ? XCircle : Loader2;
-  const statusColor = isActive ? "text-green-500" : source.status === "no_data" ? "text-yellow-500" : "text-red-500";
+  const StatusIcon = stateIcon(summary.load_state);
+  const statusColor = stateTone(summary.load_state);
+  const statusText = stateLabel(summary.load_state);
+  const dataSource = sourceLabel(summary.source);
 
   return (
-    <motion.div
+    <motion.article
       initial={reducedMotion ? false : { opacity: 0, y: 20 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.06 }}
       className="p-4 rounded-xl border bg-card hover:border-primary/50 transition-colors"
+      aria-labelledby={`product-${summary.id}-title`}
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-xl">{source.icon}</span>
-          <span className="font-medium text-sm">{source.name}</span>
+          <span className="text-xl" aria-hidden="true">
+            {summary.icon}
+          </span>
+          <span id={`product-${summary.id}-title`} className="font-medium text-sm">
+            {summary.name}
+          </span>
         </div>
-        <StatusIcon className={`w-4 h-4 ${statusColor}`} />
+        <StatusIcon
+          className={`w-4 h-4 ${statusColor} ${summary.load_state === "loading" ? "animate-spin" : ""}`}
+          aria-hidden="true"
+        />
       </div>
       <div className="grid grid-cols-2 gap-2 text-xs">
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Rows</span>
-          <span className="font-mono">{source.rows.toLocaleString()}</span>
+          <span className="text-muted-foreground">Records</span>
+          <span className="font-mono">{summary.record_count.toLocaleString()}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">New</span>
-          <span className="font-mono">{source.new_items}</span>
+          <span className="text-muted-foreground">Port</span>
+          <span className="font-mono">{summary.port}</span>
         </div>
         <div className="flex justify-between col-span-2">
-          <span className="text-muted-foreground">Updated</span>
-          <span className="font-mono">{source.last_updated}</span>
+          <span className="text-muted-foreground">Status</span>
+          <span
+            className="font-mono"
+            role="status"
+            aria-label={`${summary.name} status: ${statusText}`}
+          >
+            {statusText}
+          </span>
         </div>
+        <div className="flex justify-between col-span-2">
+          <span className="text-muted-foreground">Data source</span>
+          <span
+            className="font-mono"
+            aria-label={`${summary.name} data source: ${dataSource}`}
+          >
+            {dataSource}
+          </span>
+        </div>
+        <div className="flex justify-between col-span-2">
+          <span className="text-muted-foreground">Schema</span>
+          <span className="font-mono">{summary.schema_version}</span>
+        </div>
+        {summary.retrieved_at && (
+          <div className="flex justify-between col-span-2">
+            <span className="text-muted-foreground">Retrieved</span>
+            <span className="font-mono truncate" title={summary.retrieved_at}>
+              {summary.retrieved_at}
+            </span>
+          </div>
+        )}
+        {summary.errorMessage && (
+          <div
+            className="col-span-2 text-[11px] text-yellow-600 dark:text-yellow-400"
+            role="note"
+          >
+            {summary.errorMessage}
+          </div>
+        )}
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
 export function LiveSystemsClient() {
   const reducedMotion = useReducedMotion();
-  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  const [results, setResults] = useState<ProductLoadResult[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [banner, setBanner] = useState<string>("Connecting to local data-product APIs…");
 
   useEffect(() => {
-    fetch("/data/scraper-dashboard.json")
-      .then((r) => r.json())
-      .then((data) => { setDashboard(data); setLoading(false); })
-      .catch(() => setLoading(false));
+    let cancelled = false;
+    const params =
+      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    const forceFixtures =
+      params?.get("fixtures") === "1" ||
+      params?.get("offline") === "1" ||
+      process.env.NEXT_PUBLIC_DATA_PRODUCTS_USE_FIXTURES === "true";
+
+    (async () => {
+      setLoading(true);
+      const loaded = await fetchAllProducts({
+        useFixtures: forceFixtures,
+        timeoutMs: 3500,
+      });
+      if (cancelled) return;
+      setResults(loaded);
+      const apiCount = loaded.filter((r) => r.source === "api").length;
+      const fixtureCount = loaded.filter((r) => r.source === "fixture").length;
+      setBanner(
+        forceFixtures
+          ? `Offline fixture mode · ${fixtureCount}/8 products · free-only · no external writes`
+          : `Loaded ${apiCount} from local APIs · ${fixtureCount} fixture fallbacks · free-only`,
+      );
+      setLoading(false);
+    })().catch(() => {
+      if (!cancelled) {
+        setBanner("Unable to load data products");
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const sources = dashboard ? Object.entries(dashboard.sources) : [];
-  const stats = dashboard?.stats;
+  const summaries = useMemo(
+    () => (results ? toHealthSummaries(results) : []),
+    [results],
+  );
+
+  const stats = useMemo(() => {
+    if (!results) return null;
+    const total = results.length;
+    const active = results.filter((r) => r.state === "ready" || r.state === "stale").length;
+    const points = results.reduce((sum, r) => sum + (r.envelope?.items.length ?? 0), 0);
+    const issues = results.filter((r) =>
+      ["unavailable", "timeout", "error", "empty"].includes(r.state),
+    ).length;
+    return {
+      total_sources: total,
+      active_sources: active,
+      issue_sources: issues,
+      total_data_points: points,
+    };
+  }, [results]);
+
+  const sampleItems = useMemo(() => {
+    if (!results) return [] as Array<{ product: string; line: string }>;
+    const lines: Array<{ product: string; line: string }> = [];
+    for (const result of results) {
+      const item = result.envelope?.items[0];
+      if (!item) continue;
+      const product = DATA_PRODUCT_CATALOG.find((p) => p.id === result.productId);
+      const preview =
+        typeof item.title === "string"
+          ? item.title
+          : typeof item.name === "string"
+            ? item.name
+            : typeof item.symbol === "string"
+              ? `${item.symbol} ${item.price ?? ""}`
+              : typeof item.coin_id === "string"
+                ? `${item.coin_id} ${item.price ?? ""}`
+                : typeof item.keyword === "string"
+                  ? item.keyword
+                  : typeof item.project === "string"
+                    ? `${item.project} APY ${item.apy ?? ""}`
+                    : typeof item.origin === "string"
+                      ? `${item.origin}-${item.destination} ฿${item.price_thb ?? ""}`
+                      : typeof item.currency === "string"
+                        ? `${item.base}/${item.currency} ${item.rate ?? ""}`
+                        : JSON.stringify(item).slice(0, 80);
+      lines.push({
+        product: product?.title ?? result.productId,
+        line: String(preview),
+      });
+      if (lines.length >= 8) break;
+    }
+    return lines;
+  }, [results]);
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl space-y-16">
-      {/* Hero */}
       <motion.div
         className="text-center space-y-6 py-8"
         initial={reducedMotion ? false : { opacity: 0, y: 30 }}
@@ -136,21 +337,22 @@ export function LiveSystemsClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-medium mb-4">
-          <Activity className="w-3 h-3" />
-          Live System — Running Daily
+          <Activity className="w-3 h-3" aria-hidden="true" />
+          Free-only data products · loopback APIs
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-          Automation <span className="text-primary">Ecosystem</span>
+          Live <span className="text-primary">Data Products</span>
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          A self-maintaining data pipeline that runs 24 scheduled jobs across 12 data categories,
-          tracks market opportunities, cross-matches against products, and
-          delivers actionable intelligence via Telegram and Todoist — all
-          without manual intervention.
+          Portfolio consumers read versioned envelopes from eight local data-product APIs
+          (`127.0.0.1:8101–8108`). No upstream scraping, no paid fallbacks, and no external
+          writes from this app. Offline demos use sanitized fixtures.
+        </p>
+        <p className="text-xs text-muted-foreground" role="status" aria-live="polite">
+          {banner}
         </p>
       </motion.div>
 
-      {/* Stats */}
       {stats && (
         <motion.div
           className="grid grid-cols-2 md:grid-cols-4 gap-4"
@@ -159,153 +361,162 @@ export function LiveSystemsClient() {
           viewport={{ once: true }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         >
-          <StatCard icon={Server} value={stats.total_sources} label="Total Sources" color="bg-blue-500" />
-          <StatCard icon={Activity} value={stats.active_sources} label="Active Sources" color="bg-green-500" />
-          <StatCard icon={Bell} value={stats.total_alerts} label="Active Alerts" color="bg-yellow-500" />
-          <StatCard icon={Database} value={stats.total_data_points} label="Data Points" color="bg-purple-500" />
+          <StatCard icon={Server} value={stats.total_sources} label="Data Products" color="bg-blue-500" />
+          <StatCard icon={Activity} value={stats.active_sources} label="Ready / Stale" color="bg-green-500" />
+          <StatCard icon={AlertTriangle} value={stats.issue_sources} label="Empty / Issues" color="bg-yellow-500" />
+          <StatCard icon={Database} value={stats.total_data_points} label="Records Loaded" color="bg-purple-500" />
         </motion.div>
       )}
 
-      {/* Source Health Grid */}
       <section>
         <div className="flex items-center gap-3 mb-6">
           <Shield className="w-6 h-6 text-primary" />
           <div>
-            <h2 className="text-2xl font-bold">Source Health Monitor</h2>
-            <p className="text-sm text-muted-foreground">Real-time status of all data scrapers</p>
+            <h2 className="text-2xl font-bold">Data Product Health</h2>
+            <p className="text-sm text-muted-foreground">
+              Loading, stale, timeout, empty, and API-unavailable states
+            </p>
           </div>
         </div>
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          <div
+            className="flex items-center justify-center py-12 gap-2 text-muted-foreground"
+            role="status"
+            aria-live="polite"
+            aria-busy="true"
+          >
+            <Loader2 className="w-6 h-6 animate-spin" aria-hidden="true" />
+            <span>Loading product envelopes…</span>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sources.map(([key, source], i) => (
-              <SourceCard key={key} source={source} keyName={key} index={i} />
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            role="list"
+            aria-label="Data product health cards"
+          >
+            {summaries.map((summary, i) => (
+              <div key={summary.id} role="listitem">
+                <SourceCard summary={summary} index={i} />
+              </div>
             ))}
           </div>
         )}
-        {dashboard && (
-          <p className="text-xs text-muted-foreground mt-4 text-center">
-            Last generated: {dashboard.generated_at}
-          </p>
-        )}
+        <p className="text-xs text-muted-foreground mt-4 text-center">
+          free_only={String(FREE_ONLY_DEFAULTS.freeOnly)} · allow_paid_providers=
+          {String(FREE_ONLY_DEFAULTS.allowPaidProviders)} · allow_external_writes=
+          {String(FREE_ONLY_DEFAULTS.allowExternalWrites)} · offline tip: add{" "}
+          <code className="px-1 rounded bg-muted">?fixtures=1</code>
+        </p>
       </section>
 
-      {/* Architecture Flow */}
       <section>
         <div className="flex items-center gap-3 mb-6">
           <Cpu className="w-6 h-6 text-primary" />
           <div>
-            <h2 className="text-2xl font-bold">System Architecture</h2>
-            <p className="text-sm text-muted-foreground">How data flows from web to actionable intelligence</p>
+            <h2 className="text-2xl font-bold">Consumer Architecture</h2>
+            <p className="text-sm text-muted-foreground">
+              Applications consume contracts — data repos own ingestion
+            </p>
           </div>
         </div>
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {architectureSteps.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <motion.div
-                  key={i}
-                  initial={reducedMotion ? false : { opacity: 0, x: -20 }}
-                  whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: i * 0.12 }}
-                  className="relative"
-                >
-                  <div className="p-4 rounded-xl border bg-card text-center space-y-3">
-                    <div className={`mx-auto w-fit p-2.5 rounded-lg bg-muted ${step.color}`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="font-semibold text-sm">{step.label}</h3>
-                    <p className="text-xs text-muted-foreground">{step.desc}</p>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {architectureSteps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={step.label}
+                initial={reducedMotion ? false : { opacity: 0, x: -20 }}
+                whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: i * 0.12 }}
+                className="relative"
+              >
+                <div className="p-4 rounded-xl border bg-card text-center space-y-3 h-full">
+                  <div className={`mx-auto w-fit p-2.5 rounded-lg bg-muted ${step.color}`}>
+                    <Icon className="w-5 h-5" />
                   </div>
-                  {i < architectureSteps.length - 1 && (
-                    <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                      <ArrowRight className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
+                  <h3 className="font-semibold text-sm">{step.label}</h3>
+                  <p className="text-xs text-muted-foreground">{step.desc}</p>
+                </div>
+                {i < architectureSteps.length - 1 && (
+                  <div className="hidden md:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                    <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
-      {/* Cron Schedule */}
       <section>
         <div className="flex items-center gap-3 mb-6">
           <RefreshCw className="w-6 h-6 text-primary" />
           <div>
-            <h2 className="text-2xl font-bold">Daily Schedule</h2>
-            <p className="text-sm text-muted-foreground">Automated cron jobs running on VPS</p>
+            <h2 className="text-2xl font-bold">Local API Map</h2>
+            <p className="text-sm text-muted-foreground">Development loopback endpoints</p>
           </div>
         </div>
-        <div className="rounded-xl border overflow-hidden">
-          <div className="grid grid-cols-[80px_1fr_80px] gap-0">
-            <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground">Time</div>
-            <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground">Task</div>
-            <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground text-center">Status</div>
-            {cronSchedule.map((item, i) => (
-              <motion.div
-                key={i}
-                className="contents"
-                initial={reducedMotion ? false : { opacity: 0 }}
-                whileInView={reducedMotion ? undefined : { opacity: 1 }}
-                viewport={{ once: true }}
-                transition={reducedMotion ? { duration: 0 } : { duration: 0.3, delay: i * 0.05 }}
-              >
-                <div className="px-3 py-2.5 text-xs font-mono border-t">{item.time}</div>
-                <div className="px-3 py-2.5 text-sm border-t">{item.task}</div>
-                <div className="px-3 py-2.5 border-t flex justify-center">
-                  <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${
-                    item.status === "active"
-                      ? "bg-green-500/10 text-green-600 dark:text-green-400"
-                      : "bg-blue-500/10 text-blue-600 dark:text-blue-400"
-                  }`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${item.status === "active" ? "bg-green-500" : "bg-blue-500"}`} />
-                    {item.status}
-                  </span>
+        <div className="rounded-xl border overflow-hidden" role="table" aria-label="Local data-product API map">
+          <div className="grid grid-cols-[80px_1fr_1fr] gap-0" role="rowgroup">
+            <div className="contents" role="row">
+              <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground" role="columnheader">
+                Port
+              </div>
+              <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground" role="columnheader">
+                Product
+              </div>
+              <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground" role="columnheader">
+                Contract
+              </div>
+            </div>
+            {apiSchedule.map((item) => (
+              <div key={item.port} className="contents" role="row">
+                <div className="px-3 py-2.5 text-xs font-mono border-t" role="cell">
+                  {item.port}
                 </div>
-              </motion.div>
+                <div className="px-3 py-2.5 text-sm border-t" role="cell">
+                  {item.product}
+                </div>
+                <div className="px-3 py-2.5 text-xs font-mono border-t text-muted-foreground" role="cell">
+                  {item.endpoint}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tech Stack */}
       <section>
         <div className="flex items-center gap-3 mb-6">
           <Zap className="w-6 h-6 text-primary" />
           <div>
-            <h2 className="text-2xl font-bold">Resilience Features</h2>
-            <p className="text-sm text-muted-foreground">Built to survive the real web</p>
+            <h2 className="text-2xl font-bold">Resilience (consumer-side)</h2>
+            <p className="text-sm text-muted-foreground">No paid fallbacks · free-only defaults</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              title: "Firecrawl Fallback",
-              desc: "Every scraper has a universal fallback via Firecrawl search API. When direct scraping fails (DNS, 429, JS-rendered sites), data still flows.",
+              title: "Fixture fallback",
+              desc: "If a local API times out or is unavailable, the UI falls back to sanitized fixtures under /data/data-products/.",
               icon: Shield,
             },
             {
-              title: "Fast-Fail Detection",
-              desc: "Network errors are detected immediately (name resolution, DNS, unreachable) instead of wasting time on retries. Fallback triggers in <1s.",
-              icon: Zap,
+              title: "Envelope validation",
+              desc: "Responses must include schema_version, source, retrieved_at, data_status, items, and next_cursor.",
+              icon: GitBranch,
             },
             {
-              title: "Cross-Matching Engine",
-              desc: "Scraped opportunities are automatically matched against product catalog keywords, surfacing actionable trends for existing shops.",
-              icon: GitBranch,
+              title: "No external writes",
+              desc: "This consumer never sends Telegram, Todoist, or email. Writes stay disabled under free-only policy.",
+              icon: Clock,
             },
           ].map((feature, i) => {
             const Icon = feature.icon;
             return (
               <motion.div
-                key={i}
+                key={feature.title}
                 initial={reducedMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -323,39 +534,33 @@ export function LiveSystemsClient() {
         </div>
       </section>
 
-      {/* Sample Alerts */}
-      {dashboard && dashboard.alerts.length > 0 && (
+      {sampleItems.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
-            <AlertTriangle className="w-6 h-6 text-primary" />
+            <Database className="w-6 h-6 text-primary" />
             <div>
-              <h2 className="text-2xl font-bold">Live Alert Sample</h2>
-              <p className="text-sm text-muted-foreground">Top alerts from the latest dashboard run</p>
+              <h2 className="text-2xl font-bold">Envelope Sample</h2>
+              <p className="text-sm text-muted-foreground">First record from each loaded product</p>
             </div>
           </div>
           <div className="space-y-2">
-            {dashboard.alerts.slice(0, 8).map((alert, i) => (
+            {sampleItems.map((row, i) => (
               <motion.div
-                key={i}
+                key={`${row.product}-${i}`}
                 initial={reducedMotion ? false : { opacity: 0, x: -10 }}
                 whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={reducedMotion ? { duration: 0 } : { duration: 0.3, delay: i * 0.05 }}
                 className="flex items-center gap-3 p-3 rounded-lg border bg-card text-sm"
               >
-                <span className="text-lg">{alert.icon}</span>
-                <span className="text-lg">{alert.direction}</span>
-                <span className="flex-1 truncate">{alert.label}</span>
-                <span className={`font-mono text-xs ${alert.direction === "🔺" ? "text-green-500" : "text-red-500"}`}>
-                  {alert.direction === "🔺" ? "+" : ""}{typeof alert.value === 'number' ? alert.value.toFixed(1) : alert.value}
-                </span>
+                <span className="font-medium w-36 shrink-0">{row.product}</span>
+                <span className="flex-1 truncate text-muted-foreground">{row.line}</span>
               </motion.div>
             ))}
           </div>
         </section>
       )}
 
-      {/* Footer note */}
       <motion.div
         className="text-center py-8"
         initial={reducedMotion ? false : { opacity: 0 }}
@@ -364,12 +569,12 @@ export function LiveSystemsClient() {
         transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
       >
         <p className="text-sm text-muted-foreground">
-          This page is powered by the same automation it describes.
-          24 scheduler jobs run continuously and refresh data via static JSON.
+          Legacy scraper-dashboard JSON is no longer the live source. This page consumes
+          data-product API envelopes (or fixtures) only.
         </p>
         <div className="flex items-center justify-center gap-2 mt-3 text-xs text-muted-foreground">
           <ExternalLink className="w-3 h-3" />
-          <span>Part of the Solo Empire infrastructure</span>
+          <span>Solo Empire data-product portfolio consumer</span>
         </div>
       </motion.div>
     </div>
