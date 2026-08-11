@@ -679,10 +679,14 @@ Add all variables from `.env.example` in the Vercel dashboard. Mark `GITHUB_TOKE
 GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
 
 1. **quality** — `typecheck`, `lint`, data-product unit tests  
-2. **a11y-e2e** — production build + `npm run e2e:a11y` (help dialog Escape, skip link, nav, locale/theme)
+2. **a11y-e2e** — production build + `npm run e2e:a11y` (help dialog Escape, skip link, nav, locale/theme)  
+3. **lighthouse** — production build + Lighthouse CI on `/en`, `/en/projects`, `/en/contact`, `/th`  
+   - **error** if Accessibility &lt; 0.9  
+   - **warn** only for Performance / Best Practices / SEO (noisy under CI)
 
 **Branch protection on `main`:** required status checks  
 `Typecheck, lint, unit` and `A11y / keyboard e2e` (strict, up-to-date branch).  
+Lighthouse is reported in CI but not required for merge (perf noise).  
 Force-push and branch deletion are disabled. Direct push to `main` still works for admins; PR merges must be green.
 
 Local equivalent for the keyboard suite against a running server:
@@ -691,6 +695,8 @@ Local equivalent for the keyboard suite against a running server:
 npm run build && npm run start -- -p 3000
 # other terminal:
 BASE_URL=http://127.0.0.1:3000 npm run e2e:a11y
+CHROME_PATH="$(node -e "const {chromium}=require('playwright'); console.log(chromium.executablePath())")" \
+  npm run lhci:ci
 ```
 
 ---

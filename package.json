@@ -19,6 +19,7 @@
     "e2e:data-products": "playwright test e2e/data-products-walkthrough.spec.ts --project=chromium",
     "e2e:a11y": "playwright test e2e/keyboard-help.spec.ts e2e/home.spec.ts e2e/navigation.spec.ts e2e/locale-theme.spec.ts --project=chromium",
     "lhci": "lhci autorun",
+    "lhci:ci": "lhci autorun --config=lighthouserc.ci.json",
     "test:data-products": "node --experimental-strip-types --test src/lib/data-products/__tests__/**/*.test.ts",
     "typecheck": "tsc --noEmit",
     "ci:local": "npm run typecheck && npm run lint && npm run test:data-products && npm run build"

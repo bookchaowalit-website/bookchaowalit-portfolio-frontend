@@ -101,3 +101,68 @@ jobs:
           if [ -f /tmp/portfolio-server.pid ]; then
             kill "$(cat /tmp/portfolio-server.pid)" 2>/dev/null || true
           fi
+
+  lighthouse:
+    name: Lighthouse (a11y gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium (for Lighthouse Chrome)
+        run: npx playwright install --with-deps chromium
+
+      - name: Production build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Start production server
+        run: |
+          npm run start -- -p 3000 &
+          echo $! > /tmp/portfolio-lh-server.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:3000/en" >/dev/null; then
+              echo "server ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "server failed to become ready"
+          exit 1
+
+      - name: Lighthouse CI (accessibility error gate)
+        run: |
+          # Point Lighthouse at Playwright Chromium when system Chrome is absent.
+          CHROME_BIN="$(node -e "const {chromium}=require('playwright'); console.log(chromium.executablePath())")"
+          echo "Using Chrome: $CHROME_BIN"
+          export CHROME_PATH="$CHROME_BIN"
+          npm run lhci:ci
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-ci-reports
+          path: .lighthouseci/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Stop production server
+        if: always()
+        run: |
+          if [ -f /tmp/portfolio-lh-server.pid ]; then
+            kill "$(cat /tmp/portfolio-lh-server.pid)" 2>/dev/null || true
+          fi
