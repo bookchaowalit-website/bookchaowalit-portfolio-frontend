@@ -684,10 +684,13 @@ GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
    - **error** if Accessibility &lt; 0.9  
    - **warn** only for Performance / Best Practices / SEO (noisy under CI)
 
-**Branch protection on `main`:** required status checks  
-`Typecheck, lint, unit` and `A11y / keyboard e2e` (strict, up-to-date branch).  
-Lighthouse is reported in CI but not required for merge (perf noise).  
-Force-push and branch deletion are disabled. Direct push to `main` still works for admins; PR merges must be green.
+**Branch protection on `main`:** required status checks (strict, up-to-date branch):
+
+1. `Typecheck, lint, unit`  
+2. `A11y / keyboard e2e`  
+3. `Lighthouse (a11y gate)` — Accessibility must score ≥ 0.9 on key routes  
+
+Force-push and branch deletion are disabled. Direct push to `main` still works for admins (bypass until checks finish); **PR merges must be green on all three**.
 
 Local equivalent for the keyboard suite against a running server:
 
