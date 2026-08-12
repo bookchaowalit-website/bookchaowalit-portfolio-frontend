@@ -22,13 +22,27 @@ Probe of all 129 hub catalog URLs after the utility / mini-app / remaining-demo 
 3. **Provisioned `recommendation-engine`** on Vercel and bound `recommendation-engine.bookchaowalit.com`.
 4. Cleared `demoUnavailable` for `recommendation-engine` in `src/data/app-projects.ts` after domain returned 200.
 
+## Restore pass — 2026-08-12 (flagship TLS)
+
+| Slug | Action | Public URL | Probe |
+|---|---|---|---|
+| booktrading | Vercel project `booktrading-frontend` + domain attach | https://booktrading.bookchaowalit.com | HTTP 200 |
+| bookreading | Vercel project `bookreading-frontend` + domain attach | https://bookreading.bookchaowalit.com | HTTP 200 |
+| localcrm | Vercel project `localcrm-frontend` + domain attach | https://localcrm.bookchaowalit.com | HTTP 200 |
+
+Also available on `*.vercel.app` aliases:
+- https://booktrading-frontend.vercel.app
+- https://bookreading-frontend.vercel.app
+- https://localcrm-frontend.vercel.app
+
+Hub catalog: `status: live`, `demoUnavailable` cleared for the three flagships.
+
 ## Known remaining dead / TLS demos
 
 Keep `demoUnavailable: true` until restored:
 
-- booktrading, bookreading, localcrm (TLS EOF)
-- military-strategy-db, fashion-lookbook, sports-training, psychology-explorer, legal-knowledge (TLS EOF)
-- solo-empire-cli, bookchaowalit-portfolio-mobile (404)
+- military-strategy-db, fashion-lookbook, sports-training, psychology-explorer, legal-knowledge (TLS / missing project)
+- solo-empire-cli, bookchaowalit-portfolio-mobile (404 / store links)
 
 ## Honesty note
 
