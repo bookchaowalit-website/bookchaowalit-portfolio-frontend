@@ -147,15 +147,17 @@ function ProjectCard({
             {project.name}
           </h3>
         </div>
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${project.name} — ${t("tryDemo")}`}
-          className="relative z-10 shrink-0 text-muted-foreground hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-        >
-          <ArrowUpRight className="size-3.5" />
-        </a>
+        {!project.demoUnavailable && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.name} — ${t("tryDemo")}`}
+            className="relative z-10 shrink-0 text-muted-foreground hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
+          >
+            <ArrowUpRight className="size-3.5" />
+          </a>
+        )}
       </div>
       {project.promise && (
         <p className="text-xs font-medium text-foreground/90 leading-relaxed mb-1">
@@ -192,7 +194,7 @@ function ProjectCard({
               —
             </span>
           )}
-          {project.githubUrl && (
+          {project.githubUrl && !project.sourceUnavailable && (
             <a
               href={project.githubUrl}
               target="_blank"

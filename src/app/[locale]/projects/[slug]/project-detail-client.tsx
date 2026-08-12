@@ -165,16 +165,26 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
 
         {/* Action buttons */}
         <div className="flex flex-wrap gap-3 mb-16">
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-          >
-            <ExternalLink className="size-4" />
-            {t("visitProject")}
-          </a>
-          {project.githubUrl && (
+          {project.demoUnavailable ? (
+            <span
+              className="inline-flex items-center gap-2 px-6 py-3 bg-muted text-muted-foreground text-sm font-medium cursor-not-allowed"
+              title={t("demoUnavailable")}
+            >
+              <ExternalLink className="size-4" />
+              {t("demoUnavailable")}
+            </span>
+          ) : (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+            >
+              <ExternalLink className="size-4" />
+              {t("visitProject")}
+            </a>
+          )}
+          {project.githubUrl && !project.sourceUnavailable && (
             <a
               href={project.githubUrl}
               target="_blank"

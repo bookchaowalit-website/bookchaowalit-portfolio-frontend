@@ -99,25 +99,29 @@ function ProjectPreviewModal({
           </div>
 
           <div className="flex flex-wrap gap-3 pt-2 border-t border-border">
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <Globe className="size-3.5" />
-              {t("liveDemo")}
-              <ExternalLink className="size-3" />
-            </a>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-border text-foreground hover:bg-muted transition-colors"
-            >
-              <Github className="size-3.5" />
-              {t("sourceCode")}
-            </a>
+            {!project.demoUnavailable && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <Globe className="size-3.5" />
+                {t("liveDemo")}
+                <ExternalLink className="size-3" />
+              </a>
+            )}
+            {!project.sourceUnavailable && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-border text-foreground hover:bg-muted transition-colors"
+              >
+                <Github className="size-3.5" />
+                {t("sourceCode")}
+              </a>
+            )}
             {hasCaseStudy && (
               <Link
                 href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
@@ -222,15 +226,17 @@ export function FeaturedProjects() {
                       {tProjects("preview")}
                     </button>
                   )}
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${project.name} live demo`}
-                    className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    <ArrowUpRight className="size-4" />
-                  </a>
+                  {!project.demoUnavailable && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.name} live demo`}
+                      className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <ArrowUpRight className="size-4" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
