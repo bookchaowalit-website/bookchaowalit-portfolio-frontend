@@ -54,3 +54,6 @@ test-results/
 # Lighthouse CI
 .lighthouseci/
 
+# a11y audit evidence (timestamped local reports, not source)
+a11y-evidence/
+
