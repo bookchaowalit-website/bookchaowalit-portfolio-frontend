@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { allProjects, categoryMeta, type AppProject } from "@/data/app-projects";
+import { allProjects, categoryMeta, laneMeta, type AppProject } from "@/data/app-projects";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight, ExternalLink, Github, X, Globe } from "lucide-react";
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+import { LaneIcon } from "@/components/lane-icon";
 
 const stickyColors = ["yellow", "pink", "green", "blue"] as const;
 const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
@@ -44,6 +45,7 @@ function ProjectPreviewModal({
   onClose: () => void;
 }) {
   const t = useTranslations("projects");
+  const hasCaseStudy = Boolean(project.caseStudy);
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-foreground/40 backdrop-blur-sm"
@@ -96,7 +98,7 @@ function ProjectPreviewModal({
             <span>{categoryMeta[project.category].label}</span>
           </div>
 
-          <div className="flex gap-3 pt-2 border-t border-border">
+          <div className="flex flex-wrap gap-3 pt-2 border-t border-border">
             <a
               href={project.url}
               target="_blank"
@@ -116,6 +118,14 @@ function ProjectPreviewModal({
               <Github className="size-3.5" />
               {t("sourceCode")}
             </a>
+            {hasCaseStudy && (
+              <Link
+                href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm text-foreground/70 hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                {t("readCaseStudy")}
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -128,7 +138,9 @@ export function FeaturedProjects() {
   const tProjects = useTranslations("projects");
   const [preview, setPreview] = useState<AppProject | null>(null);
 
-  const featured = allProjects.filter((p) => p.featured).slice(0, 6);
+  const featured = allProjects
+    .filter((p) => p.featuredRank != null)
+    .sort((a, b) => (a.featuredRank ?? 0) - (b.featuredRank ?? 0));
 
   return (
     <section className="space-y-8">
@@ -152,14 +164,29 @@ export function FeaturedProjects() {
           >
             <div className="flex flex-col h-full">
               <div className="flex items-start justify-between gap-2 mb-2">
-                <h3 className="text-sm font-bold leading-tight">
-                  {project.name}
-                </h3>
+                {project.promise ? (
+                  <Link
+                    href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
+                    className="text-sm font-bold leading-tight hover:underline"
+                  >
+                    {project.name}
+                  </Link>
+                ) : (
+                  <h3 className="text-sm font-bold leading-tight">
+                    {project.name}
+                  </h3>
+                )}
                 <StatusBadge status={project.status} />
               </div>
 
+              {project.promise && (
+                <p className="text-xs font-medium text-foreground/90 leading-relaxed mb-1">
+                  {project.promise}
+                </p>
+              )}
+
               <p className="text-xs text-foreground/70 leading-relaxed mb-3 flex-1">
-                {project.description}
+                {project.problem ?? project.description}
               </p>
 
               <div className="flex flex-wrap gap-1 mb-3">
@@ -174,17 +201,27 @@ export function FeaturedProjects() {
               </div>
 
               <div className="flex items-center justify-between pt-2 border-t border-foreground/10">
-                <span className="text-[10px] uppercase tracking-wider text-foreground/70">
-                  {categoryMeta[project.category].label}
+                <span className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-foreground/70">
+                  <LaneIcon lane={project.problemLane} className="size-3" />
+                  {laneMeta[project.problemLane].label}
                 </span>
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setPreview(project)}
-                    className="inline-flex min-h-11 items-center px-2 text-[10px] uppercase tracking-wider text-foreground/70 hover:text-foreground transition-colors underline underline-offset-2"
-                    aria-label={`Preview ${project.name}`}
-                  >
-                    {tProjects("preview")}
-                  </button>
+                  {project.promise ? (
+                    <Link
+                      href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
+                      className="inline-flex min-h-11 items-center px-2 text-[10px] uppercase tracking-wider text-foreground/70 hover:text-foreground transition-colors underline underline-offset-2"
+                    >
+                      {tProjects("readCaseStudy")}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setPreview(project)}
+                      className="inline-flex min-h-11 items-center px-2 text-[10px] uppercase tracking-wider text-foreground/70 hover:text-foreground transition-colors underline underline-offset-2"
+                      aria-label={`Preview ${project.name}`}
+                    >
+                      {tProjects("preview")}
+                    </button>
+                  )}
                   <a
                     href={project.url}
                     target="_blank"

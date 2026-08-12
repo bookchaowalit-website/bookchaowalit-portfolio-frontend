@@ -8,11 +8,15 @@ import { useTranslations } from "next-intl";
 import {
   allProjects,
   categoryMeta,
+  laneMeta,
   type ProjectCategory,
   type AppProject,
   type ProjectStatus,
+  type ProblemLane,
 } from "@/data/app-projects";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
+import { LaneIcon, laneFrameVariant } from "@/components/lane-icon";
+import { SketchyFrame } from "@/components/ui/notebook-elements";
 import {
   ExternalLink,
   Search,
@@ -35,6 +39,16 @@ const categories: ("all" | ProjectCategory)[] = [
   "client",
 ];
 
+const lanes: ("all" | ProblemLane)[] = [
+  "all",
+  "decisions",
+  "solo-ops",
+  "growth",
+  "knowledge",
+  "dev-ai",
+  "experience",
+];
+
 const PAGE_SIZE = 24;
 
 const statusConfig: Record<
@@ -44,6 +58,13 @@ const statusConfig: Record<
   live: { label: "Live", dot: "bg-foreground", text: "text-foreground" },
   wip: { label: "WIP", dot: "bg-muted-foreground", text: "text-muted-foreground" },
   archived: { label: "Archived", dot: "bg-muted-foreground/50", text: "text-muted-foreground/50" },
+};
+
+const evidenceLabelKey: Record<string, string> = {
+  Live: "evidence_live",
+  Prototype: "evidence_prototype",
+  "Internal System": "evidence_internal",
+  Experiment: "evidence_experiment",
 };
 
 function getFaviconUrl(projectUrl: string): string {
@@ -68,28 +89,45 @@ function ProjectCard({
 }) {
   const t = useTranslations("projects");
   const [imgError, setImgError] = useState(false);
+  const [screenshotError, setScreenshotError] = useState(false);
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
+  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
   // Generate a unique gray tone from the project name for the placeholder
   const lightness = 0.80 + (project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 10) * 0.015;
 
   return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block bg-background p-6 transition-colors hover:bg-secondary border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring card-hover-lift"
-    >
+    <div className="group relative bg-background p-6 transition-colors hover:bg-secondary border border-transparent card-hover-lift">
+      <Link
+        href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
+        className="absolute inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        aria-label={`${project.name} — ${t("readCaseStudy")}`}
+      />
       {showScreenshot && (
-        <div
-          className="mb-4 aspect-video overflow-hidden flex items-center justify-center"
-          style={{ background: `oklch(${lightness} 0 0)` }}
-        >
-          <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
-            {project.name}
-          </span>
-        </div>
+        <SketchyFrame variant={laneFrameVariant[project.problemLane]} className="mb-4 aspect-video overflow-hidden">
+          {!screenshotError ? (
+            <Image
+              src={screenshotUrl}
+              alt={`${project.name} live preview`}
+              fill
+              className="object-cover object-top"
+              loading="lazy"
+              decoding="async"
+              unoptimized
+              onError={() => setScreenshotError(true)}
+            />
+          ) : (
+            <div
+              className="w-full h-full flex items-center justify-center"
+              style={{ background: `oklch(${lightness} 0 0)` }}
+            >
+              <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
+                {project.name}
+              </span>
+            </div>
+          )}
+        </SketchyFrame>
       )}
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-2 min-w-0">
@@ -109,20 +147,36 @@ function ProjectCard({
             {project.name}
           </h3>
         </div>
-        <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.name} — ${t("tryDemo")}`}
+          className="relative z-10 shrink-0 text-muted-foreground hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
+        >
+          <ArrowUpRight className="size-3.5" />
+        </a>
       </div>
+      {project.promise && (
+        <p className="text-xs font-medium text-foreground/90 leading-relaxed mb-1">
+          {project.promise}
+        </p>
+      )}
       <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-        {project.description}
+        {project.problem ?? project.description}
       </p>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/90">
-            {t("cat_" + project.category)}
+          <span className="flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-muted-foreground/90">
+            <LaneIcon lane={project.problemLane} className="size-3" />
+            {laneMeta[project.problemLane].label}
           </span>
           <span className="flex items-center gap-1">
             <span className={`size-1.5 rounded-full ${status.dot}`} />
             <span className={`text-xs font-mono ${status.text}`}>
-              {t("status_" + project.status)}
+              {project.evidenceLevel
+                ? t(evidenceLabelKey[project.evidenceLevel])
+                : t("status_" + project.status)}
             </span>
           </span>
         </div>
@@ -143,8 +197,7 @@ function ProjectCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] text-muted-foreground/60 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="relative z-10 inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-[44px] w-[44px] text-muted-foreground/60 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`${project.name} GitHub repository`}
             >
               <Github className="size-4" />
@@ -152,7 +205,7 @@ function ProjectCard({
           )}
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -162,7 +215,10 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
   const searchParams = useSearchParams();
   const urlCategory = searchParams.get("category") as ProjectCategory | null;
   const startCategory = initialCategory ?? (urlCategory && Object.keys(categoryMeta).includes(urlCategory) ? urlCategory : "all");
+  const urlLane = searchParams.get("lane") as ProblemLane | null;
+  const startLane = urlLane && Object.keys(laneMeta).includes(urlLane) ? urlLane : "all";
   const [activeCategory, setActiveCategory] = useState<"all" | ProjectCategory>(startCategory);
+  const [activeLane, setActiveLane] = useState<"all" | ProblemLane>(startLane);
   const [activeStatus, setActiveStatus] = useState<"all" | ProjectStatus>("all");
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -228,6 +284,9 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
   // Filtered projects
   const filtered = useMemo(() => {
     let list = allProjects;
+    if (activeLane !== "all") {
+      list = list.filter((p) => p.problemLane === activeLane);
+    }
     if (activeCategory !== "all") {
       list = list.filter((p) => p.category === activeCategory);
     }
@@ -244,7 +303,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
       );
     }
     return list;
-  }, [activeCategory, activeStatus, search]);
+  }, [activeLane, activeCategory, activeStatus, search]);
 
   const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMore = visibleCount < filtered.length;
@@ -253,6 +312,14 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     const map: Record<string, number> = { all: allProjects.length };
     for (const p of allProjects) {
       map[p.category] = (map[p.category] || 0) + 1;
+    }
+    return map;
+  }, []);
+
+  const countByLane = useMemo(() => {
+    const map: Record<string, number> = { all: allProjects.length };
+    for (const p of allProjects) {
+      map[p.problemLane] = (map[p.problemLane] || 0) + 1;
     }
     return map;
   }, []);
@@ -269,12 +336,21 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     setActiveCategory(cat);
     setVisibleCount(PAGE_SIZE);
     const params = new URLSearchParams();
-    if (cat !== "all") {
-      params.set("category", cat);
-    }
+    if (activeLane !== "all") params.set("lane", activeLane);
+    if (cat !== "all") params.set("category", cat);
     const query = params.toString();
     router.replace((query ? `/projects?${query}` : "/projects") as any);
-  }, [router]);
+  }, [router, activeLane]);
+
+  const handleLaneChange = useCallback((lane: "all" | ProblemLane) => {
+    setActiveLane(lane);
+    setVisibleCount(PAGE_SIZE);
+    const params = new URLSearchParams();
+    if (lane !== "all") params.set("lane", lane);
+    if (activeCategory !== "all") params.set("category", activeCategory);
+    const query = params.toString();
+    router.replace((query ? `/projects?${query}` : "/projects") as any);
+  }, [router, activeCategory]);
 
   const handleStatusChange = useCallback((status: "all" | ProjectStatus) => {
     setActiveStatus(status);
@@ -286,7 +362,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     setVisibleCount(PAGE_SIZE);
   }, []);
 
-  const showFeatured = activeCategory === "all" && activeStatus === "all" && !search.trim();
+  const showFeatured = activeLane === "all" && activeCategory === "all" && activeStatus === "all" && !search.trim();
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl space-y-12">
@@ -342,6 +418,40 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         </div>
       </div>
 
+      {/* Problem lanes — primary navigation */}
+      <div className="py-4">
+        <p className="text-center text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
+          {t("browseByProblem")}
+        </p>
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByLane")}>
+          {lanes.map((lane) => {
+            const isActive = activeLane === lane;
+            const label = lane === "all" ? t("filterAll") : laneMeta[lane].label;
+            const count = countByLane[lane] || 0;
+            return (
+              <button
+                key={lane}
+                onClick={() => handleLaneChange(lane)}
+                className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground hover:bg-muted"
+                }`}
+              >
+                {lane !== "all" && <LaneIcon lane={lane} className="size-3.5" />}
+                {label}
+                <span className={`text-xs tabular-nums ${isActive ? "opacity-60" : "text-muted-foreground"}`}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+        {activeLane !== "all" && (
+          <p className="text-center text-sm text-muted-foreground max-w-lg mx-auto mt-4">
+            {laneMeta[activeLane].description}
+          </p>
+        )}
+      </div>
+
       {/* Search & Filters */}
       <div className="py-8 space-y-4">
         {/* Search */}
@@ -387,7 +497,10 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           })}
         </div>
 
-        {/* Category filters — flowing pill chips with progressive disclosure */}
+        {/* Category filters — secondary metadata, flowing pill chips with progressive disclosure */}
+        <p className="text-center text-[10px] font-mono uppercase tracking-wider text-muted-foreground/70">
+          {t("filterByCategory")}
+        </p>
         <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByCategory")}>
           {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
             const isActive = activeCategory === cat;
@@ -458,6 +571,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
             {filtered.length} {filtered.length === 1 ? t("singleProject") : t("pluralProjects")}
+            {activeLane !== "all" && ` ${t("inCategory")} ${laneMeta[activeLane].label}`}
             {activeCategory !== "all" && ` ${t("inCategory")} ${t("cat_" + activeCategory)}`}
             {activeStatus !== "all" && ` · ${t("status_" + activeStatus)}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
@@ -473,6 +587,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               project={project}
               stars={starsMap[project.slug] ?? 0}
               starsError={starsError}
+              showScreenshot={true}
             />
           ))}
         </div>
@@ -496,6 +611,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
             <p className="text-muted-foreground text-sm">{t("noProjectsFound")}</p>
             <button
               onClick={() => {
+                setActiveLane("all");
                 setActiveCategory("all");
                 setActiveStatus("all");
                 setSearch("");

@@ -7,9 +7,12 @@ import { useTranslations } from "next-intl";
 import {
   allProjects,
   categoryMeta,
+  laneMeta,
   type AppProject,
 } from "@/data/app-projects";
 import { statusConfig } from "./status-config";
+import { LaneIcon } from "@/components/lane-icon";
+import { SketchArrow } from "@/components/ui/notebook-elements";
 import {
   ArrowLeft,
   ArrowRight,
@@ -47,24 +50,25 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
 
   const status = statusConfig[project.status];
   const category = categoryMeta[project.category];
+  const lane = laneMeta[project.problemLane];
   const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
-  // Prev/next navigation within the same category
-  const categoryProjects = allProjects.filter(
-    (p) => p.category === project.category
+  // Prev/next navigation within the same problem lane
+  const laneProjects = allProjects.filter(
+    (p) => p.problemLane === project.problemLane
   );
-  const currentIndex = categoryProjects.findIndex(
+  const currentIndex = laneProjects.findIndex(
     (p) => p.slug === project.slug
   );
   const prevProject =
-    currentIndex > 0 ? categoryProjects[currentIndex - 1] : null;
+    currentIndex > 0 ? laneProjects[currentIndex - 1] : null;
   const nextProject =
-    currentIndex < categoryProjects.length - 1
-      ? categoryProjects[currentIndex + 1]
+    currentIndex < laneProjects.length - 1
+      ? laneProjects[currentIndex + 1]
       : null;
 
-  // Related projects (same category, excluding current, max 4)
-  const relatedProjects = categoryProjects
+  // Related solutions (same problem lane, excluding current, max 4)
+  const relatedProjects = laneProjects
     .filter((p) => p.slug !== project.slug)
     .slice(0, 4);
 
@@ -107,13 +111,23 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3 text-balance">
           {project.name}
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-          {project.description}
+        <p className="text-lg text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+          {project.promise ?? project.description}
         </p>
+        {project.problem && (
+          <p className="text-sm text-foreground/80 leading-relaxed mb-8 max-w-2xl border-l-2 border-border pl-4">
+            {project.problem}
+          </p>
+        )}
 
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm mb-10">
-          <span className="text-foreground">{category.label}</span>
+          <span className="flex items-center gap-1.5 text-foreground font-medium">
+            <LaneIcon lane={project.problemLane} className="size-4" />
+            {lane.label}
+          </span>
+          <span className="text-muted-foreground/40">|</span>
+          <span className="text-xs text-muted-foreground">{category.label}</span>
           <span className="text-muted-foreground/40">|</span>
           <span className="flex items-center gap-1.5">
             <span
@@ -122,6 +136,14 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             />
             <span className={status.text}>{status.label}</span>
           </span>
+          {project.evidenceLevel && (
+            <>
+              <span className="text-muted-foreground/40">|</span>
+              <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+                {t("evidence")}: {project.evidenceLevel}
+              </span>
+            </>
+          )}
           {(stars > 0 || starsError) && (
             <>
               <span className="text-muted-foreground/40">|</span>
@@ -175,15 +197,37 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                 {t("caseStudy")}
               </h2>
               <div className="space-y-6">
-                {project.caseStudy.challenge && (
-                  <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-amber-600 dark:text-amber-400">
-                      <Lightbulb className="size-4" />
-                      {t("challenge")}
-                    </h3>
-                    <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                      {project.caseStudy.challenge}
-                    </p>
+                {/* Before / After comparison */}
+                {(project.caseStudy.challenge || project.caseStudy.result) && (
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+                    {project.caseStudy.challenge && (
+                      <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
+                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                          <Lightbulb className="size-4" />
+                          {t("before")}
+                        </h3>
+                        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                          {project.caseStudy.challenge}
+                        </p>
+                      </div>
+                    )}
+                    {project.caseStudy.challenge && project.caseStudy.result && (
+                      <div className="flex items-center justify-center">
+                        <SketchArrow direction="down" className="md:hidden" />
+                        <SketchArrow direction="right" className="hidden md:block" />
+                      </div>
+                    )}
+                    {project.caseStudy.result && (
+                      <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
+                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-600 dark:text-green-400">
+                          <TrendingUp className="size-4" />
+                          {t("after")}
+                        </h3>
+                        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                          {project.caseStudy.result}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
                 {project.caseStudy.solution && (
@@ -197,14 +241,13 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                     </p>
                   </div>
                 )}
-                {project.caseStudy.result && (
+                {project.caseStudy.tradeoff && (
                   <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-600 dark:text-green-400">
-                      <TrendingUp className="size-4" />
-                      {t("result")}
+                    <h3 className="font-semibold mb-2 text-muted-foreground">
+                      {t("tradeoffs")}
                     </h3>
                     <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                      {project.caseStudy.result}
+                      {project.caseStudy.tradeoff}
                     </p>
                   </div>
                 )}
@@ -256,7 +299,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                 {t("relatedProjects")}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {t("moreInCategory", { category: category.label })}
+                {t("moreInCategory", { category: lane.label })}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {relatedProjects.map((rp) => (
