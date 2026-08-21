@@ -16,18 +16,18 @@ export function HandDrawnHighlight({
 }) {
   const reducedMotion = useReducedMotion();
   const isDark = useDarkMode();
-  // Monochromatic highlight tones — 4 shades of gray (light & dark mode)
+  // Colored marker tones keep the notebook system expressive without adding chrome.
   const lightMap = {
-    yellow: "oklch(0.92 0 0 / 0.4)",
-    pink: "oklch(0.88 0 0 / 0.45)",
-    green: "oklch(0.84 0 0 / 0.5)",
-    blue: "oklch(0.80 0 0 / 0.55)"
+    yellow: "oklch(0.92 0.08 95 / 0.6)",
+    pink: "oklch(0.88 0.10 350 / 0.5)",
+    green: "oklch(0.88 0.08 150 / 0.5)",
+    blue: "oklch(0.88 0.06 230 / 0.5)"
   };
   const darkMap = {
-    yellow: "oklch(0.35 0 0 / 0.4)",
-    pink: "oklch(0.32 0 0 / 0.45)",
-    green: "oklch(0.30 0 0 / 0.5)",
-    blue: "oklch(0.28 0 0 / 0.55)"
+    yellow: "oklch(0.65 0.10 95 / 0.45)",
+    pink: "oklch(0.62 0.10 350 / 0.4)",
+    green: "oklch(0.62 0.08 150 / 0.4)",
+    blue: "oklch(0.62 0.07 230 / 0.4)"
   };
   const colorMap = isDark ? darkMap : lightMap;
   return (
@@ -61,22 +61,22 @@ export function NotebookPaper({
   const isDark = useDarkMode();
   // Subtle paper tints — enough to distinguish sections, light enough to read on
   const lightBg = {
-    default: "oklch(0.985 0 0)",
-    yellow: "oklch(0.975 0 0)",
-    pink: "oklch(0.965 0 0)",
-    green: "oklch(0.955 0 0)",
-    blue: "oklch(0.945 0 0)"
+    default: "oklch(0.985 0.005 90)",
+    yellow: "oklch(0.975 0.035 95)",
+    pink: "oklch(0.965 0.03 350)",
+    green: "oklch(0.955 0.03 150)",
+    blue: "oklch(0.945 0.03 230)"
   };
   const darkBg = {
-    default: "oklch(0.20 0 0)",
-    yellow: "oklch(0.21 0 0)",
-    pink: "oklch(0.22 0 0)",
-    green: "oklch(0.23 0 0)",
-    blue: "oklch(0.24 0 0)"
+    default: "oklch(0.20 0.005 60)",
+    yellow: "oklch(0.24 0.04 95)",
+    pink: "oklch(0.24 0.04 350)",
+    green: "oklch(0.24 0.035 150)",
+    blue: "oklch(0.24 0.035 230)"
   };
   const bgMap = isDark ? darkBg : lightBg;
-  const ruleColor = isDark ? "oklch(0.30 0 0 / 0.4)" : "oklch(0.88 0 0 / 0.4)";
-  const marginColor = isDark ? "oklch(0.40 0 0 / 0.5)" : "oklch(0.75 0 0 / 0.5)";
+  const ruleColor = isDark ? "oklch(0.30 0.01 250 / 0.4)" : "oklch(0.85 0.01 250 / 0.5)";
+  const marginColor = isDark ? "oklch(0.48 0.08 25 / 0.5)" : "oklch(0.70 0.15 25 / 0.6)";
   return (
     <div className={`relative ${className}`}>
       {/* Warm paper texture background */}
@@ -127,18 +127,18 @@ export function StickyNote({
 }) {
   const reducedMotion = useReducedMotion();
   const isDark = useDarkMode();
-  // Monochromatic sticky notes — 4 distinct gray tones (light & dark mode)
+  // Four paper colors from the shared notebook palette.
   const lightColorMap = {
-    yellow: { bg: "oklch(0.96 0 0)", border: "oklch(0.86 0 0)" },
-    pink: { bg: "oklch(0.93 0 0)", border: "oklch(0.83 0 0)" },
-    green: { bg: "oklch(0.90 0 0)", border: "oklch(0.80 0 0)" },
-    blue: { bg: "oklch(0.87 0 0)", border: "oklch(0.77 0 0)" }
+    yellow: { bg: "oklch(0.95 0.06 95)", border: "oklch(0.80 0.08 95)" },
+    pink: { bg: "oklch(0.93 0.05 350)", border: "oklch(0.78 0.06 350)" },
+    green: { bg: "oklch(0.93 0.05 150)", border: "oklch(0.78 0.06 150)" },
+    blue: { bg: "oklch(0.93 0.04 230)", border: "oklch(0.78 0.05 230)" }
   };
   const darkColorMap = {
-    yellow: { bg: "oklch(0.28 0 0)", border: "oklch(0.38 0 0)" },
-    pink: { bg: "oklch(0.26 0 0)", border: "oklch(0.36 0 0)" },
-    green: { bg: "oklch(0.24 0 0)", border: "oklch(0.34 0 0)" },
-    blue: { bg: "oklch(0.22 0 0)", border: "oklch(0.32 0 0)" }
+    yellow: { bg: "oklch(0.28 0.04 95)", border: "oklch(0.42 0.06 95)" },
+    pink: { bg: "oklch(0.27 0.04 350)", border: "oklch(0.40 0.05 350)" },
+    green: { bg: "oklch(0.26 0.035 150)", border: "oklch(0.40 0.05 150)" },
+    blue: { bg: "oklch(0.25 0.035 230)", border: "oklch(0.39 0.05 230)" }
   };
   const colorMap = isDark ? darkColorMap : lightColorMap;
   const c = colorMap[color];

@@ -14,7 +14,7 @@ export function NavigationBrand() {
 
   if (!isMounted) {
     return (
-      <Link href="/" className="text-xl font-bold">
+      <Link href="/" className="text-base md:text-xl font-bold whitespace-nowrap">
         Chaowalit Greepoke
       </Link>
     );
@@ -25,7 +25,7 @@ export function NavigationBrand() {
       whileHover={reducedMotion ? undefined : { scale: 1.05 }}
       whileTap={reducedMotion ? undefined : { scale: 0.95 }}
     >
-      <Link href="/" className="text-xl font-bold text-foreground hover:text-foreground/80 transition-all duration-300">
+      <Link href="/" className="text-base md:text-xl font-bold whitespace-nowrap text-foreground hover:text-foreground/80 transition-all duration-300">
         Chaowalit Greepoke
       </Link>
     </motion.div>

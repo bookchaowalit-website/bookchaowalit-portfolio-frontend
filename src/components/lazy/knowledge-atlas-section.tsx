@@ -10,7 +10,18 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  BriefcaseBusiness,
+  ChartNoAxesCombined,
+  Globe2,
+  HeartPulse,
+  Laptop,
+  Palette,
+  Scale,
+  type LucideIcon,
+} from "lucide-react";
 import inventory from "@/content/domain-inventory.json";
 
 const categoryColors: Record<string, string> = {
@@ -24,15 +35,15 @@ const categoryColors: Record<string, string> = {
   "infrastructure": "#14B8A6",
 };
 
-const categoryIcons: Record<string, string> = {
-  "tech-engineering": "💻",
-  "business-finance": "📈",
-  "creative-design": "🎨",
-  "life-health": "❤️",
-  "professional": "💼",
-  "legal-governance": "⚖️",
-  "humanities": "📚",
-  "infrastructure": "🌍",
+const categoryIcons: Record<string, LucideIcon> = {
+  "tech-engineering": Laptop,
+  "business-finance": ChartNoAxesCombined,
+  "creative-design": Palette,
+  "life-health": HeartPulse,
+  "professional": BriefcaseBusiness,
+  "legal-governance": Scale,
+  "humanities": BookOpen,
+  "infrastructure": Globe2,
 };
 
 export function KnowledgeAtlasSection() {
@@ -77,7 +88,7 @@ export function KnowledgeAtlasSection() {
         >
           {inventory.categories.map((cat, i) => {
             const color = categoryColors[cat.id] || "#888";
-            const icon = categoryIcons[cat.id] || "📁";
+            const Icon = categoryIcons[cat.id] || BookOpen;
             const domainCount = cat.domains.length;
             const noteColor = (["yellow", "pink", "green", "blue"] as const)[i % 4];
 
@@ -91,7 +102,12 @@ export function KnowledgeAtlasSection() {
                   >
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-xl">{icon}</span>
+                        <Icon
+                          className="size-5 shrink-0"
+                          style={{ color }}
+                          strokeWidth={1.8}
+                          aria-hidden="true"
+                        />
                         <h3 className="text-sm font-bold leading-tight">{cat.label}</h3>
                       </div>
                       <div className="flex flex-wrap gap-1">

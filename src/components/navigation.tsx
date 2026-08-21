@@ -57,6 +57,7 @@ export function Navigation() {
                           ? "text-primary"
                           : "text-muted-foreground"
                       )}
+                      aria-current={pathname === item.href ? "page" : undefined}
                     >
                       {item.name}
                     </Link>
@@ -100,6 +101,7 @@ export function Navigation() {
                       ? "text-primary bg-primary/10"
                       : "text-muted-foreground hover:bg-muted"
                   )}
+                  aria-current={pathname === item.href ? "page" : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
