@@ -8,12 +8,9 @@ import { useTranslations } from "next-intl";
 
 const sectionKeys = [
   { id: "hero", translationKey: "home" },
-  { id: "atlas", translationKey: "knowledgeAtlas" },
   { id: "about", translationKey: "about" },
   { id: "projects", translationKey: "portfolio" },
-  { id: "business", translationKey: "business" },
   { id: "blog", translationKey: "blog" },
-  { id: "newsletter", translationKey: "newsletter" },
   { id: "contact", translationKey: "contact" },
 ] as const;
 

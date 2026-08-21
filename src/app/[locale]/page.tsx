@@ -4,7 +4,6 @@ import { HeroSection } from '@/components/lazy/hero-section';
 import { SectionNav } from '@/components/section-nav';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { getAllBlogPosts } from '@/lib/blog';
-import { getFeaturedTestimonials } from '@/data/testimonials';
 
 // Loading skeleton with notebook theme
 const SectionSkeleton = ({ height = 'h-64' }: { height?: string }) => (
@@ -14,10 +13,6 @@ const SectionSkeleton = ({ height = 'h-64' }: { height?: string }) => (
 );
 
 // Lazy load below-the-fold components
-const KnowledgeAtlasSection = dynamic(() => import('@/components/lazy/knowledge-atlas-section').then(mod => ({ default: mod.KnowledgeAtlasSection })), {
-  loading: () => <SectionSkeleton height="h-96" />
-});
-
 const AboutSection = dynamic(() => import('@/components/lazy/about-section').then(mod => ({ default: mod.AboutSection })), {
   loading: () => <SectionSkeleton height="h-80" />
 });
@@ -26,24 +21,12 @@ const FeaturedProjects = dynamic(() => import('@/components/lazy/featured-projec
   loading: () => <SectionSkeleton height="h-[500px]" />
 });
 
-const BusinessSection = dynamic(() => import('@/components/lazy/business-section').then(mod => ({ default: mod.BusinessSection })), {
-  loading: () => <SectionSkeleton height="h-72" />
-});
-
 const BlogSection = dynamic(() => import('@/components/lazy/blog-section').then(mod => ({ default: mod.BlogSection })), {
   loading: () => <SectionSkeleton height="h-64" />
 });
 
-const NewsletterCTA = dynamic(() => import('@/components/lazy/newsletter-cta').then(mod => ({ default: mod.NewsletterCTA })), {
-  loading: () => <SectionSkeleton height="h-48" />
-});
-
 const ContactSection = dynamic(() => import('@/components/lazy/contact-section').then(mod => ({ default: mod.ContactSection })), {
   loading: () => <SectionSkeleton height="h-96" />
-});
-
-const TestimonialsSection = dynamic(() => import('@/components/lazy/testimonials-section').then(mod => ({ default: mod.TestimonialsSection })), {
-  loading: () => <SectionSkeleton height="h-80" />
 });
 
 type Props = {
@@ -164,7 +147,6 @@ const faqData = {
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const blogPosts = getAllBlogPosts().slice(0, 3);
-  const featuredTestimonials = getFeaturedTestimonials(3);
   const faqs = faqData[locale as keyof typeof faqData] || faqData.en;
 
   const faqJsonLd = {
@@ -192,11 +174,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <HeroSection />
       </div>
       <ErrorBoundary>
-        <div id="atlas">
-          <KnowledgeAtlasSection />
-        </div>
-      </ErrorBoundary>
-      <ErrorBoundary>
         <div id="about">
           <AboutSection />
         </div>
@@ -207,23 +184,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </ErrorBoundary>
       <ErrorBoundary>
-        <div id="business">
-          <BusinessSection />
-        </div>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <div id="testimonials">
-          <TestimonialsSection testimonials={featuredTestimonials} />
-        </div>
-      </ErrorBoundary>
-      <ErrorBoundary>
         <div id="blog">
           <BlogSection blogPosts={blogPosts} />
-        </div>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <div id="newsletter">
-          <NewsletterCTA />
         </div>
       </ErrorBoundary>
       <ErrorBoundary>

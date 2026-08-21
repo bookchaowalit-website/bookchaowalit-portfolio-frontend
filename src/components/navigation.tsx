@@ -30,10 +30,8 @@ export function Navigation() {
   const navItems: { name: string; href: RouteHref; key: string }[] = [
     { name: t('home'), href: "/", key: "home" },
     { name: t('portfolio'), href: "/projects", key: "portfolio" },
-    { name: t('knowledgeAtlas'), href: "/atlas", key: "knowledgeAtlas" },
     { name: t('about'), href: "/about", key: "about" },
     { name: t('blog'), href: "/blog", key: "blog" },
-    { name: t('liveSystems'), href: "/live-systems", key: "liveSystems" },
     { name: t('contact'), href: "/contact", key: "contact" },
   ];
 

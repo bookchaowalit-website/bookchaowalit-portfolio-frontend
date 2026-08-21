@@ -10,10 +10,14 @@ test.describe('Homepage', () => {
 
   test('has all major sections', async ({ page }) => {
     await page.goto('/en');
-    // Section ids match lazy home sections in the current homepage composition.
+    // Keep the homepage focused on identity, work, writing, and contact.
     const sections = ['#hero', '#about', '#projects', '#blog', '#contact'];
     for (const id of sections) {
       await expect(page.locator(id)).toBeVisible();
+    }
+
+    for (const removedSection of ['#atlas', '#business', '#testimonials', '#newsletter']) {
+      await expect(page.locator(removedSection)).toHaveCount(0);
     }
   });
 
