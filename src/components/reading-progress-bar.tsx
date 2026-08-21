@@ -29,7 +29,7 @@ export function ReadingProgressBar() {
       className="fixed top-0 left-0 h-1 z-50 transition-[width] duration-150 ease-out"
       style={{
         width: `${progress}%`,
-        background: "linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899)",
+        background: "var(--foreground)",
       }}
       role="progressbar"
       aria-valuenow={progress}

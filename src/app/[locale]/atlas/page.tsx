@@ -77,7 +77,6 @@ export default async function AtlasPage({ params }: Props) {
     id: cat.id,
     label: cat.label,
     icon: cat.icon,
-    color: cat.color,
     domainCount: cat.domains.length,
     domains: cat.domains,
   }));
@@ -216,7 +215,7 @@ export default async function AtlasPage({ params }: Props) {
             {categoryStats.map((cat: any) => (
               <div key={cat.id} className="p-4 rounded-lg border bg-card hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: cat.color }} />
+                  <div className="w-3 h-3 rounded-full bg-foreground" />
                   <h3 className="font-semibold text-sm">{cat.label}</h3>
                 </div>
                 <div className="text-2xl font-bold mb-1">{cat.domainCount}</div>

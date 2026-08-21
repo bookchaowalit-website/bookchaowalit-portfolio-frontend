@@ -68,21 +68,21 @@ interface DomainNode {
 }
 
 const categoryColors: Record<string, string> = {
-  "tech-engineering": "#3B82F6",
-  "business-finance": "#10B981",
-  "creative-design": "#F59E0B",
-  "life-health": "#EF4444",
-  "professional": "#8B5CF6",
-  "legal-governance": "#6366F1",
-  "humanities": "#EC4899",
-  "infrastructure": "#14B8A6",
+  "tech-engineering": "color-mix(in srgb, var(--foreground) 100%, transparent)",
+  "business-finance": "color-mix(in srgb, var(--foreground) 90%, transparent)",
+  "creative-design": "color-mix(in srgb, var(--foreground) 80%, transparent)",
+  "life-health": "color-mix(in srgb, var(--foreground) 70%, transparent)",
+  "professional": "color-mix(in srgb, var(--foreground) 60%, transparent)",
+  "legal-governance": "color-mix(in srgb, var(--foreground) 52%, transparent)",
+  "humanities": "color-mix(in srgb, var(--foreground) 44%, transparent)",
+  "infrastructure": "color-mix(in srgb, var(--foreground) 36%, transparent)",
 };
 
 const depthColors: Record<string, string> = {
-  expert: "#EC4899",
-  advanced: "#F59E0B",
-  intermediate: "#3B82F6",
-  foundational: "#10B981",
+  expert: "color-mix(in srgb, var(--foreground) 100%, transparent)",
+  advanced: "color-mix(in srgb, var(--foreground) 78%, transparent)",
+  intermediate: "color-mix(in srgb, var(--foreground) 56%, transparent)",
+  foundational: "color-mix(in srgb, var(--foreground) 34%, transparent)",
 };
 
 // ── Layout ──
@@ -350,9 +350,9 @@ export function AtlasClient() {
               onClick={() => setActiveCategory(cat.id)}
               className="px-3 py-1 rounded-full text-xs font-medium transition-all"
               style={{
-                backgroundColor: activeCategory === cat.id ? categoryColors[cat.id] : "transparent",
-                color: activeCategory === cat.id ? "#fff" : categoryColors[cat.id],
-                border: `1.5px solid ${categoryColors[cat.id]}`,
+                backgroundColor: activeCategory === cat.id ? "var(--foreground)" : "transparent",
+                color: activeCategory === cat.id ? "var(--background)" : categoryColors[cat.id],
+                border: `1.5px solid ${activeCategory === cat.id ? "var(--foreground)" : categoryColors[cat.id]}`,
               }}
             >
               {cat.label}
@@ -565,7 +565,7 @@ export function AtlasClient() {
               .filter((d) => activeCategory === "all" || d.category === activeCategory)
               .sort((a, b) => b.fileCount - a.fileCount)
               .map((domain, i) => {
-                const catColor = categoryColors[domain.category] || "#888";
+                const catColor = categoryColors[domain.category] || "color-mix(in srgb, var(--foreground) 55%, transparent)";
                 return (
                   <motion.div
                     key={domain.id}

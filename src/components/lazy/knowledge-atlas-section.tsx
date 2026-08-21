@@ -25,14 +25,14 @@ import {
 import inventory from "@/content/domain-inventory.json";
 
 const categoryColors: Record<string, string> = {
-  "tech-engineering": "#3B82F6",
-  "business-finance": "#10B981",
-  "creative-design": "#F59E0B",
-  "life-health": "#EF4444",
-  "professional": "#8B5CF6",
-  "legal-governance": "#6366F1",
-  "humanities": "#EC4899",
-  "infrastructure": "#14B8A6",
+  "tech-engineering": "color-mix(in srgb, var(--foreground) 100%, transparent)",
+  "business-finance": "color-mix(in srgb, var(--foreground) 90%, transparent)",
+  "creative-design": "color-mix(in srgb, var(--foreground) 80%, transparent)",
+  "life-health": "color-mix(in srgb, var(--foreground) 70%, transparent)",
+  "professional": "color-mix(in srgb, var(--foreground) 60%, transparent)",
+  "legal-governance": "color-mix(in srgb, var(--foreground) 52%, transparent)",
+  "humanities": "color-mix(in srgb, var(--foreground) 44%, transparent)",
+  "infrastructure": "color-mix(in srgb, var(--foreground) 36%, transparent)",
 };
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -87,7 +87,7 @@ export function KnowledgeAtlasSection() {
           animate={isVisible ? "visible" : "hidden"}
         >
           {inventory.categories.map((cat, i) => {
-            const color = categoryColors[cat.id] || "#888";
+            const color = categoryColors[cat.id] || "color-mix(in srgb, var(--foreground) 55%, transparent)";
             const Icon = categoryIcons[cat.id] || BookOpen;
             const domainCount = cat.domains.length;
             const noteColor = (["yellow", "pink", "green", "blue"] as const)[i % 4];

@@ -20,14 +20,14 @@ interface DomainNode {
 }
 
 const categoryColors: Record<string, string> = {
-  "tech-engineering": "#3B82F6",
-  "business-finance": "#10B981",
-  "creative-design": "#F59E0B",
-  "life-health": "#EF4444",
-  "professional": "#8B5CF6",
-  "legal-governance": "#6366F1",
-  "humanities": "#EC4899",
-  "infrastructure": "#14B8A6",
+  "tech-engineering": "color-mix(in srgb, var(--foreground) 100%, transparent)",
+  "business-finance": "color-mix(in srgb, var(--foreground) 90%, transparent)",
+  "creative-design": "color-mix(in srgb, var(--foreground) 80%, transparent)",
+  "life-health": "color-mix(in srgb, var(--foreground) 70%, transparent)",
+  "professional": "color-mix(in srgb, var(--foreground) 60%, transparent)",
+  "legal-governance": "color-mix(in srgb, var(--foreground) 52%, transparent)",
+  "humanities": "color-mix(in srgb, var(--foreground) 44%, transparent)",
+  "infrastructure": "color-mix(in srgb, var(--foreground) 36%, transparent)",
 };
 
 function computeLayout(domains: typeof inventory.domains, width: number, height: number): DomainNode[] {
@@ -71,7 +71,7 @@ function computeLayout(domains: typeof inventory.domains, width: number, height:
         x: centroid.x + dist * Math.cos(angle),
         y: centroid.y + dist * Math.sin(angle),
         radius: nodeRadius,
-        color: categoryColors[cat.id] || "#888",
+        color: categoryColors[cat.id] || "color-mix(in srgb, var(--foreground) 55%, transparent)",
       });
     });
   });
@@ -114,7 +114,7 @@ export function DomainMap() {
           result.push({
             from: catNodes[i],
             to: catNodes[next],
-            color: categoryColors[cat.id] || "#888",
+            color: categoryColors[cat.id] || "color-mix(in srgb, var(--foreground) 55%, transparent)",
           });
         }
       }
