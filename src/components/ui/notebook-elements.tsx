@@ -252,6 +252,8 @@ export function SketchyFrame({
       {children}
       <motion.svg
         className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
         fill="none"
         initial={reducedMotion ? false : { pathLength: 0 }}
         animate={{ pathLength: 1 }}
@@ -278,7 +280,7 @@ export function SketchyFrame({
         )}
         {variant === "wavy" && (
           <motion.path
-            d="M8 4 Q12 2 16 4 T24 4 T32 4 T40 4 L92% 4 Q96% 8 92% 12 L92% 88% Q88% 92% 92% 96% L40 96% T32 96% T24 96% T16 96% Q12 94% 8 96% L8% 96% Q4% 92% 8% 88% L8 12 Q4% 8 8 4"
+            d="M8 4 Q12 2 16 4 T24 4 T32 4 T40 4 L92 4 Q96 8 92 12 L92 88 Q88 92 92 96 L40 96 T32 96 T24 96 T16 96 Q12 94 8 96 L8 96 Q4 92 8 88 L8 12 Q4 8 8 4"
             stroke="currentColor"
             strokeWidth="2"
             fill="none"
