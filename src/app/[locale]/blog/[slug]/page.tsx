@@ -40,7 +40,7 @@ async function RelatedPosts({ currentSlug, currentTags, locale }: { currentSlug:
           <Link
             key={post.slug}
             href={`/blog/${post.slug}` as "/blog"}
-            className="group rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+            className="group border border-border p-5 hover:border-foreground/40 transition-colors"
           >
             <div className="flex flex-wrap gap-1 mb-3">
               {post.tags.slice(0, 2).map((tag) => (

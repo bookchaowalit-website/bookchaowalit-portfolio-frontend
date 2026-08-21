@@ -250,44 +250,54 @@ export function SketchyFrame({
   return (
     <div className={`relative ${className}`}>
       {children}
-      <motion.svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        fill="none"
-        initial={reducedMotion ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 2, ease: "easeInOut" }}
-      >
-        {variant === "dashed" && (
-          <motion.rect
-            x="4" y="4"
-            width="calc(100% - 8px)"
-            height="calc(100% - 8px)"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-            strokeDasharray="8 4"
-            rx="0"
-            className="text-primary/40"
+      {variant === "dashed" && (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-2 border-2 border-dashed border-primary/40"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+        />
+      )}
+      {variant === "double" && (
+        <>
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-1 border border-primary/60"
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
           />
-        )}
-        {variant === "double" && (
-          <>
-            <motion.rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" stroke="currentColor" strokeWidth="1" fill="none" rx="0" className="text-primary/60" />
-            <motion.rect x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke="currentColor" strokeWidth="1" fill="none" rx="0" className="text-secondary/60" />
-          </>
-        )}
-        {variant === "wavy" && (
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-3 border border-secondary/60"
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.08, ease: "easeOut" }}
+          />
+        </>
+      )}
+      {variant === "wavy" && (
+        <motion.svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          fill="none"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+        >
           <motion.path
             d="M8 4 Q12 2 16 4 T24 4 T32 4 T40 4 L92 4 Q96 8 92 12 L92 88 Q88 92 92 96 L40 96 T32 96 T24 96 T16 96 Q12 94 8 96 L8 96 Q4 92 8 88 L8 12 Q4 8 8 4"
+            vectorEffect="non-scaling-stroke"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="1.5"
             fill="none"
             className="text-accent/50"
           />
-        )}
-      </motion.svg>
+        </motion.svg>
+      )}
     </div>
   );
 }

@@ -35,31 +35,31 @@ const architectureSteps = [
     icon: Database,
     label: "8 Data Products",
     desc: "Independent domain APIs with normalized envelopes",
-    color: "text-blue-500",
+    color: "text-foreground",
   },
   {
     icon: Shield,
     label: "Free-only policy",
     desc: "No paid providers or automatic paid fallbacks",
-    color: "text-green-500",
+    color: "text-foreground",
   },
   {
     icon: Workflow,
     label: "Local loopback APIs",
     desc: "Development binds on 127.0.0.1:8101–8108",
-    color: "text-yellow-500",
+    color: "text-foreground",
   },
   {
     icon: Cpu,
     label: "Typed consumers",
     desc: "Apps read GET /v1/records only — never scrape",
-    color: "text-purple-500",
+    color: "text-foreground",
   },
   {
     icon: Zap,
     label: "Fixture fallback",
     desc: "Sanitized offline envelopes for demos without network",
-    color: "text-pink-500",
+    color: "text-foreground",
   },
 ];
 
@@ -86,9 +86,9 @@ function StatCard({
   color: string;
 }) {
   return (
-    <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
-      <div className={`p-2.5 rounded-lg ${color}`}>
-        <Icon className="w-5 h-5 text-white" />
+    <div className="flex items-center gap-3 p-4 border border-border bg-card">
+      <div className={`p-2.5 border border-border ${color}`}>
+        <Icon className="w-5 h-5" />
       </div>
       <div>
         <div className="text-2xl font-bold">
@@ -160,7 +160,7 @@ function SourceCard({
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.06 }}
-      className="p-4 rounded-xl border bg-card hover:border-primary/50 transition-colors"
+      className="p-4 border border-border bg-card hover:border-primary/50 transition-colors"
       aria-labelledby={`product-${summary.id}-title`}
     >
       <div className="flex items-center justify-between mb-3">
@@ -336,7 +336,7 @@ export function LiveSystemsClient() {
         animate={{ opacity: 1, y: 0 }}
         transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-medium mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-secondary text-foreground text-xs font-medium mb-4">
           <Activity className="w-3 h-3" aria-hidden="true" />
           Free-only data products · loopback APIs
         </div>
@@ -361,10 +361,10 @@ export function LiveSystemsClient() {
           viewport={{ once: true }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
         >
-          <StatCard icon={Server} value={stats.total_sources} label="Data Products" color="bg-blue-500" />
-          <StatCard icon={Activity} value={stats.active_sources} label="Ready / Stale" color="bg-green-500" />
-          <StatCard icon={AlertTriangle} value={stats.issue_sources} label="Empty / Issues" color="bg-yellow-500" />
-          <StatCard icon={Database} value={stats.total_data_points} label="Records Loaded" color="bg-purple-500" />
+          <StatCard icon={Server} value={stats.total_sources} label="Data Products" color="bg-foreground" />
+          <StatCard icon={Activity} value={stats.active_sources} label="Ready / Stale" color="bg-secondary" />
+          <StatCard icon={AlertTriangle} value={stats.issue_sources} label="Empty / Issues" color="bg-muted" />
+          <StatCard icon={Database} value={stats.total_data_points} label="Records Loaded" color="bg-foreground/80" />
         </motion.div>
       )}
 
@@ -405,7 +405,7 @@ export function LiveSystemsClient() {
           free_only={String(FREE_ONLY_DEFAULTS.freeOnly)} · allow_paid_providers=
           {String(FREE_ONLY_DEFAULTS.allowPaidProviders)} · allow_external_writes=
           {String(FREE_ONLY_DEFAULTS.allowExternalWrites)} · offline tip: add{" "}
-          <code className="px-1 rounded bg-muted">?fixtures=1</code>
+          <code className="px-1 border border-border bg-muted">?fixtures=1</code>
         </p>
       </section>
 
@@ -431,8 +431,8 @@ export function LiveSystemsClient() {
                 transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: i * 0.12 }}
                 className="relative"
               >
-                <div className="p-4 rounded-xl border bg-card text-center space-y-3 h-full">
-                  <div className={`mx-auto w-fit p-2.5 rounded-lg bg-muted ${step.color}`}>
+                <div className="p-4 border border-border bg-card text-center space-y-3 h-full">
+                  <div className={`mx-auto w-fit p-2.5 border border-border bg-muted ${step.color}`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="font-semibold text-sm">{step.label}</h3>
@@ -457,7 +457,7 @@ export function LiveSystemsClient() {
             <p className="text-sm text-muted-foreground">Development loopback endpoints</p>
           </div>
         </div>
-        <div className="rounded-xl border overflow-hidden" role="table" aria-label="Local data-product API map">
+        <div className="border border-border overflow-hidden" role="table" aria-label="Local data-product API map">
           <div className="grid grid-cols-[80px_1fr_1fr] gap-0" role="rowgroup">
             <div className="contents" role="row">
               <div className="bg-muted/50 px-3 py-2 text-xs font-semibold text-muted-foreground" role="columnheader">
@@ -521,9 +521,9 @@ export function LiveSystemsClient() {
                 whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: i * 0.1 }}
-                className="p-5 rounded-xl border bg-card space-y-3"
+                className="p-5 border border-border bg-card space-y-3"
               >
-                <div className="p-2 rounded-lg bg-primary/10 w-fit">
+                <div className="p-2 border border-border bg-primary/10 w-fit">
                   <Icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-semibold">{feature.title}</h3>
@@ -551,7 +551,7 @@ export function LiveSystemsClient() {
                 whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={reducedMotion ? { duration: 0 } : { duration: 0.3, delay: i * 0.05 }}
-                className="flex items-center gap-3 p-3 rounded-lg border bg-card text-sm"
+                className="flex items-center gap-3 p-3 border border-border bg-card text-sm"
               >
                 <span className="font-medium w-36 shrink-0">{row.product}</span>
                 <span className="flex-1 truncate text-muted-foreground">{row.line}</span>

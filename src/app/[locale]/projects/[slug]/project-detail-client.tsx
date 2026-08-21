@@ -87,9 +87,10 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             onError={() => setScreenshotError(true)}
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-muted-foreground">
-            <ImageOff className="size-8" />
-            <span className="text-sm">{t("screenshotUnavailable")}</span>
+          <div className="relative w-full h-full flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground">
+            <div className="absolute inset-6 border border-dashed border-border" aria-hidden="true" />
+            <ImageOff className="size-8 relative" />
+            <span className="text-sm relative">{t("screenshotUnavailable")}</span>
           </div>
         )}
         {/* Gradient fade into page background */}
@@ -211,12 +212,12 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                 {(project.caseStudy.challenge || project.caseStudy.result) && (
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
                     {project.caseStudy.challenge && (
-                      <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                      <div className="border border-border p-6">
+                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-foreground">
                           <Lightbulb className="size-4" />
                           {t("before")}
                         </h3>
-                        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        <p className="text-sm text-foreground/80 leading-relaxed">
                           {project.caseStudy.challenge}
                         </p>
                       </div>
@@ -228,12 +229,12 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                       </div>
                     )}
                     {project.caseStudy.result && (
-                      <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-600 dark:text-green-400">
+                      <div className="border border-border p-6">
+                        <h3 className="font-semibold mb-2 flex items-center gap-2 text-foreground">
                           <TrendingUp className="size-4" />
                           {t("after")}
                         </h3>
-                        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        <p className="text-sm text-foreground/80 leading-relaxed">
                           {project.caseStudy.result}
                         </p>
                       </div>
@@ -241,22 +242,22 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                   </div>
                 )}
                 {project.caseStudy.solution && (
-                  <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                  <div className="border border-border p-6">
+                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-foreground">
                       <Target className="size-4" />
                       {t("solution")}
                     </h3>
-                    <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p className="text-sm text-foreground/80 leading-relaxed">
                       {project.caseStudy.solution}
                     </p>
                   </div>
                 )}
                 {project.caseStudy.tradeoff && (
-                  <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
+                  <div className="border border-border p-6">
                     <h3 className="font-semibold mb-2 text-muted-foreground">
                       {t("tradeoffs")}
                     </h3>
-                    <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p className="text-sm text-foreground/80 leading-relaxed">
                       {project.caseStudy.tradeoff}
                     </p>
                   </div>
@@ -283,7 +284,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                   <Link
                     key={post.slug}
                     href={{pathname: '/blog/[slug]', params: {slug: post.slug}}}
-                    className="group rounded-xl border border-neutral-200 dark:border-neutral-800 p-4 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+                    className="group border border-border p-4 hover:border-foreground/40 transition-colors"
                   >
                     <h3 className="font-medium group-hover:underline mb-1 line-clamp-2">
                       {post.title}
@@ -316,7 +317,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                   <Link
                     key={rp.slug}
                     href={{pathname: '/projects/[slug]', params: {slug: rp.slug}}}
-                    className="group rounded-xl border border-neutral-200 dark:border-neutral-800 p-4 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+                    className="group border border-border p-4 hover:border-foreground/40 transition-colors"
                   >
                     <h3 className="font-medium group-hover:underline mb-1">
                       {rp.name}
@@ -328,7 +329,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                       {rp.tech.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
+                          className="text-xs px-2 py-0.5 border border-border bg-muted text-muted-foreground"
                         >
                           {tech}
                         </span>

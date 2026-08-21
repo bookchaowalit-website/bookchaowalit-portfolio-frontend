@@ -223,7 +223,7 @@
   },
   "projects": {
     "title": "My Projects",
-    "subtitle": "{count} projects deployed on Vercel, organized by category — from web tools to mobile apps.",
+    "subtitle": "{count} projects in this portfolio, organized by category — from web tools and mobile apps to internal systems.",
     "featuredProjects": "Featured Projects",
     "highlights": "Highlights",
     "otherProjects": "Other Projects",
@@ -540,7 +540,7 @@
     "share": "Share",
     "copied": "Copied!",
     "linkCopied": "Link copied to clipboard",
-    "shareWith": "Share {{title}}",
+    "shareWith": "Share {title}",
     "loadingPage": "Loading"
   },
   "privacy": {

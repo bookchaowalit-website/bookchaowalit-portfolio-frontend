@@ -313,10 +313,10 @@ export function AtlasClient() {
       {/* View Toggle + Category Filters */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* View toggle */}
-        <div className="flex items-center gap-2 bg-secondary/50 rounded-lg p-1">
+        <div className="flex items-center gap-2 border border-border/60 bg-secondary/50 p-1">
           <button
             onClick={() => setViewMode("graph")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm transition-colors ${
               viewMode === "graph" ? "bg-background shadow-sm font-medium" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -324,7 +324,7 @@ export function AtlasClient() {
           </button>
           <button
             onClick={() => setViewMode("grid")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm transition-colors ${
               viewMode === "grid" ? "bg-background shadow-sm font-medium" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -336,7 +336,7 @@ export function AtlasClient() {
         <div className="flex flex-wrap gap-1.5 justify-center">
           <button
             onClick={() => setActiveCategory("all")}
-            className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+            className={`border border-border px-3 py-1 text-xs font-medium transition-all ${
               activeCategory === "all"
                 ? "bg-foreground text-background"
                 : "bg-secondary/60 text-muted-foreground hover:text-foreground"
@@ -348,7 +348,7 @@ export function AtlasClient() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className="px-3 py-1 rounded-full text-xs font-medium transition-all"
+              className="px-3 py-1 text-xs font-medium transition-all"
               style={{
                 backgroundColor: activeCategory === cat.id ? "var(--foreground)" : "transparent",
                 color: activeCategory === cat.id ? "var(--background)" : categoryColors[cat.id],
@@ -372,7 +372,7 @@ export function AtlasClient() {
             transition={{ duration: 0.3 }}
             className="relative"
           >
-            <div className="relative bg-secondary/20 border border-border/50 rounded-2xl overflow-hidden">
+            <div className="relative bg-secondary/20 border border-border/50 overflow-hidden">
               <svg
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
                 className="w-full"
@@ -512,7 +512,7 @@ export function AtlasClient() {
               <AnimatePresence>
                 {hoveredData && !selectedData && (
                   <motion.div
-                    className="absolute top-4 right-4 bg-background/95 backdrop-blur border border-border shadow-lg p-3 z-10 max-w-[220px] rounded-lg"
+                    className="absolute top-4 right-4 bg-background/95 backdrop-blur border border-border shadow-lg p-3 z-10 max-w-[220px]"
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
@@ -619,7 +619,7 @@ export function AtlasClient() {
             transition={{ duration: 0.3 }}
             className="sticky bottom-4 z-20"
           >
-            <div className="bg-background/95 backdrop-blur-md border border-border rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto max-h-[70vh] overflow-y-auto">
+            <div className="bg-background/95 backdrop-blur-md border border-border shadow-2xl p-6 max-w-4xl mx-auto max-h-[70vh] overflow-y-auto">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-4 h-4 rounded-full" style={{ backgroundColor: selectedData.color }} />
@@ -632,7 +632,7 @@ export function AtlasClient() {
                 </div>
                 <button
                   onClick={() => setSelectedDomain(null)}
-                  className="p-1 hover:bg-secondary rounded-full transition-colors"
+                  className="p-1 hover:bg-secondary transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -641,19 +641,19 @@ export function AtlasClient() {
               <p className="text-sm text-muted-foreground mb-4">{selectedData.description}</p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                <div className="bg-secondary/40 rounded-lg p-3 text-center">
+                <div className="bg-secondary/40 p-3 text-center">
                   <div className="text-lg font-bold">{selectedData.fileCount.toLocaleString()}</div>
                   <div className="text-[11px] text-muted-foreground">{t("files")}</div>
                 </div>
-                <div className="bg-secondary/40 rounded-lg p-3 text-center">
+                <div className="bg-secondary/40 p-3 text-center">
                   <div className="text-lg font-bold">{selectedData.subdirectories.length}</div>
                   <div className="text-[11px] text-muted-foreground">{t("subdirectories")}</div>
                 </div>
-                <div className="bg-secondary/40 rounded-lg p-3 text-center">
+                <div className="bg-secondary/40 p-3 text-center">
                   <div className="text-lg font-bold">{selectedData.integrations.length}</div>
                   <div className="text-[11px] text-muted-foreground">{t("integrations")}</div>
                 </div>
-                <div className="bg-secondary/40 rounded-lg p-3 text-center">
+                <div className="bg-secondary/40 p-3 text-center">
                   <div className="text-lg font-bold">{selectedData.notableArtifacts.length}</div>
                   <div className="text-[11px] text-muted-foreground">{t("artifacts")}</div>
                 </div>
@@ -711,7 +711,7 @@ export function AtlasClient() {
                           href={selectedData.portfolioUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors bg-primary/5 hover:bg-primary/10 rounded-lg px-3 py-2 border border-primary/20"
+                          className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors bg-primary/5 hover:bg-primary/10 px-3 py-2 border border-primary/20"
                         >
                           <Icon className="w-4 h-4" />
                           {t("viewPortfolio" as any)}
@@ -728,7 +728,7 @@ export function AtlasClient() {
                           href={selectedData.portfolioUrl2}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm text-primary/80 hover:text-primary/60 transition-colors bg-muted/50 hover:bg-muted rounded-lg px-3 py-2 border border-border/50"
+                          className="inline-flex items-center gap-2 text-sm text-primary/80 hover:text-primary/60 transition-colors bg-muted/50 hover:bg-muted px-3 py-2 border border-border/50"
                         >
                           <Icon className="w-4 h-4" />
                           {t("viewPortfolio" as any)}
@@ -765,7 +765,7 @@ export function AtlasClient() {
                     {featuredProjects.length > 0 && (
                       <div className="space-y-2">
                         {featuredProjects.map(project => (
-                          <div key={project.slug} className="bg-muted/30 rounded-lg p-3 border border-border/30">
+                          <div key={project.slug} className="bg-muted/30 p-3 border border-border/30">
                             <div className="flex items-start justify-between gap-2 mb-1">
                               <h5 className="text-sm font-medium leading-tight">{project.name}</h5>
                               {project.url && (
