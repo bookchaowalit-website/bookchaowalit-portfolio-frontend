@@ -408,6 +408,38 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
         </div>
       </div>
 
+      {/* Browse dimensions — keep problem and domain discovery visible together */}
+      <nav
+        className="flex justify-center"
+        aria-label={t("browseNavigation")}
+      >
+        <div className="inline-flex border border-border bg-background p-1">
+          <Link
+            href="/projects"
+            aria-current={activeDomain === "all" ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset ${
+              activeDomain === "all"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+            }`}
+          >
+            {t("browseByProblem")}
+          </Link>
+          <Link
+            href="/projects/domains"
+            aria-current={activeDomain !== "all" ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center gap-1 px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset ${
+              activeDomain !== "all"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+            }`}
+          >
+            {t("browseByDomain")}
+            <ArrowUpRight className="size-3" aria-hidden="true" />
+          </Link>
+        </div>
+      </nav>
+
       {/* Problem lanes — primary navigation */}
       <div className="py-4">
         <p className="text-center text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
@@ -461,18 +493,6 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
             />
           </div>
         </div>
-        {activeDomain === "all" && (
-          <div className="flex justify-center">
-            <Link
-              href="/projects/domains"
-              className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              {t("exploreDomains")}
-              <ArrowUpRight className="size-3" />
-            </Link>
-          </div>
-        )}
-
       </div>
 
       {/* Featured Projects */}
