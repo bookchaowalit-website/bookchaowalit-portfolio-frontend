@@ -245,6 +245,7 @@
     "searchPlaceholder": "Search projects... (press / to focus)",
     "filterByStatus": "Filter by status",
     "filterByCategory": "Filter by category",
+    "resetFilters": "Reset status and category",
     "filterAll": "All",
     "status_live": "Live",
     "status_wip": "WIP",

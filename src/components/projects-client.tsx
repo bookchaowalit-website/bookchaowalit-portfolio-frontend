@@ -38,6 +38,10 @@ const categories: ("all" | ProjectCategory)[] = [
   "tech",
   "client",
 ];
+const categoryOptions = categories.filter(
+  (category): category is ProjectCategory => category !== "all"
+);
+const statusOptions: ProjectStatus[] = ["live", "wip", "archived"];
 
 const lanes: ("all" | ProblemLane)[] = [
   "all",
@@ -229,7 +233,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
   const [totalStars, setTotalStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
   const [categoriesExpanded, setCategoriesExpanded] = useState(
-    startCategory !== "all" && categories.indexOf(startCategory) >= 4
+    startCategory !== "all" && categoryOptions.indexOf(startCategory) >= 4
   );
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -376,6 +380,16 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     setVisibleCount(PAGE_SIZE);
   }, []);
 
+  const handleSecondaryFiltersReset = useCallback(() => {
+    setActiveCategory("all");
+    setActiveStatus("all");
+    setVisibleCount(PAGE_SIZE);
+    const params = new URLSearchParams();
+    if (activeLane !== "all") params.set("lane", activeLane);
+    const query = params.toString();
+    router.replace((query ? `/projects?${query}` : "/projects") as any);
+  }, [router, activeLane]);
+
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
     setVisibleCount(PAGE_SIZE);
@@ -499,12 +513,15 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         </div>
 
         {/* Status filters — pill chips */}
-        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByStatus")}>
-          {(["all", "live", "wip", "archived"] as const).map((status) => {
+        <div className="flex flex-wrap items-center justify-center gap-2" role="group" aria-label={t("filterByStatus")}>
+          <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
+            {t("filterByStatus")}
+          </span>
+          {statusOptions.map((status) => {
             const isActive = activeStatus === status;
-            const label = status === "all" ? t("filterAll") : t("status_" + status);
+            const label = t("status_" + status);
             const count = countByStatus[status] || 0;
-            const dotClass = status !== "all" ? statusConfig[status].dot : "";
+            const dotClass = statusConfig[status].dot;
             return (
               <button
                 key={status}
@@ -516,9 +533,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
-                {dotClass && (
-                  <span className={`size-1.5 shrink-0 rounded-full ${dotClass} ${isActive ? "opacity-60" : ""}`} />
-                )}
+                <span className={`size-1.5 shrink-0 rounded-full ${dotClass} ${isActive ? "opacity-60" : ""}`} />
                 {label}
                 <span className={`tabular-nums ${isActive ? "opacity-60" : "opacity-100"}`}>{count}</span>
               </button>
@@ -531,9 +546,9 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           {t("filterByCategory")}
         </p>
         <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByCategory")}>
-          {(categoriesExpanded ? categories : categories.slice(0, 4)).map((cat) => {
+          {(categoriesExpanded ? categoryOptions : categoryOptions.slice(0, 4)).map((cat) => {
             const isActive = activeCategory === cat;
-            const label = cat === "all" ? t("filterAll") : t("cat_" + cat);
+            const label = t("cat_" + cat);
             const count = countByCategory[cat] || 0;
             return (
               <button
@@ -551,17 +566,17 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               </button>
             );
           })}
-          {categories.length > 4 && !categoriesExpanded && (
+          {categoryOptions.length > 4 && !categoriesExpanded && (
             <button
               type="button"
               onClick={() => setCategoriesExpanded(true)}
               className="inline-flex items-center gap-1 min-h-[44px] px-3 py-2 text-xs font-medium bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-3" />
-              {t("moreCategories", { count: categories.length - 4 })}
+              {t("moreCategories", { count: categoryOptions.length - 4 })}
             </button>
           )}
-          {categoriesExpanded && categories.length > 4 && (
+          {categoriesExpanded && categoryOptions.length > 4 && (
             <button
               type="button"
               onClick={() => setCategoriesExpanded(false)}
@@ -572,6 +587,17 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
             </button>
           )}
         </div>
+        {(activeStatus !== "all" || activeCategory !== "all") && (
+          <div className="flex justify-center pt-1">
+            <button
+              type="button"
+              onClick={handleSecondaryFiltersReset}
+              className="text-xs text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {t("resetFilters")}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Featured Projects */}

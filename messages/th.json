@@ -245,6 +245,7 @@
     "searchPlaceholder": "ค้นหาผลงาน... (กด / เพื่อเริ่มพิมพ์)",
     "filterByStatus": "กรองตามสถานะ",
     "filterByCategory": "กรองตามประเภท",
+    "resetFilters": "รีเซ็ตสถานะและประเภท",
     "filterAll": "ทั้งหมด",
     "status_live": "ใช้งานจริง",
     "status_wip": "กำลังพัฒนา",
