@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   const seoDescriptions = {
-      en: "Browse 100+ independently deployed projects organized by the problems they solve and Solo Empire workspaces such as Book Dev, Book Art, Book Content, Book Science, and Book Engineering. Built with Next.js, TypeScript, and Flutter by Bangkok-based developer Chaowalit Greepoke.",
-      th: "เรียกดู 100+ โปรเจกต์ที่ deploy อย่างอิสระ จัดตามปัญหาที่แก้และ workspace ของ Solo Empire เช่น Book Dev, Book Art, Book Content, Book Science และ Book Engineering พัฒนาโดยเชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
+      en: "Browse 100+ independently deployed projects from the active Tech Domain · Book Dev workspace. Built with Next.js, TypeScript, and Flutter by Bangkok-based developer Chaowalit Greepoke.",
+      th: "เรียกดู 100+ โปรเจกต์ที่ deploy อย่างอิสระจาก workspace ปัจจุบันคือ Tech Domain · Book Dev พัฒนาโดยเชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
   };
 
   return {
@@ -81,7 +81,7 @@ export default async function Projects({ params }: Props) {
     '@type': 'CollectionPage',
     name: 'Projects Gallery - Chaowalit Greepoke',
     url: `${baseUrl}/${locale}/projects`,
-    description: 'Browse 100+ independently deployed projects organized by the problems they solve and Solo Empire workspaces.',
+    description: 'Browse 100+ independently deployed projects from the active Tech Domain · Book Dev workspace.',
     author: {
       '@type': 'Person',
       name: 'Chaowalit Greepoke',

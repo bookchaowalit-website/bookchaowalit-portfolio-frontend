@@ -6,12 +6,10 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   allProjects,
-  laneMeta,
   type AppProject,
 } from "@/data/app-projects";
 import { getProjectDomains, projectDomainMeta } from "@/data/project-domains";
 import { statusConfig } from "./status-config";
-import { LaneIcon } from "@/components/lane-icon";
 import { SketchArrow } from "@/components/ui/notebook-elements";
 import {
   ArrowLeft,
@@ -51,25 +49,25 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
 
   const status = statusConfig[project.status];
   const domains = getProjectDomains(project).map((domain) => tProjects(projectDomainMeta[domain].labelKey));
-  const lane = laneMeta[project.problemLane];
+  const primaryDomain = getProjectDomains(project)[0] ?? "book-dev";
   const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
-  // Prev/next navigation within the same problem lane
-  const laneProjects = allProjects.filter(
-    (p) => p.problemLane === project.problemLane
+  // Prev/next navigation within the same workspace
+  const domainProjects = allProjects.filter(
+    (p) => getProjectDomains(p).includes(primaryDomain)
   );
-  const currentIndex = laneProjects.findIndex(
+  const currentIndex = domainProjects.findIndex(
     (p) => p.slug === project.slug
   );
   const prevProject =
-    currentIndex > 0 ? laneProjects[currentIndex - 1] : null;
+    currentIndex > 0 ? domainProjects[currentIndex - 1] : null;
   const nextProject =
-    currentIndex < laneProjects.length - 1
-      ? laneProjects[currentIndex + 1]
+    currentIndex < domainProjects.length - 1
+      ? domainProjects[currentIndex + 1]
       : null;
 
-  // Related solutions (same problem lane, excluding current, max 4)
-  const relatedProjects = laneProjects
+  // Related work (same workspace, excluding current, max 4)
+  const relatedProjects = domainProjects
     .filter((p) => p.slug !== project.slug)
     .slice(0, 4);
 
@@ -124,11 +122,6 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
 
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm mb-10">
-          <span className="flex items-center gap-1.5 text-foreground font-medium">
-            <LaneIcon lane={project.problemLane} className="size-4" />
-            {lane.label}
-          </span>
-          <span className="text-muted-foreground/40">|</span>
           <span className="text-xs text-muted-foreground">{domains.join(" · ")}</span>
           <span className="text-muted-foreground/40">|</span>
           <span className="flex items-center gap-1.5">
@@ -311,7 +304,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
                 {t("relatedProjects")}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {t("moreInCategory", { category: lane.label })}
+                {t("moreInDomain", { domain: domains.join(" · ") })}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {relatedProjects.map((rp) => (

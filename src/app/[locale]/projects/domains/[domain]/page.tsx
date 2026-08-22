@@ -47,8 +47,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectDomainPage({ params }: Props) {
   const { locale, domain: rawDomain } = await params;
   const domain = getCanonicalProjectDomain(rawDomain);
-  if (!domain || !getActiveProjectDomains().includes(domain)) {
+  if (!domain) {
     notFound();
+  }
+
+  if (!getActiveProjectDomains().includes(domain)) {
+    redirect(`/${locale}/projects/domains`);
   }
 
   if (rawDomain !== domain) {

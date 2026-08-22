@@ -1,21 +1,18 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { Link, useRouter } from "@/i18n/routing";
-import { useSearchParams } from "next/navigation";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   allProjects,
-  laneMeta,
   type AppProject,
   type ProjectDomain,
   type ProjectStatus,
-  type ProblemLane,
 } from "@/data/app-projects";
-import { getProjectDomains, projectDomainMeta } from "@/data/project-domains";
+import { getActiveProjectDomains, getProjectsForDomain, getProjectDomains, projectDomainMeta } from "@/data/project-domains";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { LaneIcon, laneFrameVariant } from "@/components/lane-icon";
+import { laneFrameVariant } from "@/components/lane-icon";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
 import {
   ExternalLink,
@@ -25,16 +22,6 @@ import {
   Star,
   Github,
 } from "lucide-react";
-
-const lanes: ("all" | ProblemLane)[] = [
-  "all",
-  "decisions",
-  "solo-ops",
-  "growth",
-  "knowledge",
-  "dev-ai",
-  "experience",
-];
 
 const PAGE_SIZE = 24;
 const FEATURED_LIMIT = 9;
@@ -80,6 +67,7 @@ function ProjectCard({
   const [screenshotError, setScreenshotError] = useState(false);
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
+  const domains = getProjectDomains(project);
   const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
   // Generate a unique gray tone from the project name for the placeholder
@@ -158,8 +146,7 @@ function ProjectCard({
       <div className="mt-auto flex flex-wrap items-center justify-between gap-y-2 pt-3">
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-muted-foreground/90">
-            <LaneIcon lane={project.problemLane} className="size-3" />
-            {t(`lane_${project.problemLane.replace("-", "_")}`)}
+            {domains.map((domain) => t(projectDomainMeta[domain].labelKey)).join(" · ")}
           </span>
           <span className="flex items-center gap-1">
             <span className={`size-1.5 rounded-full ${status.dot}`} />
@@ -201,12 +188,7 @@ function ProjectCard({
 
 export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomain } = {}) {
   const t = useTranslations("projects");
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const urlLane = searchParams.get("lane") as ProblemLane | null;
-  const startLane = urlLane && Object.keys(laneMeta).includes(urlLane) ? urlLane : "all";
   const startDomain = initialDomain ?? "all";
-  const [activeLane, setActiveLane] = useState<"all" | ProblemLane>(startLane);
   const [activeDomain] = useState<ProjectDomain | "all">(startDomain);
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -214,7 +196,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
   const [totalStars, setTotalStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
-  const basePath = initialDomain ? `/projects/domains/${initialDomain}` : "/projects";
+  const activeDomains = getActiveProjectDomains();
 
   // Fetch GitHub stars
   useEffect(() => {
@@ -284,14 +266,11 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
     return { live, wip, archived };
   }, [scopedProjects]);
 
-  const showFeatured = activeDomain === "all" && activeLane === "all" && !search.trim();
+  const showFeatured = activeDomain === "all" && !search.trim();
 
   // Filtered projects
   const filtered = useMemo(() => {
     let list = scopedProjects;
-    if (activeLane !== "all") {
-      list = list.filter((p) => p.problemLane === activeLane);
-    }
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
@@ -302,7 +281,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
       );
     }
     return list;
-  }, [activeLane, search, scopedProjects]);
+  }, [search, scopedProjects]);
 
   const projectsToDisplay = useMemo(
     () => (showFeatured ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
@@ -311,34 +290,15 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
   const visible = useMemo(() => projectsToDisplay.slice(0, visibleCount), [projectsToDisplay, visibleCount]);
   const hasMore = visibleCount < projectsToDisplay.length;
 
-  const countByLane = useMemo(() => {
-    const map: Record<string, number> = { all: scopedProjects.length };
-    for (const p of scopedProjects) {
-      map[p.problemLane] = (map[p.problemLane] || 0) + 1;
-    }
-    return map;
-  }, [scopedProjects]);
-
-  const handleLaneChange = useCallback((lane: "all" | ProblemLane) => {
-    setActiveLane(lane);
-    setVisibleCount(PAGE_SIZE);
-    const params = new URLSearchParams();
-    if (lane !== "all") params.set("lane", lane);
-    const query = params.toString();
-    router.replace((query ? `${basePath}?${query}` : basePath) as any);
-  }, [basePath, router]);
-
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
     setVisibleCount(PAGE_SIZE);
   }, []);
 
   const handleClearFilters = useCallback(() => {
-    setActiveLane("all");
     setSearch("");
     setVisibleCount(PAGE_SIZE);
-    router.replace(basePath as any);
-  }, [basePath, router]);
+  }, []);
 
   const domainLabel = activeDomain === "all" ? "" : t(projectDomainMeta[activeDomain].labelKey);
   const domainProjectCount = scopedProjects.length;
@@ -408,71 +368,33 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
         </div>
       </div>
 
-      {/* Browse dimensions — keep problem and domain discovery visible together */}
-      <nav
-        className="flex justify-center"
-        aria-label={t("browseNavigation")}
-      >
-        <div className="inline-flex border border-border bg-background p-1">
-          <Link
-            href="/projects"
-            aria-current={activeDomain === "all" ? "page" : undefined}
-            className={`inline-flex min-h-11 items-center px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset ${
-              activeDomain === "all"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-            }`}
-          >
-            {t("browseByProblem")}
-          </Link>
-          <Link
-            href="/projects/domains"
-            aria-current={activeDomain !== "all" ? "page" : undefined}
-            className={`inline-flex min-h-11 items-center gap-1 px-4 py-2.5 text-xs font-mono uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset ${
-              activeDomain !== "all"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-            }`}
-          >
-            {t("browseByDomain")}
-            <ArrowUpRight className="size-3" aria-hidden="true" />
-          </Link>
-        </div>
-      </nav>
-
-      {/* Problem lanes — primary navigation */}
+      {/* Domain navigation — the portfolio's only browse dimension */}
       <div className="py-4">
         <p className="text-center text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
-          {t("browseByProblem")}
+          {t("browseByDomain")}
         </p>
-        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByLane")}>
-          {lanes.map((lane) => {
-            const isActive = activeLane === lane;
-            const label = lane === "all" ? t("filterAll") : t(`lane_${lane.replace("-", "_")}`);
-            const count = countByLane[lane] || 0;
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("browseByDomain")}>
+          {activeDomains.map((domain) => {
+            const isActive = activeDomain === domain;
+            const label = t(projectDomainMeta[domain].labelKey);
+            const count = getProjectsForDomain(domain).length;
             return (
-              <button
-                key={lane}
-                onClick={() => handleLaneChange(lane)}
-                aria-pressed={isActive}
+              <Link
+                key={domain}
+                href={{ pathname: "/projects/domains/[domain]", params: { domain } }}
+                aria-current={isActive ? "page" : undefined}
                 className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-foreground hover:bg-muted"
                 }`}
               >
-                {lane !== "all" && <LaneIcon lane={lane} className="size-3.5" />}
                 {label}
                 <span className={`text-xs tabular-nums ${isActive ? "opacity-60" : "text-muted-foreground"}`}>{count}</span>
-              </button>
+              </Link>
             );
           })}
         </div>
-        {activeLane !== "all" && (
-          <p className="text-center text-sm text-muted-foreground max-w-lg mx-auto mt-4">
-            {t(`laneDescription_${activeLane.replace("-", "_")}`)}
-          </p>
-        )}
       </div>
 
       {/* Search & Filters */}
@@ -523,7 +445,6 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
             {projectsToDisplay.length} {projectsToDisplay.length === 1 ? t("singleProject") : t("pluralProjects")}
             {activeDomain !== "all" && ` ${t("inDomain")} ${domainLabel}`}
-            {activeLane !== "all" && ` ${t("inCategory")} ${t(`lane_${activeLane.replace("-", "_")}`)}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
             {hasMore && ` · ${t("showingCount")} ${visible.length}`}
           </p>

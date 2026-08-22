@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { allProjects, categoryMeta, laneMeta, type AppProject } from "@/data/app-projects";
+import { allProjects, categoryMeta, type AppProject } from "@/data/app-projects";
+import { getProjectDomains, projectDomainMeta } from "@/data/project-domains";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight, ExternalLink, Github, X, Globe } from "lucide-react";
 import { StickyNote } from "@/components/ui/notebook-elements";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
-import { LaneIcon } from "@/components/lane-icon";
 
 const stickyColors = ["yellow", "pink", "green", "blue"] as const;
 const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
@@ -206,8 +206,7 @@ export function FeaturedProjects() {
 
               <div className="flex items-center justify-between pt-2 border-t border-foreground/10">
                 <span className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-foreground/70">
-                  <LaneIcon lane={project.problemLane} className="size-3" />
-                  {laneMeta[project.problemLane].label}
+                  {getProjectDomains(project).map((domain) => tProjects(projectDomainMeta[domain].labelKey)).join(" · ")}
                 </span>
                 <div className="flex items-center gap-2">
                   {project.promise ? (

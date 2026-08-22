@@ -89,25 +89,6 @@ export default async function ProjectDomainsPage({ params }: Props) {
           </p>
         </div>
 
-        <nav className="mt-8 flex justify-center" aria-label={t("browseNavigation")}>
-          <div className="inline-flex border border-border bg-background p-1">
-            <Link
-              href="/projects"
-              className="inline-flex min-h-11 items-center px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-            >
-              {t("browseByProblem")}
-            </Link>
-            <Link
-              href="/projects/domains"
-              aria-current="page"
-              className="inline-flex min-h-11 items-center gap-1 bg-primary px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-            >
-              {t("browseByDomain")}
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </Link>
-          </div>
-        </nav>
-
         <div className="mt-12 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
           {domains.map((domain: ProjectDomain) => {
             const meta = projectDomainMeta[domain];

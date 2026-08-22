@@ -1,7 +1,6 @@
 import {
   allProjects,
   type AppProject,
-  type ProjectCategory,
   type ProjectDomain,
 } from "./app-projects";
 
@@ -100,63 +99,6 @@ export const projectDomainMeta: Record<
   },
 };
 
-const categoryFallback: Record<ProjectCategory, ProjectDomain[]> = {
-  business: ["book-business"],
-  marketing: ["book-marketing", "book-content"],
-  content: ["book-content"],
-  design: ["book-art"],
-  health: ["book-life"],
-  education: ["book-learning"],
-  social: ["book-community", "book-content"],
-  tech: ["book-dev"],
-  client: ["book-business"],
-};
-
-// Specific workspaces make subject-led projects discoverable without turning
-// the old category field into a misleading domain taxonomy.
-const projectDomainOverrides: Record<string, ProjectDomain[]> = {
-  "real-estate-analyzer": ["book-business", "book-finance"],
-  "smart-farming": ["book-science", "book-engineering"],
-  booktrading: ["book-finance", "book-business"],
-  "military-strategy-db": ["book-research", "book-learning"],
-  bookmarketing: ["book-marketing", "book-content"],
-  bookreviews: ["book-content", "book-learning"],
-  booknbook: ["book-content", "book-business"],
-  bookreading: ["book-content", "book-learning"],
-  "fashion-lookbook": ["book-art", "book-content"],
-  "recipe-explorer": ["book-content", "book-life"],
-  "energy-dashboard": ["book-science", "book-engineering"],
-  "ai-art-gallery": ["book-ai", "book-art"],
-  "carbon-calculator": ["book-science", "book-engineering", "book-life"],
-  "sports-training": ["book-life"],
-  "travel-planner": ["book-life"],
-  "game-collection": ["book-content", "book-art"],
-  coursenotes: ["book-learning", "book-content"],
-  knowledgehub: ["book-learning", "book-research"],
-  learn: ["book-learning"],
-  reading: ["book-learning", "book-content"],
-  devhub: ["book-learning", "book-dev"],
-  "language-forge": ["book-learning", "book-content"],
-  "math-workshop": ["book-science", "book-learning"],
-  "psychology-explorer": ["book-science", "book-learning"],
-  "legal-knowledge": ["book-business", "book-research"],
-  "history-timeline": ["book-research", "book-learning"],
-  "legal-templates": ["book-business", "book-research"],
-  "philosophy-archive": ["book-research", "book-learning"],
-  "religion-compare": ["book-research", "book-learning"],
-  "science-lab": ["book-science", "book-research"],
-  "engineering-calc": ["book-engineering", "book-science"],
-  "chat-playground": ["book-ai", "book-dev"],
-  "text-summarizer": ["book-ai", "book-dev"],
-  "recommendation-engine": ["book-ai", "book-dev"],
-  "sentiment-analyzer": ["book-ai", "book-dev"],
-  mcplist: ["book-ai", "book-dev"],
-  "prompt-library": ["book-ai", "book-dev"],
-  "mcp-server": ["book-ai", "book-dev"],
-  "solo-empire-cli": ["book-dev", "book-business"],
-  "bookchaowalit-portfolio-mobile": ["book-dev", "book-art"],
-};
-
 /** Redirects the first taxonomy's broad IDs to the workspace IDs. */
 export const legacyProjectDomainRedirects: Record<string, ProjectDomain> = {
   development: "book-dev",
@@ -181,12 +123,12 @@ export function getCanonicalProjectDomain(value: string): ProjectDomain | null {
 }
 
 export function getProjectDomains(
-  project: Pick<AppProject, "slug" | "category" | "domains">
+  project: Pick<AppProject, "domains">
 ): ProjectDomain[] {
-  const assigned = project.domains ?? projectDomainOverrides[project.slug] ?? categoryFallback[project.category];
   // Every item in this portfolio is software or a software-backed product;
-  // Book Dev is therefore the implementation workspace for the full gallery.
-  return Array.from(new Set<ProjectDomain>(["book-dev", ...assigned]));
+  // Book Dev is therefore the only active workspace until new workspaces get
+  // explicit assignments on future project records.
+  return project.domains?.length ? project.domains : ["book-dev"];
 }
 
 export function getProjectsForDomain(domain: ProjectDomain): AppProject[] {
