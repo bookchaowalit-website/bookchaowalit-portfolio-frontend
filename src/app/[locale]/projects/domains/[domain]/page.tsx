@@ -5,9 +5,9 @@ import { ProjectsClient } from "@/components/projects-client";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-json-ld";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import {
-  getActiveProjectDomains,
   getCanonicalProjectDomain,
   projectDomainMeta,
+  projectDomainOrder,
   type ProjectDomain,
 } from "@/data/project-domains";
 
@@ -16,13 +16,13 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return getActiveProjectDomains().map((domain) => ({ domain }));
+  return projectDomainOrder.map((domain) => ({ domain }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, domain: rawDomain } = await params;
   const domain = getCanonicalProjectDomain(rawDomain);
-  if (!domain || !getActiveProjectDomains().includes(domain)) {
+  if (!domain) {
     return {};
   }
 
@@ -49,10 +49,6 @@ export default async function ProjectDomainPage({ params }: Props) {
   const domain = getCanonicalProjectDomain(rawDomain);
   if (!domain) {
     notFound();
-  }
-
-  if (!getActiveProjectDomains().includes(domain)) {
-    redirect(`/${locale}/projects/domains`);
   }
 
   if (rawDomain !== domain) {

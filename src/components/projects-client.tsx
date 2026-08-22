@@ -289,6 +289,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
   );
   const visible = useMemo(() => projectsToDisplay.slice(0, visibleCount), [projectsToDisplay, visibleCount]);
   const hasMore = visibleCount < projectsToDisplay.length;
+  const isEmptyDomain = activeDomain !== "all" && scopedProjects.length === 0 && !search.trim();
 
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
@@ -395,6 +396,17 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
             );
           })}
         </div>
+        {activeDomain === "all" && (
+          <div className="mt-4 text-center">
+            <Link
+              href="/projects/domains"
+              className="inline-flex min-h-[44px] items-center gap-1.5 px-3 py-2 text-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {t("exploreAllDomains")}
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Search & Filters */}
@@ -450,18 +462,38 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
           </p>
         </div>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-          {visible.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              stars={starsMap[project.slug] ?? 0}
-              starsError={starsError}
-              showScreenshot={false}
-            />
-          ))}
-        </div>
+        {isEmptyDomain ? (
+          <div className="border border-dashed border-border px-6 py-16 text-center">
+            <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+              {t("domainNoProjects")}
+            </p>
+            <h2 className="mt-3 text-xl font-semibold tracking-tight">
+              {t("domainEmptyTitle")}
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {t("domainEmptyDescription")}
+            </p>
+            <Link
+              href="/projects/domains"
+              className="mt-6 inline-flex min-h-[44px] items-center gap-2 bg-primary px-5 py-2.5 text-sm text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {t("exploreAllDomains")}
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
+            {visible.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                stars={starsMap[project.slug] ?? 0}
+                starsError={starsError}
+                showScreenshot={false}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Show more */}
         {hasMore && (
@@ -477,7 +509,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
         )}
 
         {/* Empty state */}
-        {filtered.length === 0 && (
+        {filtered.length === 0 && !isEmptyDomain && (
           <div className="text-center py-20">
             <p className="text-muted-foreground text-sm">{t("noProjectsFound")}</p>
             <button

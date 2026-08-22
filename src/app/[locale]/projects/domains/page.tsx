@@ -6,9 +6,9 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-json-ld";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import {
-  getActiveProjectDomains,
   getProjectsForDomain,
   projectDomainMeta,
+  projectDomainOrder,
   type ProjectDomain,
 } from "@/data/project-domains";
 
@@ -58,7 +58,7 @@ export default async function ProjectDomainsPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "projects" });
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://bookchaowalit.com";
-  const domains = getActiveProjectDomains();
+  const domains = projectDomainOrder;
   const breadcrumbItems = [
     { name: t("breadcrumbProjects"), href: "/projects" },
     { name: t("domainDirectoryTitle") },
@@ -94,12 +94,13 @@ export default async function ProjectDomainsPage({ params }: Props) {
             const meta = projectDomainMeta[domain];
             const Icon = domainIcons[meta.icon] ?? Code2;
             const count = getProjectsForDomain(domain).length;
+            const hasProjects = count > 0;
 
             return (
               <Link
                 key={domain}
                 href={{ pathname: "/projects/domains/[domain]", params: { domain } }}
-                className="group flex min-h-56 flex-col bg-background p-6 transition-colors hover:bg-secondary focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className={`group flex min-h-56 flex-col p-6 transition-colors hover:bg-secondary focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${hasProjects ? "bg-background" : "bg-muted/20"}`}
               >
                 <div className="mb-8 flex items-start justify-between gap-4">
                   <Icon className="size-5 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
@@ -111,8 +112,8 @@ export default async function ProjectDomainsPage({ params }: Props) {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {t(meta.descriptionKey)}
                 </p>
-                <span className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  {t("domainProjectCount", { count })}
+                <span className={`mt-6 font-mono text-xs uppercase tracking-wider ${hasProjects ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                  {hasProjects ? t("domainProjectCount", { count }) : t("domainNoProjects")}
                 </span>
               </Link>
             );
