@@ -244,7 +244,10 @@ export function ContactClient() {
               <Button type="submit" className="w-full" disabled={isSubmitting} aria-busy={isSubmitting}>
                 {isSubmitting ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" aria-hidden="true"></div>
+                    <div
+                      className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground"
+                      aria-hidden="true"
+                    />
                     {t("sending")}
                   </>
                 ) : (
