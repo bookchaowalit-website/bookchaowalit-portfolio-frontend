@@ -289,7 +289,19 @@
     "evidence_internal": "Internal System",
     "evidence_experiment": "Experiment",
     "browseByProblem": "Browse by problem",
-    "filterByLane": "Filter by problem"
+    "filterByLane": "Filter by problem",
+    "lane_decisions": "Better Decisions",
+    "lane_solo_ops": "Solo Operations",
+    "lane_growth": "Growth & Conversion",
+    "lane_knowledge": "Organized Knowledge",
+    "lane_dev_ai": "Dev & AI Tools",
+    "lane_experience": "Experience & Community",
+    "laneDescription_decisions": "Dashboards, comparisons, and calculators that turn scattered data into a decision you can trust",
+    "laneDescription_solo_ops": "Workflow, planning, and infrastructure tools for running a one-person operation at scale",
+    "laneDescription_growth": "SEO, campaigns, and funnels that turn an audience into measurable growth",
+    "laneDescription_knowledge": "Knowledge bases, wikis, and learning paths that make information findable and usable",
+    "laneDescription_dev_ai": "Developer utilities and AI playgrounds for building, testing, and debugging faster",
+    "laneDescription_experience": "Galleries, creative tools, and community features built for discovery and connection"
   },
   "projectDetail": {
     "backToProjects": "All projects",

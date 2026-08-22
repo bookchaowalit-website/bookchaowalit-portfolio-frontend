@@ -50,6 +50,7 @@ const lanes: ("all" | ProblemLane)[] = [
 ];
 
 const PAGE_SIZE = 24;
+const FEATURED_LIMIT = 9;
 
 const statusConfig: Record<
   ProjectStatus,
@@ -98,14 +99,14 @@ function ProjectCard({
   const lightness = 0.80 + (project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 10) * 0.015;
 
   return (
-    <div className="group relative bg-background p-6 transition-colors hover:bg-secondary border border-transparent card-hover-lift">
+    <div className="group relative flex h-full flex-col border border-transparent bg-background p-5 transition-colors hover:bg-secondary card-hover-lift">
       <Link
         href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }}
         className="absolute inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         aria-label={`${project.name} — ${t("readCaseStudy")}`}
       />
       {showScreenshot && (
-        <SketchyFrame variant={laneFrameVariant[project.problemLane]} className="mb-4 aspect-video overflow-hidden">
+        <SketchyFrame variant={laneFrameVariant[project.problemLane]} className="mb-5 aspect-video overflow-hidden">
           {!screenshotError ? (
             <Image
               src={screenshotUrl}
@@ -122,7 +123,7 @@ function ProjectCard({
               className="w-full h-full flex items-center justify-center"
               style={{ background: `oklch(${lightness} 0 0)` }}
             >
-              <span className="text-2xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
+              <span className="px-4 text-center text-xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
                 {project.name}
               </span>
             </div>
@@ -153,7 +154,7 @@ function ProjectCard({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${project.name} — ${t("tryDemo")}`}
-            className="relative z-10 shrink-0 text-muted-foreground hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
+            className="relative z-10 inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center text-muted-foreground transition-all hover:-translate-y-0.5 hover:translate-x-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ArrowUpRight className="size-3.5" />
           </a>
@@ -164,14 +165,14 @@ function ProjectCard({
           {project.promise}
         </p>
       )}
-      <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+      <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
         {project.problem ?? project.description}
       </p>
-      <div className="flex items-center justify-between">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-y-2 pt-3">
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-muted-foreground/90">
             <LaneIcon lane={project.problemLane} className="size-3" />
-            {laneMeta[project.problemLane].label}
+            {t(`lane_${project.problemLane.replace("-", "_")}`)}
           </span>
           <span className="flex items-center gap-1">
             <span className={`size-1.5 rounded-full ${status.dot}`} />
@@ -227,7 +228,9 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
   const [starsMap, setStarsMap] = useState<Record<string, number>>({});
   const [totalStars, setTotalStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
-  const [categoriesExpanded, setCategoriesExpanded] = useState(false);
+  const [categoriesExpanded, setCategoriesExpanded] = useState(
+    startCategory !== "all" && categories.indexOf(startCategory) >= 4
+  );
   const searchRef = useRef<HTMLInputElement>(null);
 
   // Fetch GitHub stars
@@ -271,8 +274,16 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
 
   // Featured projects
   const featuredProjects = useMemo(
-    () => allProjects.filter((p) => p.featured),
+    () =>
+      allProjects
+        .filter((p) => p.featured)
+        .sort((a, b) => (a.featuredRank ?? Number.MAX_SAFE_INTEGER) - (b.featuredRank ?? Number.MAX_SAFE_INTEGER))
+        .slice(0, FEATURED_LIMIT),
     []
+  );
+  const featuredSlugs = useMemo(
+    () => new Set(featuredProjects.map((project) => project.slug)),
+    [featuredProjects]
   );
 
   // Stats
@@ -282,6 +293,8 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     const archived = allProjects.filter((p) => p.status === "archived").length;
     return { live, wip, archived };
   }, []);
+
+  const showFeatured = activeLane === "all" && activeCategory === "all" && activeStatus === "all" && !search.trim();
 
   // Filtered projects
   const filtered = useMemo(() => {
@@ -307,8 +320,12 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     return list;
   }, [activeLane, activeCategory, activeStatus, search]);
 
-  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
-  const hasMore = visibleCount < filtered.length;
+  const projectsToDisplay = useMemo(
+    () => (showFeatured ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
+    [featuredSlugs, filtered, showFeatured]
+  );
+  const visible = useMemo(() => projectsToDisplay.slice(0, visibleCount), [projectsToDisplay, visibleCount]);
+  const hasMore = visibleCount < projectsToDisplay.length;
 
   const countByCategory = useMemo(() => {
     const map: Record<string, number> = { all: allProjects.length };
@@ -364,10 +381,17 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
     setVisibleCount(PAGE_SIZE);
   }, []);
 
-  const showFeatured = activeLane === "all" && activeCategory === "all" && activeStatus === "all" && !search.trim();
+  const handleClearFilters = useCallback(() => {
+    setActiveLane("all");
+    setActiveCategory("all");
+    setActiveStatus("all");
+    setSearch("");
+    setVisibleCount(PAGE_SIZE);
+    router.replace("/projects" as any);
+  }, [router]);
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl space-y-12">
+    <div className="w-full space-y-10 pb-12 pt-8">
       {/* Header */}
       <div className="py-8">
         <div className="text-center space-y-4">
@@ -428,12 +452,13 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByLane")}>
           {lanes.map((lane) => {
             const isActive = activeLane === lane;
-            const label = lane === "all" ? t("filterAll") : laneMeta[lane].label;
+            const label = lane === "all" ? t("filterAll") : t(`lane_${lane.replace("-", "_")}`);
             const count = countByLane[lane] || 0;
             return (
               <button
                 key={lane}
                 onClick={() => handleLaneChange(lane)}
+                aria-pressed={isActive}
                 className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
@@ -449,7 +474,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         </div>
         {activeLane !== "all" && (
           <p className="text-center text-sm text-muted-foreground max-w-lg mx-auto mt-4">
-            {laneMeta[activeLane].description}
+            {t(`laneDescription_${activeLane.replace("-", "_")}`)}
           </p>
         )}
       </div>
@@ -464,6 +489,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               ref={searchRef}
               type="text"
               aria-label={t("searchLabel")}
+              aria-keyshortcuts="/"
               placeholder={t("searchPlaceholder")}
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -483,6 +509,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={status}
                 onClick={() => handleStatusChange(status)}
+                aria-pressed={isActive}
                 className={`inline-flex items-center gap-1.5 min-h-[44px] px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
@@ -500,7 +527,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         </div>
 
         {/* Category filters — secondary metadata, flowing pill chips with progressive disclosure */}
-        <p className="text-center text-[10px] font-mono uppercase tracking-wider text-muted-foreground/70">
+        <p className="text-center text-xs font-mono uppercase tracking-wider text-muted-foreground/70">
           {t("filterByCategory")}
         </p>
         <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("filterByCategory")}>
@@ -512,6 +539,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
+                aria-pressed={isActive}
                 className={`inline-flex items-center gap-1 min-h-[44px] px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
@@ -572,12 +600,12 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
         {/* Results count */}
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
-            {filtered.length} {filtered.length === 1 ? t("singleProject") : t("pluralProjects")}
-            {activeLane !== "all" && ` ${t("inCategory")} ${laneMeta[activeLane].label}`}
+            {projectsToDisplay.length} {projectsToDisplay.length === 1 ? t("singleProject") : t("pluralProjects")}
+            {activeLane !== "all" && ` ${t("inCategory")} ${t(`lane_${activeLane.replace("-", "_")}`)}`}
             {activeCategory !== "all" && ` ${t("inCategory")} ${t("cat_" + activeCategory)}`}
             {activeStatus !== "all" && ` · ${t("status_" + activeStatus)}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
-            {hasMore && ` · showing ${visible.length}`}
+            {hasMore && ` · ${t("showingCount")} ${visible.length}`}
           </p>
         </div>
 
@@ -589,7 +617,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               project={project}
               stars={starsMap[project.slug] ?? 0}
               starsError={starsError}
-              showScreenshot={true}
+              showScreenshot={false}
             />
           ))}
         </div>
@@ -602,7 +630,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
               className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ChevronDown className="size-4" />
-              {t("showMore", { count: filtered.length - visible.length })}
+              {t("showMore", { count: projectsToDisplay.length - visible.length })}
             </button>
           </div>
         )}
@@ -612,12 +640,7 @@ export function ProjectsClient({ initialCategory }: { initialCategory?: ProjectC
           <div className="text-center py-20">
             <p className="text-muted-foreground text-sm">{t("noProjectsFound")}</p>
             <button
-              onClick={() => {
-                setActiveLane("all");
-                setActiveCategory("all");
-                setActiveStatus("all");
-                setSearch("");
-              }}
+              onClick={handleClearFilters}
               className="mt-4 text-sm underline underline-offset-4 text-foreground hover:text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {t("clearFilters")}

@@ -106,7 +106,7 @@ export default async function Projects({ params }: Props) {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <BreadcrumbNav items={[
         { name: locale === 'th' ? 'โปรเจกต์' : 'Projects' },
