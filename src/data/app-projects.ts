@@ -9,6 +9,18 @@ export type ProjectCategory =
   | "tech"
   | "client";
 
+export type ProjectDomain =
+  | "development"
+  | "ai-data"
+  | "science"
+  | "engineering"
+  | "art-design"
+  | "business-operations"
+  | "content-media"
+  | "education-knowledge"
+  | "health-life"
+  | "community";
+
 export type ProjectStatus = "live" | "archived" | "wip";
 
 export type EvidenceLevel = "Live" | "Prototype" | "Internal System" | "Experiment";
@@ -59,6 +71,8 @@ export interface AppProject {
   slug: string;
   name: string;
   category: ProjectCategory;
+  /** Public discipline taxonomy; optional while legacy entries migrate. */
+  domains?: ProjectDomain[];
   description: string;
   url: string;
   githubUrl: string;

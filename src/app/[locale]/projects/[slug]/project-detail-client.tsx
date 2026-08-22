@@ -6,10 +6,10 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   allProjects,
-  categoryMeta,
   laneMeta,
   type AppProject,
 } from "@/data/app-projects";
+import { getProjectDomains, projectDomainMeta } from "@/data/project-domains";
 import { statusConfig } from "./status-config";
 import { LaneIcon } from "@/components/lane-icon";
 import { SketchArrow } from "@/components/ui/notebook-elements";
@@ -34,6 +34,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
   const [stars, setStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
   const [screenshotError, setScreenshotError] = useState(false);
+  const tProjects = useTranslations("projects");
 
   useEffect(() => {
     fetch("/api/github-stars")
@@ -49,7 +50,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
   }, [project.slug]);
 
   const status = statusConfig[project.status];
-  const category = categoryMeta[project.category];
+  const domains = getProjectDomains(project).map((domain) => tProjects(projectDomainMeta[domain].labelKey));
   const lane = laneMeta[project.problemLane];
   const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
 
@@ -128,7 +129,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             {lane.label}
           </span>
           <span className="text-muted-foreground/40">|</span>
-          <span className="text-xs text-muted-foreground">{category.label}</span>
+          <span className="text-xs text-muted-foreground">{domains.join(" · ")}</span>
           <span className="text-muted-foreground/40">|</span>
           <span className="flex items-center gap-1.5">
             <span

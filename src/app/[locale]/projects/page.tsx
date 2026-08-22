@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   const seoDescriptions = {
-    en: "Browse 100+ independently deployed projects organized by category: tools, productivity, content, creative, business, social, AI & data, and mobile apps. Built with Next.js, TypeScript, and Flutter by Bangkok-based developer Chaowalit Greepoke.",
-    th: "เรียกดู 100+ โปรเจกต์ที่ deploy อย่างอิสระ จัดตามหมวดหมู่: เครื่องมือ, ผลผลิต, เนื้อหา, สร้างสรรค์, ธุรกิจ, โซเชียล, AI และข้อมูล รวมถึงแอปมือถือ พัฒนาโดย เชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
+      en: "Browse 100+ independently deployed projects organized by the problems they solve and the domains they explore: software, AI, art, science, engineering, business, and more. Built with Next.js, TypeScript, and Flutter by Bangkok-based developer Chaowalit Greepoke.",
+      th: "เรียกดู 100+ โปรเจกต์ที่ deploy อย่างอิสระ จัดตามปัญหาที่แก้และสายงานที่สำรวจ ทั้งซอฟต์แวร์ AI ศิลปะ วิทยาศาสตร์ วิศวกรรม ธุรกิจ และอีกมากมาย พัฒนาโดยเชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
   };
 
   return {
@@ -81,7 +81,7 @@ export default async function Projects({ params }: Props) {
     '@type': 'CollectionPage',
     name: 'Projects Gallery - Chaowalit Greepoke',
     url: `${baseUrl}/${locale}/projects`,
-    description: 'Browse 100+ independently deployed projects organized by category: tools, productivity, content, creative, business, social, AI & data, and mobile apps.',
+    description: 'Browse 100+ independently deployed projects organized by the problems they solve and the domains they explore.',
     author: {
       '@type': 'Person',
       name: 'Chaowalit Greepoke',

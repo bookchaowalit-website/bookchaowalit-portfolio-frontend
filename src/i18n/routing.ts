@@ -18,6 +18,8 @@ export const routing = defineRouting({
     '/about/journey': '/about/journey',
     '/about/trading': '/about/trading',
     '/projects': '/projects',
+    '/projects/domains': '/projects/domains',
+    '/projects/domains/[domain]': '/projects/domains/[domain]',
     '/projects/[slug]': '/projects/[slug]',
     '/blog': '/blog',
     '/blog/[slug]': '/blog/[slug]',

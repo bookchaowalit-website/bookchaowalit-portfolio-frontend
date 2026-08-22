@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { allProjects } from '@/data/app-projects'
+import { getActiveProjectDomains } from '@/data/project-domains'
 import { getAllBlogPosts } from '@/lib/blog'
 import inventory from '@/content/domain-inventory.json'
 
@@ -44,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...entry('/about/journey', { priority: 0.6 }),
     ...entry('/about/trading', { priority: 0.6 }),
     ...entry('/projects', { changeFrequency: 'weekly', priority: 0.9 }),
+    ...entry('/projects/domains', { changeFrequency: 'monthly', priority: 0.8 }),
     ...entry('/blog', { changeFrequency: 'weekly', priority: 0.8 }),
     ...entry('/contact', { priority: 0.7 }),
     ...entry('/atlas', { changeFrequency: 'weekly', priority: 0.8 }),
@@ -60,6 +62,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic project pages
   const projectPages: SitemapEntry[] = allProjects.flatMap((project) =>
     entry(`/projects/${project.slug}`, { changeFrequency: 'monthly', priority: 0.7 })
+  )
+
+  const projectDomainPages: SitemapEntry[] = getActiveProjectDomains().flatMap((domain) =>
+    entry(`/projects/domains/${domain}`, { changeFrequency: 'monthly', priority: 0.6 })
   )
 
   // Dynamic blog post pages
@@ -86,5 +92,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ]
   }).flat()
 
-  return [...staticPages, ...projectPages, ...blogPages, ...blogTagPages, ...domainPages]
+  return [...staticPages, ...projectPages, ...projectDomainPages, ...blogPages, ...blogTagPages, ...domainPages]
 }

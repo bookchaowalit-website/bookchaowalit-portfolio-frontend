@@ -9,9 +9,11 @@ import {
   allProjects,
   laneMeta,
   type AppProject,
+  type ProjectDomain,
   type ProjectStatus,
   type ProblemLane,
 } from "@/data/app-projects";
+import { getProjectDomains, projectDomainMeta } from "@/data/project-domains";
 import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 import { LaneIcon, laneFrameVariant } from "@/components/lane-icon";
 import { SketchyFrame } from "@/components/ui/notebook-elements";
@@ -197,19 +199,22 @@ function ProjectCard({
   );
 }
 
-export function ProjectsClient() {
+export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomain } = {}) {
   const t = useTranslations("projects");
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlLane = searchParams.get("lane") as ProblemLane | null;
   const startLane = urlLane && Object.keys(laneMeta).includes(urlLane) ? urlLane : "all";
+  const startDomain = initialDomain ?? "all";
   const [activeLane, setActiveLane] = useState<"all" | ProblemLane>(startLane);
+  const [activeDomain] = useState<ProjectDomain | "all">(startDomain);
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [starsMap, setStarsMap] = useState<Record<string, number>>({});
   const [totalStars, setTotalStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const basePath = initialDomain ? `/projects/domains/${initialDomain}` : "/projects";
 
   // Fetch GitHub stars
   useEffect(() => {
@@ -264,19 +269,26 @@ export function ProjectsClient() {
     [featuredProjects]
   );
 
+  const scopedProjects = useMemo(
+    () => activeDomain === "all"
+      ? allProjects
+      : allProjects.filter((project) => getProjectDomains(project).includes(activeDomain)),
+    [activeDomain]
+  );
+
   // Stats
   const stats = useMemo(() => {
-    const live = allProjects.filter((p) => p.status === "live").length;
-    const wip = allProjects.filter((p) => p.status === "wip").length;
-    const archived = allProjects.filter((p) => p.status === "archived").length;
+    const live = scopedProjects.filter((p) => p.status === "live").length;
+    const wip = scopedProjects.filter((p) => p.status === "wip").length;
+    const archived = scopedProjects.filter((p) => p.status === "archived").length;
     return { live, wip, archived };
-  }, []);
+  }, [scopedProjects]);
 
-  const showFeatured = activeLane === "all" && !search.trim();
+  const showFeatured = activeDomain === "all" && activeLane === "all" && !search.trim();
 
   // Filtered projects
   const filtered = useMemo(() => {
-    let list = allProjects;
+    let list = scopedProjects;
     if (activeLane !== "all") {
       list = list.filter((p) => p.problemLane === activeLane);
     }
@@ -290,7 +302,7 @@ export function ProjectsClient() {
       );
     }
     return list;
-  }, [activeLane, search]);
+  }, [activeLane, search, scopedProjects]);
 
   const projectsToDisplay = useMemo(
     () => (showFeatured ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
@@ -300,12 +312,12 @@ export function ProjectsClient() {
   const hasMore = visibleCount < projectsToDisplay.length;
 
   const countByLane = useMemo(() => {
-    const map: Record<string, number> = { all: allProjects.length };
-    for (const p of allProjects) {
+    const map: Record<string, number> = { all: scopedProjects.length };
+    for (const p of scopedProjects) {
       map[p.problemLane] = (map[p.problemLane] || 0) + 1;
     }
     return map;
-  }, []);
+  }, [scopedProjects]);
 
   const handleLaneChange = useCallback((lane: "all" | ProblemLane) => {
     setActiveLane(lane);
@@ -313,8 +325,8 @@ export function ProjectsClient() {
     const params = new URLSearchParams();
     if (lane !== "all") params.set("lane", lane);
     const query = params.toString();
-    router.replace((query ? `/projects?${query}` : "/projects") as any);
-  }, [router]);
+    router.replace((query ? `${basePath}?${query}` : basePath) as any);
+  }, [basePath, router]);
 
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
@@ -325,30 +337,44 @@ export function ProjectsClient() {
     setActiveLane("all");
     setSearch("");
     setVisibleCount(PAGE_SIZE);
-    router.replace("/projects" as any);
-  }, [router]);
+    router.replace(basePath as any);
+  }, [basePath, router]);
+
+  const domainLabel = activeDomain === "all" ? "" : t(projectDomainMeta[activeDomain].labelKey);
+  const domainProjectCount = scopedProjects.length;
+  const displayedStars = activeDomain === "all"
+    ? totalStars
+    : scopedProjects.reduce((sum, project) => sum + (starsMap[project.slug] ?? 0), 0);
 
   return (
     <div className="w-full space-y-10 pb-12 pt-8">
       {/* Header */}
       <div className="py-8">
         <div className="text-center space-y-4">
-          <MixedTypographyTitle as="h1"
-            words={[
-              { text: t("titleWord1"), style: "cursive", size: "xl" },
-              { text: t("titleWord2"), style: "filled", size: "xl" },
-            ]}
+          <MixedTypographyTitle
+            as="h1"
+            words={activeDomain === "all"
+              ? [
+                { text: t("titleWord1"), style: "cursive", size: "xl" },
+                { text: t("titleWord2"), style: "filled", size: "xl" },
+              ]
+              : [
+                { text: domainLabel, style: "cursive", size: "lg" },
+                { text: t("titleWord2"), style: "filled", size: "lg" },
+              ]}
             className="mb-4"
           />
           <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-            {t("subtitle", { count: allProjects.length })}
+            {activeDomain === "all"
+              ? t("subtitle", { count: scopedProjects.length })
+              : t("domainSubtitle", { count: domainProjectCount, domain: domainLabel })}
           </p>
         </div>
 
         {/* Stats Banner — uses the same gap-px grid language */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 max-w-lg mx-auto mt-8 gap-px bg-border">
           <div className="bg-background flex flex-col items-center py-3 px-2">
-            <span className="text-lg font-bold tabular-nums">{allProjects.length}</span>
+            <span className="text-lg font-bold tabular-nums">{scopedProjects.length}</span>
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statTotal")}</span>
           </div>
           <div className="bg-background flex flex-col items-center py-3 px-2">
@@ -375,7 +401,7 @@ export function ProjectsClient() {
           <div className="bg-background flex flex-col items-center py-3 px-2 col-span-2 sm:col-span-1">
             <span className="flex items-center gap-1.5">
               <Star className="size-3.5 text-muted-foreground" />
-              <span className="text-lg font-bold tabular-nums">{starsError ? '—' : totalStars}</span>
+              <span className="text-lg font-bold tabular-nums">{starsError ? '—' : displayedStars}</span>
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statStars")}</span>
           </div>
@@ -435,6 +461,17 @@ export function ProjectsClient() {
             />
           </div>
         </div>
+        {activeDomain === "all" && (
+          <div className="flex justify-center">
+            <Link
+              href="/projects/domains"
+              className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {t("exploreDomains")}
+              <ArrowUpRight className="size-3" />
+            </Link>
+          </div>
+        )}
 
       </div>
 
@@ -465,6 +502,7 @@ export function ProjectsClient() {
         <div className="mb-6">
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
             {projectsToDisplay.length} {projectsToDisplay.length === 1 ? t("singleProject") : t("pluralProjects")}
+            {activeDomain !== "all" && ` ${t("inDomain")} ${domainLabel}`}
             {activeLane !== "all" && ` ${t("inCategory")} ${t(`lane_${activeLane.replace("-", "_")}`)}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
             {hasMore && ` · ${t("showingCount")} ${visible.length}`}
