@@ -1,125 +1,204 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { BarChart3, Bot, Code2, ExternalLink, PenLine } from "lucide-react";
+import { Link } from "@/i18n/routing";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
-import { StickyNote } from "@/components/ui/notebook-elements";
-import { Calendar, Code2, BookOpen, Dumbbell, Lightbulb, Coffee, Target, Music } from "lucide-react";
 
-interface NowItem {
+type FocusStatus = "building" | "shipping" | "maintaining" | "exploring";
+
+type ProjectProof =
+  | { label: string; slug: string }
+  | { label: string; href: "/projects" | "/blog" };
+
+interface FocusLane {
   icon: React.ElementType;
   title: string;
   description: string;
-  color: "yellow" | "pink" | "green" | "blue";
+  status: FocusStatus;
+  proof: ProjectProof[];
 }
 
-function NowCard({ item, index }: { item: NowItem; index: number }) {
-  const reducedMotion = useReducedMotion();
-  const Icon = item.icon;
+function ProofLink({ proof }: { proof: ProjectProof }) {
+  const className =
+    "inline-flex min-h-[44px] items-center gap-1.5 text-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+  if ("slug" in proof) {
+    return (
+      <Link
+        href={{ pathname: "/projects/[slug]", params: { slug: proof.slug } }}
+        className={className}
+      >
+        {proof.label}
+        <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+      </Link>
+    );
+  }
+
   return (
-    <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 15, rotate: (index % 2 === 0 ? 1 : -1) }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, rotate: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={reducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.08 }}
+    <Link href={proof.href} className={className}>
+      {proof.label}
+      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+    </Link>
+  );
+}
+
+function FocusLaneCard({
+  item,
+  statusLabel,
+  proofLabel,
+}: {
+  item: FocusLane;
+  statusLabel: string;
+  proofLabel: string;
+}) {
+  const Icon = item.icon;
+
+  return (
+    <motion.article
+      initial={false}
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="flex h-full flex-col bg-background p-6 md:p-8"
     >
-      <StickyNote color={item.color} rotation={((index % 3) - 1) * 0.8} className="h-full">
-        <div className="flex items-start gap-3">
-          <div className="p-2 rounded-lg bg-background/60 shrink-0">
-            <Icon className="w-4 h-4 text-foreground" />
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-bold">{item.title}</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
-          </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-border bg-muted/40">
+          <Icon className="h-5 w-5 text-foreground" aria-hidden="true" />
         </div>
-      </StickyNote>
-    </motion.div>
+        <span className="border border-border px-2 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          {statusLabel}
+        </span>
+      </div>
+
+      <h3 className="mt-6 text-xl font-semibold tracking-tight">{item.title}</h3>
+      <p className="mt-3 max-w-[42ch] text-sm leading-7 text-muted-foreground">
+        {item.description}
+      </p>
+
+      <div className="mt-auto border-t border-border pt-5">
+        <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          {proofLabel}
+        </p>
+        <div className="flex flex-wrap gap-x-5 gap-y-1">
+          {item.proof.map((proof) => (
+            <ProofLink key={proof.label} proof={proof} />
+          ))}
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
 export function NowClient() {
   const t = useTranslations("now");
-  const reducedMotion = useReducedMotion();
 
-  const nowItems: NowItem[] = [
-    { icon: Code2, title: t("focusTitle"), description: t("focusDesc"), color: "blue" },
-    { icon: BookOpen, title: t("learningTitle"), description: t("learningDesc"), color: "green" },
-    { icon: Lightbulb, title: t("buildingTitle"), description: t("buildingDesc"), color: "yellow" },
-    { icon: Dumbbell, title: t("fitnessTitle"), description: t("fitnessDesc"), color: "pink" },
-    { icon: Target, title: t("goalTitle"), description: t("goalDesc"), color: "blue" },
-    { icon: Coffee, title: t("consumingTitle"), description: t("consumingDesc"), color: "yellow" },
-    { icon: Music, title: t("listeningTitle"), description: t("listeningDesc"), color: "pink" },
-    { icon: Calendar, title: t("scheduleTitle"), description: t("scheduleDesc"), color: "green" },
+  const focusLanes: FocusLane[] = [
+    {
+      icon: Bot,
+      title: t("aiTitle"),
+      description: t("aiDesc"),
+      status: "building",
+      proof: [
+        { label: t("aiProof1"), slug: "mcp-server" },
+        { label: t("aiProof2"), slug: "chat-playground" },
+      ],
+    },
+    {
+      icon: Code2,
+      title: t("systemsTitle"),
+      description: t("systemsDesc"),
+      status: "shipping",
+      proof: [
+        { label: t("systemsProof1"), slug: "webhook-tester" },
+        { label: t("systemsProof2"), slug: "recommendation-engine" },
+      ],
+    },
+    {
+      icon: BarChart3,
+      title: t("growthTitle"),
+      description: t("growthDesc"),
+      status: "maintaining",
+      proof: [
+        { label: t("growthProof1"), slug: "bookmarketing" },
+        { label: t("growthProof2"), slug: "analytics-dashboard" },
+      ],
+    },
+    {
+      icon: PenLine,
+      title: t("publicTitle"),
+      description: t("publicDesc"),
+      status: "exploring",
+      proof: [
+        { label: t("publicProof1"), href: "/projects" },
+        { label: t("publicProof2"), href: "/blog" },
+      ],
+    },
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl space-y-8">
-      {/* Hero */}
-      <motion.div
-        className="text-center space-y-6 py-8"
-        initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.8 }}
-      >
-        <MixedTypographyTitle as="h1"
+    <div className="space-y-12 py-8 md:space-y-16 md:py-12">
+      <header className="max-w-3xl space-y-6">
+        <MixedTypographyTitle
+          as="h1"
           words={[
             { text: t("titleWord1"), style: "cursive", size: "xl" },
             { text: t("titleWord2"), style: "filled", size: "xl" },
           ]}
-          className="mb-4"
         />
-        <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
+        <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
           {t("subtitle")}
         </p>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/60 text-xs text-muted-foreground">
-          <Calendar className="w-3 h-3" />
+        <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
           {t("lastUpdated")}
-        </div>
-      </motion.div>
-
-      {/* Intro Note */}
-      <motion.div
-        className="max-w-lg mx-auto"
-        initial={reducedMotion ? false : { opacity: 0, scale: 0.95, rotate: 1 }}
-        animate={{ opacity: 1, scale: 1, rotate: -1 }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
-      >
-        <StickyNote rotation={-1} className="text-center">
-          <p className="text-sm text-foreground">{t("introNote")}</p>
-        </StickyNote>
-      </motion.div>
-
-      {/* What I'm doing now */}
-      <NotebookSectionHeader
-        title={t("nowSectionTitle")}
-        subtitle={t("nowSectionSubtitle")}
-        className="mt-12"
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {nowItems.map((item, i) => (
-          <NowCard key={item.title} item={item} index={i} />
-        ))}
-      </div>
-
-      {/* Philosophy */}
-      <motion.div
-        className="max-w-2xl mx-auto text-center py-8"
-        initial={reducedMotion ? false : { opacity: 0 }}
-        whileInView={reducedMotion ? undefined : { opacity: 1 }}
-        viewport={{ once: true }}
-        transition={reducedMotion ? { duration: 0 } : { duration: 0.6 }}
-      >
-        <NotebookSectionHeader
-          title={t("philosophyTitle")}
-          subtitle={t("philosophySubtitle")}
-          className="mb-4"
-        />
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-          {t("philosophyNote")}
         </p>
-      </motion.div>
+      </header>
+
+      <aside className="border border-border bg-muted/30 p-6 md:p-8" aria-label={t("boundaryTitle")}>
+        <div className="flex items-start gap-4">
+          <div className="mt-1 h-2 w-2 shrink-0 bg-foreground" aria-hidden="true" />
+          <div className="space-y-2">
+            <h2 className="text-lg font-semibold">{t("boundaryTitle")}</h2>
+            <p className="max-w-3xl text-sm leading-7 text-muted-foreground">
+              {t("boundaryNote")}
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <section aria-label={t("nowSectionTitle")}>
+        <NotebookSectionHeader
+          title={t("nowSectionTitle")}
+          subtitle={t("nowSectionSubtitle")}
+        />
+
+        <div
+          className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2"
+        >
+          {focusLanes.map((item) => (
+            <FocusLaneCard
+              key={item.title}
+              item={item}
+              statusLabel={t(`status${item.status[0].toUpperCase()}${item.status.slice(1)}` as const)}
+              proofLabel={t("proofLabel")}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border pt-8" aria-labelledby="focus-principle-heading">
+        <div className="flex items-start gap-4">
+          <div className="mt-1 h-2 w-2 shrink-0 bg-foreground" aria-hidden="true" />
+          <div>
+            <h2 id="focus-principle-heading" className="text-lg font-semibold">
+              {t("principleTitle")}
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-7 text-muted-foreground">
+              {t("principleNote")}
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

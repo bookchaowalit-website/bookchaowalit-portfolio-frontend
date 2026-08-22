@@ -77,6 +77,15 @@ export function Footer() {
               </motion.div>
               <motion.div whileHover={hoverSecondary}>
                 <Link
+                  href="/now"
+                  className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
+                  style={{ transform: `rotate(-0.5deg)` }}
+                >
+                  {tNav("now")}
+                </Link>
+              </motion.div>
+              <motion.div whileHover={hoverSecondary}>
+                <Link
                   href="/contact"
                   className="text-muted-foreground hover:text-primary font-[family-name:var(--font-doodle)] text-lg transition-colors duration-200"
                   style={{ transform: `rotate(0.5deg)` }}

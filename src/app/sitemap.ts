@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...entry('/atlas', { changeFrequency: 'weekly', priority: 0.8 }),
     ...entry('/testimonials', { changeFrequency: 'weekly', priority: 0.8 }),
     ...entry('/uses', { priority: 0.7 }),
-    ...entry('/now', { changeFrequency: 'weekly', priority: 0.7 }),
+    ...entry('/now', { changeFrequency: 'monthly', priority: 0.5 }),
     ...entry('/colophon', { priority: 0.6 }),
     ...entry('/live-systems', { changeFrequency: 'weekly', priority: 0.7 }),
     ...entry('/privacy', { changeFrequency: 'yearly', priority: 0.3 }),

@@ -19,6 +19,7 @@ import {
   TrendingUp,
   FileText,
   ArrowRight,
+  Compass,
   HelpCircle,
   Newspaper,
 } from "lucide-react";
@@ -145,6 +146,15 @@ export function CommandPalette() {
         icon: <BookOpen className="size-4" />,
         action: () => navigateTo("/blog"),
         keywords: ["blog", "articles", "posts", "writing"],
+        group: t("groupNav"),
+      },
+      {
+        id: "now",
+        label: t("navNow"),
+        description: t("navNowDesc"),
+        icon: <Compass className="size-4" />,
+        action: () => navigateTo("/now"),
+        keywords: ["now", "focus", "current", "direction"],
         group: t("groupNav"),
       },
       {

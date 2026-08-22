@@ -11,13 +11,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const seoTitles = {
-    en: "Now - What I'm Working On | Chaowalit Greepoke",
-    th: "ตอนนี้กำลังทำอะไร | เชาวลิต กรีโภค"
+    en: "Current Focus | Chaowalit Greepoke",
+    th: "สิ่งที่กำลังโฟกัส | เชาวลิต กรีโภค"
   };
 
   const seoDescriptions = {
-    en: "What I'm focused on right now — current projects, learning goals, fitness routine, and things I'm consuming. A snapshot of my present moment.",
-    th: "สิ่งที่ผมกำลังโฟกัสตอนนี้ — โปรเจกต์ปัจจุบัน เป้าหมายการเรียนรู้ ตารางฟิตเนส และสิ่งที่กำลังบริโภค สแนปช็อตของช่วงเวลาปัจจุบันของผม"
+    en: "A curated view of the themes shaping my public work. It shows broad direction and selected proof, not private goals, deadlines, or live metrics.",
+    th: "ภาพรวมแบบคัดสรรของทิศทางงานที่เผยแพร่ต่อสาธารณะ แสดงแนวทางกว้าง ๆ และผลงานอ้างอิง โดยไม่เปิดเผยเป้าหมายส่วนตัว กำหนดเวลา หรือข้อมูลแบบเรียลไทม์"
   };
 
   return {
@@ -25,9 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
-      'Now Page',
       'Current Focus',
-      'What I Am Doing',
+      'Public Work',
+      'Selected Work',
       'Chaowalit Greepoke',
       'Developer Bangkok',
       'Generalist'
@@ -48,14 +48,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       siteName: 'Chaowalit Greepoke Portfolio',
-      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Now - What I\'m Working On' }],
+      images: [{ url: `/${locale}/now/opengraph-image`, width: 1200, height: 630, alt: 'Current Focus' }],
     },
     twitter: {
       card: 'summary_large_image',
       title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
       description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
       creator: '@bookchaowalit',
-      images: ['/og-image.jpg'],
+      images: [`/${locale}/now/opengraph-image`],
     }
   };
 }
@@ -67,11 +67,11 @@ export default async function NowPage({ params }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: locale === 'th' ? 'ตอนนี้ - กำลังทำอะไร' : 'Now - What I\'m Working On',
+    name: locale === 'th' ? 'สิ่งที่กำลังโฟกัส' : 'Current Focus',
     url: `${baseUrl}/${locale}/now`,
     description: locale === 'th'
-      ? 'สิ่งที่ผมกำลังโฟกัสตอนนี้ — โปรเจกต์ปัจจุบัน เป้าหมายการเรียนรู้ และสิ่งที่กำลังบริโภค'
-      : 'What I am focused on right now — current projects, learning goals, and things I am consuming.',
+      ? 'ภาพรวมแบบคัดสรรของทิศทางงานที่เผยแพร่ต่อสาธารณะและผลงานอ้างอิง'
+      : 'A curated view of public focus areas and selected proof of work.',
     inLanguage: locale === 'th' ? 'th' : 'en',
     author: {
       '@type': 'Person',
@@ -84,10 +84,10 @@ export default async function NowPage({ params }: Props) {
     },
     mainEntity: {
       '@type': 'Thing',
-      name: locale === 'th' ? 'โฟกัสและกิจกรรมปัจจุบัน' : 'Current Focus & Activities',
+      name: locale === 'th' ? 'ทิศทางงานที่เผยแพร่ต่อสาธารณะ' : 'Public Focus Areas',
       description: locale === 'th'
-        ? 'สแนปช็อตของสิ่งที่ผมกำลังทำ เรียนรู้ และบริโภคตอนนี้'
-        : 'A snapshot of what I am working on, learning, and consuming right now',
+        ? 'ทิศทางกว้าง ๆ และผลงานอ้างอิงที่คัดสรร โดยไม่เปิดเผยข้อมูลการดำเนินงานภายใน'
+        : 'Broad directions and selected proof without exposing private operating detail',
     },
     // NowPage spec (https://nownownow.com/about)
     isBasedOn: {
@@ -103,7 +103,7 @@ export default async function NowPage({ params }: Props) {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <BreadcrumbNav items={[
         { name: locale === 'th' ? 'ตอนนี้' : 'Now' },

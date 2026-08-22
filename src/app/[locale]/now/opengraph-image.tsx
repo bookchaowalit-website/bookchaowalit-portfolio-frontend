@@ -6,12 +6,12 @@ export const contentType = 'image/png';
 
 const content: Record<string, { title: string; subtitle: string }> = {
   en: {
-    title: "What I'm Working On",
-    subtitle: "Current projects, learning goals, and focus areas",
+    title: "Current Focus",
+    subtitle: "Public themes and selected proof of work",
   },
   th: {
-    title: "สิ่งที่กำลังทำอยู่",
-    subtitle: "โปรเจกต์ปัจจุบัน เป้าหมายการเรียนรู้ และสิ่งที่โฟกัส",
+    title: "สิ่งที่กำลังโฟกัส",
+    subtitle: "ทิศทางงานที่เปิดเผยและผลงานอ้างอิงที่คัดสรร",
   },
 };
 
@@ -42,7 +42,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
           }}
         />
 
-        {/* Accent bar */}
+        {/* Notebook rule */}
         <div
           style={{
             position: 'absolute',
@@ -50,7 +50,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             left: 0,
             right: 0,
             height: 4,
-            background: 'linear-gradient(90deg, #f59e0b, #f97316, #ef4444)',
+            background: '#f4f4f5',
           }}
         />
 
@@ -67,7 +67,6 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             zIndex: 1,
           }}
         >
-          <div style={{ fontSize: 72, marginBottom: 16 }}>🎯</div>
           <div
             style={{
               fontSize: 52,
@@ -107,11 +106,11 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
               width: 36,
               height: 36,
               borderRadius: 8,
-              background: 'linear-gradient(135deg, #60a5fa, #a78bfa, #c084fc)',
+              background: '#f4f4f5',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fff',
+              color: '#18181b',
               fontSize: 18,
               fontWeight: 700,
             }}
