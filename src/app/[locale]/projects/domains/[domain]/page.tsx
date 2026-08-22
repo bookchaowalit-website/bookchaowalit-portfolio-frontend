@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { ProjectsClient } from "@/components/projects-client";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-json-ld";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import {
   getActiveProjectDomains,
-  isProjectDomain,
+  getCanonicalProjectDomain,
   projectDomainMeta,
   type ProjectDomain,
 } from "@/data/project-domains";
@@ -21,22 +21,23 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, domain: rawDomain } = await params;
-  if (!isProjectDomain(rawDomain) || !getActiveProjectDomains().includes(rawDomain)) {
+  const domain = getCanonicalProjectDomain(rawDomain);
+  if (!domain || !getActiveProjectDomains().includes(domain)) {
     return {};
   }
 
   const t = await getTranslations({ locale, namespace: "projects" });
-  const label = t(projectDomainMeta[rawDomain].labelKey);
+  const label = t(projectDomainMeta[domain].labelKey);
 
   return {
     title: `${label} Projects | Chaowalit Greepoke`,
-    description: t(projectDomainMeta[rawDomain].descriptionKey),
+    description: t(projectDomainMeta[domain].descriptionKey),
     alternates: {
-      canonical: `/${locale}/projects/domains/${rawDomain}`,
+      canonical: `/${locale}/projects/domains/${domain}`,
       languages: {
-        en: `/en/projects/domains/${rawDomain}`,
-        th: `/th/projects/domains/${rawDomain}`,
-        "x-default": `/en/projects/domains/${rawDomain}`,
+        en: `/en/projects/domains/${domain}`,
+        th: `/th/projects/domains/${domain}`,
+        "x-default": `/en/projects/domains/${domain}`,
       },
     },
     robots: "index, follow",
@@ -45,14 +46,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDomainPage({ params }: Props) {
   const { locale, domain: rawDomain } = await params;
-  if (!isProjectDomain(rawDomain) || !getActiveProjectDomains().includes(rawDomain)) {
+  const domain = getCanonicalProjectDomain(rawDomain);
+  if (!domain || !getActiveProjectDomains().includes(domain)) {
     notFound();
   }
 
-  const domain = rawDomain as ProjectDomain;
+  if (rawDomain !== domain) {
+    redirect(`/${locale}/projects/domains/${domain}`);
+  }
+
+  const canonicalDomain = domain as ProjectDomain;
   const t = await getTranslations({ locale, namespace: "projects" });
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://bookchaowalit.com";
-  const label = t(projectDomainMeta[domain].labelKey);
+  const label = t(projectDomainMeta[canonicalDomain].labelKey);
   const breadcrumbItems = [
     { name: t("breadcrumbProjects"), href: "/projects" },
     { name: t("domainDirectoryTitle"), href: "/projects/domains" },
@@ -66,10 +72,10 @@ export default async function ProjectDomainPage({ params }: Props) {
         items={[
           { name: t("breadcrumbProjects"), url: `${baseUrl}/${locale}/projects` },
           { name: t("domainDirectoryTitle"), url: `${baseUrl}/${locale}/projects/domains` },
-          { name: label, url: `${baseUrl}/${locale}/projects/domains/${domain}` },
+          { name: label, url: `${baseUrl}/${locale}/projects/domains/${canonicalDomain}` },
         ]}
       />
-      <ProjectsClient initialDomain={domain} />
+      <ProjectsClient initialDomain={canonicalDomain} />
     </div>
   );
 }

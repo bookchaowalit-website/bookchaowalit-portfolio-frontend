@@ -10,16 +10,19 @@ export type ProjectCategory =
   | "client";
 
 export type ProjectDomain =
-  | "development"
-  | "ai-data"
-  | "science"
-  | "engineering"
-  | "art-design"
-  | "business-operations"
-  | "content-media"
-  | "education-knowledge"
-  | "health-life"
-  | "community";
+  | "book-dev"
+  | "book-art"
+  | "book-content"
+  | "book-ai"
+  | "book-science"
+  | "book-engineering"
+  | "book-business"
+  | "book-marketing"
+  | "book-finance"
+  | "book-learning"
+  | "book-life"
+  | "book-community"
+  | "book-research";
 
 export type ProjectStatus = "live" | "archived" | "wip";
 
@@ -71,7 +74,7 @@ export interface AppProject {
   slug: string;
   name: string;
   category: ProjectCategory;
-  /** Public discipline taxonomy; optional while legacy entries migrate. */
+  /** Public Solo Empire workspace taxonomy; optional while legacy entries migrate. */
   domains?: ProjectDomain[];
   description: string;
   url: string;

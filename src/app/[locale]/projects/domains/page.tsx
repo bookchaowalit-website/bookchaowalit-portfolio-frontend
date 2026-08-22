@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArrowUpRight, BookOpen, BrainCircuit, BriefcaseBusiness, Code2, Cog, FlaskConical, HeartPulse, Palette, PenLine, Users, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, BookOpen, BrainCircuit, BriefcaseBusiness, ChartNoAxesCombined, Code2, Cog, FlaskConical, HeartPulse, Palette, PenLine, Search, TrendingUp, Users, type LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { BreadcrumbJsonLd } from "@/components/breadcrumb-json-ld";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
@@ -24,9 +24,12 @@ const domainIcons: Record<string, LucideIcon> = {
   palette: Palette,
   briefcase: BriefcaseBusiness,
   "pen-line": PenLine,
+  "trending-up": TrendingUp,
+  chart: ChartNoAxesCombined,
   "book-open": BookOpen,
   "heart-pulse": HeartPulse,
   users: Users,
+  search: Search,
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
