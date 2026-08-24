@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const projectCount = allProjects.length;
   const seoDescriptions = {
-      en: `Browse ${projectCount} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, work-in-progress apps, and archived experiments.`,
-      th: `เรียกดูผลงาน ${projectCount} รายการจาก workspace ปัจจุบันคือ Tech Domain · Book Dev รวมทั้งเดโมที่ใช้งานได้ งานที่กำลังพัฒนา และโปรเจกต์ที่เก็บถาวร`
+      en: `Browse ${projectCount} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, internal tools, and archived experiments.`,
+      th: `เรียกดูผลงาน ${projectCount} รายการจาก workspace ปัจจุบันคือ Tech Domain · Book Dev รวมทั้งเดโมที่ใช้งานได้ เครื่องมือภายใน และโปรเจกต์ที่เก็บถาวร`
   };
 
   return {
@@ -82,7 +82,7 @@ export default async function Projects({ params }: Props) {
     '@type': 'CollectionPage',
     name: 'Projects Gallery - Chaowalit Greepoke',
     url: `${baseUrl}/${locale}/projects`,
-    description: `Browse ${allProjects.length} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, work-in-progress apps, and archived experiments.`,
+    description: `Browse ${allProjects.length} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, internal tools, and archived experiments.`,
     author: {
       '@type': 'Person',
       name: 'Chaowalit Greepoke',

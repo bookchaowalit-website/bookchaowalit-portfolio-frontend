@@ -34,7 +34,7 @@ they won't believe `PRODUCT.md` in any of the flagship repos either.
 ### Project counts & claims — mostly accurate, one stale one fixed
 
 The real data source (`src/data/app-projects.ts`) has **129 projects**
-(116 live, 10 wip, 3 archived), every single one with a real `caseStudy`
+(126 live, 0 wip, 3 archived), every single one with a real `caseStudy`
 object (challenge/solution/result) — not just a name and a link. Site-wide
 copy consistently says **"100+"**, which is honestly hedged (129 ≥ 100,
 the claim ages gracefully as the count grows) — no fix needed there.
@@ -47,7 +47,7 @@ dynamic (`totalProjects: allProjects.length`) — only the human-readable
 description text had gone stale. Fixed to interpolate the real count so
 it can't go stale again.
 
-### Links — structurally sound
+### Links — structurally sound and release-checked
 
 Project URLs are generated programmatically (`vercel(slug)` /
 `gh(slug)` / `sub(slug)` helper functions from each project's `slug`),
@@ -60,6 +60,8 @@ a bug specific to this repo. No `href="#"` placeholder links found
 anywhere (unlike `booknbook`'s footer before this session). The `live` label
 is the portfolio catalog's declared product status; it is not a claim that
 every linked deployment has passed a fresh health check on every release.
+The current release pass rechecked all public Live demos; internal-only
+entries remain explicitly marked without a public demo link.
 
 ### Domain taxonomy — Book Dev is the only populated workspace
 
@@ -68,6 +70,14 @@ records intentionally resolve to `book-dev` until a project has evidence for a
 different workspace. Empty domain pages are therefore expected, not missing
 routes. Adding a project to another domain requires an explicit `domains` field
 and a catalog integrity test update.
+
+### WIP closure — public first releases are shipped
+
+The former ten WIP records now have a closed lifecycle: eight public web
+experiments have a build-passing deployment, the Solo Empire CLI is a verified
+internal system, and the Flutter portfolio app has a public web preview. Native
+App Store and Google Play publication remains a separate mobile-release step;
+the catalog no longer implies that store publication already happened.
 
 ### Contact flow — solid, one self-documented gap
 
@@ -149,8 +159,9 @@ should be trusted versus interrogated.
    even on routes that don't need all of them.
 2. **Resend domain (ops):** deferred by owner 2026-08-11. Code supports
    `RESEND_FROM`; sandbox remains the fallback. See `RESEND-DOMAIN-SETUP.md`.
-3. **Live-link honesty (done 2026-08-11):** 29 declared-`live` → `wip`
-   where demos were unreachable; booknbook URL fixed to consulting host.
+3. **Live-link honesty (done 2026-08-11, rechecked 2026-08-24):** unreachable
+   public demos are not presented as working links; internal-only systems are
+   labelled separately.
 4. **UI/UX a11y pass (done 2026-08-11):** page titles use semantic
    `MixedTypographyTitle as="h1"`; homepage sections `as="h2"`; theme/help
    use 44px `Button size="icon"`; project filters/GitHub/stats banner
