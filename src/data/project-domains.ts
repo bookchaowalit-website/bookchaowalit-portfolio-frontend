@@ -2,7 +2,7 @@ import {
   allProjects,
   type AppProject,
   type ProjectDomain,
-} from "./app-projects";
+} from "./app-projects.ts";
 
 export type { ProjectDomain } from "./app-projects";
 

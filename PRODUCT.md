@@ -34,7 +34,7 @@ they won't believe `PRODUCT.md` in any of the flagship repos either.
 ### Project counts & claims — mostly accurate, one stale one fixed
 
 The real data source (`src/data/app-projects.ts`) has **129 projects**
-(122 live, 4 wip, 3 archived), every single one with a real `caseStudy`
+(116 live, 10 wip, 3 archived), every single one with a real `caseStudy`
 object (challenge/solution/result) — not just a name and a link. Site-wide
 copy consistently says **"100+"**, which is honestly hedged (129 ≥ 100,
 the claim ages gracefully as the count grows) — no fix needed there.
@@ -57,7 +57,17 @@ is a separate question this pass didn't chase down (many are the same
 Tier C portfolio-generator repos audited in Phase 1, several of which are
 unedited scaffolds) — that's tracked at the portfolio level already, not
 a bug specific to this repo. No `href="#"` placeholder links found
-anywhere (unlike `booknbook`'s footer before this session).
+anywhere (unlike `booknbook`'s footer before this session). The `live` label
+is the portfolio catalog's declared product status; it is not a claim that
+every linked deployment has passed a fresh health check on every release.
+
+### Domain taxonomy — Book Dev is the only populated workspace
+
+The project directory exposes 13 future Solo Empire domains. The current 129
+records intentionally resolve to `book-dev` until a project has evidence for a
+different workspace. Empty domain pages are therefore expected, not missing
+routes. Adding a project to another domain requires an explicit `domains` field
+and a catalog integrity test update.
 
 ### Contact flow — solid, one self-documented gap
 
@@ -149,7 +159,8 @@ should be trusted versus interrogated.
 
 ## Status
 
-Interview case-study + verification pass: 2026-08-05. Fixed: MCP tool's
+Interview case-study + verification pass: 2026-08-05. Updated catalog truth and
+domain integrity checks: 2026-08-24. Fixed: MCP tool's
 stale project-count description, button touch-target sizing (40px/36px →
 44px across all variants), an unused prop, and — the significant one — a
 broken ESLint config that had been silently linting generated files

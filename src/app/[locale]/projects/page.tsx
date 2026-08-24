@@ -17,9 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     th: "แกลเลอรีผลงาน - 100+ แอป เครื่องมือ และมือถือ | เชาวลิต กรีโภค"
   };
 
+  const projectCount = allProjects.length;
   const seoDescriptions = {
-      en: "Browse 100+ independently deployed projects from the active Tech Domain · Book Dev workspace. Built with Next.js, TypeScript, and Flutter by Bangkok-based developer Chaowalit Greepoke.",
-      th: "เรียกดู 100+ โปรเจกต์ที่ deploy อย่างอิสระจาก workspace ปัจจุบันคือ Tech Domain · Book Dev พัฒนาโดยเชาวลิต กรีโภค นักพัฒนาจากกรุงเทพฯ"
+      en: `Browse ${projectCount} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, work-in-progress apps, and archived experiments.`,
+      th: `เรียกดูผลงาน ${projectCount} รายการจาก workspace ปัจจุบันคือ Tech Domain · Book Dev รวมทั้งเดโมที่ใช้งานได้ งานที่กำลังพัฒนา และโปรเจกต์ที่เก็บถาวร`
   };
 
   return {
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seoTitles[locale as keyof typeof seoTitles] || seoTitles.en,
     description: seoDescriptions[locale as keyof typeof seoDescriptions] || seoDescriptions.en,
     keywords: [
-      '100 Projects Portfolio',
+      `${projectCount} Projects Portfolio`,
       'Micro-Frontend Gallery',
       'Next.js TypeScript Projects',
       'Developer Tools Collection',
@@ -81,7 +82,7 @@ export default async function Projects({ params }: Props) {
     '@type': 'CollectionPage',
     name: 'Projects Gallery - Chaowalit Greepoke',
     url: `${baseUrl}/${locale}/projects`,
-    description: 'Browse 100+ independently deployed projects from the active Tech Domain · Book Dev workspace.',
+    description: `Browse ${allProjects.length} portfolio entries from the active Tech Domain · Book Dev workspace, including live demos, work-in-progress apps, and archived experiments.`,
     author: {
       '@type': 'Person',
       name: 'Chaowalit Greepoke',
