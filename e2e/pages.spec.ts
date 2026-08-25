@@ -15,18 +15,19 @@ test.describe('Projects Page', () => {
     // Results count should update
     const results = page.locator('p[aria-live="polite"]');
     await expect(results).toBeVisible();
+    await expect(page).toHaveURL(/\/en\/projects\?q=kanban/);
   });
 
-  test('status filter group exists', async ({ page }) => {
+  test('domain navigation and pagination are available', async ({ page }) => {
     await page.goto('/en/projects');
-    const statusGroup = page.locator('[role="group"][aria-label="Filter by status"]');
-    await expect(statusGroup).toBeVisible();
-  });
-
-  test('category filter group exists', async ({ page }) => {
-    await page.goto('/en/projects');
-    const catGroup = page.locator('[role="group"][aria-label="Filter by category"]');
-    await expect(catGroup).toBeVisible();
+    await expect(page.locator('[role="group"][aria-label="Browse by domain"]')).toBeVisible();
+    const pagination = page.locator('nav[aria-label="Projects pagination"]');
+    await expect(pagination).toBeVisible();
+    const pageTwo = pagination.getByRole('link', { name: 'Page 2' });
+    await expect(pageTwo).toHaveAttribute('href', /page=2/);
+    await pageTwo.click();
+    await expect(page).toHaveURL(/\/en\/projects\?page=2/);
+    await expect(page.locator('p[aria-live="polite"]')).toContainText('page 2 of 5');
   });
 });
 
@@ -42,7 +43,12 @@ test.describe('Contact Page', () => {
   test('contact form fields have aria-describedby', async ({ page }) => {
     await page.goto('/en/contact');
     const nameInput = page.locator('#name');
-    await expect(nameInput).toHaveAttribute('aria-describedby', /name-error|/);
+    await nameInput.fill('A');
+    await page.locator('#email').fill('hello@example.com');
+    await page.locator('#subject').fill('Hi');
+    await page.locator('#message').fill('Short');
+    await page.getByRole('button', { name: /send/i }).click();
+    await expect(nameInput).toHaveAttribute('aria-describedby', 'name-error');
   });
 });
 

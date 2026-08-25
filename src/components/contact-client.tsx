@@ -9,15 +9,24 @@ import { Separator } from "@/components/ui/separator";
 import { MixedTypographyTitle, NotebookSectionHeader } from "@/components/ui/mixed-typography";
 import { SketchyFrame, StickyNote } from "@/components/ui/notebook-elements";
 import { motion, useReducedMotion } from "framer-motion";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, PenTool, BookOpen, Briefcase, Zap, Bot, BarChart3, Code, ShoppingBag, TrendingUp, CheckCircle2, XCircle, Rocket } from "lucide-react";
+
+type ContactFormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+type ContactTouched = Partial<Record<keyof ContactFormData, boolean>>;
 
 export function ContactClient() {
   const t = useTranslations("contact");
   const reducedMotion = useReducedMotion();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     subject: "",
@@ -30,16 +39,20 @@ export function ContactClient() {
     message: string;
   }>({ type: null, message: '' });
 
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState<ContactTouched>({});
+
+  const getValidationErrors = useCallback((data: ContactFormData, fields: ContactTouched) => {
+    const errs: Partial<Record<keyof ContactFormData, string>> = {};
+    if (fields.name && data.name.trim().length < 2) errs.name = t("errorNameMin");
+    if (fields.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errs.email = t("errorEmailInvalid");
+    if (fields.subject && data.subject.trim().length < 3) errs.subject = t("errorSubjectMin");
+    if (fields.message && data.message.trim().length < 10) errs.message = t("errorMessageMin");
+    return errs;
+  }, [t]);
 
   const errors = useMemo(() => {
-    const errs: Record<string, string> = {};
-    if (touched.name && formData.name.trim().length < 2) errs.name = t("errorNameMin");
-    if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = t("errorEmailInvalid");
-    if (touched.subject && formData.subject.trim().length < 3) errs.subject = t("errorSubjectMin");
-    if (touched.message && formData.message.trim().length < 10) errs.message = t("errorMessageMin");
-    return errs;
-  }, [formData, touched, t]);
+    return getValidationErrors(formData, touched);
+  }, [formData, touched, getValidationErrors]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTouched((prev) => ({ ...prev, [e.target.name]: true }));
@@ -59,8 +72,10 @@ export function ContactClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Mark all fields as touched to show any remaining errors
-    setTouched({ name: true, email: true, subject: true, message: true });
-    if (Object.keys(errors).length > 0) {
+    const allFieldsTouched = { name: true, email: true, subject: true, message: true } satisfies ContactTouched;
+    const submitErrors = getValidationErrors(formData, allFieldsTouched);
+    setTouched(allFieldsTouched);
+    if (Object.keys(submitErrors).length > 0) {
       setSubmitStatus({ type: 'error', message: t("errorFixErrors") });
       return;
     }
