@@ -124,6 +124,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
+  const projectPageUrl = `${baseUrl}/${locale}/projects/${slug}`;
 
   // SoftwareApplication structured data for rich Google results
   const softwareAppJsonLd = {
@@ -131,7 +132,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     '@type': 'SoftwareApplication',
     name: project.name,
     description: project.description,
-    url: project.url,
+    url: project.demoUnavailable ? projectPageUrl : project.url,
     applicationCategory: project.category === 'tech' ? 'DeveloperApplication' :
       project.category === 'business' ? 'BusinessApplication' :
       project.category === 'education' ? 'EducationalApplication' :
@@ -190,7 +191,6 @@ export default async function ProjectDetailPage({ params }: Props) {
     keywords: project.tech.join(', '),
     abstract: project.caseStudy.solution,
     text: project.caseStudy.result,
-    datePublished: '2026-01-01',
     genre: 'CaseStudy',
   } : null;
 

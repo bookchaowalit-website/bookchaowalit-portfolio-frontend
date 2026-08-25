@@ -27,6 +27,19 @@ import {
 
 type RelatedBlogPost = { slug: string; title: string; excerpt: string };
 
+const statusLabelKey = {
+  live: "status_live",
+  wip: "status_wip",
+  archived: "status_archived",
+} as const;
+
+const evidenceLabelKey = {
+  Live: "evidence_live",
+  Prototype: "evidence_prototype",
+  "Internal System": "evidence_internal",
+  Experiment: "evidence_experiment",
+} as const;
+
 export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { project: AppProject; relatedBlogPosts?: RelatedBlogPost[] }) {
   const t = useTranslations("projectDetail");
   const [stars, setStars] = useState(0);
@@ -66,9 +79,18 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
       ? domainProjects[currentIndex + 1]
       : null;
 
-  // Related work (same workspace, excluding current, max 4)
+  // Related work prioritises the same problem lane and category instead of
+  // simply taking the first four records in the catalog.
+  const catalogOrder = new Map(domainProjects.map((candidate, index) => [candidate.slug, index]));
+  const relatedScore = (candidate: AppProject) =>
+    (candidate.problemLane === project.problemLane ? 3 : 0) +
+    (candidate.category === project.category ? 2 : 0);
   const relatedProjects = domainProjects
     .filter((p) => p.slug !== project.slug)
+    .sort((a, b) =>
+      relatedScore(b) - relatedScore(a) ||
+      (catalogOrder.get(a.slug) ?? 0) - (catalogOrder.get(b.slug) ?? 0)
+    )
     .slice(0, 4);
 
   return (
@@ -98,9 +120,13 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             onError={() => setScreenshotError(true)}
           />
         ) : (
-          <div className="relative w-full h-full flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground">
+          <div
+            className="relative w-full h-full flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground"
+            role="img"
+            aria-label={t("screenshotUnavailable")}
+          >
             <div className="absolute inset-6 border border-dashed border-border" aria-hidden="true" />
-            <ImageOff className="size-8 relative" />
+            <ImageOff className="size-8 relative" aria-hidden="true" />
             <span className="text-sm relative">{t("screenshotUnavailable")}</span>
           </div>
         )}
@@ -113,7 +139,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
         {/* Back link */}
         <Link
           href="/projects"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="size-3.5" />
           {t("backToProjects")}
@@ -141,13 +167,13 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
               className={`size-2 rounded-full ${status.dot}`}
               aria-hidden="true"
             />
-            <span className={status.text}>{status.label}</span>
+            <span className={status.text}>{tProjects(statusLabelKey[project.status])}</span>
           </span>
           {project.evidenceLevel && (
             <>
               <span className="text-muted-foreground/40">|</span>
               <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                {t("evidence")}: {project.evidenceLevel}
+                {t("evidence")}: {tProjects(evidenceLabelKey[project.evidenceLevel])}
               </span>
             </>
           )}
@@ -356,7 +382,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
           {prevProject ? (
             <Link
               href={{pathname: '/projects/[slug]', params: {slug: prevProject.slug}}}
-              className="group flex flex-col gap-1 min-w-0 max-w-[45%] text-left"
+              className="group flex min-h-11 flex-col justify-center gap-1 min-w-0 max-w-[45%] text-left"
             >
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <ArrowLeft className="size-3" /> {t("previous")}
@@ -371,7 +397,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
           {nextProject ? (
             <Link
               href={{pathname: '/projects/[slug]', params: {slug: nextProject.slug}}}
-              className="group flex flex-col gap-1 min-w-0 max-w-[45%] text-right ml-auto"
+              className="group flex min-h-11 flex-col justify-center gap-1 min-w-0 max-w-[45%] text-right ml-auto"
             >
               <span className="text-xs text-muted-foreground flex items-center gap-1 justify-end">
                 {t("next")} <ArrowRight className="size-3" />

@@ -8,6 +8,14 @@ test.describe('Projects Page', () => {
     await expect(search).toBeVisible();
   });
 
+  test('project detail keeps status and evidence localized', async ({ page }) => {
+    await page.goto('/th/projects/real-estate-analyzer');
+    await expect(page.getByRole('heading', { name: 'Yield Line — Property Decision Desk' })).toBeVisible();
+    await expect(page.getByText('ใช้งานจริง', { exact: true })).toBeVisible();
+    await expect(page.getByText('Evidence:', { exact: false })).not.toBeVisible();
+    await expect(page.getByText('หลักฐาน: ใช้งานจริง', { exact: true })).toBeVisible();
+  });
+
   test('search input filters projects', async ({ page }) => {
     await page.goto('/en/projects');
     const search = page.locator('input[aria-label="Search projects"]');

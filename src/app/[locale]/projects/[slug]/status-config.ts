@@ -6,5 +6,5 @@ export const statusConfig: Record<
 > = {
   live: { label: "Live", dot: "bg-foreground", text: "text-foreground" },
   wip: { label: "WIP", dot: "bg-muted-foreground", text: "text-muted-foreground" },
-  archived: { label: "Archived", dot: "bg-muted", text: "text-muted" },
+  archived: { label: "Archived", dot: "bg-muted-foreground", text: "text-muted-foreground" },
 };
