@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import NextLink from "next/link";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -18,7 +20,8 @@ import {
   ExternalLink,
   Search,
   ArrowUpRight,
-  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Star,
   Github,
   ImageOff,
@@ -26,6 +29,7 @@ import {
 
 const PAGE_SIZE = 24;
 const FEATURED_LIMIT = 9;
+type PageItem = number | "ellipsis";
 
 const statusConfig: Record<
   ProjectStatus,
@@ -50,6 +54,27 @@ function getFaviconUrl(projectUrl: string): string {
   } catch {
     return "";
   }
+}
+
+function getPaginationItems(totalPages: number, currentPage: number): PageItem[] {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  const orderedPages = Array.from(pages)
+    .filter((page) => page >= 1 && page <= totalPages)
+    .sort((a, b) => a - b);
+  const items: PageItem[] = [];
+
+  orderedPages.forEach((page, index) => {
+    if (index > 0 && page - orderedPages[index - 1] > 1) {
+      items.push("ellipsis");
+    }
+    items.push(page);
+  });
+
+  return items;
 }
 
 function ProjectCard({
@@ -197,17 +222,57 @@ function ProjectCard({
   );
 }
 
-export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomain } = {}) {
+export function ProjectsClient({
+  initialDomain,
+  initialPage = 1,
+  initialSearch = "",
+}: {
+  initialDomain?: ProjectDomain;
+  initialPage?: number;
+  initialSearch?: string;
+} = {}) {
   const t = useTranslations("projects");
   const startDomain = initialDomain ?? "all";
+  const startPage = Math.max(1, initialPage);
+  const startSearch = initialSearch;
+  const pathname = usePathname();
   const [activeDomain] = useState<ProjectDomain | "all">(startDomain);
-  const [search, setSearch] = useState("");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [search, setSearch] = useState(startSearch);
+  const [page, setPage] = useState(startPage);
   const [starsMap, setStarsMap] = useState<Record<string, number>>({});
   const [totalStars, setTotalStars] = useState(0);
   const [starsError, setStarsError] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const activeDomains = getActiveProjectDomains();
+
+  const replaceQuery = useCallback((nextPage: number, nextSearch: string) => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const normalizedSearch = nextSearch.trim();
+    if (nextPage > 1) {
+      params.set("page", String(nextPage));
+    } else {
+      params.delete("page");
+    }
+    if (normalizedSearch) {
+      params.set("q", normalizedSearch);
+    } else {
+      params.delete("q");
+    }
+
+    const query = params.toString();
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${window.location.pathname}${query ? `?${query}` : ""}`,
+    );
+  }, []);
+
+  useEffect(() => {
+    setPage(startPage);
+    setSearch(startSearch);
+  }, [startPage, startSearch]);
 
   // Fetch GitHub stars
   useEffect(() => {
@@ -240,13 +305,14 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
       // Escape to clear search
       if (e.key === "Escape" && document.activeElement === searchRef.current) {
         setSearch("");
-        setVisibleCount(PAGE_SIZE);
+        setPage(1);
+        replaceQuery(1, "");
         searchRef.current?.blur();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [replaceQuery]);
 
   // Featured projects
   const featuredProjects = useMemo(
@@ -277,7 +343,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
     return { live, wip, archived };
   }, [scopedProjects]);
 
-  const showFeatured = activeDomain === "all" && !search.trim();
+  const hasFeaturedSection = activeDomain === "all" && !search.trim();
 
   // Filtered projects
   const filtered = useMemo(() => {
@@ -295,22 +361,46 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
   }, [search, scopedProjects]);
 
   const projectsToDisplay = useMemo(
-    () => (showFeatured ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
-    [featuredSlugs, filtered, showFeatured]
+    () => (hasFeaturedSection ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
+    [featuredSlugs, filtered, hasFeaturedSection]
   );
-  const visible = useMemo(() => projectsToDisplay.slice(0, visibleCount), [projectsToDisplay, visibleCount]);
-  const hasMore = visibleCount < projectsToDisplay.length;
+  const pageCount = Math.max(1, Math.ceil(projectsToDisplay.length / PAGE_SIZE));
+  const currentPage = Math.min(Math.max(page, 1), pageCount);
+  const showFeatured = hasFeaturedSection && currentPage === 1;
+  const visible = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return projectsToDisplay.slice(start, start + PAGE_SIZE);
+  }, [currentPage, projectsToDisplay]);
+  const paginationItems = useMemo(
+    () => getPaginationItems(pageCount, currentPage),
+    [currentPage, pageCount],
+  );
   const isEmptyDomain = activeDomain !== "all" && scopedProjects.length === 0 && !search.trim();
 
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
-    setVisibleCount(PAGE_SIZE);
-  }, []);
+    setPage(1);
+    replaceQuery(1, value);
+  }, [replaceQuery]);
 
   const handleClearFilters = useCallback(() => {
     setSearch("");
-    setVisibleCount(PAGE_SIZE);
-  }, []);
+    setPage(1);
+    replaceQuery(1, "");
+  }, [replaceQuery]);
+
+  const pageHref = useCallback((targetPage: number) => {
+    const params = new URLSearchParams();
+    const normalizedSearch = search.trim();
+    if (targetPage > 1) {
+      params.set("page", String(targetPage));
+    }
+    if (normalizedSearch) {
+      params.set("q", normalizedSearch);
+    }
+    const query = params.toString();
+    return `${pathname}${query ? `?${query}` : ""}`;
+  }, [pathname, search]);
 
   const domainLabel = activeDomain === "all" ? "" : t(projectDomainMeta[activeDomain].labelKey);
   const domainProjectCount = scopedProjects.length;
@@ -472,7 +562,7 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
             {projectsToDisplay.length} {projectsToDisplay.length === 1 ? t("singleProject") : t("pluralProjects")}
             {activeDomain !== "all" && ` ${t("inDomain")} ${domainLabel}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
-            {hasMore && ` · ${t("showingCount")} ${visible.length}`}
+            {pageCount > 1 && ` · ${t("pageStatus", { page: currentPage, total: pageCount })}`}
           </p>
         </div>
 
@@ -509,17 +599,64 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
           </div>
         )}
 
-        {/* Show more */}
-        {hasMore && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-secondary text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <ChevronDown className="size-4" />
-              {t("showMore", { count: projectsToDisplay.length - visible.length })}
-            </button>
-          </div>
+        {pageCount > 1 && !isEmptyDomain && (
+          <nav aria-label={t("paginationLabel")} className="mt-10 flex flex-wrap items-center justify-center gap-1">
+            {currentPage > 1 ? (
+              <NextLink
+                href={pageHref(currentPage - 1)}
+                aria-label={t("previousPage")}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ChevronLeft className="size-4" aria-hidden="true" />
+              </NextLink>
+            ) : (
+              <span
+                aria-disabled="true"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground/40"
+              >
+                <ChevronLeft className="size-4" aria-hidden="true" />
+              </span>
+            )}
+
+            {paginationItems.map((item, index) =>
+              item === "ellipsis" ? (
+                <span key={`ellipsis-${index}`} className="inline-flex min-h-11 min-w-7 items-center justify-center text-sm text-muted-foreground" aria-hidden="true">
+                  …
+                </span>
+              ) : (
+                <NextLink
+                  key={item}
+                  href={pageHref(item)}
+                  aria-current={item === currentPage ? "page" : undefined}
+                  aria-label={t("page", { page: item })}
+                  className={`inline-flex min-h-11 min-w-11 items-center justify-center px-2 text-sm tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    item === currentPage
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                >
+                  {item}
+                </NextLink>
+              ),
+            )}
+
+            {currentPage < pageCount ? (
+              <NextLink
+                href={pageHref(currentPage + 1)}
+                aria-label={t("nextPage")}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ChevronRight className="size-4" aria-hidden="true" />
+              </NextLink>
+            ) : (
+              <span
+                aria-disabled="true"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground/40"
+              >
+                <ChevronRight className="size-4" aria-hidden="true" />
+              </span>
+            )}
+          </nav>
         )}
 
         {/* Empty state */}

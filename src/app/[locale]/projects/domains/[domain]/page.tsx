@@ -13,7 +13,17 @@ import {
 
 type Props = {
   params: Promise<{ locale: string; domain: string }>;
+  searchParams: Promise<{ page?: string | string[]; q?: string | string[] }>;
 };
+
+function firstQueryValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function parsePage(value: string | string[] | undefined): number {
+  const page = Number.parseInt(firstQueryValue(value) ?? "1", 10);
+  return Number.isFinite(page) && page > 0 ? page : 1;
+}
 
 export function generateStaticParams() {
   return projectDomainOrder.map((domain) => ({ domain }));
@@ -44,8 +54,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProjectDomainPage({ params }: Props) {
+export default async function ProjectDomainPage({ params, searchParams }: Props) {
   const { locale, domain: rawDomain } = await params;
+  const query = await searchParams;
   const domain = getCanonicalProjectDomain(rawDomain);
   if (!domain) {
     notFound();
@@ -75,7 +86,11 @@ export default async function ProjectDomainPage({ params }: Props) {
           { name: label, url: `${baseUrl}/${locale}/projects/domains/${canonicalDomain}` },
         ]}
       />
-      <ProjectsClient initialDomain={canonicalDomain} />
+      <ProjectsClient
+        initialDomain={canonicalDomain}
+        initialPage={parsePage(query.page)}
+        initialSearch={firstQueryValue(query.q)}
+      />
     </div>
   );
 }

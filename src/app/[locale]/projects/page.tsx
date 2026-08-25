@@ -7,7 +7,17 @@ import { allProjects } from '@/data/app-projects';
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ page?: string | string[]; q?: string | string[] }>;
 };
+
+function firstQueryValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function parsePage(value: string | string[] | undefined): number {
+  const page = Number.parseInt(firstQueryValue(value) ?? "1", 10);
+  return Number.isFinite(page) && page > 0 ? page : 1;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -73,8 +83,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Projects({ params }: Props) {
+export default async function Projects({ params, searchParams }: Props) {
   const { locale } = await params;
+  const query = await searchParams;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bookchaowalit.com';
 
   const jsonLd = {
@@ -117,7 +128,10 @@ export default async function Projects({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Suspense>
-        <ProjectsClient />
+        <ProjectsClient
+          initialPage={parsePage(query.page)}
+          initialSearch={firstQueryValue(query.q)}
+        />
       </Suspense>
     </div>
   );
