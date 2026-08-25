@@ -68,7 +68,7 @@ function ProjectCard({
   const favicon = getFaviconUrl(project.url);
   const status = statusConfig[project.status];
   const domains = getProjectDomains(project);
-  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
+  const screenshotUrl = `/api/screenshot?url=${encodeURIComponent(project.url)}`;
 
   // Generate a unique gray tone from the project name for the placeholder
   const lightness = 0.80 + (project.name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 10) * 0.015;

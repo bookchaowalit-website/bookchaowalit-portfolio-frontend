@@ -50,7 +50,7 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
   const status = statusConfig[project.status];
   const domains = getProjectDomains(project).map((domain) => tProjects(projectDomainMeta[domain].labelKey));
   const primaryDomain = getProjectDomains(project)[0] ?? "book-dev";
-  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false`;
+  const screenshotUrl = `/api/screenshot?url=${encodeURIComponent(project.url)}`;
 
   // Prev/next navigation within the same workspace
   const domainProjects = allProjects.filter(
@@ -83,6 +83,8 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             className="w-full h-full object-cover object-top"
             priority
             decoding="async"
+            sizes="100vw"
+            unoptimized
             onError={() => setScreenshotError(true)}
           />
         ) : (

@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { allProjects } from '@/data/app-projects';
 
 export const dynamic = 'force-dynamic';
 
 // Simple in-memory cache for screenshot URLs
 const screenshotCache = new Map<string, { url: string; timestamp: number }>();
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const allowedProjectUrls = new Set(allProjects.map((project) => project.url));
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -12,6 +14,17 @@ export async function GET(request: NextRequest) {
 
   if (!projectUrl) {
     return NextResponse.json({ error: 'URL parameter required' }, { status: 400 });
+  }
+
+  let parsedProjectUrl: URL;
+  try {
+    parsedProjectUrl = new URL(projectUrl);
+  } catch {
+    return NextResponse.json({ error: 'Valid project URL required' }, { status: 400 });
+  }
+
+  if (parsedProjectUrl.protocol !== 'https:' || !allowedProjectUrls.has(projectUrl)) {
+    return NextResponse.json({ error: 'Project URL not allowed' }, { status: 400 });
   }
 
   // Check cache first
@@ -22,7 +35,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // Use Microlink API for screenshots
-    const microlinkUrl = `https://api.microlink.io/?url=${encodeURIComponent(projectUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
+    const microlinkUrl = `https://api.microlink.io/?url=${encodeURIComponent(projectUrl)}&screenshot=true&meta=false`;
     
     const response = await fetch(microlinkUrl, {
       headers: {
