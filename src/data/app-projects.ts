@@ -302,6 +302,25 @@ export const allProjects: AppProject[] = [
   { slug: "localcrm", name: "LocalCRM", category: "client", description: "Privacy-first local CRM for managing client relationships, projects, invoices, and communications — no cloud dependency", url: sub("localcrm"), githubUrl: "https://github.com/bookchaowalit/localcrm", tech: ["Python", "SQLite", "FastAPI", "Docker"], featured: true, status: "live", sourceUnavailable: true, promise: "Keep client data on your machine — never in someone else's cloud.", problem: "Client details were scattered across spreadsheets, email, and chat threads, with sensitive information sitting in third-party inboxes.", evidenceLevel: "Prototype", featuredRank: 3, problemLane: "solo-ops", caseStudy: { challenge: "Client relationship data was scattered across spreadsheets, email, and messaging apps. Needed a unified, privacy-first CRM that runs locally without cloud dependency to protect sensitive client information.", solution: "Built a local-first CRM with SQLite backend, FastAPI service layer, and a clean web interface. Features include client profiles, project tracking, invoice generation, communication logs, and automated follow-up reminders. All data stays on the local machine.", result: "Consolidated all client data into a single offline-capable system. Zero cloud dependency ensures complete privacy for sensitive client information. Handles client profiles, projects, invoices, and communications in one unified interface.", tradeoff: "Local-first means no built-in multi-device sync yet — data lives on whichever machine runs it." } },
 ];
 
+// Keep unavailable source links out of the public UI until their repositories
+// are restored or replaced. The catalog still preserves the source URL for
+// internal maintenance and case-study context.
+const unavailableSourceSlugs = new Set([
+  "booknbook",
+  "legal-templates",
+  "localcrm",
+  "mcp-server",
+  "philosophy-archive",
+  "religion-compare",
+  "solo-empire-cli",
+]);
+
+for (const project of allProjects) {
+  if (unavailableSourceSlugs.has(project.slug)) {
+    project.sourceUnavailable = true;
+  }
+}
+
 export function getProjectStatusCounts(projects: readonly AppProject[] = allProjects) {
   return projects.reduce(
     (counts, project) => {

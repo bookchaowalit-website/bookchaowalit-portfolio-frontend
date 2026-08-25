@@ -35,4 +35,11 @@ describe("portfolio catalog integrity", () => {
     );
     assert.ok(allProjects.every((project) => getProjectDomains(project).includes("book-dev")));
   });
+
+  it("hides source links that are currently unavailable", () => {
+    assert.deepEqual(
+      allProjects.filter((project) => project.sourceUnavailable).map((project) => project.slug).sort(),
+      ["booknbook", "legal-templates", "localcrm", "mcp-server", "philosophy-archive", "religion-compare", "solo-empire-cli"],
+    );
+  });
 });

@@ -21,6 +21,7 @@ import {
   ChevronDown,
   Star,
   Github,
+  ImageOff,
 } from "lucide-react";
 
 const PAGE_SIZE = 24;
@@ -82,7 +83,17 @@ function ProjectCard({
       />
       {showScreenshot && (
         <SketchyFrame variant={laneFrameVariant[project.problemLane]} className="mb-5 aspect-video overflow-hidden">
-          {!screenshotError ? (
+          {project.demoUnavailable ? (
+            <div
+              className="flex h-full flex-col items-center justify-center gap-2 bg-secondary px-5 text-center text-muted-foreground"
+              role="img"
+              aria-label={t("previewUnavailable")}
+            >
+              <ImageOff className="size-5" aria-hidden="true" />
+              <span className="font-mono text-xs uppercase tracking-wider">{t("previewUnavailable")}</span>
+              <span className="max-w-xs text-xs leading-relaxed">{t("internalPreviewNote")}</span>
+            </div>
+          ) : !screenshotError ? (
             <Image
               src={screenshotUrl}
               alt={`${project.name} live preview`}
@@ -99,7 +110,7 @@ function ProjectCard({
               style={{ background: `oklch(${lightness} 0 0)` }}
             >
               <span className="px-4 text-center text-xl font-bold font-[family-name:var(--font-doodle)] text-foreground/70">
-                {project.name}
+                {t("previewLoadFailed")}
               </span>
             </div>
           )}
@@ -367,6 +378,9 @@ export function ProjectsClient({ initialDomain }: { initialDomain?: ProjectDomai
             <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{t("statStars")}</span>
           </div>
         </div>
+        <p className="mx-auto mt-4 max-w-lg text-center text-xs leading-relaxed text-muted-foreground">
+          {t("statusNote")}
+        </p>
       </div>
 
       {/* Domain navigation — the portfolio's only browse dimension */}
