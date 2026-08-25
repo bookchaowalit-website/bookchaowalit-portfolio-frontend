@@ -22,6 +22,7 @@ describe("portfolio catalog integrity", () => {
     const slugs = allProjects.map((project) => project.slug);
     assert.equal(new Set(slugs).size, slugs.length, "project slugs must be unique");
     assert.ok(allProjects.every((project) => project.caseStudy), "every project needs a case study");
+    assert.ok(allProjects.every((project) => project.evidenceLevel), "every project needs an evidence level");
   });
 
   it("makes the current domain boundary honest", () => {

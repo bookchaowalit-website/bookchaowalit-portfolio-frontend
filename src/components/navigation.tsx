@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Link, usePathname } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +16,16 @@ import { NavigationBrand } from './navigation-brand';
 import { ThemeToggle } from './theme-toggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { CommandPalette } from './command-palette';
-import { HelpDialog } from './help-dialog';
+
+const CommandPalette = dynamic(
+  () => import('./command-palette').then((mod) => ({ default: mod.CommandPalette })),
+  { ssr: false, loading: () => null },
+);
+
+const HelpDialog = dynamic(
+  () => import('./help-dialog').then((mod) => ({ default: mod.HelpDialog })),
+  { ssr: false, loading: () => null },
+);
 
 
 type RouteHref = Parameters<typeof Link>[0]['href'];

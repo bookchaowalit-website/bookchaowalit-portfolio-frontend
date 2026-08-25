@@ -1,33 +1,14 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
-import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 
 export function NavigationBrand() {
-  const [isMounted, setIsMounted] = useState(false);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return (
-      <Link href="/" className="text-base md:text-xl font-bold whitespace-nowrap">
-        Chaowalit Greepoke
-      </Link>
-    );
-  }
-
   return (
-    <motion.div
-      whileHover={reducedMotion ? undefined : { scale: 1.05 }}
-      whileTap={reducedMotion ? undefined : { scale: 0.95 }}
+    <Link
+      href="/"
+      className="inline-block text-base md:text-xl font-bold whitespace-nowrap text-foreground transition-colors duration-300 hover:text-foreground/80 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
     >
-      <Link href="/" className="text-base md:text-xl font-bold whitespace-nowrap text-foreground hover:text-foreground/80 transition-all duration-300">
-        Chaowalit Greepoke
-      </Link>
-    </motion.div>
+      Chaowalit Greepoke
+    </Link>
   );
 }
