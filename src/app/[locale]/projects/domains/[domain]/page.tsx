@@ -10,10 +10,11 @@ import {
   projectDomainOrder,
   type ProjectDomain,
 } from "@/data/project-domains";
+import { problemLaneOrder, type ProblemLane } from "@/data/app-projects";
 
 type Props = {
   params: Promise<{ locale: string; domain: string }>;
-  searchParams: Promise<{ page?: string | string[]; q?: string | string[] }>;
+  searchParams: Promise<{ page?: string | string[]; q?: string | string[]; focus?: string | string[] }>;
 };
 
 function firstQueryValue(value: string | string[] | undefined): string | undefined {
@@ -23,6 +24,13 @@ function firstQueryValue(value: string | string[] | undefined): string | undefin
 function parsePage(value: string | string[] | undefined): number {
   const page = Number.parseInt(firstQueryValue(value) ?? "1", 10);
   return Number.isFinite(page) && page > 0 ? page : 1;
+}
+
+function parseLane(value: string | string[] | undefined): ProblemLane | undefined {
+  const candidate = firstQueryValue(value);
+  return candidate && problemLaneOrder.includes(candidate as ProblemLane)
+    ? candidate as ProblemLane
+    : undefined;
 }
 
 export function generateStaticParams() {
@@ -88,6 +96,7 @@ export default async function ProjectDomainPage({ params, searchParams }: Props)
       />
       <ProjectsClient
         initialDomain={canonicalDomain}
+        initialLane={parseLane(query.focus)}
         initialPage={parsePage(query.page)}
         initialSearch={firstQueryValue(query.q)}
       />

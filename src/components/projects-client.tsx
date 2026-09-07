@@ -8,7 +8,9 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   allProjects,
+  problemLaneOrder,
   type AppProject,
+  type ProblemLane,
   type ProjectDomain,
   type ProjectStatus,
 } from "@/data/app-projects";
@@ -224,19 +226,23 @@ function ProjectCard({
 
 export function ProjectsClient({
   initialDomain,
+  initialLane,
   initialPage = 1,
   initialSearch = "",
 }: {
   initialDomain?: ProjectDomain;
+  initialLane?: ProblemLane;
   initialPage?: number;
   initialSearch?: string;
 } = {}) {
   const t = useTranslations("projects");
   const startDomain = initialDomain ?? "all";
+  const startLane = initialLane ?? "all";
   const startPage = Math.max(1, initialPage);
   const startSearch = initialSearch;
   const pathname = usePathname();
   const [activeDomain] = useState<ProjectDomain | "all">(startDomain);
+  const [activeLane, setActiveLane] = useState<ProblemLane | "all">(startLane);
   const [search, setSearch] = useState(startSearch);
   const [page, setPage] = useState(startPage);
   const [starsMap, setStarsMap] = useState<Record<string, number>>({});
@@ -245,7 +251,7 @@ export function ProjectsClient({
   const searchRef = useRef<HTMLInputElement>(null);
   const activeDomains = getActiveProjectDomains();
 
-  const replaceQuery = useCallback((nextPage: number, nextSearch: string) => {
+  const replaceQuery = useCallback((nextPage: number, nextSearch: string, nextLane?: ProblemLane | "all") => {
     if (typeof window === "undefined") return;
 
     const params = new URLSearchParams(window.location.search);
@@ -260,6 +266,13 @@ export function ProjectsClient({
     } else {
       params.delete("q");
     }
+    if (nextLane !== undefined) {
+      if (nextLane === "all") {
+        params.delete("focus");
+      } else {
+        params.set("focus", nextLane);
+      }
+    }
 
     const query = params.toString();
     window.history.replaceState(
@@ -270,9 +283,10 @@ export function ProjectsClient({
   }, []);
 
   useEffect(() => {
+    setActiveLane(startLane);
     setPage(startPage);
     setSearch(startSearch);
-  }, [startPage, startSearch]);
+  }, [startLane, startPage, startSearch]);
 
   // Fetch GitHub stars
   useEffect(() => {
@@ -335,19 +349,26 @@ export function ProjectsClient({
     [activeDomain]
   );
 
+  const focusScopedProjects = useMemo(
+    () => activeLane === "all"
+      ? scopedProjects
+      : scopedProjects.filter((project) => project.problemLane === activeLane),
+    [activeLane, scopedProjects]
+  );
+
   // Stats
   const stats = useMemo(() => {
-    const live = scopedProjects.filter((p) => p.status === "live").length;
-    const wip = scopedProjects.filter((p) => p.status === "wip").length;
-    const archived = scopedProjects.filter((p) => p.status === "archived").length;
+    const live = focusScopedProjects.filter((p) => p.status === "live").length;
+    const wip = focusScopedProjects.filter((p) => p.status === "wip").length;
+    const archived = focusScopedProjects.filter((p) => p.status === "archived").length;
     return { live, wip, archived };
-  }, [scopedProjects]);
+  }, [focusScopedProjects]);
 
-  const hasFeaturedSection = activeDomain === "all" && !search.trim();
+  const hasFeaturedSection = activeDomain === "all" && activeLane === "all" && !search.trim();
 
   // Filtered projects
   const filtered = useMemo(() => {
-    let list = scopedProjects;
+    let list = focusScopedProjects;
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
@@ -358,7 +379,7 @@ export function ProjectsClient({
       );
     }
     return list;
-  }, [search, scopedProjects]);
+  }, [focusScopedProjects, search]);
 
   const projectsToDisplay = useMemo(
     () => (hasFeaturedSection ? filtered.filter((project) => !featuredSlugs.has(project.slug)) : filtered),
@@ -384,9 +405,10 @@ export function ProjectsClient({
   }, [replaceQuery]);
 
   const handleClearFilters = useCallback(() => {
+    setActiveLane("all");
     setSearch("");
     setPage(1);
-    replaceQuery(1, "");
+    replaceQuery(1, "", "all");
   }, [replaceQuery]);
 
   const pageHref = useCallback((targetPage: number) => {
@@ -398,15 +420,32 @@ export function ProjectsClient({
     if (normalizedSearch) {
       params.set("q", normalizedSearch);
     }
+    if (activeLane !== "all") {
+      params.set("focus", activeLane);
+    }
+    const query = params.toString();
+    return `${pathname}${query ? `?${query}` : ""}`;
+  }, [activeLane, pathname, search]);
+
+  const focusHref = useCallback((lane: ProblemLane | "all") => {
+    const params = new URLSearchParams();
+    const normalizedSearch = search.trim();
+    if (normalizedSearch) {
+      params.set("q", normalizedSearch);
+    }
+    if (lane !== "all") {
+      params.set("focus", lane);
+    }
     const query = params.toString();
     return `${pathname}${query ? `?${query}` : ""}`;
   }, [pathname, search]);
 
   const domainLabel = activeDomain === "all" ? "" : t(projectDomainMeta[activeDomain].labelKey);
-  const domainProjectCount = scopedProjects.length;
+  const focusLabel = activeLane === "all" ? "" : t(`focus_${activeLane}`);
+  const domainProjectCount = focusScopedProjects.length;
   const displayedStars = activeDomain === "all"
-    ? totalStars
-    : scopedProjects.reduce((sum, project) => sum + (starsMap[project.slug] ?? 0), 0);
+    ? (activeLane === "all" ? totalStars : focusScopedProjects.reduce((sum, project) => sum + (starsMap[project.slug] ?? 0), 0))
+    : focusScopedProjects.reduce((sum, project) => sum + (starsMap[project.slug] ?? 0), 0);
 
   return (
     <div className="w-full space-y-10 pb-12 pt-8">
@@ -428,8 +467,13 @@ export function ProjectsClient({
           />
           <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
             {activeDomain === "all"
-              ? t("subtitle", { count: scopedProjects.length })
+              ? t("subtitle", { count: focusScopedProjects.length })
               : t("domainSubtitle", { count: domainProjectCount, domain: domainLabel })}
+            {activeLane !== "all" && (
+              <span className="block mt-1 text-xs font-mono uppercase tracking-wider text-foreground/70">
+                {t("focusLabel", { focus: focusLabel })}
+              </span>
+            )}
           </p>
         </div>
 
@@ -513,6 +557,45 @@ export function ProjectsClient({
         )}
       </div>
 
+      {/* Visitor-facing problem lanes */}
+      <div className="py-4">
+        <p className="text-center text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
+          {t("browseByFocus")}
+        </p>
+        <div className="flex flex-wrap justify-center gap-2" role="group" aria-label={t("browseByFocus")}>
+          <NextLink
+            href={focusHref("all")}
+            aria-current={activeLane === "all" ? "page" : undefined}
+            className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              activeLane === "all"
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary text-foreground hover:bg-muted"
+            }`}
+          >
+            {t("focusAll")}
+          </NextLink>
+          {problemLaneOrder.map((lane) => {
+            const isActive = activeLane === lane;
+            const count = scopedProjects.filter((project) => project.problemLane === lane).length;
+            return (
+              <NextLink
+                key={lane}
+                href={focusHref(lane)}
+                aria-current={isActive ? "page" : undefined}
+                className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground hover:bg-muted"
+                }`}
+              >
+                {t(`focus_${lane}`)}
+                <span className={`text-xs tabular-nums ${isActive ? "opacity-60" : "text-muted-foreground"}`}>{count}</span>
+              </NextLink>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Search & Filters */}
       <div className="py-8 space-y-4">
         {/* Search */}
@@ -561,6 +644,7 @@ export function ProjectsClient({
           <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider" aria-live="polite" aria-atomic="true">
             {projectsToDisplay.length} {projectsToDisplay.length === 1 ? t("singleProject") : t("pluralProjects")}
             {activeDomain !== "all" && ` ${t("inDomain")} ${domainLabel}`}
+            {activeLane !== "all" && ` ${t("inFocus")} ${focusLabel}`}
             {search && ` ${t("matchingSearch")} "${search}"`}
             {pageCount > 1 && ` · ${t("pageStatus", { page: currentPage, total: pageCount })}`}
           </p>

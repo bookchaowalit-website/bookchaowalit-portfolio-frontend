@@ -44,7 +44,7 @@ real number was 1.
 - **Bilingual** — English and Thai via `next-intl` with locale-prefixed URLs (`/en/`, `/th/`)
 - **MDX Blog** — File-based content in `content/blog/` with frontmatter, reading time, and syntax highlighting
 - **Live GitHub Activity** — Edge-compatible API route fetching recent repos with sessionStorage client cache (5-min TTL)
-- **Contact Form** — Server-side validated, Resend-powered email delivery with graceful fallback
+- **Contact Form** — Server-side validated, Resend-powered email delivery with an explicit unavailable state when delivery is not configured
 - **MCP Server** — Model Context Protocol endpoint at `/api/mcp` exposing projects, skills, blog, GitHub, and contact info as tools
 - **Dark Mode** — Full dark mode support across all pages using Tailwind design tokens
 - **Accessibility** — WCAG-aligned: skip-to-content link, 44px touch targets, aria attributes, ErrorBoundary fallback
@@ -130,7 +130,8 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 
 # From-address after verifying bookchaowalit.com in Resend (recommended)
 # RESEND_FROM="Contact Form <contact@bookchaowalit.com>"
-# Without RESEND_FROM the API falls back to Resend's sandbox sender.
+# In development, omitted RESEND_FROM uses Resend's sandbox sender.
+# Production requires a verified sender address.
 ```
 
 | Variable | Required | Default | Notes |
@@ -139,8 +140,8 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | — | Enables GA4 page tracking |
 | `CONTACT_EMAIL` | Yes (for contact form) | — | Recipient of contact form submissions |
 | `GITHUB_TOKEN` | No | — | Without token: 60 req/hr limit |
-| `RESEND_API_KEY` | No | — | Without key: form logs to console instead of sending |
-| `RESEND_FROM` | No | `Contact Form <onboarding@resend.dev>` | Set after domain verification; see `RESEND-DOMAIN-SETUP.md` |
+| `RESEND_API_KEY` | No | — | Required for delivery; without it the form returns an unavailable state and keeps the user's input |
+| `RESEND_FROM` | Production | `Contact Form <onboarding@resend.dev>` in development | Set a verified `bookchaowalit.com` sender for production; see `RESEND-DOMAIN-SETUP.md` |
 
 ---
 
@@ -393,10 +394,10 @@ Framer Motion and decorative components (FloatingDoodles, Footer) are also lazy-
 
 - **Method:** POST
 - **Runtime:** Node.js
-- **Validation:** Zod schema (name, email, subject, message)
+- **Validation:** Server-side type, length, required-field, and email-format checks (with matching client constraints)
 - **Email:** Resend API
-- **Fallback:** Logs to console if `RESEND_API_KEY` is not set
-- **Security:** Server-side validation, no rate limiting (add Vercel Edge config if needed)
+- **Unavailable state:** Returns `503 CONTACT_SERVICE_UNAVAILABLE` if `RESEND_API_KEY` is not set; the client shows the direct email fallback and preserves the form
+- **Security:** Server-side type/length validation, email format validation, HTML escaping, and newline normalization; rate limiting is still a deployment concern
 
 **Request body:**
 ```json
@@ -716,4 +717,3 @@ Made with Next.js 15, TypeScript, and Tailwind CSS by [Chaowalit Greepoke](https
 
 - **Mobile App:** [bookchaowalit-portfolio-mobile](https://github.com/bookchaowalit-mobile/bookchaowalit-portfolio-mobile)
 - **Portfolio:** [bookchaowalit.com](https://bookchaowalit.com)
-

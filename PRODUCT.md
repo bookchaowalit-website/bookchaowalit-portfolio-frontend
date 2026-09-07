@@ -81,16 +81,16 @@ the catalog no longer implies that store publication already happened.
 
 ### Contact flow — solid, one self-documented gap
 
-Server-side validation (required fields, email format regex), graceful
-degradation when `RESEND_API_KEY` is unset (returns success with a
-"logged server-side" note instead of erroring), reply-to set to the
-sender. One honest gap already flagged in the code itself: the send-from
-address is Resend's sandbox domain (`onboarding@resend.dev`) with a
-comment reading *"Use your verified domain"* — meaning production email
-currently doesn't send from `bookchaowalit.com`, which affects
-deliverability/branding. That's a Resend-dashboard action (domain
-verification), not something fixable in code — left as a known,
-self-documented gap.
+Server-side validation (required fields, input types and lengths, email format
+regex), HTML escaping, newline normalization, and reply-to set to the sender.
+When `RESEND_API_KEY` is unset, the endpoint returns an explicit
+`503 CONTACT_SERVICE_UNAVAILABLE`; the form keeps the user's input and points
+them to the direct email address instead of claiming delivery. One honest gap
+already flagged in the code itself: the send-from
+address is Resend's sandbox domain (`onboarding@resend.dev`) in development;
+production now refuses to send until `RESEND_FROM` points to a verified
+`bookchaowalit.com` sender. Domain verification is a Resend-dashboard action,
+not something fixable in code — left as the remaining deployment step.
 
 ### SEO — claims verified accurate
 
@@ -157,8 +157,10 @@ should be trusted versus interrogated.
 1. Study `build:analyze` output and split the 534 kB vendor chunk more
    granularly — MDX/animation/i18n libraries are likely bundled together
    even on routes that don't need all of them.
-2. **Resend domain (ops):** deferred by owner 2026-08-11. Code supports
-   `RESEND_FROM`; sandbox remains the fallback. See `RESEND-DOMAIN-SETUP.md`.
+2. **Resend domain (ops):** still requires the owner to verify
+   `bookchaowalit.com` and set `RESEND_FROM` in the deployment environment.
+   Development may use the sandbox sender; production will show the direct
+   email fallback until this is configured. See `RESEND-DOMAIN-SETUP.md`.
 3. **Live-link honesty (done 2026-08-11, rechecked 2026-08-24):** unreachable
    public demos are not presented as working links; internal-only systems are
    labelled separately.

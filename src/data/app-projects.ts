@@ -63,6 +63,15 @@ export const laneMeta: Record<ProblemLane, { label: string; description: string;
   },
 };
 
+export const problemLaneOrder: ProblemLane[] = [
+  "decisions",
+  "solo-ops",
+  "growth",
+  "knowledge",
+  "dev-ai",
+  "experience",
+];
+
 export interface CaseStudy {
   challenge: string;
   solution: string;

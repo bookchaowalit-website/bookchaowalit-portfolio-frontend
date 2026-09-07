@@ -91,7 +91,7 @@ export function ContactClient() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
         setSubmitStatus({
@@ -101,9 +101,12 @@ export function ContactClient() {
         // Clear form on success
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
+        const message = data.code === 'CONTACT_SERVICE_UNAVAILABLE'
+          ? t('errorServiceUnavailable')
+          : data.error || t('errorMessage');
         setSubmitStatus({
           type: 'error',
-          message: data.error || t("errorMessage")
+          message
         });
       }
     } catch (error) {
@@ -191,6 +194,7 @@ export function ContactClient() {
                   name="name"
                   type="text"
                   placeholder={t("namePlaceholder")}
+                  maxLength={120}
                   value={formData.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -209,6 +213,7 @@ export function ContactClient() {
                   name="email"
                   type="email"
                   placeholder={t("emailPlaceholder")}
+                  maxLength={254}
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -227,6 +232,7 @@ export function ContactClient() {
                   name="subject"
                   type="text"
                   placeholder={t("subjectPlaceholder")}
+                  maxLength={200}
                   value={formData.subject}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -245,6 +251,7 @@ export function ContactClient() {
                   name="message"
                   placeholder={t("messagePlaceholder")}
                   className="min-h-32"
+                  maxLength={5000}
                   value={formData.message}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -285,7 +292,12 @@ export function ContactClient() {
                 </div>
                 <div>
                   <p className="font-medium">{t("email")}</p>
-                  <p className="text-sm text-muted-foreground">bookchaowalit@gmail.com</p>
+                  <a
+                    href="mailto:bookchaowalit@gmail.com"
+                    className="text-sm text-muted-foreground underline decoration-border underline-offset-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    bookchaowalit@gmail.com
+                  </a>
                 </div>
               </div>
 
@@ -295,7 +307,12 @@ export function ContactClient() {
                 </div>
                 <div>
                   <p className="font-medium">{t("phone")}</p>
-                  <p className="text-sm text-muted-foreground">+66 65-416-9146</p>
+                  <a
+                    href="tel:+66654169146"
+                    className="text-sm text-muted-foreground underline decoration-border underline-offset-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    +66 65-416-9146
+                  </a>
                 </div>
               </div>
 
@@ -367,26 +384,41 @@ export function ContactClient() {
 
           <StickyNote rotation={-1}>
             <h3 className="font-bold font-[family-name:var(--font-doodle)] mb-2">{t("whatICanHelp")}</h3>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
+            <div className="space-y-3">
+              <div className="flex items-start space-x-2">
                 <Badge variant="secondary"><Bot className="w-3 h-3" /></Badge>
-                <span className="text-sm">{t("helpAi")}</span>
+                <div>
+                  <p className="text-sm">{t("helpAi")}</p>
+                  <p className="text-xs text-muted-foreground">{t("helpAiDesc")}</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-start space-x-2">
                 <Badge variant="secondary"><BarChart3 className="w-3 h-3" /></Badge>
-                <span className="text-sm">{t("helpSeo")}</span>
+                <div>
+                  <p className="text-sm">{t("helpSeo")}</p>
+                  <p className="text-xs text-muted-foreground">{t("helpSeoDesc")}</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-start space-x-2">
                 <Badge variant="secondary"><Code className="w-3 h-3" /></Badge>
-                <span className="text-sm">{t("helpFullStack")}</span>
+                <div>
+                  <p className="text-sm">{t("helpFullStack")}</p>
+                  <p className="text-xs text-muted-foreground">{t("helpFullStackDesc")}</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-start space-x-2">
                 <Badge variant="secondary"><ShoppingBag className="w-3 h-3" /></Badge>
-                <span className="text-sm">{t("helpShopify")}</span>
+                <div>
+                  <p className="text-sm">{t("helpShopify")}</p>
+                  <p className="text-xs text-muted-foreground">{t("helpShopifyDesc")}</p>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-start space-x-2">
                 <Badge variant="secondary"><TrendingUp className="w-3 h-3" /></Badge>
-                <span className="text-sm">{t("helpData")}</span>
+                <div>
+                  <p className="text-sm">{t("helpData")}</p>
+                  <p className="text-xs text-muted-foreground">{t("helpDataDesc")}</p>
+                </div>
               </div>
             </div>
           </StickyNote>

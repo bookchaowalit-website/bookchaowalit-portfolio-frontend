@@ -40,6 +40,13 @@ const evidenceLabelKey = {
   Experiment: "evidence_experiment",
 } as const;
 
+const evidenceDescriptionKey = {
+  Live: "evidenceDescription_live",
+  Prototype: "evidenceDescription_prototype",
+  "Internal System": "evidenceDescription_internal",
+  Experiment: "evidenceDescription_experiment",
+} as const;
+
 export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { project: AppProject; relatedBlogPosts?: RelatedBlogPost[] }) {
   const t = useTranslations("projectDetail");
   const [stars, setStars] = useState(0);
@@ -192,6 +199,12 @@ export function ProjectDetailClient({ project, relatedBlogPosts = [] }: { projec
             <span className="font-mono text-xs">{project.tech.join(", ")}</span>
           </span>
         </div>
+
+        {project.evidenceLevel && (
+          <p className="-mt-6 mb-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+            {tProjects(evidenceDescriptionKey[project.evidenceLevel])}
+          </p>
+        )}
 
         {/* Divider */}
         <div className="h-px bg-border mb-10" />

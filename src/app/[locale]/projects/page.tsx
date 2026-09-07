@@ -3,11 +3,11 @@ import { Suspense } from 'react';
 import { ProjectsClient } from '@/components/projects-client';
 import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
-import { allProjects } from '@/data/app-projects';
+import { allProjects, problemLaneOrder, type ProblemLane } from '@/data/app-projects';
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string | string[]; q?: string | string[] }>;
+  searchParams: Promise<{ page?: string | string[]; q?: string | string[]; focus?: string | string[] }>;
 };
 
 function firstQueryValue(value: string | string[] | undefined): string | undefined {
@@ -17,6 +17,13 @@ function firstQueryValue(value: string | string[] | undefined): string | undefin
 function parsePage(value: string | string[] | undefined): number {
   const page = Number.parseInt(firstQueryValue(value) ?? "1", 10);
   return Number.isFinite(page) && page > 0 ? page : 1;
+}
+
+function parseLane(value: string | string[] | undefined): ProblemLane | undefined {
+  const candidate = firstQueryValue(value);
+  return candidate && problemLaneOrder.includes(candidate as ProblemLane)
+    ? candidate as ProblemLane
+    : undefined;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -129,6 +136,7 @@ export default async function Projects({ params, searchParams }: Props) {
       />
       <Suspense>
         <ProjectsClient
+          initialLane={parseLane(query.focus)}
           initialPage={parsePage(query.page)}
           initialSearch={firstQueryValue(query.q)}
         />

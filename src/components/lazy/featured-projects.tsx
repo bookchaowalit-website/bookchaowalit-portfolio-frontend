@@ -12,27 +12,41 @@ import { MixedTypographyTitle } from "@/components/ui/mixed-typography";
 const stickyColors = ["yellow", "pink", "green", "blue"] as const;
 const rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5];
 
-function StatusBadge({ status }: { status: AppProject["status"] }) {
+const evidenceLabelKey = {
+  Live: "evidence_live",
+  Prototype: "evidence_prototype",
+  "Internal System": "evidence_internal",
+  Experiment: "evidence_experiment",
+} as const;
+
+function StatusBadge({ project }: { project: AppProject }) {
   const t = useTranslations("projects");
-  if (status === "live") {
+  const evidenceLabel = project.evidenceLevel
+    ? t(evidenceLabelKey[project.evidenceLevel])
+    : t("status_" + project.status);
+
+  if (project.status === "live") {
     return (
-      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-white bg-foreground px-1.5 py-0.5">
+      <span
+        className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-white bg-foreground px-1.5 py-0.5"
+        title={evidenceLabel}
+      >
         <span className="size-1.5 rounded-full bg-white animate-pulse" />
-        {t("statusLive")}
+        {evidenceLabel}
       </span>
     );
   }
-  if (status === "wip") {
+  if (project.status === "wip") {
     return (
       <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-foreground bg-muted px-1.5 py-0.5">
         <span className="size-1.5 rounded-full bg-foreground/50" />
-        {t("statusWip")}
+        {evidenceLabel}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5">
-      {t("statusArchived")}
+      {evidenceLabel}
     </span>
   );
 }
@@ -70,7 +84,7 @@ function ProjectPreviewModal({
         <div className="space-y-4">
           <div className="flex items-start justify-between gap-3">
             <h3 className="text-lg font-bold">{project.name}</h3>
-            <StatusBadge status={project.status} />
+            <StatusBadge project={project} />
           </div>
 
           <p className="text-sm text-muted-foreground leading-relaxed">
@@ -180,7 +194,7 @@ export function FeaturedProjects() {
                     {project.name}
                   </h3>
                 )}
-                <StatusBadge status={project.status} />
+                <StatusBadge project={project} />
               </div>
 
               {project.promise && (
