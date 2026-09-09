@@ -1,6 +1,6 @@
 {
   "deprecated": true,
-  "message": "Legacy scraper-dashboard.json is no longer used and must not be precached by the service worker. Consumers load free-only data-product envelopes from /data/data-products/*.json or local APIs on ports 8101-8108.",
+  "message": "Legacy scraper-dashboard.json is no longer used and must not be precached by the service worker. Consumers load free-only data-product envelopes from /data/data-products/*.json or local APIs on ports 8101-8110.",
   "replacement": "/data/data-products/*.json",
   "fallback_summary": "/data/data-products-fallback.json",
   "generated_at": "2026-08-04T00:00:00Z",

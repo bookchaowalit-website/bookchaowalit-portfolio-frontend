@@ -1,5 +1,5 @@
 /**
- * Typed read-only client for free-only data-product APIs (ports 8101–8108).
+ * Typed read-only client for free-only data-product APIs (ports 8101–8110).
  *
  * - Never scrapes upstream providers
  * - Never imports legacy scraper modules or paths
@@ -16,6 +16,34 @@ import type {
   ProductHealthSummary,
   ProductLoadResult,
 } from "./types.ts";
+
+/**
+ * Public API URL overrides for a hosted frontend. Local loopback URLs remain
+ * the default; these variables must contain URLs only and never credentials.
+ */
+function configuredBaseUrl(productId: string, fallback: string): string {
+  const configured =
+    productId === "crypto"
+      ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_CRYPTO
+      : productId === "stocks"
+        ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_STOCKS
+        : productId === "fx"
+          ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_FX
+          : productId === "defi"
+            ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_DEFI
+            : productId === "flights"
+              ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_FLIGHTS
+              : productId === "seo"
+                ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_SEO
+                : productId === "ai_tools"
+                  ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_AI_TOOLS
+                  : productId === "news"
+                    ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_NEWS
+                    : productId === "discovery"
+                      ? process.env.NEXT_PUBLIC_DATA_PRODUCT_URL_DISCOVERY
+                  : undefined;
+  return configured?.trim() || fallback;
+}
 
 const ENVELOPE_KEYS = [
   "schema_version",
@@ -68,9 +96,9 @@ export function isDataProductEnvelope(value: unknown): value is DataProductEnvel
 }
 
 function stateFromEnvelope(envelope: DataProductEnvelope): ConsumerLoadState {
+  if (envelope.data_status === "malformed") return "error";
   if (envelope.data_status === "empty" || envelope.items.length === 0) return "empty";
   if (envelope.data_status === "stale") return "stale";
-  if (envelope.data_status === "malformed") return "error";
   return "ready";
 }
 
@@ -165,7 +193,7 @@ export async function fetchProductRecords(
     }
   }
 
-  const baseUrl = (options.baseUrl ?? product.baseUrl).replace(/\/$/, "");
+  const baseUrl = (options.baseUrl ?? configuredBaseUrl(product.id, product.baseUrl)).replace(/\/$/, "");
   const limit = options.limit ?? 50;
   const cursor = options.cursor ? `&cursor=${encodeURIComponent(options.cursor)}` : "";
   // Read-only contract: GET /v1/records only (never POST /v1/refresh).

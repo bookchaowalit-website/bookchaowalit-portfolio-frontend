@@ -14,7 +14,7 @@ const withSerwist = withSerwistInit({
   register: true,
   scope: '/',
   // Never precache the deprecated scraper-dashboard JSON. Consumers use
-  // /data/data-products/*.json envelopes or local APIs on ports 8101–8108.
+  // /data/data-products/*.json envelopes or local APIs on ports 8101–8110.
   exclude: [/scraper-dashboard\.json$/i],
   manifestTransforms: [
     async (manifestEntries) => ({
