@@ -69,7 +69,7 @@ const nextConfig = {
         pathname: '/api/screenshot',
       },
       {
-        pathname: '/profile.webp',
+        pathname: '/profile-2026.webp',
       },
     ],
     remotePatterns: [
@@ -126,7 +126,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/profile.webp',
+        source: '/profile-2026.webp',
         headers: [
           {
             key: 'Cache-Control',

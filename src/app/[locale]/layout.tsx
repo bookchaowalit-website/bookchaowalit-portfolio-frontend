@@ -121,7 +121,7 @@ export default async function LocaleLayout({
         "description": "Generalist and Solopreneur who enjoys solving problems and building things end-to-end",
         "jobTitle": "Generalist & Solopreneur",
         "url": "https://bookchaowalit.com",
-        "image": "https://bookchaowalit.com/profile.webp",
+        "image": "https://bookchaowalit.com/profile-2026.webp",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Bangkok",

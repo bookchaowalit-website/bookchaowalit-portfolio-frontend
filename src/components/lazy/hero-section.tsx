@@ -40,7 +40,7 @@ export function HeroSection() {
           }}
         >
           <Image
-            src="/profile.webp"
+            src="/profile-2026.webp"
             alt={t('heroAlt')}
             width={128}
             height={128}

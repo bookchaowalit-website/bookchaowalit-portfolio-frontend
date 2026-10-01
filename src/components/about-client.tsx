@@ -28,7 +28,7 @@ export function AboutClient() {
           transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
         >
           <Avatar className="w-32 h-32 mx-auto">
-            <AvatarImage src="/profile.webp" alt="Profile" />
+            <AvatarImage src="/profile-2026.webp" alt="Profile" />
             <AvatarFallback className="text-3xl">CG</AvatarFallback>
           </Avatar>
         </motion.div>

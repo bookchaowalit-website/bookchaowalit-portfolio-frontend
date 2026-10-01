@@ -279,7 +279,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center space-x-4">
             <Avatar>
-              <AvatarImage src="/profile.webp" alt={post.author} />
+              <AvatarImage src="/profile-2026.webp" alt={post.author} />
               <AvatarFallback>CG</AvatarFallback>
             </Avatar>
             <div>
@@ -334,7 +334,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <section className="bg-muted/50 p-8">
         <div className="flex items-start space-x-4">
           <Avatar className="w-16 h-16">
-            <AvatarImage src="/profile.webp" alt={post.author} />
+            <AvatarImage src="/profile-2026.webp" alt={post.author} />
             <AvatarFallback className="text-lg">CG</AvatarFallback>
           </Avatar>
           <div className="flex-1">

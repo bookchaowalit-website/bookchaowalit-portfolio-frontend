@@ -78,7 +78,7 @@ export default async function TestimonialsPage({ params }: Props) {
     '@id': `${baseUrl}/#professional-service`,
     name: 'Chaowalit Greepoke',
     url: baseUrl,
-    image: `${baseUrl}/profile.webp`,
+    image: `${baseUrl}/profile-2026.webp`,
     description:
       'Freelance software engineering, data, and AI services by Chaowalit Greepoke based in Bangkok, Thailand.',
     address: {
